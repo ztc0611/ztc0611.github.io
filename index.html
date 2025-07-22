@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0c116c">
     <title>Zachary Coleman</title>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Zachary Coleman">
+    <meta property="og:image" content="Assets/Embed.jpg">
+    <meta property="og:url" content="https://ztc0611.github.io">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zachary Coleman">
+    <meta name="twitter:image" content="Assets/Embed.jpg">
+    
+    <!-- Preload dark mode images -->
+    <link rel="preload" as="image" href="Assets/Booklet-Dark.webp">
+    <link rel="preload" as="image" href="Assets/Pixellate-Dark.webp">
+    <link rel="preload" as="image" href="Assets/PointTo-Dark.webp">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,25 +50,25 @@
         <section class="projects-section">
             <h2>Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-project="booklet">
                     <div class="project-image">
-                        <img src="Assets/Booklet.jpg" alt="Booklet: RSS Reader Screenshot">
+                        <img src="Assets/Booklet.webp" alt="Booklet: RSS Reader Screenshot">
                     </div>
                     <div class="project-info">
                         <div class="project-title">
                             <h3>Booklet: RSS Reader</h3>
                             <span class="tag">WIP</span>
                         </div>
-                        <p>A RSS app for iOS, iPadOS, visionOS, and macOS focused on simplicity and using native apple frameworks.</p>
+                        <p>A RSS app for iOS, iPadOS, visionOS, and macOS focused on simplicity and using native apple frameworks. Native for iOS 26.</p>
                         <div class="project-actions">
                             <button class="btn-secondary" disabled>Coming September 2025</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project="pixellate">
                     <div class="project-image">
-                        <img src="Assets/Pixellate.jpg" alt="Pixellate Camera Screenshot">
+                        <img src="Assets/Pixellate.webp" alt="Pixellate Camera Screenshot">
                     </div>
                     <div class="project-info">
                         <h3>Pixellate Camera</h3>
@@ -62,9 +79,9 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card" data-project="pointto">
                     <div class="project-image">
-                        <img src="Assets/PointTo.jpg" alt="Point To: Custom Compass Screenshot">
+                        <img src="Assets/PointTo.webp" alt="Point To: Custom Compass Screenshot">
                     </div>
                     <div class="project-info">
                         <h3>Point To: Custom Compass</h3>
@@ -77,7 +94,7 @@
 
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="Assets/Northward.jpg" alt="Northward Game Demo Screenshot">
+                        <img src="Assets/Northward.webp" alt="Northward Game Demo Screenshot">
                     </div>
                     <div class="project-info">
                         <h3>Northward Demo</h3>
@@ -90,7 +107,7 @@
 
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="Assets/Recall.jpg" alt="Recall: Moving Gallery Screenshot">
+                        <img src="Assets/Recall.webp" alt="Recall: Moving Gallery Screenshot">
                     </div>
                     <div class="project-info">
                         <h3>Recall: Moving Gallery</h3>
@@ -110,7 +127,7 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="Assets/base4096.jpg" alt="Base4096 Image">
+                        <img src="Assets/base4096.webp" alt="Base4096 Image">
                     </div>
                     <div class="project-info">
                         <h3>Base4096</h3>
@@ -123,7 +140,7 @@
 
                 <div class="project-card">
                     <div class="project-image project-image-bottom">
-                        <img src="Assets/Dominos.jpg" alt="Live Activity for Dominos Screenshot">
+                        <img src="Assets/Dominos.webp" alt="Live Activity for Dominos Screenshot">
                     </div>
                     <div class="project-info">
                         <h3>Live Activity for Dominos Pizza</h3>
@@ -177,7 +194,7 @@
                 <div class="commit-item">
                     <div class="commit-content">
                         <h4>Godot 3.x Legacy Support</h4>
-                        <p>Back-ported modern mobile features to Godot 3.x so existing projects could benefit from performance improvements without needing to upgrade engines</p>
+                        <p>Back-ported many changes and fixes to Godot 3.x so existing projects could benefit from performance improvements without needing to upgrade engines</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/68189" class="repo-link">#68189</a>
@@ -188,6 +205,10 @@
                 </div>
             </div>
         </section>
+        
+        <footer style="text-align: center; padding: 40px 20px; color: rgba(245, 255, 232, 0.6); font-size: 0.9rem;">
+            <p>Designed on  Macintosh</p>
+        </footer>
     </main>
     
     <script src="banner.js"></script>

@@ -339,17 +339,17 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 0;
 }
 
 .project-title .tag {
-    transform: translateY(-2px);
+    transform: translateY(-10px);
 }
 
 .project-info h3 {
     color: #f5ffe8;
     font-size: 1.5rem;
-    margin: 0;
+    margin: 0 0 16px 0;
     font-family: 'Bitcount', monospace;
 }
 
@@ -684,5 +684,38 @@ body {
 
     .project-image img {
         filter: brightness(0.85); /* slight dimming on project images */
+    }
+    
+    .project-card[data-project="booklet"] .project-image {
+        background-image: url('Assets/Booklet-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .project-card[data-project="booklet"] .project-image img {
+        opacity: 0;
+        filter: none;
+    }
+    
+    .project-card[data-project="pixellate"] .project-image {
+        background-image: url('Assets/Pixellate-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .project-card[data-project="pixellate"] .project-image img {
+        opacity: 0;
+        filter: none;
+    }
+    
+    .project-card[data-project="pointto"] .project-image {
+        background-image: url('Assets/PointTo-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .project-card[data-project="pointto"] .project-image img {
+        opacity: 0;
+        filter: none;
     }
 }
