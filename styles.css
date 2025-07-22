@@ -296,7 +296,7 @@ body {
 
 .content {
     padding: 60px 20px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -314,12 +314,18 @@ body {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    max-width: 1000px;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     gap: 30px;
     margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .project-card {
@@ -338,12 +344,14 @@ body {
 }
 
 .project-image {
-    height: 250px;
+    width: 100%;
+    height: clamp(180px, 45vw, 270px);
     overflow: hidden;
     background: rgba(0, 0, 46, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: height 0.3s ease;
 }
 
 .project-image img {
@@ -450,7 +458,7 @@ body {
 }
 
 .commits-section h3 {
-    font-size: 1.4rem;
+    font-size: 2.0rem;
     color: rgba(153, 102, 255, 0.9);
     margin-bottom: 30px;
     text-align: center;
@@ -478,14 +486,14 @@ body {
 
 .commit-content h4 {
     color: #f5ffe8;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 8px;
     font-family: 'Merriweather', serif;
 }
 
 .commit-content p {
     color: rgba(245, 255, 232, 0.8);
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 12px;
 }
@@ -508,6 +516,7 @@ body {
 .repo-link:hover {
     color: rgba(153, 102, 255, 1);
 }
+
 
 @media (max-width: 1200px) {
     .banner {
@@ -555,15 +564,6 @@ body {
     }
 }
 
-@media (max-width: 1000px) {
-    .commit-content h4 {
-        font-size: 1rem;
-    }
-    
-    .commit-content p {
-        font-size: 0.8rem;
-    }
-}
 
 @media (max-width: 480px) {
     .projects-grid {
@@ -787,4 +787,39 @@ body {
         opacity: 0;
         filter: none;
     }
+    
+    .project-card[data-project="dominos"] .project-image {
+        background-image: url('Assets/Dominos-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .project-card[data-project="dominos"] .project-image img {
+        opacity: 0;
+        filter: none;
+    }
+    
+    .project-card[data-project="base4096"] .project-image {
+        background-image: url('Assets/base4096-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .project-card[data-project="base4096"] .project-image img {
+        opacity: 0;
+        filter: none;
+    }
 }
+
+/* Tablet Portrait  */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .project-image {
+        height: clamp(200px, 30vw, 250px);
+    }
+    
+    
+    .repo-link {
+        font-size: 1rem;
+    }
+}
+

@@ -21,6 +21,7 @@
     <link rel="preload" as="image" href="Assets/Booklet-Dark.webp">
     <link rel="preload" as="image" href="Assets/Pixellate-Dark.webp">
     <link rel="preload" as="image" href="Assets/PointTo-Dark.webp">
+    <link rel="preload" as="image" href="Assets/Dominos-Dark.webp">
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -52,6 +53,19 @@
         <section class="projects-section">
             <h2>Projects</h2>
             <div class="projects-grid">
+                <div class="project-card" data-project="pixellate">
+                    <div class="project-image">
+                        <img src="Assets/Pixellate.webp" alt="Pixellate Camera Screenshot">
+                    </div>
+                    <div class="project-info">
+                        <h3>Pixellate Camera</h3>
+                        <p>Camera app for iOS that gives a look similar to the Gameboy Camera from 1999. Saves metadata with optional geotagging.</p>
+                        <div class="project-actions">
+                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View App Store</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="project-card" data-project="booklet">
                     <div class="project-image">
                         <img src="Assets/Booklet.webp" alt="Booklet: RSS Reader Screenshot">
@@ -61,22 +75,9 @@
                             <h3>Booklet: RSS Reader</h3>
                             <span class="tag">WIP</span>
                         </div>
-                        <p>A RSS app for iOS, iPadOS, visionOS, and macOS focused on simplicity and using native apple frameworks. Native for iOS 26.</p>
+                        <p>A RSS app for iOS, iPadOS, visionOS, and macOS focused on simplicity and using native Apple frameworks. Native for iOS 26.</p>
                         <div class="project-actions">
                             <button class="btn-secondary" disabled>Coming September 2025</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="pixellate">
-                    <div class="project-image">
-                        <img src="Assets/Pixellate.webp" alt="Pixellate Camera Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Pixellate Camera</h3>
-                        <p>Camera app for iOS that gives a look similar to the Gameboy Camera from 1999.</p>
-                        <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View App Store</a>
                         </div>
                     </div>
                 </div>
@@ -127,7 +128,20 @@
         <section class="projects-section">
             <h2>Experiments</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-project="dominos">
+                    <div class="project-image">
+                        <img src="Assets/Dominos.webp" alt="Live Activity for Dominos Screenshot">
+                    </div>
+                    <div class="project-info">
+                        <h3>Live Activity for Dominos Pizza</h3>
+                        <p>An experiment in generating an iOS live activity for Dominos Pizza, which works on actual orders when a phone number is entered.</p>
+                        <div class="project-actions">
+                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View Experiment</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="base4096">
                     <div class="project-image">
                         <img src="Assets/base4096.webp" alt="Base4096 Image">
                     </div>
@@ -136,19 +150,6 @@
                         <p>An experiment in data compression for when logical character count matters more than physical bytes.</p>
                         <div class="project-actions">
                             <a href="https://github.com/ztc0611/base4096-godot" class="btn-primary">View Experiment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image project-image-bottom">
-                        <img src="Assets/Dominos.webp" alt="Live Activity for Dominos Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Live Activity for Dominos Pizza</h3>
-                        <p>An experiment in generating an iOS live activity for Dominos Pizza, which works on actual hardware when a phone number is entered.</p>
-                        <div class="project-actions">
-                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View Experiment</a>
                         </div>
                     </div>
                 </div>
