@@ -10,6 +10,13 @@ class BannerAnimation {
         this.bannerRect = null;
         this.isVisible = true;
         
+        this.starPool = { small: [], big: [] };
+        this.activeStars = [];
+        this.preloadedFrames = { small: [], big: [] };
+        this.cachedDate = null;
+        this.lastDateCheck = 0;
+        this.resizeTimeout = null;
+        
         this.init();
     }
 
@@ -17,6 +24,8 @@ class BannerAnimation {
         console.log("Today's StarVal:", this.starThreshold);
         this.updateBannerRect();
         this.setupVisibilityListener();
+        this.preloadStarFrames();
+        this.initializeStarPools();
         this.startParallaxScrolling();
         this.startStarGeneration();
         this.scheduleGuaranteedBigStar();
@@ -32,8 +41,49 @@ class BannerAnimation {
         });
         
         window.addEventListener('resize', () => {
-            this.updateBannerRect();
+            if (this.resizeTimeout) {
+                clearTimeout(this.resizeTimeout);
+            }
+            this.resizeTimeout = setTimeout(() => {
+                this.updateBannerRect();
+            }, 100);
         });
+    }
+
+    preloadStarFrames() {
+        // Preload small star frames
+        for (let i = 1; i <= 14; i++) {
+            const img = new Image();
+            img.src = `TitleScreen/Star/smallstartest_straight${i}.png`;
+            this.preloadedFrames.small.push(img.src);
+        }
+        
+        // Preload big star frames
+        for (let i = 1; i <= 13; i++) {
+            const img = new Image();
+            img.src = `TitleScreen/StarBig/StarBig${i}.png`;
+            this.preloadedFrames.big.push(img.src);
+        }
+    }
+
+    initializeStarPools() {
+        // Pre-create star elements to avoid DOM creation overhead
+        for (let i = 0; i < 10; i++) {
+            this.starPool.small.push(this.createStarElement(false));
+            this.starPool.big.push(this.createStarElement(true));
+        }
+    }
+
+    createStarElement(isBig) {
+        const star = document.createElement('div');
+        star.className = isBig ? 'star-big' : 'star';
+        
+        const img = document.createElement('img');
+        img.style.width = '100%';
+        img.style.height = '100%';
+        
+        star.appendChild(img);
+        return { element: star, img: img, inUse: false, animationId: null };
     }
 
     calculateStarProbability(isNewDay = false) {
@@ -41,11 +91,20 @@ class BannerAnimation {
             console.log("New Day...");
         }
 
-        const now = new Date();
-        const date = now.getDate();
-        const weekday = now.getDay(); // 0 = Sunday, 6 = Saturday
-        const month = now.getMonth() + 1; // 0-based, so add 1
-        const year = now.getFullYear();
+        // Cache date calculations to avoid repeated Date object creation
+        const now = performance.now();
+        if (!this.cachedDate || now - this.lastDateCheck > 60000) { // Check every minute
+            const dateObj = new Date();
+            this.cachedDate = {
+                date: dateObj.getDate(),
+                weekday: dateObj.getDay(),
+                month: dateObj.getMonth() + 1,
+                year: dateObj.getFullYear()
+            };
+            this.lastDateCheck = now;
+        }
+
+        const { date, weekday, month, year } = this.cachedDate;
 
         let threshold = 0;
 
@@ -109,30 +168,23 @@ class BannerAnimation {
 
             scrollOffset += 0.5;
 
-            // Different scroll speeds for parallax effect using background-position
-            if (stars) {
-                stars.style.backgroundPosition = `${-scrollOffset * 0.001}px top`;
-            }
-            if (clouds1) {
-                clouds1.style.backgroundPosition = `${-scrollOffset * 0.08}px bottom`;
-            }
-            if (clouds2) {
-                clouds2.style.backgroundPosition = `${-scrollOffset * 0.06}px bottom`;
-            }
-            if (mountains) {
-                mountains.style.backgroundPosition = `${-scrollOffset * 0.5}px bottom`;
-            }
-            if (mountainsBack) {
-                mountainsBack.style.backgroundPosition = `${150 + -scrollOffset * 0.4}px bottom`;
-            }
-            if (houses) {
-                houses.style.backgroundPosition = `${-scrollOffset * 0.7}px bottom`;
-            }
-            if (frontHouses) {
-                frontHouses.style.backgroundPosition = `${-scrollOffset * 0.9}px bottom`;
-            }
-            if (ground) {
-                ground.style.backgroundPosition = `${-scrollOffset * 1.0}px bottom`;
+            // Batch DOM updates to minimize repaints
+            const updates = [
+                [stars, `${-scrollOffset * 0.001}px top`],
+                [clouds1, `${-scrollOffset * 0.08}px bottom`],
+                [clouds2, `${-scrollOffset * 0.06}px bottom`],
+                [mountains, `${-scrollOffset * 0.5}px bottom`],
+                [mountainsBack, `${150 + -scrollOffset * 0.4}px bottom`],
+                [houses, `${-scrollOffset * 0.7}px bottom`],
+                [frontHouses, `${-scrollOffset * 0.9}px bottom`],
+                [ground, `${-scrollOffset * 1.0}px bottom`]
+            ];
+
+            // Apply all updates in a single batch
+            for (const [element, position] of updates) {
+                if (element) {
+                    element.style.backgroundPosition = position;
+                }
             }
 
             // Reset scroll offset when it gets too large
@@ -153,8 +205,8 @@ class BannerAnimation {
                 return;
             }
 
-            // Check if a new day has started
-            const currentDay = new Date().getDate();
+            // Check if a new day has started (use cached date)
+            const currentDay = this.cachedDate ? this.cachedDate.date : new Date().getDate();
             if (currentDay !== this.lastDay) {
                 this.starThreshold = this.calculateStarProbability(true);
                 this.lastDay = currentDay;
@@ -197,88 +249,103 @@ class BannerAnimation {
         }
     }
 
-    createRegularStar(bannerRect) {
-        const star = document.createElement('div');
-        star.className = 'star';
+    getStarFromPool(isBig) {
+        const pool = isBig ? this.starPool.big : this.starPool.small;
+        let star = pool.find(s => !s.inUse);
         
-        // Create animated star using sprite frames
-        const img = document.createElement('img');
+        if (!star) {
+            // Pool exhausted, create new star (fallback)
+            star = this.createStarElement(isBig);
+            pool.push(star);
+        }
+        
+        star.inUse = true;
+        return star;
+    }
+
+    returnStarToPool(star) {
+        star.inUse = false;
+        if (star.animationId) {
+            clearTimeout(star.animationId);
+            star.animationId = null;
+        }
+        if (star.element.parentNode) {
+            star.element.parentNode.removeChild(star.element);
+        }
+    }
+
+    createRegularStar(bannerRect) {
+        const star = this.getStarFromPool(false);
+        
+        // Create animated star using preloaded sprite frames
         const frameCount = 14; // smallstartest_straight1 to 14
         const currentFrame = Math.floor(Math.random() * frameCount) + 1;
-        img.src = `TitleScreen/Star/smallstartest_straight${currentFrame}.png`;
-        img.style.width = '100%';
-        img.style.height = '100%';
+        star.img.src = this.preloadedFrames.small[currentFrame - 1];
         
         const size = Math.random() * 20 + 12; // 12-32px scaled for 300px height
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = (Math.random() * (bannerRect.width + 60) - 30) + 'px';
-        star.style.top = (Math.random() * 80 - 10) + 'px';
+        star.element.style.width = size + 'px';
+        star.element.style.height = size + 'px';
+        star.element.style.left = (Math.random() * (bannerRect.width + 60) - 30) + 'px';
+        star.element.style.top = (Math.random() * 80 - 10) + 'px';
         
-        star.appendChild(img);
-        this.shootingStars.appendChild(star);
+        this.shootingStars.appendChild(star.element);
+        this.activeStars.push(star);
         
         // Animate through sprite frames
-        this.animateStarFrames(img, frameCount, 2000);
+        this.animateStarFrames(star.img, frameCount, 2000, false);
         
         // Remove star after animation completes
-        setTimeout(() => {
-            if (star && star.parentNode) {
-                star.parentNode.removeChild(star);
+        star.animationId = setTimeout(() => {
+            this.returnStarToPool(star);
+            const index = this.activeStars.indexOf(star);
+            if (index > -1) {
+                this.activeStars.splice(index, 1);
             }
         }, 2000);
     }
 
     createBigStar(bannerRect) {
-        const star = document.createElement('div');
-        star.className = 'star-big';
+        const star = this.getStarFromPool(true);
         
-        // Create animated big star using sprite frames
-        const img = document.createElement('img');
+        // Create animated big star using preloaded sprite frames
         const frameCount = 13; // StarBig1 to 13
         const currentFrame = Math.floor(Math.random() * frameCount) + 1;
-        img.src = `TitleScreen/StarBig/StarBig${currentFrame}.png`;
-        img.style.width = '100%';
-        img.style.height = '100%';
+        star.img.src = this.preloadedFrames.big[currentFrame - 1];
         
         const size = Math.random() * 25 + 30; // 30-55px scaled for 300px height
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = (Math.random() * (bannerRect.width + 60) - 30) + 'px';
-        star.style.top = (Math.random() * 80 - 10) + 'px';
+        star.element.style.width = size + 'px';
+        star.element.style.height = size + 'px';
+        star.element.style.left = (Math.random() * (bannerRect.width + 60) - 30) + 'px';
+        star.element.style.top = (Math.random() * 80 - 10) + 'px';
         
-        star.appendChild(img);
-        this.shootingStars.appendChild(star);
+        this.shootingStars.appendChild(star.element);
+        this.activeStars.push(star);
         
         // Animate through sprite frames
-        this.animateStarFrames(img, frameCount, 3000);
+        this.animateStarFrames(star.img, frameCount, 3000, true);
         
         // Remove star after animation completes
-        setTimeout(() => {
-            if (star && star.parentNode) {
-                star.parentNode.removeChild(star);
+        star.animationId = setTimeout(() => {
+            this.returnStarToPool(star);
+            const index = this.activeStars.indexOf(star);
+            if (index > -1) {
+                this.activeStars.splice(index, 1);
             }
         }, 3000);
     }
 
-    animateStarFrames(img, frameCount, duration) {
+    animateStarFrames(img, frameCount, duration, isBig) {
         let currentFrame = 1;
-        const frameInterval = duration / frameCount; // Play through frames once
         const staticDuration = duration * 0.57; // 57% of animation is static (frames 1-7)
         const movingDuration = duration * 0.33; // 33% is movement (frames 8-14)
         const staticFrameInterval = staticDuration / 7; // static frames
         const movingFrameInterval = movingDuration / (frameCount - 7); // remaining frames
         
+        const frames = isBig ? this.preloadedFrames.big : this.preloadedFrames.small;
+        
         const animate = () => {
             if (img && img.parentNode && currentFrame <= frameCount) {
-                const isSmall = img.src.includes('smallstartest');
-                
-                if (isSmall) {
-                    img.src = `TitleScreen/Star/smallstartest_straight${currentFrame}.png`;
-                } else {
-                    img.src = `TitleScreen/StarBig/StarBig${currentFrame}.png`;
-                }
-                
+                img.src = frames[currentFrame - 1];
                 currentFrame++;
                 
                 if (currentFrame <= frameCount) {
