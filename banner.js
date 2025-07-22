@@ -90,6 +90,7 @@ class BannerAnimation {
     }
 
     startParallaxScrolling() {
+        const stars = document.querySelector('.stars');
         const clouds1 = document.getElementById('clouds1');
         const clouds2 = document.getElementById('clouds2');
         const mountains = document.querySelector('.mountains');
@@ -109,6 +110,9 @@ class BannerAnimation {
             scrollOffset += 0.5;
 
             // Different scroll speeds for parallax effect using background-position
+            if (stars) {
+                stars.style.backgroundPosition = `${-scrollOffset * 0.001}px top`;
+            }
             if (clouds1) {
                 clouds1.style.backgroundPosition = `${-scrollOffset * 0.08}px bottom`;
             }

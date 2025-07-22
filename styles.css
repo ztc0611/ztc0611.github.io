@@ -16,7 +16,7 @@ body {
     height: 300px;
     position: relative;
     overflow: hidden;
-    background-color: #0c116c;
+    background-color: #00002e;
     background-image: url('TitleScreen/sky.png');
     background-size: auto 300px;
     background-position: center;
@@ -63,6 +63,28 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.sky-top {
+    z-index: 1;
+    width: 100%;
+    height: 320px;
+    background-image: url('TitleScreen/sky_top.png');
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: auto 320px;
+    image-rendering: pixelated;
+}
+
+.stars {
+    z-index: 2;
+    width: 100%;
+    height: 320px;
+    background-image: url('TitleScreen/stars.png');
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: auto 160px;
+    image-rendering: pixelated;
 }
 
 .clouds {
@@ -153,7 +175,7 @@ body {
 
 .logo-container {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -166,7 +188,8 @@ body {
     font-size: 4.5rem;
     font-weight: 400;
     text-shadow: 2px 2px 4px rgba(30, 10, 60, 0.6), 
-                 4px 4px 8px rgba(153, 102, 255, 0.2);
+                 4px 4px 8px rgba(153, 102, 255, 0.2),
+                 0 0 20px rgba(0, 0, 46, 0.8);
     margin: 0;
     font-family: 'Bitcount', monospace;
     letter-spacing: 0px;
@@ -483,6 +506,11 @@ body {
         font-size: 3.8rem;
     }
     
+    .stars {
+        height: 250px;
+        background-size: auto 125px;
+    }
+    
     .clouds {
         height: 250px;
         background-size: auto 250px;
@@ -529,6 +557,15 @@ body {
     
     .logo-text {
         font-size: 3.0rem;
+    }
+    
+    .sky-top {
+        display: none;
+    }
+    
+    .stars {
+        height: 250px;
+        background-size: auto 125px;
     }
     
     .clouds {
@@ -578,6 +615,15 @@ body {
     
     .logo-text {
         font-size: 3.0rem;
+    }
+    
+    .sky-top {
+        display: none;
+    }
+    
+    .stars {
+        height: 250px;
+        background-size: auto 125px;
     }
     
     .clouds {
