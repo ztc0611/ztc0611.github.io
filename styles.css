@@ -809,6 +809,17 @@ body {
         opacity: 0;
         filter: none;
     }
+    
+    .project-card[data-project="photostat"] .project-image {
+        background-image: url('Assets/PhotoStat-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .project-card[data-project="photostat"] .project-image img {
+        opacity: 0;
+        filter: none;
+    }
 }
 
 /* Tablet Portrait  */
