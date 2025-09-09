@@ -413,6 +413,16 @@ body {
     font-weight: 500;
 }
 
+.project-meta {
+    margin-bottom: 16px;
+}
+
+.project-meta .first-worked {
+    color: rgba(245, 255, 232, 0.6);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 .project-actions {
     display: flex;
     gap: 12px;
