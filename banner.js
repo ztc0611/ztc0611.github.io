@@ -9,14 +9,17 @@ class BannerAnimation {
         this.guaranteedBigStar = false;
         this.bannerRect = null;
         this.isVisible = true;
-        
+
         this.starPool = { small: [], big: [] };
         this.activeStars = [];
         this.preloadedFrames = { small: [], big: [] };
         this.cachedDate = null;
         this.lastDateCheck = 0;
         this.resizeTimeout = null;
-        
+
+        // Cache parallax elements
+        this.parallaxElements = null;
+
         this.init();
     }
 
@@ -39,13 +42,23 @@ class BannerAnimation {
         document.addEventListener('visibilitychange', () => {
             this.isVisible = !document.hidden;
         });
-        
+
+        let resizeRAF = null;
         window.addEventListener('resize', () => {
+            // Cancel pending resize update if any
+            if (resizeRAF) {
+                cancelAnimationFrame(resizeRAF);
+            }
             if (this.resizeTimeout) {
                 clearTimeout(this.resizeTimeout);
             }
+
+            // Use RAF for smooth updates, with timeout for debouncing
             this.resizeTimeout = setTimeout(() => {
-                this.updateBannerRect();
+                resizeRAF = requestAnimationFrame(() => {
+                    this.updateBannerRect();
+                    resizeRAF = null;
+                });
             }, 100);
         });
     }
@@ -77,13 +90,13 @@ class BannerAnimation {
     createStarElement(isBig) {
         const star = document.createElement('div');
         star.className = isBig ? 'star-big' : 'star';
-        
+
         const img = document.createElement('img');
         img.style.width = '100%';
         img.style.height = '100%';
-        
+
         star.appendChild(img);
-        return { element: star, img: img, inUse: false, animationId: null };
+        return { element: star, img: img, inUse: false, animationId: null, frameAnimationId: null };
     }
 
     calculateStarProbability(isNewDay = false) {
@@ -92,8 +105,7 @@ class BannerAnimation {
         }
 
         // Cache date calculations to avoid repeated Date object creation
-        const now = performance.now();
-        if (!this.cachedDate || now - this.lastDateCheck > 60000) { // Check every minute
+        if (!this.cachedDate || isNewDay) {
             const dateObj = new Date();
             this.cachedDate = {
                 date: dateObj.getDate(),
@@ -101,7 +113,7 @@ class BannerAnimation {
                 month: dateObj.getMonth() + 1,
                 year: dateObj.getFullYear()
             };
-            this.lastDateCheck = now;
+            this.lastDateCheck = performance.now();
         }
 
         const { date, weekday, month, year } = this.cachedDate;
@@ -149,15 +161,21 @@ class BannerAnimation {
     }
 
     startParallaxScrolling() {
-        const stars = document.querySelector('.stars');
-        const clouds1 = document.getElementById('clouds1');
-        const clouds2 = document.getElementById('clouds2');
-        const mountains = document.querySelector('.mountains');
-        const mountainsBack = document.querySelector('.mountains-back');
-        const houses = document.querySelector('.houses');
-        const frontHouses = document.querySelector('.front-houses');
-        const ground = document.querySelector('.ground');
+        // Cache DOM elements once
+        if (!this.parallaxElements) {
+            this.parallaxElements = {
+                stars: document.querySelector('.stars'),
+                clouds1: document.getElementById('clouds1'),
+                clouds2: document.getElementById('clouds2'),
+                mountains: document.querySelector('.mountains'),
+                mountainsBack: document.querySelector('.mountains-back'),
+                houses: document.querySelector('.houses'),
+                frontHouses: document.querySelector('.front-houses'),
+                ground: document.querySelector('.ground')
+            };
+        }
 
+        const { stars, clouds1, clouds2, mountains, mountainsBack, houses, frontHouses, ground } = this.parallaxElements;
         let scrollOffset = 0;
 
         const animate = () => {
@@ -187,9 +205,9 @@ class BannerAnimation {
                 }
             }
 
-            // Reset scroll offset when it gets too large
+            // Reset scroll offset smoothly when it gets too large
             if (scrollOffset > 20000) {
-                scrollOffset = 0;
+                scrollOffset = scrollOffset % 20000;
             }
 
             requestAnimationFrame(animate);
@@ -199,43 +217,67 @@ class BannerAnimation {
     }
 
     startStarGeneration() {
-        const generateStar = () => {
+        let lastFrameTime = performance.now();
+        let frameCount = 0;
+
+        const generateStar = (currentTime) => {
             if (!this.isVisible) {
+                lastFrameTime = currentTime;
                 requestAnimationFrame(generateStar);
                 return;
             }
 
-            // Check if a new day has started (use cached date)
-            const currentDay = this.cachedDate ? this.cachedDate.date : new Date().getDate();
+            const deltaTime = (currentTime - lastFrameTime) / 1000; // Convert to seconds
+            lastFrameTime = currentTime;
+
+            // Check if a new day has started (force fresh date check, not cached)
+            const currentDay = new Date().getDate();
             if (currentDay !== this.lastDay) {
                 this.starThreshold = this.calculateStarProbability(true);
                 this.lastDay = currentDay;
+                // Invalidate cached date to force recalculation
+                this.cachedDate = null;
             }
 
             if (this.starFreeze <= 0) {
                 this.tryCreateStar();
             }
 
-            // Update freeze timers
+            // Update freeze timers using actual delta time
             if (this.starFreeze > 0) {
-                this.starFreeze -= 0.016; // ~60fps
+                this.starFreeze -= deltaTime;
             }
             if (this.starFreezeBig > 0) {
-                this.starFreezeBig -= 0.016;
+                this.starFreezeBig -= deltaTime;
+            }
+
+            // Prune star pools periodically (every ~5 seconds at 60fps)
+            frameCount++;
+            if (frameCount >= 300) {
+                this.pruneStarPools();
+                frameCount = 0;
             }
 
             requestAnimationFrame(generateStar);
         };
 
-        generateStar();
+        requestAnimationFrame(generateStar);
     }
 
     tryCreateStar() {
+        // Ensure bannerRect is valid
+        if (!this.bannerRect || this.bannerRect.width === 0) {
+            this.updateBannerRect();
+            if (!this.bannerRect || this.bannerRect.width === 0) {
+                return; // Banner not ready yet
+            }
+        }
+
         const rand = Math.floor(Math.random() * 250);
         const randSize = Math.floor(Math.random() * rand);
 
         if (rand < this.starThreshold) {
-            
+
             if (randSize < rand / 4.5 && this.starThreshold > 8 && this.starFreezeBig <= 0) {
                 // Create big star
                 this.createBigStar(this.bannerRect);
@@ -244,7 +286,7 @@ class BannerAnimation {
                 // Create regular star
                 this.createRegularStar(this.bannerRect);
             }
-            
+
             this.starFreeze = 1 / (this.starThreshold * 2);
         }
     }
@@ -265,12 +307,40 @@ class BannerAnimation {
 
     returnStarToPool(star) {
         star.inUse = false;
+
+        // Clear removal timeout
         if (star.animationId) {
             clearTimeout(star.animationId);
             star.animationId = null;
         }
+
+        // Cancel ongoing frame animations
+        if (star.frameAnimationId) {
+            cancelAnimationFrame(star.frameAnimationId);
+            star.frameAnimationId = null;
+        }
+
         if (star.element.parentNode) {
             star.element.parentNode.removeChild(star.element);
+        }
+    }
+
+    pruneStarPools() {
+        // Keep pool sizes reasonable (max 20 of each type)
+        const maxPoolSize = 20;
+
+        // Prune small star pool
+        const unusedSmall = this.starPool.small.filter(s => !s.inUse);
+        if (unusedSmall.length > maxPoolSize) {
+            this.starPool.small = this.starPool.small.filter(s => s.inUse)
+                .concat(unusedSmall.slice(0, maxPoolSize));
+        }
+
+        // Prune big star pool
+        const unusedBig = this.starPool.big.filter(s => !s.inUse);
+        if (unusedBig.length > maxPoolSize) {
+            this.starPool.big = this.starPool.big.filter(s => s.inUse)
+                .concat(unusedBig.slice(0, maxPoolSize));
         }
     }
 
@@ -292,7 +362,7 @@ class BannerAnimation {
         this.activeStars.push(star);
         
         // Animate through sprite frames
-        this.animateStarFrames(star.img, frameCount, 2000, false);
+        this.animateStarFrames(star, frameCount, 2000, false);
         
         // Remove star after animation completes
         star.animationId = setTimeout(() => {
@@ -322,7 +392,7 @@ class BannerAnimation {
         this.activeStars.push(star);
         
         // Animate through sprite frames
-        this.animateStarFrames(star.img, frameCount, 3000, true);
+        this.animateStarFrames(star, frameCount, 3000, true);
         
         // Remove star after animation completes
         star.animationId = setTimeout(() => {
@@ -334,36 +404,57 @@ class BannerAnimation {
         }, 3000);
     }
 
-    animateStarFrames(img, frameCount, duration, isBig) {
+    animateStarFrames(star, frameCount, duration, isBig) {
         let currentFrame = 1;
         const staticDuration = duration * 0.57; // 57% of animation is static (frames 1-7)
         const movingDuration = duration * 0.33; // 33% is movement (frames 8-14)
         const staticFrameInterval = staticDuration / 7; // static frames
         const movingFrameInterval = movingDuration / (frameCount - 7); // remaining frames
-        
+
         const frames = isBig ? this.preloadedFrames.big : this.preloadedFrames.small;
-        
-        const animate = () => {
-            if (img && img.parentNode && currentFrame <= frameCount) {
-                img.src = frames[currentFrame - 1];
-                currentFrame++;
-                
-                if (currentFrame <= frameCount) {
-                    const nextInterval = currentFrame <= 8 ? staticFrameInterval : movingFrameInterval;
-                    setTimeout(animate, nextInterval);
-                }
+        const startTime = performance.now();
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+
+            // Calculate which frame we should be on based on elapsed time
+            let targetFrame;
+            if (elapsed < staticDuration) {
+                targetFrame = Math.min(Math.floor(elapsed / staticFrameInterval) + 1, 7);
+            } else {
+                const movingElapsed = elapsed - staticDuration;
+                targetFrame = Math.min(Math.floor(movingElapsed / movingFrameInterval) + 8, frameCount);
+            }
+
+            // Update frame if needed
+            if (star.img && star.img.parentNode && targetFrame !== currentFrame) {
+                currentFrame = targetFrame;
+                star.img.src = frames[currentFrame - 1];
+            }
+
+            // Continue animation if not finished and star is still valid
+            if (currentFrame < frameCount && star.img && star.img.parentNode) {
+                star.frameAnimationId = requestAnimationFrame(animate);
+            } else {
+                star.frameAnimationId = null;
             }
         };
-        
-        setTimeout(animate, staticFrameInterval);
+
+        star.frameAnimationId = requestAnimationFrame(animate);
     }
 
     scheduleGuaranteedBigStar() {
         const delay = Math.random() * 3000 + 1000; // 1-4 seconds
         setTimeout(() => {
             if (!this.guaranteedBigStar) {
-                this.createBigStar(this.bannerRect);
-                this.guaranteedBigStar = true;
+                // Ensure bannerRect is valid before creating star
+                if (!this.bannerRect || this.bannerRect.width === 0) {
+                    this.updateBannerRect();
+                }
+                if (this.bannerRect && this.bannerRect.width > 0) {
+                    this.createBigStar(this.bannerRect);
+                    this.guaranteedBigStar = true;
+                }
             }
         }, delay);
     }
