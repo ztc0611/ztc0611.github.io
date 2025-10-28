@@ -140,7 +140,7 @@ body {
     background-position: 0px bottom;
     background-size: auto 320px;
     image-rendering: pixelated;
-    opacity: 0.8;
+    opacity: 0.95;
 }
 
 .houses {
@@ -190,19 +190,50 @@ body {
     z-index: 10;
     width: 90%;
     max-width: 800px;
+    text-align: center;
 }
 
 .logo-text {
     color: #f5ffe8;
     font-size: 4.5rem;
     font-weight: 400;
-    text-shadow: 2px 2px 4px rgba(30, 10, 60, 0.6), 
+    text-shadow: 2px 2px 4px rgba(30, 10, 60, 0.6),
                  4px 4px 8px rgba(153, 102, 255, 0.2),
                  0 0 20px rgba(0, 0, 46, 0.8);
     margin: 0;
     font-family: 'Bitcount', monospace;
     letter-spacing: 0px;
     text-align: center;
+}
+
+.landing-choices {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.landing-btn {
+    font-family: 'Bitcount', monospace;
+    font-size: 24px;
+    color: #f5ffe8;
+    text-decoration: none;
+    padding: 15px 30px;
+    border: 2px solid rgba(245, 255, 232, 0.5);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 46, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.landing-btn:hover {
+    background: rgba(245, 255, 232, 0.1);
+    border-color: #f5ffe8;
+    box-shadow:
+        0 0 20px rgba(245, 255, 232, 0.3),
+        0 0 30px rgba(245, 255, 232, 0.2);
+    transform: translateY(-2px);
 }
 
 .shooting-stars {

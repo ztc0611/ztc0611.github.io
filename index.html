@@ -5,31 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0c116c">
     <title>Zachary Coleman</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="apple-touch-icon" href="Favicon/favicon.png">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Zachary Coleman">
     <meta property="og:image" content="Assets/Embed.jpg">
     <meta property="og:url" content="https://ztc0611.github.io">
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Zachary Coleman">
     <meta name="twitter:image" content="Assets/Embed.jpg">
-    
-    <!-- Preload dark mode images -->
-    <link rel="preload" as="image" href="Assets/Pixellate-Dark.webp">
-    <link rel="preload" as="image" href="Assets/PointTo-Dark.webp">
-    <link rel="preload" as="image" href="Assets/Booklet-Dark.webp">
-    <link rel="preload" as="image" href="Assets/Dominos-Dark.webp">
-    <link rel="preload" as="image" href="Assets/base4096-Dark.webp">
-    <link rel="preload" as="image" href="Assets/PhotoStat-Dark.webp">
-    
+
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
     <div class="banner" id="banner">
@@ -48,212 +41,16 @@
             <div class="parallax-layer ground"></div>
             <div class="shooting-stars" id="shooting-stars"></div>
         </div>
-        
+
         <div class="logo-container">
             <h1 class="logo-text">Zachary Coleman</h1>
+            <div class="landing-choices">
+                <a href="blog/" class="landing-btn">Blog</a>
+                <a href="portfolio.html" class="landing-btn">Portfolio</a>
+            </div>
         </div>
     </div>
-    
-    <main class="content">
-        <!-- Projects Section -->
-        <section class="projects-section">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card" data-project="pixellate">
-                    <div class="project-image">
-                        <img src="Assets/Pixellate.webp" alt="Pixellate Camera Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Pixellate Camera</h3>
-                        <p>Camera app for iOS that gives a look similar to the Gameboy Camera from 1999. Saves metadata with optional geotagging.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Mar. 2025 - present</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View App Store</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="project-card" data-project="pointto">
-                    <div class="project-image">
-                        <img src="Assets/PointTo.webp" alt="Point To: Custom Compass Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Point To: Custom Compass</h3>
-                        <p>App for iOS and watchOS app that allows the user to define custom locations to point towards. Used by the Northeast Rail Feed Association for antenna alignment!</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Feb. 2024 - present</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" class="btn-primary">View App Store</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="booklet">
-                    <div class="project-image">
-                        <img src="Assets/Booklet.webp" alt="Booklyt: RSS Reader Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <div class="project-title">
-                            <h3>Booklyt: RSS Reader</h3>
-                            <span class="tag">WIP</span>
-                        </div>
-                        <p>A RSS app for iOS, iPadOS, visionOS, and macOS focused on simplicity and using native Apple frameworks. Native for iOS 26.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Jun. 2025 - present</span>
-                        </div>
-                        <div class="project-actions">
-                            <button class="btn-secondary" disabled>Coming September 2025</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Assets/Northward.webp" alt="Northward Game Demo Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Northward Demo</h3>
-                        <p>A demo made as an independent study in game design. Playable in web browser, see details on the itch.io page.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Oct. 2021 - May 2022</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">Play Demo</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="Assets/Recall.webp" alt="Recall: Moving Gallery Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Recall: Moving Gallery</h3>
-                        <p>A gallery app for iOS, iPadOS, visionOS, and macOS that selects random Live Photos and videos to create a memory experience.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Jun. 2025 - Sep. 2025</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View App Store</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Experiments Section -->
-        <section class="projects-section">
-            <h2>Experiments</h2>
-            <div class="projects-grid">
-                <div class="project-card" data-project="dominos">
-                    <div class="project-image">
-                        <img src="Assets/Dominos.webp" alt="Live Activity for Dominos Screenshot">
-                    </div>
-                    <div class="project-info">
-                        <h3>Live Activity for Dominos Pizza</h3>
-                        <p>An experiment in generating an iOS live activity for Dominos Pizza, which works on actual orders when a phone number is entered.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Feb. 2024</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View Experiment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="base4096">
-                    <div class="project-image">
-                        <img src="Assets/base4096.webp" alt="Base4096 Image">
-                    </div>
-                    <div class="project-info">
-                        <h3>Base4096</h3>
-                        <p>An experiment in data compression for when character count matters more than total bytes.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Feb. 2025</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://github.com/ztc0611/base4096-godot" class="btn-primary">View Experiment</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="photostat">
-                    <div class="project-image">
-                        <img src="Assets/PhotoStat.webp" alt="PhotoStat Image">
-                    </div>
-                    <div class="project-info">
-                        <h3>PhotoStat</h3>
-                        <p>A small project that can show stats of the user's iCloud photo library either by years or by months.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Aug. 2025</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Open Source Contributions Section -->
-        <section class="commits-section">
-            <h2>Open Source</h2>
-            <h3>Godot</h3>
-            <div class="commits-list">
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>iOS Display & Interface Improvements</h4>
-                        <p>APIs for controlling status bar visibility and gesture handling, as well as tweaks that enabled 120hz "Pro Motion" display mode</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/67322" class="repo-link">#67322</a>
-                        <a href="https://github.com/godotengine/godot/pull/68044" class="repo-link">#68044</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>Mobile App Lifecycle Handling</h4>
-                        <p>Corrected how iOS apps detect when they're suspended or resumed, giving developers reliable signals to pause gameplay and save progress</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/85100" class="repo-link">#85100</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>Bug Fixes</h4>
-                        <p>Tracked down and fixed a Windows daylight saving time bug that was causing timing issue for 11 years, fixed iOS low power mode get method, and improved video recording stability in the MovieWriter</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223</a>
-                        <a href="https://github.com/godotengine/godot/pull/85026" class="repo-link">#85026</a>
-                        <a href="https://github.com/godotengine/godot/pull/104334" class="repo-link">#104334</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>Godot 3.x Legacy Support</h4>
-                        <p>Back-ported many changes and fixes to Godot 3.x so existing projects could benefit from performance improvements without needing to upgrade engines</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/68189" class="repo-link">#68189</a>
-                        <a href="https://github.com/godotengine/godot/pull/68190" class="repo-link">#68190</a>
-                        <a href="https://github.com/godotengine/godot/pull/85229" class="repo-link">#85229</a>
-                        <a href="https://github.com/godotengine/godot/pull/85230" class="repo-link">#85230</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <footer style="text-align: center; padding: 40px 20px; color: rgba(245, 255, 232, 0.6); font-size: 0.9rem;">
-            <p>Designed on  Macintosh</p>
-        </footer>
-    </main>
-    
     <script src="banner.js"></script>
 </body>
 </html>

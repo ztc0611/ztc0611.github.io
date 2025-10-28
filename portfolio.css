@@ -1,0 +1,30 @@
+/* Portfolio-specific styles */
+
+body {
+    padding-top: 40px;
+}
+
+.content {
+    padding-top: 20px;
+}
+
+.back-home {
+    display: inline-block;
+    margin-bottom: 30px;
+    color: #8ab4f8;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.back-home:hover {
+    text-decoration: underline;
+}
+
+.page-title {
+    color: rgb(231, 254, 195);
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin: 0 0 40px 0;
+    font-family: 'Bitcount', monospace;
+    text-align: center;
+}
