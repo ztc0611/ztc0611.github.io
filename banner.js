@@ -12,7 +12,6 @@ class BannerAnimation {
 
         this.starPool = { small: [], big: [] };
         this.activeStars = [];
-        this.preloadedFrames = { small: [], big: [] };
         this.cachedDate = null;
         this.lastDateCheck = 0;
         this.resizeTimeout = null;
@@ -27,7 +26,6 @@ class BannerAnimation {
         console.log("Today's StarVal:", this.starThreshold);
         this.updateBannerRect();
         this.setupVisibilityListener();
-        this.preloadStarFrames();
         this.initializeStarPools();
         this.startParallaxScrolling();
         this.startStarGeneration();
@@ -63,22 +61,6 @@ class BannerAnimation {
         });
     }
 
-    preloadStarFrames() {
-        // Preload small star frames
-        for (let i = 1; i <= 14; i++) {
-            const img = new Image();
-            img.src = `TitleScreen/Star/smallstartest_straight${i}.png`;
-            this.preloadedFrames.small.push(img.src);
-        }
-        
-        // Preload big star frames
-        for (let i = 1; i <= 13; i++) {
-            const img = new Image();
-            img.src = `TitleScreen/StarBig/StarBig${i}.png`;
-            this.preloadedFrames.big.push(img.src);
-        }
-    }
-
     initializeStarPools() {
         // Pre-create star elements to avoid DOM creation overhead
         for (let i = 0; i < 10; i++) {
@@ -90,13 +72,10 @@ class BannerAnimation {
     createStarElement(isBig) {
         const star = document.createElement('div');
         star.className = isBig ? 'star-big' : 'star';
+        star.style.backgroundColor = '#fdfae7';
+        star.style.boxShadow = '0 0 4px rgba(253, 250, 231, 0.8)';
 
-        const img = document.createElement('img');
-        img.style.width = '100%';
-        img.style.height = '100%';
-
-        star.appendChild(img);
-        return { element: star, img: img, inUse: false, animationId: null, frameAnimationId: null };
+        return { element: star, inUse: false, positionAnimationId: null };
     }
 
     calculateStarProbability(isNewDay = false) {
@@ -187,15 +166,16 @@ class BannerAnimation {
             scrollOffset += 0.5;
 
             // Batch DOM updates to minimize repaints
+            // Round to whole pixels to prevent Safari Retina blurriness
             const updates = [
-                [stars, `${-scrollOffset * 0.001}px top`],
-                [clouds1, `${-scrollOffset * 0.08}px bottom`],
-                [clouds2, `${-scrollOffset * 0.06}px bottom`],
-                [mountains, `${-scrollOffset * 0.5}px bottom`],
-                [mountainsBack, `${150 + -scrollOffset * 0.4}px bottom`],
-                [houses, `${-scrollOffset * 0.7}px bottom`],
-                [frontHouses, `${-scrollOffset * 0.9}px bottom`],
-                [ground, `${-scrollOffset * 1.0}px bottom`]
+                [stars, `${Math.round(-scrollOffset * 0.001)}px top`],
+                [clouds1, `${Math.round(-scrollOffset * 0.08)}px bottom`],
+                [clouds2, `${Math.round(-scrollOffset * 0.06)}px bottom`],
+                [mountains, `${Math.round(-scrollOffset * 0.5)}px bottom`],
+                [mountainsBack, `${Math.round(150 + -scrollOffset * 0.4)}px bottom`],
+                [houses, `${Math.round(-scrollOffset * 0.7)}px bottom`],
+                [frontHouses, `${Math.round(-scrollOffset * 0.9)}px bottom`],
+                [ground, `${Math.round(-scrollOffset * 1.0)}px bottom`]
             ];
 
             // Apply all updates in a single batch
@@ -308,16 +288,10 @@ class BannerAnimation {
     returnStarToPool(star) {
         star.inUse = false;
 
-        // Clear removal timeout
-        if (star.animationId) {
-            clearTimeout(star.animationId);
-            star.animationId = null;
-        }
-
-        // Cancel ongoing frame animations
-        if (star.frameAnimationId) {
-            cancelAnimationFrame(star.frameAnimationId);
-            star.frameAnimationId = null;
+        // Cancel position animations
+        if (star.positionAnimationId) {
+            cancelAnimationFrame(star.positionAnimationId);
+            star.positionAnimationId = null;
         }
 
         if (star.element.parentNode) {
@@ -346,102 +320,115 @@ class BannerAnimation {
 
     createRegularStar(bannerRect) {
         const star = this.getStarFromPool(false);
-        
-        // Create animated star using preloaded sprite frames
-        const frameCount = 14; // smallstartest_straight1 to 14
-        const currentFrame = Math.floor(Math.random() * frameCount) + 1;
-        star.img.src = this.preloadedFrames.small[currentFrame - 1];
-        
-        const size = Math.random() * 20 + 12; // 12-32px scaled for 300px height
+
+        const size = Math.floor(Math.random() * 3 + 2) * 2; // 4, 6, 8px (pixel sizes)
         star.element.style.width = size + 'px';
         star.element.style.height = size + 'px';
-        star.element.style.left = (Math.random() * (bannerRect.width + 60) - 30) + 'px';
-        star.element.style.top = (Math.random() * 80 - 10) + 'px';
-        
+
+        // Store animation properties
+        star.startX = Math.random() * (bannerRect.width + 180) - 90;
+
+        // All stars spawn above the screen
+        // Weighted random: mostly near top, some further up
+        const rand = Math.random();
+        const normalizedY = Math.pow(rand, 2); // Square makes values cluster near 0
+        star.startY = -10 - (normalizedY * 150); // Range from -10 to -160 (all negative)
+
+        star.startTime = performance.now();
+        star.duration = 1000;
+        star.size = size;
+
+        star.element.style.left = Math.round(star.startX) + 'px';
+        star.element.style.top = Math.round(star.startY) + 'px';
+        star.element.style.opacity = '0';
+
         this.shootingStars.appendChild(star.element);
         this.activeStars.push(star);
-        
-        // Animate through sprite frames
-        this.animateStarFrames(star, frameCount, 2000, false);
-        
-        // Remove star after animation completes
-        star.animationId = setTimeout(() => {
-            this.returnStarToPool(star);
-            const index = this.activeStars.indexOf(star);
-            if (index > -1) {
-                this.activeStars.splice(index, 1);
-            }
-        }, 2000);
+
+        // Start position animation
+        this.animateStarPosition(star, false);
     }
 
     createBigStar(bannerRect) {
         const star = this.getStarFromPool(true);
-        
-        // Create animated big star using preloaded sprite frames
-        const frameCount = 13; // StarBig1 to 13
-        const currentFrame = Math.floor(Math.random() * frameCount) + 1;
-        star.img.src = this.preloadedFrames.big[currentFrame - 1];
-        
-        const size = Math.random() * 25 + 30; // 30-55px scaled for 300px height
+
+        const size = Math.floor(Math.random() * 3 + 3) * 2; // 6, 8, 10px (bigger pixel sizes)
         star.element.style.width = size + 'px';
         star.element.style.height = size + 'px';
-        star.element.style.left = (Math.random() * (bannerRect.width + 60) - 30) + 'px';
-        star.element.style.top = (Math.random() * 80 - 10) + 'px';
-        
+
+        // Store animation properties
+        star.startX = Math.random() * (bannerRect.width + 180) - 90;
+
+        // All stars spawn above the screen
+        // Weighted random: mostly near top, some further up
+        const rand = Math.random();
+        const normalizedY = Math.pow(rand, 2); // Square makes values cluster near 0
+        star.startY = -10 - (normalizedY * 150); // Range from -10 to -160 (all negative)
+
+        star.startTime = performance.now();
+        star.duration = 1500;
+        star.size = size;
+
+        star.element.style.left = Math.round(star.startX) + 'px';
+        star.element.style.top = Math.round(star.startY) + 'px';
+        star.element.style.opacity = '0';
+
         this.shootingStars.appendChild(star.element);
         this.activeStars.push(star);
-        
-        // Animate through sprite frames
-        this.animateStarFrames(star, frameCount, 3000, true);
-        
-        // Remove star after animation completes
-        star.animationId = setTimeout(() => {
-            this.returnStarToPool(star);
-            const index = this.activeStars.indexOf(star);
-            if (index > -1) {
-                this.activeStars.splice(index, 1);
-            }
-        }, 3000);
+
+        // Start position animation
+        this.animateStarPosition(star, true);
     }
 
-    animateStarFrames(star, frameCount, duration, isBig) {
-        let currentFrame = 1;
-        const staticDuration = duration * 0.57; // 57% of animation is static (frames 1-7)
-        const movingDuration = duration * 0.33; // 33% is movement (frames 8-14)
-        const staticFrameInterval = staticDuration / 7; // static frames
-        const movingFrameInterval = movingDuration / (frameCount - 7); // remaining frames
-
-        const frames = isBig ? this.preloadedFrames.big : this.preloadedFrames.small;
-        const startTime = performance.now();
+    animateStarPosition(star, isBig) {
+        const totalDistance = 300; // pixels to move (increased to go further down)
+        const distanceX = totalDistance;
+        const distanceY = totalDistance / 2;
 
         const animate = (currentTime) => {
-            const elapsed = currentTime - startTime;
-
-            // Calculate which frame we should be on based on elapsed time
-            let targetFrame;
-            if (elapsed < staticDuration) {
-                targetFrame = Math.min(Math.floor(elapsed / staticFrameInterval) + 1, 7);
-            } else {
-                const movingElapsed = elapsed - staticDuration;
-                targetFrame = Math.min(Math.floor(movingElapsed / movingFrameInterval) + 8, frameCount);
+            if (!star.element.parentNode) {
+                return; // Star was removed
             }
 
-            // Update frame if needed
-            if (star.img && star.img.parentNode && targetFrame !== currentFrame) {
-                currentFrame = targetFrame;
-                star.img.src = frames[currentFrame - 1];
+            const elapsed = currentTime - star.startTime;
+            const progress = Math.min(elapsed / star.duration, 1);
+
+            // Simple fade in/out while moving the whole time
+            let opacity = 1;
+            if (progress < 0.2) {
+                // Fade in during first 20%
+                opacity = progress / 0.2;
+            } else if (progress > 0.8) {
+                // Fade out during last 20%
+                opacity = 1 - ((progress - 0.8) / 0.2);
             }
 
-            // Continue animation if not finished and star is still valid
-            if (currentFrame < frameCount && star.img && star.img.parentNode) {
-                star.frameAnimationId = requestAnimationFrame(animate);
+            // Always moving - use full progress
+            const moveProgress = progress;
+
+            // Round to whole pixels for pixel-perfect movement
+            const currentX = Math.round(star.startX + (distanceX * moveProgress));
+            const currentY = Math.round(star.startY + (distanceY * moveProgress));
+
+            star.element.style.left = currentX + 'px';
+            star.element.style.top = currentY + 'px';
+            star.element.style.opacity = opacity;
+
+            if (progress < 1) {
+                star.positionAnimationId = requestAnimationFrame(animate);
             } else {
-                star.frameAnimationId = null;
+                // Clean up when done
+                this.returnStarToPool(star);
+                const index = this.activeStars.indexOf(star);
+                if (index > -1) {
+                    this.activeStars.splice(index, 1);
+                }
             }
         };
 
-        star.frameAnimationId = requestAnimationFrame(animate);
+        star.positionAnimationId = requestAnimationFrame(animate);
     }
+
 
     scheduleGuaranteedBigStar() {
         const delay = Math.random() * 3000 + 1000; // 1-4 seconds

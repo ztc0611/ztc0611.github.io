@@ -1,47 +1,259 @@
-/* Homepage-specific styles */
+/* Homepage-specific styles - Banner fills entire viewport */
 
-/* Make homepage banner fill entire viewport */
 html, body {
     height: 100%;
     overflow: hidden;
 }
 
 .banner {
-    height: 100vh !important;
-    background-size: auto 100vh !important;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #00002e;
+    background-image: url('banner/sky.png');
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: repeat-x;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    margin-top: calc(-1 * env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+    margin-left: calc(-1 * env(safe-area-inset-left));
+    margin-right: calc(-1 * env(safe-area-inset-right));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+.parallax-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 .parallax-layer img {
-    height: 100vh !important;
+    height: 100%;
+    width: auto;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    display: inline-block;
 }
 
-.sky-top, .stars, .clouds, .mountains, .mountains-back, .houses, .front-houses, .ground {
-    height: 100vh !important;
-    background-size: auto 100vh !important;
+.sky {
+    z-index: 1;
 }
 
-/* Scale shooting stars for larger viewport */
-.shooting-stars {
-    transform: scale(3);
-    transform-origin: top left;
+.sky img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sky-top {
+    z-index: 1;
+    background-image: url('banner/sky_top.png');
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: auto 100%;
+}
+
+.stars {
+    z-index: 2;
+    background-image: url('banner/stars.png');
+    background-repeat: repeat-x;
+    background-position: top;
+    background-size: auto 50%;
+}
+
+.clouds {
+    z-index: 2;
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: auto 100%;
+}
+
+#clouds1 {
+    background-image: url('banner/clouds.png');
+}
+
+#clouds2 {
+    background-image: url('banner/clouds2.png');
+    opacity: 0.7;
+    top: 20px;
+}
+
+.mountains {
+    z-index: 3;
+    bottom: 0;
+    top: auto;
+    background-image: url('banner/mountians.png');
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: auto 100%;
+}
+
+.mountains-back {
+    z-index: 2;
+    bottom: -30px;
+    top: auto;
+    background-image: url('banner/mountians2.png');
+    background-repeat: repeat-x;
+    background-position: 0px bottom;
+    background-size: auto 100%;
+    opacity: 0.95;
+}
+
+.houses {
+    z-index: 4;
+    bottom: 0;
+    top: auto;
+    background-image: url('banner/bg_houses.png');
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: auto 100%;
+}
+
+.front-houses {
+    z-index: 6;
+    bottom: 0;
+    top: auto;
+    background-image: url('banner/front_houses.png');
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: auto 100%;
+}
+
+.ground {
+    z-index: 7;
+    bottom: 0;
+    top: auto;
+    background-image: url('banner/ground.png');
+    background-repeat: repeat-x;
+    background-position: bottom;
+    background-size: auto 100%;
+}
+
+.logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
 }
 
 .logo-text {
-    font-size: clamp(1.5rem, 6vw, 4.5rem) !important;
+    color: #f5ffe8;
+    font-size: clamp(1.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    text-shadow: 2px 2px 4px rgba(30, 10, 60, 0.6),
+                 4px 4px 8px rgba(153, 102, 255, 0.2),
+                 0 0 20px rgba(0, 0, 46, 0.8);
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    .logo-text {
+        color: rgb(231, 254, 195);
+    }
+}
+
+.landing-choices {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .landing-btn {
-    font-size: clamp(0.9rem, 2vw, 1.5rem) !important;
-    padding: clamp(8px, 1.5vh, 15px) clamp(15px, 3vw, 30px) !important;
+    font-family: Georgia, serif;
+    color: #f5ffe8;
+    text-decoration: none;
+    font-size: clamp(0.9rem, 2vw, 1.5rem);
+    padding: clamp(8px, 1.5vh, 15px) clamp(15px, 3vw, 30px);
+    border: 2px solid rgba(245, 255, 232, 0.5);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 46, 0.5);
+    backdrop-filter: blur(5px);
 }
 
+.landing-btn:hover {
+    background: rgba(245, 255, 232, 0.1);
+    border-color: #f5ffe8;
+    box-shadow:
+        0 0 20px rgba(245, 255, 232, 0.3),
+        0 0 30px rgba(245, 255, 232, 0.2);
+    transform: translateY(-2px);
+}
+
+.shooting-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+}
+
+.star img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+}
+
+.star-big {
+    position: absolute;
+}
+
+.star-big img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+}
+
+/* Shooting star animations now handled by JavaScript */
+
 @media (max-width: 768px) {
+    html, body {
+        height: 100dvh;
+    }
+
+    .banner {
+        height: 100dvh;
+    }
+
     .logo-text {
-        font-size: clamp(3.5rem, 12vw, 6rem) !important;
+        font-size: clamp(3.5rem, 12vw, 6rem);
     }
 
     .landing-btn {
-        font-size: clamp(1.2rem, 4vw, 2rem) !important;
-        padding: clamp(10px, 2.5vh, 20px) clamp(20px, 5vw, 40px) !important;
+        font-size: clamp(1.2rem, 4vw, 2rem);
+        padding: clamp(10px, 2.5vh, 20px) clamp(20px, 5vw, 40px);
     }
 }

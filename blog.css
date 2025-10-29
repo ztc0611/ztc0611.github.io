@@ -124,7 +124,7 @@ figure, pre {
 
     .blog-container {
         max-width: none;
-        padding: 0;
+        padding: 0 20px;
     }
 
     .blog-post-preview {
@@ -133,18 +133,18 @@ figure, pre {
     }
 
     .back-link, .back-home {
-        margin-left: 20px;
+        margin-left: 0;
     }
 
     h1.post-title, .blog-title {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 0;
+        padding-right: 0;
         font-size: 2.5rem;
     }
 
     .post-date {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -335,6 +335,7 @@ article h3, article h4, article h5, article h6 {
     display: inline-block;
     margin-bottom: 20px;
     text-decoration: none;
+    padding: 0 20px;
 }
 
 .back-link:hover {
@@ -482,7 +483,7 @@ article h3, article h4, article h5, article h6 {
     font-size: 3.5rem;
     font-weight: 400;
     margin: 0 0 40px 0;
-    font-family: 'Bitcount', monospace;
+    font-family: Georgia, serif;
     letter-spacing: 0px;
     text-align: center;
 }

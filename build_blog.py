@@ -411,6 +411,8 @@ def generate_page(content, metadata, slug, date_formatted, updated_formatted=Non
             <h1 class="post-title">{title}</h1>
             {date_display}
             {content}
+            <br>
+            <a href="index.html" class="back-link">← Back to weblog</a>
         </div>
     </main>
     <script>
@@ -518,8 +520,8 @@ def generate_rss(posts):
         content_for_rss = post['content']
         # Replace src="/blog_assets/ with full URL
         content_for_rss = content_for_rss.replace('src="/blog_assets/', 'src="https://ztc0611.github.io/blog_assets/')
-        # Replace src="../Assets/ with full URL (for older posts)
-        content_for_rss = content_for_rss.replace('src="../Assets/', 'src="https://ztc0611.github.io/Assets/')
+        # Replace src="../portfolio_assets/ with full URL
+        content_for_rss = content_for_rss.replace('src="../portfolio_assets/', 'src="https://ztc0611.github.io/portfolio_assets/')
 
         # Replace WebP and HEIC extensions with JPG for RSS compatibility
         content_for_rss = re.sub(r'\.webp"', '.jpg"', content_for_rss, flags=re.IGNORECASE)
@@ -571,6 +573,15 @@ def main():
     output_dir = Path('blog')
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Convert all WebP and HEIC images to JPG for compatibility
+    print("Converting WebP and HEIC images to JPG...")
+    asset_path = Path('blog_assets')
+    if asset_path.exists():
+        for ext in ['webp', 'heic', 'HEIC']:
+            for img_file in asset_path.glob(f'*.{ext}'):
+                convert_to_jpg(img_file)
+    print()
+
     posts = []
 
     # Process each markdown file in blog_posts/
@@ -591,20 +602,6 @@ def main():
 
         # Wrap in <article> tag
         html_content = f'<article>\n\n{html_content}\n</article>'
-
-        # Find and convert WebP/HEIC images to JPG for RSS compatibility
-        image_matches = re.findall(r'src="([^"]+\.(heic|webp))"', html_content, re.IGNORECASE)
-        for img_src, ext in image_matches:
-            # Convert relative paths to actual file paths
-            if img_src.startswith('/'):
-                # Absolute path from site root
-                img_path = Path(img_src[1:])  # Remove leading /
-            else:
-                # Relative to blog_posts directory
-                img_path = blog_dir.parent / img_src
-
-            if img_path.exists():
-                convert_to_jpg(img_path)
 
         # Extract slug from filename (remove date prefix if present)
         slug = file_path.stem

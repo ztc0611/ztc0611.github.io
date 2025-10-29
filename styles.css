@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@400&family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
 
 * {
     margin: 0;
@@ -17,313 +17,7 @@ body {
     padding-right: env(safe-area-inset-right);
 }
 
-.banner {
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-    background-color: #00002e;
-    background-image: url('TitleScreen/sky.png');
-    background-size: auto 300px;
-    background-position: center;
-    background-repeat: repeat-x;
-    image-rendering: pixelated;
-    margin-top: calc(-1 * env(safe-area-inset-top));
-    padding-top: env(safe-area-inset-top);
-    margin-left: calc(-1 * env(safe-area-inset-left));
-    margin-right: calc(-1 * env(safe-area-inset-right));
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-}
-
-.parallax-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.parallax-layer {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    will-change: transform;
-}
-
-.parallax-layer img {
-    height: 320px;
-    width: auto;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-    display: inline-block;
-}
-
-.parallax-layer img:nth-child(2) {
-    margin-left: 0px;
-}
-
-.sky {
-    z-index: 1;
-    width: 100%;
-}
-
-.sky img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.sky-top {
-    z-index: 1;
-    width: 100%;
-    height: 320px;
-    background-image: url('TitleScreen/sky_top.png');
-    background-repeat: repeat-x;
-    background-position: top;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-}
-
-.stars {
-    z-index: 2;
-    width: 100%;
-    height: 320px;
-    background-image: url('TitleScreen/stars.png');
-    background-repeat: repeat-x;
-    background-position: top;
-    background-size: auto 160px;
-    image-rendering: pixelated;
-}
-
-.clouds {
-    z-index: 2;
-    width: 100%;
-    height: 320px;
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-}
-
-#clouds1 {
-    background-image: url('TitleScreen/clouds.png');
-}
-
-#clouds2 {
-    background-image: url('TitleScreen/clouds2.png');
-    opacity: 0.7;
-    top: 20px;
-}
-
-.mountains {
-    z-index: 3;
-    width: 100%;
-    bottom: 0;
-    top: auto;
-    height: 320px;
-    background-image: url('TitleScreen/mountians.png');
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-}
-
-.mountains-back {
-    z-index: 2;
-    width: 100%;
-    bottom: -30px;
-    top: auto;
-    height: 320px;
-    background-image: url('TitleScreen/mountians2.png');
-    background-repeat: repeat-x;
-    background-position: 0px bottom;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-    opacity: 0.95;
-}
-
-.houses {
-    z-index: 4;
-    width: 100%;
-    bottom: 0;
-    top: auto;
-    height: 320px;
-    background-image: url('TitleScreen/bg_houses.png');
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-}
-
-.front-houses {
-    z-index: 6;
-    width: 100%;
-    bottom: 0;
-    top: auto;
-    height: 320px;
-    background-image: url('TitleScreen/front_houses.png');
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-}
-
-.ground {
-    z-index: 7;
-    width: 100%;
-    bottom: 0;
-    top: auto;
-    height: 320px;
-    background-image: url('TitleScreen/ground.png');
-    background-repeat: repeat-x;
-    background-position: bottom;
-    background-size: auto 320px;
-    image-rendering: pixelated;
-}
-
-.logo-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    width: 90%;
-    max-width: 800px;
-    text-align: center;
-}
-
-.logo-text {
-    color: #f5ffe8;
-    font-size: 4.5rem;
-    font-weight: 400;
-    text-shadow: 2px 2px 4px rgba(30, 10, 60, 0.6),
-                 4px 4px 8px rgba(153, 102, 255, 0.2),
-                 0 0 20px rgba(0, 0, 46, 0.8);
-    margin: 0;
-    font-family: 'Bitcount', monospace;
-    letter-spacing: 0px;
-    text-align: center;
-}
-
-.landing-choices {
-    margin-top: 30px;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.landing-btn {
-    font-family: 'Bitcount', monospace;
-    font-size: 24px;
-    color: #f5ffe8;
-    text-decoration: none;
-    padding: 15px 30px;
-    border: 2px solid rgba(245, 255, 232, 0.5);
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    background: rgba(0, 0, 46, 0.5);
-    backdrop-filter: blur(5px);
-}
-
-.landing-btn:hover {
-    background: rgba(245, 255, 232, 0.1);
-    border-color: #f5ffe8;
-    box-shadow:
-        0 0 20px rgba(245, 255, 232, 0.3),
-        0 0 30px rgba(245, 255, 232, 0.2);
-    transform: translateY(-2px);
-}
-
-.shooting-stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.star {
-    position: absolute;
-    animation: shootingStar 2s linear forwards;
-    transform: translateX(0px) translateY(0px) scale(0);
-}
-
-.star img {
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-}
-
-.star-big {
-    position: absolute;
-    animation: shootingStarBig 3s linear forwards;
-    transform: translateX(0px) translateY(0px) scale(0);
-}
-
-.star-big img {
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-}
-
-@keyframes float {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-@keyframes shootingStar {
-    0% {
-        opacity: 0;
-        transform: translateX(0px) translateY(0px) scale(0);
-    }
-    10% {
-        opacity: 1;
-        transform: translateX(0px) translateY(0px) scale(1);
-    }
-    57% {
-        opacity: 1;
-        transform: translateX(0px) translateY(0px) scale(1);
-    }
-    90% {
-        opacity: 1;
-        transform: translateX(150px) translateY(75px) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(180px) translateY(90px) scale(0);
-    }
-}
-
-@keyframes shootingStarBig {
-    0% {
-        opacity: 0;
-        transform: translateX(0px) translateY(0px) scale(0);
-    }
-    10% {
-        opacity: 1;
-        transform: translateX(0px) translateY(0px) scale(1.5);
-    }
-    57% {
-        opacity: 1;
-        transform: translateX(0px) translateY(0px) scale(1.5);
-    }
-    90% {
-        opacity: 1;
-        transform: translateX(150px) translateY(75px) scale(1.5);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(180px) translateY(90px) scale(0);
-    }
-}
+/* Banner styles moved to homepage.css */
 
 .content {
     padding: 60px 20px;
@@ -398,7 +92,7 @@ body {
 .placeholder-image {
     color: #f5ffe8;
     font-size: 1.5rem;
-    font-family: 'Bitcount', monospace;
+    font-family: Georgia, serif;
     opacity: 0.7;
 }
 
@@ -424,7 +118,7 @@ body {
     color: #f5ffe8;
     font-size: 1.5rem;
     margin: 0 0 16px 0;
-    font-family: 'Bitcount', monospace;
+    font-family: Georgia, serif;
 }
 
 .project-info p {
@@ -503,7 +197,7 @@ body {
     color: rgba(153, 102, 255, 0.9);
     margin-bottom: 30px;
     text-align: center;
-    font-family: 'Bitcount', monospace;
+    font-family: Georgia, serif;
     font-weight: 400;
 }
 
@@ -797,66 +491,66 @@ body {
     }
     
     .project-card[data-project="booklet"] .project-image {
-        background-image: url('Assets/Booklet-Dark.webp');
+        background-image: url('portfolio_assets/Booklet-Dark.webp');
         background-size: cover;
         background-position: center;
     }
-    
+
     .project-card[data-project="booklet"] .project-image img {
         opacity: 0;
         filter: none;
     }
-    
+
     .project-card[data-project="pixellate"] .project-image {
-        background-image: url('Assets/Pixellate-Dark.webp');
+        background-image: url('portfolio_assets/Pixellate-Dark.webp');
         background-size: cover;
         background-position: center;
     }
-    
+
     .project-card[data-project="pixellate"] .project-image img {
         opacity: 0;
         filter: none;
     }
-    
+
     .project-card[data-project="pointto"] .project-image {
-        background-image: url('Assets/PointTo-Dark.webp');
+        background-image: url('portfolio_assets/PointTo-Dark.webp');
         background-size: cover;
         background-position: center;
     }
-    
+
     .project-card[data-project="pointto"] .project-image img {
         opacity: 0;
         filter: none;
     }
-    
+
     .project-card[data-project="dominos"] .project-image {
-        background-image: url('Assets/Dominos-Dark.webp');
+        background-image: url('portfolio_assets/Dominos-Dark.webp');
         background-size: cover;
         background-position: center;
     }
-    
+
     .project-card[data-project="dominos"] .project-image img {
         opacity: 0;
         filter: none;
     }
-    
+
     .project-card[data-project="base4096"] .project-image {
-        background-image: url('Assets/base4096-Dark.webp');
+        background-image: url('portfolio_assets/base4096-Dark.webp');
         background-size: cover;
         background-position: center;
     }
-    
+
     .project-card[data-project="base4096"] .project-image img {
         opacity: 0;
         filter: none;
     }
-    
+
     .project-card[data-project="photostat"] .project-image {
-        background-image: url('Assets/PhotoStat-Dark.webp');
+        background-image: url('portfolio_assets/PhotoStat-Dark.webp');
         background-size: cover;
         background-position: center;
     }
-    
+
     .project-card[data-project="photostat"] .project-image img {
         opacity: 0;
         filter: none;

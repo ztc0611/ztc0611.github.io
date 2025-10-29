@@ -5,7 +5,7 @@
     <link>https://ztc0611.github.io/blog/</link>
     <description>Thoughts on technology, photography, etc.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Oct 2025 04:20:19 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 30 Oct 2025 22:33:20 GMT</lastBuildDate>
     <atom:link href="https://ztc0611.github.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -13,7 +13,7 @@
         <link>https://ztc0611.github.io/blog/2025-vision-pro-m5.html</link>
         <guid>https://ztc0611.github.io/blog/2025-vision-pro-m5.html</guid>
         <pubDate>Tue, 28 Oct 2025 04:30:00 GMT</pubDate>
-        <description>My thoughts on the Apple Vision platform in 2025, from the outside looking in.</description>
+        <description>Too many thoughts on the Apple Vision platform in 2025, from the outside looking in.</description>
         <enclosure url="https://ztc0611.github.io/blog_assets/vp-style.jpg" type="image/jpeg" />
         <content:encoded><![CDATA[<article>
 
@@ -22,19 +22,19 @@
   <img src="https://ztc0611.github.io/blog_assets/vp-style.jpg" alt="An image of the Vision Pro, slick marketing photo. It is pointing vertical (screen upwards) instead of its normal orientation, horizontal.">
 </picture>
 
-<p>It's been about 18 months since the Vision Pro (M2) came out. I have been following it pretty closely since WWDC 2023. It has been interesting to watch the developments along the way, from big upgrades to Personas to features like the new widgets. On launch day, I decided to check out the new model.</p>
+<p>It's been about 18 months since the Vision Pro (M2) came out. I have been following it pretty closely since WWDC 2023. It has been interesting to watch the developments along the way, from big upgrades to Personas to features like the new widgets. On the M5's launch day, I decided to check out the new model.</p>
 
 <p>My knowledge of the platform: I've been following since WWDC 2023. I did a demo the day it came out, and 2 more demos across the time after, each in different stores. I have watched many of the developer videos about it across the time since WWDC'23. I also attended the two day "Create immersive media experiences for visionOS" developer session (remotely) on the 21st/22nd of October this year. I have 3 apps on Apple platforms, one of which has a native visionOS port, but I've never gotten to use it on actual hardware.</p>
 
 <p>In my time I have used the HTC Vive, Meta Quest 2, Meta Quest 3s, and Valve Index (demo). My favorite VR app of all time is Google Earth VR.<sup><a href="#fn1" id="fnref1">1</a></sup></p>
 
-<p>I did a demo on October 22nd, the day the M5 model came out. The employees seemed pretty excited, and a few people walked by while I was doing my demo and asked about the new hardware. I told the employee early on in our conversation that I develop apps, and after that point she mostly let me drive while we chatted.</p>
+<p>On the launch day for the 2nd generation, the employees seemed pretty excited. A few people walked by while I was doing my demo and asked about the new hardware. I told the employee early on in our conversation that I develop apps, and after that point she mostly let me drive while we chatted.</p>
 
 <h2>Hardware Experience</h2>
 
 <p>It's such a beautiful piece of hardware, and while there are aspects of it that are a little dorky, I think it might be the platonic ideal for headsets with current technology.</p>
 
-<p>It is almost ridiculous how much more comfortable the new Dual Knit Band is. Despite being a decent bit heavier, it feels significantly lighter. Apple usually has balancing down to perfection in their other devices, so the 1st generation not employing this technique is very strange.</p>
+<p>It is almost ridiculous how much more comfortable the new Dual Knit Band is. Despite being a bit heavier, it feels significantly lighter. Apple usually has balancing down to perfection in their other devices, so the 1st generation not employing this technique is very strange.</p>
 
 <figure>
 <picture>
@@ -46,19 +46,29 @@
 
 <p>I was a fan of the Solo Knit Band's design and adjustment dial from the first generation, but even across my brief experiences with it, I could tell that it was never going to work out. How we ever ended up in a situation where the 1st generation shipped with two bands instead of one that combines both strengths is a mystery to me. I never tried the Dual Loop, but it seemed the obvious practical choice even when factoring in that I hate velcro straps for these kinds of devices.</p>
 
-<p>I'm continually shocked by how clear the screens are, every time I convince myself it's just rose tinted glasses. The faster refresh rate, and "10% extra pixels rendered"<sup><a href="#fn2" id="fnref2">2</a></sup> made text easier on the eyes. Much easier to read iPhone screen through the headset than I remember. Didn't notice the foveated zone moving anymore, no matter how fast I looked around. I have seen some reviews claim the M5 helped with this, but I may have just lost my touch in catching it. Still loses eye tracking precision near the edge of the frame. (Works perfectly closer to the center.)</p>
+<p>I'm continually shocked by how clear the screens are, every time I convince myself I just have an overly rosy memory of my most recent demo. The faster refresh rate, and "10% extra pixels rendered"<sup><a href="#fn2" id="fnref2">2</a></sup> made text easier on the eyes. Much easier to read my iPhone screen through the headset than I remember. Didn't notice the foveated zone moving anymore, no matter how fast I looked around. I have seen some reviews claim the M5 helped with this, but I may have just lost my touch in catching it. Still loses eye tracking precision near the edge of the frame. (Works perfectly closer to the center.)</p>
 
 <h2>Software Experience</h2>
 
-<p>It really reminds me of my first iPhone, or the MacBook running 10.6 Snow Leopard I got when I was 10. Sharp, beautiful, precise.</p>
+<p>It reminds me of my first iPhone, or the MacBook running 10.6 Snow Leopard I got when I was 10. Sharp, beautiful, precise.</p>
 
-<p>They really thought of every last detail when making a new platform. Ridiculous things I'd have never considered in a million years like it not censoring passwords because there's nobody else to see you typing them. I've not encountered this on any other AR/VR device but maybe someone else did think of it first. The fact that popups appear on the same plane as the current window and the main window actually "steps back" behind the popup is another stroke of genius.</p>
+<p>They really thought of every last detail when making a new platform. Ridiculous things I'd have never considered in a million years like it not censoring passwords because there's nobody else to see you typing them. I've not encountered this on any other AR/VR device but maybe someone else did think of it first. Another stroke of genius is popups appear on the same plane as the current window and the main window actually "steps back" behind the popup.</p>
 
-<p>It's continually obvious eye and hand tracking first is the only way forward, with 6DOF game controllers being an accessory only for gamers. I find this to be a continually undersold aspect of the platform. They were right to pick hand tracking over game controllers if only one could make it for launch. I've tried to get family members to use the ones with controllers, and it frustrates them very quickly. I've gotten some of the same people to try these gestures, and they have taken to them extremely fast. Apple really has something here for when the hardware gets cheaper.</p>
+<figure>
+<picture>
+  <source srcset="/blog_assets/vp-ui-pretty.jpg" type="image/webp">
+  <img src="https://ztc0611.github.io/blog_assets/vp-ui-pretty.jpg" alt="Image of an app in visionOS, floating over a wooden table.">
+</picture>
+<figcaption>Source: Apple Design Team, <a href="https://www.wallpaper.com/tech/apple-vision-pro-review">Wallpaper*</a></figcaption>
+</figure>
 
-<p>visionOS has gone from feeling like a late stage polished tech demo to actually feeling like an operating system you could use to get something done. (I still wanted it even when it was a tech demo, lol.) When I said they thought of every detail, it was re-imagining the basics. In V1 they had still failed to do basic things like letting you rearrange apps on the Home Screen. Near the end, I pulled a 3D model out of Files and found it very hard to make it go away, not in alignment of Apple's normal UX.</p>
+<p>It's very obvious to me eye and hand tracking first is the only way forward, with 6DOF controllers being an accessory only for gamers. I find this to be a continually undersold aspect of the platform. They were right to pick hand tracking over game controllers if only one could make it for launch. I've tried to get family members to use the ones with controllers in the past, and it frustrates them very quickly. I've gotten some of the same people to try these gestures, and they have taken to them extremely fast.<sup><a href="#fn3" id="fnref3">3</a></sup> Apple truly has something here for when the hardware gets cheaper.</p>
 
-<p>Final comment on software; it's nice that you can browse the App Store on the demo units even if you can't download anything. It was cool to see my own app.<sup><a href="#fn3" id="fnref3">3</a></sup></p>
+<p>visionOS has gone from feeling like a late stage polished tech demo to actually feeling like an operating system you could use to get something done. (I still wanted it even when it was a tech demo, lol.) When I said they thought of every detail, it was re-imagining the basics. In V1 they had still failed to do basic things like letting you rearrange apps on the Home Screen.</p>
+
+<p>However, near the end of my demo, I pulled a 3D model out of Files and found it very hard to make it go away. The employee even struggled to figure out how to make it go away, it took us about 30 seconds to figure it out. (The typical app controls eventually appeared and I was able to click the X.) Not sure if this is a bug or just a UX issue.</p>
+
+<p>Final comment on software; it's nice that you can browse the App Store on the demo units even if you can't download anything. It was cool to see my own app.<sup><a href="#fn4" id="fnref4">4</a></sup></p>
 
 <figure>
 <picture>
@@ -70,23 +80,27 @@
 
 <h2>Photos, Videos</h2>
 
-<p>I am pretty obsessed with photos. I took 9,637 photos last year, and currently have taken 8,235 so far this year<sup><a href="#fn4" id="fnref4">4</a></sup> How do I know this? I made a basic app that breaks it into a bar graph. (lol) To me, using the Vision Pro to look at pictures, videos, spatial media, panoramas, blah would be one of my favorite use cases.</p>
+<p>I am pretty obsessed with photos. I took 9,637 photos last year, and currently have taken 8,235 so far this year.<sup><a href="#fn5" id="fnref5">5</a></sup> How do I know this? I made a basic app that breaks it into a bar graph. (lol) To me, using the Vision Pro to look at pictures, videos, spatial media, panoramas, etc would be one of my favorite use cases.</p>
 
-<p>I have taken 427 spatial videos, and 160 spatial photos. All were shot on an iPhone 15 Pro (mine) or 16 Pro (borrowing friend's). You are allowed to take 10 into the demo, and I selected a few spatial videos, 2 panoramas, a spatial photo, and 2 normal photos.</p>
+<p>I have taken 427 spatial videos, and 160 spatial photos. All were shot on an iPhone 15 Pro (mine) or 16 Pro (borrowing friend's). I have also taken 800 panoramas (wow, round number) since the WWDC'23, and had only taken 25 before.</p>
 
-<p>I've been very curious to try spatial scenes, and after trying them on my own photo I am not very impressed. People talk about it like it makes spatial photos obsolete, and I don't really agree. They look odd, mostly in how the perspective moves. I find it convincingly predicts the depth, but I'm just not a fan. I will likely shoot more spatial photos going forward. However, their limitations (cropping, etc) are sad, even though they're non-trivial or impossible for Apple to fix.</p>
+<p>You are allowed to take 10 into the demo, and I selected a few spatial videos, 2 panoramas, a spatial photo, and 2 normal photos.</p>
+
+<p>I've been very curious to try spatial scenes on Vision, instead of on a phone. I find it convincingly predicts the depth, far better than I expected. The ones I selected were probably bad candidates, because they did look a little odd. (Both were close-ups of animals without a large amount of background.) But they're pretty cool. I enjoy when they show up in the photos widget on my phone, looking forward to trying more someday.</p>
 
 <figure>
 <picture class="spatial">
   <source srcset="/blog_assets/san-juan-may.jpg" type="image/heic">
   <img src="https://ztc0611.github.io/blog_assets/san-juan-may.jpg" alt="Stereoscopic spatial image of a pacific northwest coastline during the golden hour near sunset. The sky is mostly clear and blue. It is taken semi-parallel to a steep shoreline. The water is on the left, land to the right. The grass and weeds are tall, a mix of yellow and green. You can see many pine trees in the distance as the coastline wraps around. Far in the distance on the left, you can see mountains.">
 </picture>
-<figcaption>Hopefully, a spatial photo for anyone reading on Vision. Normal picture for us squares.<br>I've never actually seen this one on device. Simulator seems to work correctly?<sup><a href="#fn5" id="fnref5">5</a></sup><br>Source: Me</figcaption>
+<figcaption>Hopefully, a spatial photo for anyone reading on Vision. Normal picture for us squares.<br>I've never actually seen this one on device. Simulator seems to work correctly?<sup><a href="#fn6" id="fnref6">6</a></sup><br>Source: Me</figcaption>
 </figure>
 
-<p>Spatial videos are incredible. I have one I took just a few days ago in the rain on Orcas Island in Washington and I was blown away by how I could see the rain drops falling in the immersive view. The store was loud enough that I couldn't really tell the audio difference between the footage from the 15 Pro and the 16 Pro. (Maybe it's just not very noticeable in the first place.) They talked a lot about spatial video in that developer session I went to, as well as immersive video. It gave me an idea for a stupid camera rig, which I am playing around with concepts to make.<sup><a href="#fn6" id="fnref6">6</a></sup></p>
+<p>Panoramas are as impressive as my other demos. I never really understood the format before seeing some in a headset. Before, it always just looked awkward to map a rounded view onto a flat map and look at it like that, I didn't really get it. However, they are very impressive in the Vision Pro. There is one that I took on top of a mountain and you can take in so many more details than I've ever noticed zooming in using a flat display. Not as cool as some other formats, but it does give a faint impression of standing where you took it. I really wish the iPhone could take panoramas in HDR, though.</p>
 
-<p>Immersive video is very impressive, and while they did spend a lot of time during that developer session talking about it, it's kind of moot because it requires $50,000 of equipment if we're being generous. I look forward to watching the content they've created for it when the day comes that I own a VP. It's super cool to hear all of the technical aspects of how filmmaking rules change, but I'm not a video expert, I'm way more on the photos side. (Would like to change that someday!) I would still like to try one of the BlackMagic immersive cameras out someday, maybe in the 2050s I can find one on eBay.</p>
+<p>Spatial videos are incredible. I have one taken just a few days ago in the rain on Orcas Island in Washington, and I was blown away by how I could see the rain drops falling in the immersive view. The store was loud enough that I couldn't really tell the audio difference between the footage from the 15 Pro and the 16 Pro. (The 16 Pro has much better audio recording for video. The controls for this appear on 16 Pro spatial videos, so I think it should be noticeable without noise.) They talked a lot about spatial video in that developer session I went to. It gave me an idea for a stupid camera rig, which I am playing around with concepts to make.<sup><a href="#fn7" id="fnref7">7</a></sup></p>
+
+<p>Immersive video is very impressive, and while they did spend a lot of time during that developer session talking about it, it's kind of moot to me because it requires $50,000 of equipment if we're being generous. I look forward to watching the content they've created for it when the day comes that I own a VP. It's super cool to hear all of the technical aspects of how filmmaking rules change, but I'm not a video expert. I'm a photo guy who takes videos on the side. (Someday I'd like to branch out, though!) For Immersive, I would still like to try one of the BlackMagic immersive cameras out someday. Maybe in the 2050s I can find one on eBay.</p>
 
 <p><em>Random soapbox while we're here:</em> I will mourn the Days view from the Photos app forever. It's so sad that best I can tell it was removed purely because having it fit in the iPhone UI would be inconvenient. I really liked how you could zoom in and out on your photo library and chronologically scroll through days, something the worse Recent Days replacement does not allow. It's funny to me that when the Vision Pro (M2) was announced at WWDC'23, the very first thing it was ever shown doing was opening Photos to the Days view. If only I could do that someday…</p>
 
@@ -100,7 +114,7 @@
 
 <h2>Thoughts on Future</h2>
 
-<p>Overall, the reaction to this device in the tech space has been extremely perplexing to me. Even in 2024, it seemed like everybody was clamoring for it to fail. Yes, it is too expensive, and yes it's a bit too heavy. But I just don't get how people see to be missing the endgame here.</p>
+<p>Overall, the reaction to this device in the tech space has been extremely odd to me. Even in 2024, it seemed like everybody was clamoring for it to fail. Yes, it is too expensive, and yes it's a bit too heavy. But I just don't get how people see to be missing the endgame here.</p>
 
 <p>The screens are already very sharp and are only going to get sharper with time. It's big but it will get smaller with time. This is very early into a new paradigm that I believe will replace even more electronic devices than the iPhone.</p>
 
@@ -110,7 +124,7 @@
 <li>Do you wish you had a larger iPad that didn't tire your hands? This can do that.</li>
 </ul>
 
-<p>All of this, and it can do anywhere you can carry a small pouch, for one single price. The use cases will only add on as time progresses.</p>
+<p>All of this, and it can do anywhere you can carry a small pouch, for one single price. The use cases will only add on as time progresses. Eventually it will also do some of the functions of the Apple Watch, and some of the iPhone.</p>
 
 <p>I get it, the winning form factor that flies off the shelves will likely end up being glasses, but I think there will be two classes of this for a long time to come. Glasses = Phone, Headset = Laptop/iPad. You're just not going to get enough processing power and battery to knock the headset form factor out anytime soon. The iPhone Air offers a hint at what that miniaturization might look like, but it's going to take time.</p>
 
@@ -122,9 +136,9 @@
 <figcaption>Note the guts being centralized at the top of the device and being overall pretty small.<br>Source: Apple Newsroom</figcaption>
 </figure>
 
-<p>I think that it's very likely that this technology (in glasses) will smash the iPhone out of common memory by the time I'm old. People have already started to memory hole the iPod, one day the iPhone might share the same fate. If that happens, it will seem retroactively so absurd and antiquated that everybody ever called the iPhone the "one device."</p>
+<p>I think that it's very likely that this technology (in glasses) will smash the iPhone out of common memory by the time I'm old. People have already started to memory hole the iPod, one day the iPhone might share the same fate. If that happens, it will seem retroactively so absurd and antiquated that everybody ever called iPhone the "one device."</p>
 
-<p>Much ink has been spilled about if this product line is already over, and given the sheer amount of effort being put into Apple Immersive (streaming, new productions, new cameras)… I just don't think that's the case. I don't see a world where the glasses are capable of playing it back in anywhere as impressive of a way anytime soon.</p>
+<p>Much ink has been spilled about if this product line is already over, and given the sheer amount of present effort being put into Apple Immersive (streaming, new productions, new cameras)… I just don't think that's the case. I don't see a world where the glasses are capable of playing it back in the same quality anytime soon.</p>
 
 <p>This is not my pitch to tell you to run out and buy one right now, but I do find a large portion of the gripes very short sighted.</p>
 
@@ -132,17 +146,17 @@
 
 <p>As I said earlier, I make apps as a hobby.</p>
 
-<p>It's very frustrating to me how limited the simulator is, and how there are basically no programs to try and address this. I am aware I wouldn't be important enough for a loaner program, but even being able to borrow a demo unit for an hour in the store during a slow period in the week would be a huge help. I think that the development environment would be a lot healthier if Apple put more effort into getting this into smaller developer's hands, by any means they can muster.</p>
+<p>It's very frustrating to me how limited the simulator is, and how there are basically no outreach programs to try and address this. I am aware I wouldn't be important enough for a loaner program, but even being able to borrow a demo unit for an hour in the store during a slow period in the week would be a huge help. I think that the development environment would be a lot healthier if Apple put more effort into getting this into smaller developer's hands, by any means they can muster.</p>
 
-<p>The simulator is basically useless once you graduate past flat apps, even for things that really should work. For example, the TableTopKit demo project just spawns the table floating over a couch when you load in, despite the fact that the default environment literally has 2 tables. I know that things like ARKit probably couldn't be emulated to any meaningful degree, but some more aggressive attempts at making more complex APIs work in the simulator would be nice, if no hardware lending is going to happen.</p>
+<p>The simulator slowly becomes useless the further you go past flat apps, even for things that really should work. For example, the TableTopKit demo project just spawns the table floating over a couch when you load in, despite the fact that the default environment literally has 2 tables. I know that things like ARKit probably couldn't be emulated to any meaningful degree, but some more aggressive attempts at making more complex APIs work in the simulator would be nice, if no hardware lending is going to happen.</p>
 
 <p>I have a few ideas for app concepts I'd like to try, but the ones that take advantage of the platform beyond being a floating iPad basically require you to own one. That's a bummer.</p>
 
 <h2>Final Thoughts</h2>
 
-<p>The M5 upgrade seems to be pretty nice. The bumps felt noticeable, but not completely game changing. I imagine in the future there will be AI features exclusive to the M5 version due to how much acceleration it has gotten. I find it extremely weird that it didn't get WiFi 6E/7, remaining on 6. 256GB of storage base for a $3,499 device is too low.</p>
+<p>The M5 upgrade seems to be pretty nice. The bumps felt noticeable, but not completely game changing. I imagine in the future there will be AI features exclusive to the M5 version due to how much acceleration it has gotten. (Apple quotes up to 2x faster AI.) I find it extremely weird that it didn't get WiFi 6E/7, remaining on WiFi 6. 256GB of storage base for a $3,499 device is too low.</p>
 
-<p>I'd have walked out of the store that day with one if I could afford it, and I would have done the same the other 3 times. But unfortunately it's not in the cards. Maybe someday.</p>
+<p>I'd have walked out of the store that day with one if I could afford it, and I would have done the same the other 3 times. But unfortunately that's not in the cards. Maybe someday.</p>
 
 <br>
 
@@ -151,10 +165,11 @@
 <ol>
 <li id="fn1">If only Google shared similar feelings. I'm sure it will stop working one day, it's already getting pretty long in the tooth. Last updated August 2017, which startles me to say was 8 years ago. <a href="#fnref1">↩</a></li>
 <li id="fn2">To this day, I'm not entirely sure what the "renders 10% more pixels" metric is supposed to be tracking. I originally thought it was an increased "full quality" zone as part of the foveated rendering, but I'm now under the impression that it's some kind of super sampling? The footnote attached on the official site helpfully notes "Compared with Apple Vision Pro (M2)." Clear as mud guys. <a href="#fnref2">↩</a></li>
-<li id="fn3">You can <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430">try it out</a> if you want, but I'm not super happy with how slow it can be to start when you have iCloud Photos enabled. (Tried a lot of workarounds, unfortunately couldn't get it much faster.) If you're a Vision Pro user, let me know if you do! <a href="#fnref3">↩</a></li>
-<li id="fn4">On track to beat my number from last year! Just gotta keep it up! <a href="#fnref4">↩</a></li>
-<li id="fn5">I discovered a bug(?) during this process in which it turns out that a spatial photo cannot have a space in its file name in a &lt;source&gt; tag on Safari. Spatial works with spaces specifically in the a &lt;img&gt; tag, but that has no fallback for other browsers. I asked someone for a sanity check and they told me I should never expect spaces to work right with file names on the web. <a href="#fnref5">↩</a></li>
-<li id="fn6">Two iPhones in landscape mode, but rotated to have their primary cameras in horizontal alignment. <a href="/blog_assets/dumb-camera-rig.jpg">(Visual Aid)</a> 16:9 Spatial, hopefully in 4K/HDR. Fixes the ultra wide camera problem, and the smaller depth of field due to the iPhone shooters being close together. You can position them at right about 2.5in from my napkin measurements. Some kind of ramshackle system to press record on both at the same time so they don't need genlock. I am not sure if the spatial video format could take all of this, however. Also not sure how best to handle audio. <a href="#fnref6">↩</a></li>
+<li id="fn3">To the point that my sibling who doesn't care much about technology (especially VR) actually purchased an M2 model after a demo. <a href="#fnref3">↩</a></li>
+<li id="fn4">You can <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430">try it out</a> if you want, but I'm not super happy with how slow it can be to start when you have iCloud Photos enabled. (Tried a lot of workarounds, unfortunately couldn't get it much faster.) If you're a Vision Pro user, let me know if you do! <a href="#fnref4">↩</a></li>
+<li id="fn5">On track to beat my number from last year! Just gotta keep it up. <a href="#fnref5">↩</a></li>
+<li id="fn6">I discovered a bug(?) during this process in which it turns out that a spatial photo cannot have a space in its file name in a &lt;source&gt; tag on Safari. Spatial works with spaces specifically in the a &lt;img&gt; tag, but that has no fallback for other browsers. I asked someone for a sanity check and they told me I should never expect spaces to work right with file names on the web. My fault, I guess. <a href="#fnref6">↩</a></li>
+<li id="fn7">Two iPhones in landscape mode, but rotated to have their primary cameras in horizontal alignment while also staying close together. <a href="/blog_assets/dumb-camera-rig.jpg">(Visual Aid)</a> 16:9 Spatial, hopefully in 4K/HDR. Fixes the ultra wide camera problem, and the smaller depth of field due to the iPhone shooters being close together. You can position them at right about 2.5in from my napkin measurements. Some kind of ramshackle system to press record on both at the same time so they don't need genlock. I am not sure if the spatial video format could take all of this, however. Also not sure how best to handle audio. <a href="#fnref7">↩</a></li>
 </ol>
 </article>]]></content:encoded>
     </item>
