@@ -192,21 +192,23 @@ html, body {
     color: #f5ffe8;
     text-decoration: none;
     font-size: clamp(0.9rem, 2vw, 1.5rem);
-    padding: clamp(8px, 1.5vh, 15px) clamp(15px, 3vw, 30px);
-    border: 2px solid rgba(245, 255, 232, 0.5);
-    border-radius: 5px;
+    padding: clamp(10px, 2vh, 18px) clamp(20px, 4vw, 40px);
+    border: 2px solid rgba(245, 255, 232, 0.4);
+    border-radius: 12px;
     transition: all 0.3s ease;
-    background: rgba(0, 0, 46, 0.5);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 46, 0.4);
+    backdrop-filter: blur(8px);
+    letter-spacing: 0.01em;
+    font-weight: 400;
 }
 
 .landing-btn:hover {
-    background: rgba(245, 255, 232, 0.1);
-    border-color: #f5ffe8;
+    background: rgba(245, 255, 232, 0.12);
+    border-color: rgba(245, 255, 232, 0.8);
     box-shadow:
-        0 0 20px rgba(245, 255, 232, 0.3),
-        0 0 30px rgba(245, 255, 232, 0.2);
-    transform: translateY(-2px);
+        0 0 24px rgba(245, 255, 232, 0.25),
+        0 0 40px rgba(245, 255, 232, 0.15);
+    transform: translateY(-3px);
 }
 
 .shooting-stars {
