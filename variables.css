@@ -1,0 +1,37 @@
+/* Shared CSS Variables */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Light mode colors */
+:root {
+    --bg-primary: #faf8f3;
+    --bg-secondary: #ffffff;
+    --text-primary: #1a1d2e;
+    --text-secondary: #4a4d5e;
+    --text-tertiary: #7a7d8e;
+    --accent: #7b5fc7;
+    --accent-hover: #6849b0;
+    --border: rgba(26, 29, 46, 0.08);
+    --border-hover: rgba(26, 29, 46, 0.15);
+    --shadow: rgba(26, 29, 46, 0.08);
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1a1d2e;
+        --bg-secondary: #252837;
+        --text-primary: #faf8f3;
+        --text-secondary: #c8c6c1;
+        --text-tertiary: #a8a6a1;
+        --accent: #9b7ed9;
+        --accent-hover: #b49ee3;
+        --border: rgba(250, 248, 243, 0.08);
+        --border-hover: rgba(250, 248, 243, 0.15);
+        --shadow: rgba(0, 0, 0, 0.3);
+    }
+}
