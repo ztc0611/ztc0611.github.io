@@ -17,8 +17,6 @@ body {
     padding-right: env(safe-area-inset-right);
 }
 
-/* Banner styles moved to homepage.css */
-
 .content {
     padding: 60px 20px;
     max-width: 1200px;
@@ -100,10 +98,16 @@ body {
 }
 
 .placeholder-image {
-    color: #f5ffe8;
+    color: var(--text-secondary);
     font-size: 1.5rem;
     font-family: Georgia, serif;
-    opacity: 0.7;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 500;
 }
 
 .project-info {
@@ -170,176 +174,45 @@ body {
     padding: 12px 24px;
     border-radius: 10px;
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
     transition: all 0.3s ease;
-    border: 1.5px solid transparent;
+    border: 1px solid transparent;
     cursor: pointer;
     font-family: 'Merriweather', serif;
     font-size: 0.95rem;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
+    display: inline-block;
 }
 
 .btn-primary {
-    background: rgba(153, 102, 255, 0.7);
-    color: #f5ffe8;
-    border-color: rgba(153, 102, 255, 0.8);
+    background: var(--accent, #7b5fc7);
+    color: var(--bg-primary, #faf8f3);
+    border-color: var(--accent, #7b5fc7);
 }
 
 .btn-primary:hover {
-    background: rgba(153, 102, 255, 0.9);
-    border-color: rgba(153, 102, 255, 1);
+    background: var(--accent-hover, #6849b0);
+    border-color: var(--accent-hover, #6849b0);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(153, 102, 255, 0.3);
+    box-shadow: 0 8px 24px rgba(123, 95, 199, 0.4);
 }
 
 .btn-secondary {
     background: transparent;
-    color: rgba(245, 255, 232, 0.6);
-    border-color: rgba(153, 102, 255, 0.4);
+    color: var(--text-secondary, #4a4d5e);
+    border-color: var(--border, rgba(26, 29, 46, 0.15));
 }
 
 .btn-secondary:hover:not(:disabled) {
-    background: rgba(153, 102, 255, 0.15);
-    border-color: rgba(153, 102, 255, 0.6);
-    color: rgba(245, 255, 232, 0.85);
+    background: var(--bg-secondary, #ffffff);
+    border-color: var(--border-hover, rgba(26, 29, 46, 0.25));
+    color: var(--text-primary, #1a1d2e);
 }
 
 .btn-secondary:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.4;
 }
-
-/* Commits Section */
-.commits-section {
-    margin-bottom: 80px;
-}
-
-.commits-section h2 {
-    font-size: 2rem;
-    color: #f5ffe8;
-    margin-bottom: 48px;
-    text-align: center;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-}
-
-.commits-section h3 {
-    font-size: 2.0rem;
-    color: rgba(153, 102, 255, 0.9);
-    margin-bottom: 36px;
-    text-align: center;
-    font-family: Georgia, serif;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-}
-
-.commits-list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.commit-item {
-    background: rgba(12, 17, 108, 0.2);
-    border-radius: 16px;
-    padding: 28px;
-    border: 1px solid rgba(245, 255, 232, 0.12);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-}
-
-.commit-item:hover {
-    background: rgba(12, 17, 108, 0.35);
-    border-color: rgba(245, 255, 232, 0.25);
-    box-shadow: 0 8px 24px rgba(12, 17, 108, 0.3);
-}
-
-.commit-content h4 {
-    color: #f5ffe8;
-    font-size: 1.4rem;
-    margin-bottom: 12px;
-    font-family: Georgia, serif;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-}
-
-.commit-content p {
-    color: rgba(245, 255, 232, 0.75);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 0;
-}
-
-.commit-meta {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 16px;
-}
-
-.repo-link {
-    color: rgba(153, 102, 255, 0.8);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 400;
-    transition: all 0.2s ease;
-}
-
-.repo-link:hover {
-    color: rgba(153, 102, 255, 1);
-    text-decoration: underline;
-}
-
-
-@media (max-width: 1200px) {
-    .banner {
-        height: 250px;
-    }
-    
-    .logo-text {
-        font-size: 3.8rem;
-    }
-    
-    .stars {
-        height: 250px;
-        background-size: auto 125px;
-    }
-    
-    .clouds {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .mountains {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .mountains-back {
-        height: 250px;
-        background-size: auto 250px;
-        bottom: -25px;
-    }
-    
-    .houses {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .front-houses {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .ground {
-        height: 250px;
-        background-size: auto 250px;
-    }
-}
-
 
 @media (max-width: 768px) {
     .content {
@@ -422,114 +295,7 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .banner {
-        height: 250px;
-    }
-    
-    .logo-text {
-        font-size: 3.0rem;
-    }
-    
-    
-    .sky-top {
-        display: none;
-    }
-    
-    .stars {
-        height: 250px;
-        background-size: auto 125px;
-    }
-    
-    .clouds {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .mountains {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .mountains-back {
-        height: 250px;
-        background-size: auto 250px;
-        bottom: -25px;
-    }
-    
-    .houses {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .front-houses {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .ground {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .projects-section h2 {
-        font-size: 2rem;
-    }
-    
-    .commits-section h2 {
-        font-size: 1.8rem;
-    }
-}
-
 @media (max-width: 480px) {
-    .banner {
-        height: 250px;
-    }
-    
-    .logo-text {
-        font-size: 3.0rem;
-    }
-    
-    .sky-top {
-        display: none;
-    }
-    
-    .stars {
-        height: 250px;
-        background-size: auto 125px;
-    }
-    
-    .clouds {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .mountains {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .mountains-back {
-        height: 250px;
-        background-size: auto 250px;
-        bottom: -25px;
-    }
-    
-    .houses {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .front-houses {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
-    .ground {
-        height: 250px;
-        background-size: auto 250px;
-    }
-    
     .content {
         padding: 40px 15px;
     }
@@ -564,123 +330,10 @@ body {
     }
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    .logo-text,
-    .projects-section h2,
-    .commits-section h2,
-    .project-info h3,
-    .commit-content h4,
-    .content h1 {
-        color: rgb(231, 254, 195);
-    }
-
-    .project-info p,
-    .commit-content p,
-    .content p {
-        color: rgba(231, 254, 195, 0.8); 
-    }
-
-    .btn-primary {
-        background: rgba(34, 3, 116, 0.8);
-    }
-
-    .btn-primary:hover {
-        background: rgba(34, 3, 116, 1);
-    }
-
-    .tag {
-        color: rgb(231, 254, 195);
-    }
-
-    .project-card {
-        background: rgba(5, 6, 55, 0.8);
-    }
-
-    .commit-item {
-        background: rgba(5, 6, 55, 0.6);
-    }
-
-    .project-image img {
-        filter: brightness(0.85); /* slight dimming on project images */
-    }
-    
-    .project-card[data-project="booklet"] .project-image {
-        background-image: url('portfolio_assets/Booklet-Dark.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .project-card[data-project="booklet"] .project-image img {
-        opacity: 0;
-        filter: none;
-    }
-
-    .project-card[data-project="pixellate"] .project-image {
-        background-image: url('portfolio_assets/Pixellate-Dark.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .project-card[data-project="pixellate"] .project-image img {
-        opacity: 0;
-        filter: none;
-    }
-
-    .project-card[data-project="pointto"] .project-image {
-        background-image: url('portfolio_assets/PointTo-Dark.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .project-card[data-project="pointto"] .project-image img {
-        opacity: 0;
-        filter: none;
-    }
-
-    .project-card[data-project="dominos"] .project-image {
-        background-image: url('portfolio_assets/Dominos-Dark.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .project-card[data-project="dominos"] .project-image img {
-        opacity: 0;
-        filter: none;
-    }
-
-    .project-card[data-project="base4096"] .project-image {
-        background-image: url('portfolio_assets/base4096-Dark.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .project-card[data-project="base4096"] .project-image img {
-        opacity: 0;
-        filter: none;
-    }
-
-    .project-card[data-project="photostat"] .project-image {
-        background-image: url('portfolio_assets/PhotoStat-Dark.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .project-card[data-project="photostat"] .project-image img {
-        opacity: 0;
-        filter: none;
-    }
-}
-
 /* Tablet Portrait  */
 @media (min-width: 769px) and (max-width: 1024px) {
     .project-image {
         height: clamp(200px, 30vw, 250px);
-    }
-    
-    
-    .repo-link {
-        font-size: 1rem;
     }
 }
 

@@ -1,8 +1,8 @@
 <!--
-title: Thoughts on Apple Vision Pro (M5) after the demo
+title: Apple Vision Pro (M5) Impressions
 date: 2025-10-27
 time: 21:30
-description: Too many thoughts on the Apple Vision platform in 2025, from the outside looking in.
+description: After months of consuming developer resources and news, demoing M2 model 3 times, and M5 model once... Thoughts on the Apple Vision platform in 2025. 
 image: /blog_assets/vp-style.jpg
 -->
 
@@ -15,7 +15,7 @@ It's been about 18 months since the Vision Pro (M2) came out. I have been follow
 
 My knowledge of the platform: I've been following since WWDC 2023. I did a demo the day it came out, and 2 more demos across the time after, each in different stores. I have watched many of the developer videos about it across the time since WWDC'23. I also attended the two day "Create immersive media experiences for visionOS" developer session (remotely) on the 21st/22nd of October this year. I have 3 apps on Apple platforms, one of which has a native visionOS port, but I've never gotten to use it on actual hardware.
 
-In my time I have used the HTC Vive, Meta Quest 2, Meta Quest 3s, and Valve Index (demo). My favorite VR app of all time is Google Earth VR.[^If only Google shared similar feelings. I'm sure it will stop working one day, it's already getting pretty long in the tooth. Last updated August 2017, which startles me to say was 8 years ago.]
+In my time I have used the HTC Vive, Meta Quest 2, Meta Quest 3s, and Valve Index (demo). My favorite VR app of all time is Google Earth VR.[^If only Google shared similar feelings. I'm sure it will stop working one day, it's already getting pretty long in the tooth. Last updated February 2018, which startles me to say was nearly 7 years ago.]
 
 On the launch day for the 2nd generation, the employees seemed pretty excited. A few people walked by while I was doing my demo and asked about the new hardware. I told the employee early on in our conversation that I develop apps, and after that point she mostly let me drive while we chatted.
 

@@ -388,7 +388,7 @@ def generate_page(content, metadata, slug, date_formatted, updated_formatted=Non
     <title>{title} - Zach Coleman</title>
 
     <link rel="icon" type="image/png" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/Favicon/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
 
     <meta name="description" content="{description}">
     <link rel="canonical" href="https://ztc0611.github.io/blog/{slug}.html">
@@ -460,7 +460,7 @@ def generate_index(posts):
     <title>Weblog - Zach Coleman</title>
 
     <link rel="icon" type="image/png" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/Favicon/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
 
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/blog.css">
@@ -470,7 +470,7 @@ def generate_index(posts):
     <main class="content">
         <div class="blog-container">
             <a href="/" class="back-home">← Back to home</a>
-            <a href="feed.xml" class="rss-link">RSS Feed</a>
+            <a href="feed.xml" class="rss-link">RSS Feed ⧉</a>
             <h1 class="blog-title">Weblog</h1>
             {posts_section}
         </div>

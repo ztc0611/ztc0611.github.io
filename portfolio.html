@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0c116c">
-    <title>Zach Coleman</title>
+    <title>Portfolio - Zach Coleman</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="Favicon/favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -29,13 +29,17 @@
     <link rel="preload" as="image" href="portfolio_assets/base4096-Dark.webp">
     <link rel="preload" as="image" href="portfolio_assets/PhotoStat-Dark.webp">
     
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
     <main class="content">
-        <a href="/" class="back-home">← Back to home</a>
-        <h1 class="page-title">Portfolio</h1>
+        <div class="nav-bar">
+            <a href="/" class="back-home">← Back to home</a>
+            <a href="mailto:za.colem@gmail.com" class="contact-link">Contact ⧉</a>
+        </div>
+        <div class="page-header">
+            <h1 class="page-title">Portfolio</h1>
+        </div>
         <!-- Apps Section -->
         <section class="projects-section">
             <h2>Apps</h2>
@@ -46,12 +50,12 @@
                     </div>
                     <div class="project-info">
                         <h3>Pixellate Camera</h3>
-                        <p>Camera app for iOS that gives a look similar to the Gameboy Camera from 1999. Saves metadata with optional geotagging.</p>
+                        <p>Camera app that recreates the Game Boy Camera aesthetic from 1998, with full metadata and GPS support.</p>
                         <div class="project-meta">
                             <span class="first-worked">Mar. 2025 - present</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View App Store</a>
+                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View App Store ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -62,12 +66,28 @@
                     </div>
                     <div class="project-info">
                         <h3>Point To: Custom Compass</h3>
-                        <p>App for iOS and watchOS app that allows the user to define custom locations to point towards. Used by the Northeast Rail Feed Association for antenna alignment!</p>
+                        <p>A compass that points wherever you want. Syncs custom locations between iPhone and Apple Watch for standalone use. Started as a personal tool, ended up adopted by the Northeast Rail Feed Association for aligning radio antennas.</p>
                         <div class="project-meta">
                             <span class="first-worked">Feb. 2024 - present</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" class="btn-primary">View App Store</a>
+                            <a href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" class="btn-primary">View App Store ⧉</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="portfolio_assets/Recall.webp" alt="Recall: Moving Gallery Screenshot">
+                    </div>
+                    <div class="project-info">
+                        <h3>Recall: Moving Gallery</h3>
+                        <p>Shows random Live Photos and videos from your library, auto-cropped to subjects. Built to surface unexpected memories you forgot you had.</p>
+                        <div class="project-meta">
+                            <span class="first-worked">Jun. 2025 - Sep. 2025</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View App Store ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +101,7 @@
                             <h3>Booklyt: RSS Reader</h3>
                             <span class="tag">WIP</span>
                         </div>
-                        <p>A RSS app for iOS, iPadOS, visionOS, and macOS focused on simplicity and using native Apple frameworks. Native for iOS 26.</p>
+                        <p>Simple RSS reader with all on-device processing. No accounts, no sync servers. Just your feeds across the Apple ecosystem.</p>
                         <div class="project-meta">
                             <span class="first-worked">Jun. 2025 - present</span>
                         </div>
@@ -91,22 +111,78 @@
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="portfolio_assets/Recall.webp" alt="Recall: Moving Gallery Screenshot">
+            </div>
+        </section>
+
+        <!-- Open Source Contributions Section -->
+        <section class="commits-section">
+            <h2>Open Source</h2>
+            <h3>Godot Engine</h3>
+            <p class="project-description"><a href="https://godotengine.org" class="inline-link">Godot Engine ⧉</a> is a free and open-source game engine used by indie developers and studios worldwide to create 2D and 3D games across all major platforms.</p>
+            <div class="commits-list">
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>Mobile App Lifecycle Notifications</h4>
+                        <p>Added APPLICATION_PAUSED and APPLICATION_RESUMED notifications for iOS and enhanced focus notifications on iOS and Android to fire when users switch apps. This allows developers to implement more reliable pausing and saving in their games.</p>
                     </div>
-                    <div class="project-info">
-                        <h3>Recall: Moving Gallery</h3>
-                        <p>A gallery app for iOS, iPadOS, visionOS, and macOS that selects random Live Photos and videos to create a memory experience.</p>
-                        <div class="project-meta">
-                            <span class="first-worked">Jun. 2025 - Sep. 2025</span>
-                        </div>
-                        <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View App Store</a>
-                        </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/85100" class="repo-link">#85100 ⧉</a>
                     </div>
                 </div>
 
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>iOS Game Interface Controls</h4>
+                        <p>Added settings to control status bar visibility and enable the professional "double-swipe" gesture protection that commercial games use. This was previously unavailable in Godot, preventing developers from implementing standard game interface conventions.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/67322" class="repo-link">#67322 ⧉</a>
+                    </div>
+                </div>
+
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>ProMotion 120Hz Display Support</h4>
+                        <p>Enabled 120Hz ProMotion high refresh rate support for iOS games on compatible devices (iPhone 13 Pro+, iPhone 17+, iPad Pro 2018+), allowing for smoother gameplay.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/68044" class="repo-link">#68044 ⧉</a>
+                    </div>
+                </div>
+
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>11-Year-Old Windows Timezone Bug</h4>
+                        <p>Fixed a critical timezone bug in Godot's Windows implementation that had existed since 2011, causing incorrect daylight saving time detection and timezone calculations in games worldwide.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223 ⧉</a>
+                    </div>
+                </div>
+
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>iOS & MovieWriter Bug Fixes</h4>
+                        <p>Corrected iOS refresh rate reporting during Low Power Mode and fixed MovieWriter viewport rendering issues when using custom resolutions.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/85026" class="repo-link">#85026 ⧉</a>
+                        <a href="https://github.com/godotengine/godot/pull/104334" class="repo-link">#104334 ⧉</a>
+                    </div>
+                </div>
+
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>Godot 3.x Legacy Support</h4>
+                        <p>Backported iOS interface controls, ProMotion support, and mobile lifecycle notifications from 4.x to 3.x, enabling legacy projects to use modern features without migrating.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/68189" class="repo-link">#68189 ⧉</a>
+                        <a href="https://github.com/godotengine/godot/pull/68190" class="repo-link">#68190 ⧉</a>
+                        <a href="https://github.com/godotengine/godot/pull/85229" class="repo-link">#85229 ⧉</a>
+                        <a href="https://github.com/godotengine/godot/pull/85230" class="repo-link">#85230 ⧉</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -125,7 +201,7 @@
                             <span class="first-worked">Oct. 2021 - May 2022</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">Play Demo</a>
+                            <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">Play Demo ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -147,7 +223,7 @@
                             <span class="first-worked">Feb. 2024</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View Experiment</a>
+                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View Experiment ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -163,7 +239,7 @@
                             <span class="first-worked">Feb. 2025</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://github.com/ztc0611/base4096-godot" class="btn-primary">View Experiment</a>
+                            <a href="https://github.com/ztc0611/base4096-godot" class="btn-primary">View Experiment ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -174,67 +250,31 @@
                     </div>
                     <div class="project-info">
                         <h3>PhotoStat</h3>
-                        <p>A small project that can show stats of the user's iCloud photo library either by years or by months.</p>
+                        <p>A small project that can show stats of how many photos the user has taken by months or years, accessing iCloud Photos on macOS.</p>
                         <div class="project-meta">
                             <span class="first-worked">Aug. 2025</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Open Source Contributions Section -->
-        <section class="commits-section">
-            <h2>Open Source</h2>
-            <h3>Godot</h3>
-            <div class="commits-list">
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>iOS Display & Interface Improvements</h4>
-                        <p>APIs for controlling status bar visibility and gesture handling, as well as tweaks that enabled 120hz "Pro Motion" display mode.</p>
+                <div class="project-card" data-project="discord-stock">
+                    <div class="project-image">
+                        <div class="placeholder-image">Discord Bot</div>
                     </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/67322" class="repo-link">#67322</a>
-                        <a href="https://github.com/godotengine/godot/pull/68044" class="repo-link">#68044</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>Mobile App Lifecycle Handling</h4>
-                        <p>Corrected how iOS apps detect when they're suspended or resumed, giving developers reliable signals to pause gameplay and save progress.</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/85100" class="repo-link">#85100</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>Bug Fixes</h4>
-                        <p>Tracked down and fixed a Windows daylight saving time bug that was causing timing issue for 11 years, fixed iOS low power mode get method, and improved video recording stability in the MovieWriter.</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223</a>
-                        <a href="https://github.com/godotengine/godot/pull/85026" class="repo-link">#85026</a>
-                        <a href="https://github.com/godotengine/godot/pull/104334" class="repo-link">#104334</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>Godot 3.x Legacy Support</h4>
-                        <p>Back-ported many changes and fixes to Godot 3.x so existing projects could benefit from feature improvements without needing to upgrade to 4.x.</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/68189" class="repo-link">#68189</a>
-                        <a href="https://github.com/godotengine/godot/pull/68190" class="repo-link">#68190</a>
-                        <a href="https://github.com/godotengine/godot/pull/85229" class="repo-link">#85229</a>
-                        <a href="https://github.com/godotengine/godot/pull/85230" class="repo-link">#85230</a>
+                    <div class="project-info">
+                        <h3>Discord Apple Stock Checker</h3>
+                        <p>A Discord chat-bot that monitored in-store availability of the Apple Studio Display and notified users when it came in stock.</p>
+                        <div class="project-meta">
+                            <span class="first-worked">Spring/Summer 2022</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://github.com/ztc0611/Discord-Apple-Stock-Checker" class="btn-primary">View Experiment ⧉</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        <a href="/" class="back-home" style="margin-top: 60px;">← Back to home</a>
     </main>
 </body>
 </html>
