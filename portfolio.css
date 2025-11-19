@@ -1,6 +1,6 @@
 /* Portfolio-specific styles */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
-@import url('variables.css');
+@import url('globals.css');
 
 html, body {
     font-family: 'Merriweather', serif;
@@ -43,48 +43,14 @@ body::before {
     margin-bottom: 32px;
 }
 
-.back-home {
-    display: inline-flex;
-    align-items: center;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 400;
-    transition: all 0.2s ease;
-    gap: 6px;
-}
-
-.back-home:hover {
-    color: var(--accent);
-    transform: translateX(-4px);
-}
-
 .contact-link {
     color: var(--text-secondary);
-    text-decoration: none;
     font-size: 0.95rem;
     font-weight: 400;
-    transition: all 0.2s ease;
-    position: relative;
 }
 
-.contact-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-.contact-link:hover {
+.contact-link.animated-underline-link:hover {
     color: var(--accent);
-}
-
-.contact-link:hover::after {
-    width: 100%;
 }
 
 .page-header {
@@ -337,29 +303,11 @@ body::before {
 
 .commits-section .inline-link {
     color: var(--accent);
-    text-decoration: none;
     font-weight: 500;
-    transition: all 0.2s ease;
-    position: relative;
 }
 
-.commits-section .inline-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-.commits-section .inline-link:hover {
+.commits-section .inline-link.animated-underline-link:hover {
     color: var(--accent-hover);
-}
-
-.commits-section .inline-link:hover::after {
-    width: 100%;
 }
 
 .commits-list {

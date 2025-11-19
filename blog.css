@@ -1,6 +1,6 @@
 /* Blog-specific styles */
 
-@import url('variables.css');
+@import url('globals.css');
 
 body {
     background: var(--bg-primary);
@@ -37,50 +37,15 @@ body::before {
     margin: 0 auto;
 }
 
-.back-home {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 24px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 400;
-    transition: all 0.2s ease;
-    gap: 6px;
-}
-
-.back-home:hover {
-    color: var(--accent);
-    transform: translateX(-4px);
-}
-
 .rss-link {
     float: right;
     color: var(--text-secondary);
-    text-decoration: none;
     font-size: 0.95rem;
     font-weight: 400;
-    transition: all 0.2s ease;
-    position: relative;
 }
 
-.rss-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-.rss-link:hover {
+.rss-link.animated-underline-link:hover {
     color: var(--accent);
-}
-
-.rss-link:hover::after {
-    width: 100%;
 }
 
 .blog-title {
@@ -141,23 +106,6 @@ body::before {
 }
 
 /* Blog Post Page */
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 24px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 400;
-    transition: all 0.2s ease;
-    gap: 6px;
-}
-
-.back-link:hover {
-    color: var(--accent);
-    transform: translateX(-4px);
-}
-
 h1.post-title {
     color: var(--text-primary);
     font-size: clamp(2.5rem, 5vw, 3.5rem);

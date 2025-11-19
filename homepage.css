@@ -1,6 +1,6 @@
 /* Homepage */
 
-@import url('variables.css');
+@import url('globals.css');
 
 html {
     height: 100%;
@@ -176,30 +176,12 @@ body::before {
 
 .footer-link {
     color: var(--text-tertiary);
-    text-decoration: none;
     font-size: 0.95rem;
     font-weight: 400;
-    transition: all 0.2s ease;
-    position: relative;
 }
 
-.footer-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-.footer-link:hover {
+.footer-link.animated-underline-link:hover {
     color: var(--accent);
-}
-
-.footer-link:hover::after {
-    width: 100%;
 }
 
 .footer-spacer {

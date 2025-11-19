@@ -11,6 +11,13 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from PIL import Image
 
+# Register HEIF plugin for HEIC support
+try:
+    import pillow_heif
+    pillow_heif.register_heif_opener()
+except ImportError:
+    pass  # pillow_heif not installed, HEIC conversion will fail gracefully
+
 
 def parse_metadata(content):
     """Extract metadata from HTML comments at the top of the file."""
@@ -112,7 +119,9 @@ def parse_markdown_to_html(content):
                 # Determine if we need picture element for webp/heic
                 ext = src.split('.')[-1].lower()
                 if ext in ['webp', 'heic']:
-                    jpg_src = re.sub(r'\.(webp|heic)$', '.jpg', src, flags=re.IGNORECASE)
+                    # Generate jpg filename and put in /jpg/ subfolder
+                    jpg_filename = re.sub(r'\.(webp|heic)$', '.jpg', src.split('/')[-1], flags=re.IGNORECASE)
+                    jpg_src = src.rsplit('/', 1)[0] + '/jpg/' + jpg_filename
                     mime_type = 'image/heic' if ext == 'heic' else 'image/webp'
                     picture_class = f' class="{img_class}"' if img_class else ''
                     img_html = f'''<picture{picture_class}>
@@ -325,13 +334,19 @@ def escape_html(text):
 
 def convert_to_jpg(image_path):
     """Convert an image to JPG format if JPG doesn't already exist."""
-    jpg_path = re.sub(r'\.(webp|heic)$', '.jpg', str(image_path), flags=re.IGNORECASE)
+    # Extract filename and put JPG in /jpg/ subfolder
+    image_path_obj = Path(image_path)
+    jpg_filename = re.sub(r'\.(webp|heic)$', '.jpg', image_path_obj.name, flags=re.IGNORECASE)
+    jpg_path = image_path_obj.parent / 'jpg' / jpg_filename
 
     # If JPG already exists, skip conversion
-    if Path(jpg_path).exists():
-        return jpg_path
+    if jpg_path.exists():
+        return str(jpg_path)
 
     try:
+        # Create jpg folder if it doesn't exist
+        jpg_path.parent.mkdir(parents=True, exist_ok=True)
+
         # Open and convert image
         img = Image.open(image_path)
 
@@ -346,7 +361,7 @@ def convert_to_jpg(image_path):
         # Save as JPG
         img.save(jpg_path, 'JPEG', quality=90)
         print(f"  Converted: {image_path} -> {jpg_path}")
-        return jpg_path
+        return str(jpg_path)
     except Exception as e:
         print(f"  Warning: Could not convert {image_path}: {e}")
         return None
@@ -384,7 +399,7 @@ def generate_page(content, metadata, slug, date_formatted, updated_formatted=Non
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0c116c">
+    <meta name="theme-color" content="#faf8f3">
     <title>{title} - Zach Coleman</title>
 
     <link rel="icon" type="image/png" href="/favicon.ico">
@@ -456,7 +471,7 @@ def generate_index(posts):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0c116c">
+    <meta name="theme-color" content="#faf8f3">
     <title>Weblog - Zach Coleman</title>
 
     <link rel="icon" type="image/png" href="/favicon.ico">
@@ -470,7 +485,7 @@ def generate_index(posts):
     <main class="content">
         <div class="blog-container">
             <a href="/" class="back-home">← Back to home</a>
-            <a href="feed.xml" class="rss-link">RSS Feed ⧉</a>
+            <a href="feed.xml" class="rss-link animated-underline-link">RSS Feed ⧉</a>
             <h1 class="blog-title">Weblog</h1>
             {posts_section}
         </div>

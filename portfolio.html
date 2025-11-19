@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0c116c">
+    <meta name="theme-color" content="#faf8f3">
     <title>Portfolio - Zach Coleman</title>
     
     <!-- Favicon -->
@@ -35,14 +35,14 @@
     <main class="content">
         <div class="nav-bar">
             <a href="/" class="back-home">← Back to home</a>
-            <a href="mailto:za.colem@gmail.com" class="contact-link">Contact ⧉</a>
+            <a href="mailto:za.colem@gmail.com" class="contact-link animated-underline-link">Contact ⧉</a>
         </div>
         <div class="page-header">
             <h1 class="page-title">Portfolio</h1>
         </div>
         <!-- Apps Section -->
         <section class="projects-section">
-            <h2>Apps</h2>
+            <h2>iOS Apps</h2>
             <div class="projects-grid">
                 <div class="project-card" data-project="pixellate">
                     <div class="project-image">
@@ -55,7 +55,7 @@
                             <span class="first-worked">Mar. 2025 - present</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View App Store ⧉</a>
+                            <a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" class="btn-primary">View in App Store ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                             <span class="first-worked">Feb. 2024 - present</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" class="btn-primary">View App Store ⧉</a>
+                            <a href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" class="btn-primary">View in App Store ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                             <span class="first-worked">Jun. 2025 - Sep. 2025</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View App Store ⧉</a>
+                            <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View in App Store ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -115,18 +115,29 @@
         </section>
 
         <!-- Open Source Contributions Section -->
+        <div id="open-source"></div>
         <section class="commits-section">
             <h2>Open Source</h2>
             <h3>Godot Engine</h3>
-            <p class="project-description"><a href="https://godotengine.org" class="inline-link">Godot Engine ⧉</a> is a free and open-source game engine used by indie developers and studios worldwide to create 2D and 3D games across all major platforms.</p>
+            <p class="project-description"><a href="https://godotengine.org" class="inline-link animated-underline-link">Godot Engine ⧉</a> is a free and open-source game engine used to create 2D and 3D games across all major platforms. It has received donations from Microsoft, Meta Reality Labs, Epic Games, Mozilla, and JetBrains. Parts of its code have been used by Tesla, Sega, and Electronic Arts.</p>
             <div class="commits-list">
                 <div class="commit-item">
                     <div class="commit-content">
-                        <h4>Mobile App Lifecycle Notifications</h4>
-                        <p>Added APPLICATION_PAUSED and APPLICATION_RESUMED notifications for iOS and enhanced focus notifications on iOS and Android to fire when users switch apps. This allows developers to implement more reliable pausing and saving in their games.</p>
+                        <h4>iOS/Android App Lifecycle Notifications</h4>
+                        <p>Added APPLICATION_PAUSED and APPLICATION_RESUMED notifications for iOS and enhanced focus notifications on Android and iOS to activate when users switch apps. This allows developers to implement more reliable pausing and data saving in their games.</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/85100" class="repo-link">#85100 ⧉</a>
+                    </div>
+                </div>
+
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>8-Year-Old Daylight Savings Bug</h4>
+                        <p>Fixed a critical daylight savings/timezone bug in Godot's Windows implementation that had existed since the project became public, causing errors with resolving time in every Windows release of Godot between 2014 and 2022.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223 ⧉</a>
                     </div>
                 </div>
 
@@ -143,7 +154,7 @@
                 <div class="commit-item">
                     <div class="commit-content">
                         <h4>ProMotion 120Hz Display Support</h4>
-                        <p>Enabled 120Hz ProMotion high refresh rate support for iOS games on compatible devices (iPhone 13 Pro+, iPhone 17+, iPad Pro 2018+), allowing for smoother gameplay.</p>
+                        <p>Enabled 120Hz ProMotion high refresh rate support for iOS games on compatible devices (iPad Pro 2018+, iPhone 13 Pro+, iPhone 17+), allowing for smoother gameplay.</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/68044" class="repo-link">#68044 ⧉</a>
@@ -152,18 +163,8 @@
 
                 <div class="commit-item">
                     <div class="commit-content">
-                        <h4>11-Year-Old Windows Timezone Bug</h4>
-                        <p>Fixed a critical timezone bug in Godot's Windows implementation that had existed since 2011, causing incorrect daylight saving time detection and timezone calculations in games worldwide.</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223 ⧉</a>
-                    </div>
-                </div>
-
-                <div class="commit-item">
-                    <div class="commit-content">
                         <h4>iOS & MovieWriter Bug Fixes</h4>
-                        <p>Corrected iOS refresh rate reporting during Low Power Mode and fixed MovieWriter viewport rendering issues when using custom resolutions.</p>
+                        <p>Corrected iOS refresh rate reporting during Low Power Mode and fixed an issue with the MovieWriter, a tool for creating video clips for social media/trailers.</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/85026" class="repo-link">#85026 ⧉</a>
@@ -201,7 +202,7 @@
                             <span class="first-worked">Oct. 2021 - May 2022</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">Play Demo ⧉</a>
+                            <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">View on Itch.io ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -223,7 +224,7 @@
                             <span class="first-worked">Feb. 2024</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View Experiment ⧉</a>
+                            <a href="https://github.com/ztc0611/Live-Activity-4-Dominos" class="btn-primary">View on Github ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -234,12 +235,12 @@
                     </div>
                     <div class="project-info">
                         <h3>Base4096</h3>
-                        <p>An experiment in data compression for when character count matters more than total bytes.</p>
+                        <p>An experiment in data compression for when character count matters more than total bytes. Useful for sending small pieces of data on character-capped platforms such as X and Discord.</p>
                         <div class="project-meta">
                             <span class="first-worked">Feb. 2025</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://github.com/ztc0611/base4096-godot" class="btn-primary">View Experiment ⧉</a>
+                            <a href="https://github.com/ztc0611/base4096-godot" class="btn-primary">View on Github ⧉</a>
                         </div>
                     </div>
                 </div>
@@ -268,7 +269,7 @@
                             <span class="first-worked">Spring/Summer 2022</span>
                         </div>
                         <div class="project-actions">
-                            <a href="https://github.com/ztc0611/Discord-Apple-Stock-Checker" class="btn-primary">View Experiment ⧉</a>
+                            <a href="https://github.com/ztc0611/Discord-Apple-Stock-Checker" class="btn-primary">View on Github ⧉</a>
                         </div>
                     </div>
                 </div>

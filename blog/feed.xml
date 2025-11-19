@@ -5,7 +5,7 @@
     <link>https://ztc0611.github.io/blog/</link>
     <description>Thoughts on technology, photography, etc.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Nov 2025 19:33:31 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 20 Nov 2025 16:31:58 GMT</lastBuildDate>
     <atom:link href="https://ztc0611.github.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     
     <item>
@@ -19,7 +19,7 @@
 
 <picture>
   <source srcset="/blog_assets/vp-style.jpg" type="image/webp">
-  <img src="https://ztc0611.github.io/blog_assets/vp-style.jpg" alt="An image of the Vision Pro, slick marketing photo. It is pointing vertical (screen upwards) instead of its normal orientation, horizontal.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/vp-style.jpg" alt="An image of the Vision Pro, slick marketing photo. It is pointing vertical (screen upwards) instead of its normal orientation, horizontal.">
 </picture>
 
 <p>It's been about 18 months since the Vision Pro (M2) came out. I have been following it pretty closely since WWDC 2023. It has been interesting to watch the developments along the way, from big upgrades to Personas to features like the new widgets. On the M5's launch day, I decided to check out the new model.</p>
@@ -39,7 +39,7 @@
 <figure>
 <picture>
   <source srcset="/blog_assets/vp-bands.jpg" type="image/webp">
-  <img src="https://ztc0611.github.io/blog_assets/vp-bands.jpg" alt="An image of all 3 Vision Pro bands. Top left shows the Solo Knit Band, which only attaches to the back of the user's head and is adjusted with a dial. Top right shows the Dual Loop, which holds both onto the back and top of the head, adjusted with a velcro strap. Bottom middle shows the Dual Knit Band, which has support both on the back and top of the head, each adjusted with the same dial that you can pop in/out to select.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/vp-bands.jpg" alt="An image of all 3 Vision Pro bands. Top left shows the Solo Knit Band, which only attaches to the back of the user's head and is adjusted with a dial. Top right shows the Dual Loop, which holds both onto the back and top of the head, adjusted with a velcro strap. Bottom middle shows the Dual Knit Band, which has support both on the back and top of the head, each adjusted with the same dial that you can pop in/out to select.">
 </picture>
 <figcaption>Source: Apple Newsroom, combined by me</figcaption>
 </figure>
@@ -57,7 +57,7 @@
 <figure>
 <picture>
   <source srcset="/blog_assets/vp-ui-pretty.jpg" type="image/webp">
-  <img src="https://ztc0611.github.io/blog_assets/vp-ui-pretty.jpg" alt="Image of an app in visionOS, floating over a wooden table.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/vp-ui-pretty.jpg" alt="Image of an app in visionOS, floating over a wooden table.">
 </picture>
 <figcaption>Source: Apple Design Team, <a href="https://www.wallpaper.com/tech/apple-vision-pro-review">Wallpaper*</a></figcaption>
 </figure>
@@ -73,7 +73,7 @@
 <figure>
 <picture>
   <source srcset="/blog_assets/vp-my-app.jpg" type="image/webp">
-  <img src="https://ztc0611.github.io/blog_assets/vp-my-app.jpg" alt="Image of the iPad which is used to direct Vision Pro demos. On it there is a small window showing the perspective of the Vision Pro user (me) looking at my photo memory app, Recall.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/vp-my-app.jpg" alt="Image of the iPad which is used to direct Vision Pro demos. On it there is a small window showing the perspective of the Vision Pro user (me) looking at my photo memory app, Recall.">
 </picture>
 <figcaption>Source: Meeeeeee</figcaption>
 </figure>
@@ -91,7 +91,7 @@
 <figure>
 <picture class="spatial">
   <source srcset="/blog_assets/san-juan-may.jpg" type="image/heic">
-  <img src="https://ztc0611.github.io/blog_assets/san-juan-may.jpg" alt="Stereoscopic spatial image of a pacific northwest coastline during the golden hour near sunset. The sky is mostly clear and blue. It is taken semi-parallel to a steep shoreline. The water is on the left, land to the right. The grass and weeds are tall, a mix of yellow and green. You can see many pine trees in the distance as the coastline wraps around. Far in the distance on the left, you can see mountains.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/san-juan-may.jpg" alt="Stereoscopic spatial image of a pacific northwest coastline during the golden hour near sunset. The sky is mostly clear and blue. It is taken semi-parallel to a steep shoreline. The water is on the left, land to the right. The grass and weeds are tall, a mix of yellow and green. You can see many pine trees in the distance as the coastline wraps around. Far in the distance on the left, you can see mountains.">
 </picture>
 <figcaption>Hopefully, a spatial photo for anyone reading on Vision. Normal picture for us squares.<br>I've never actually seen this one on device. Simulator seems to work correctly?<sup><a href="#fn6" id="fnref6">6</a></sup><br>Source: Me</figcaption>
 </figure>
@@ -107,7 +107,7 @@
 <figure>
 <picture>
   <source srcset="/blog_assets/vp-days-view.jpg" type="image/webp">
-  <img src="https://ztc0611.github.io/blog_assets/vp-days-view.jpg" alt="Image showing the visionOS 1 native Photos app, selected to the Days view. The Days view lays out photos in a nicer arrangement than the typical rigid grid used in All Photos, the only remaining view as of late 2024.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/vp-days-view.jpg" alt="Image showing the visionOS 1 native Photos app, selected to the Days view. The Days view lays out photos in a nicer arrangement than the typical rigid grid used in All Photos, the only remaining view as of late 2024.">
 </picture>
 <figcaption>Source: Apple WWDC 2023 / 1:22:51 <a href="https://www.youtube.com/live/GYkq9Rgoj8E?si=V_qDCeepD9v4PcTx&amp;t=4971">Youtube</a></figcaption>
 </figure>
@@ -131,7 +131,7 @@
 <figure>
 <picture>
   <source srcset="/blog_assets/iphone-air-inside.jpg" type="image/webp">
-  <img src="https://ztc0611.github.io/blog_assets/iphone-air-inside.jpg" alt="Image of the inside of the iPhone Air. All of the important pieces of the phone are near the top under the camera bump. The rest is just a large battery.">
+  <img src="https://ztc0611.github.io/blog_assets/jpg/iphone-air-inside.jpg" alt="Image of the inside of the iPhone Air. All of the important pieces of the phone are near the top under the camera bump. The rest is just a large battery.">
 </picture>
 <figcaption>Note the guts being centralized at the top of the device and being overall pretty small.<br>Source: Apple Newsroom</figcaption>
 </figure>
