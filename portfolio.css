@@ -5,6 +5,7 @@
 html, body {
     font-family: 'Merriweather', serif;
     overflow-x: hidden;
+    background-color: var(--bg-primary);
 }
 
 body {
@@ -346,6 +347,34 @@ body::before {
     font-size: 1rem;
     line-height: 1.7;
     margin-bottom: 0;
+}
+
+.commit-content ul {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+    padding-left: 24px;
+}
+
+.commit-content li {
+    margin-bottom: 8px;
+}
+
+.commit-content li:last-child {
+    margin-bottom: 0;
+}
+
+code {
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 0.8em;
+    background: var(--bg-primary);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .commit-meta {

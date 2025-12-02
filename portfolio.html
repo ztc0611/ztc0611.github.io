@@ -121,20 +121,11 @@
             <h3>Godot Engine</h3>
             <p class="project-description"><a href="https://godotengine.org" class="inline-link animated-underline-link">Godot Engine ⧉</a> is a free and open-source game engine used to create 2D and 3D games across all major platforms. It has received donations from Microsoft, Meta Reality Labs, Epic Games, Mozilla, and JetBrains. Parts of its code have been used by Tesla, Sega, and Electronic Arts.</p>
             <div class="commits-list">
-                <div class="commit-item">
-                    <div class="commit-content">
-                        <h4>iOS/Android App Lifecycle Notifications</h4>
-                        <p>Added APPLICATION_PAUSED and APPLICATION_RESUMED notifications for iOS and enhanced focus notifications on Android and iOS to activate when users switch apps. This allows developers to implement more reliable pausing and data saving in their games.</p>
-                    </div>
-                    <div class="commit-meta">
-                        <a href="https://github.com/godotengine/godot/pull/85100" class="repo-link">#85100 ⧉</a>
-                    </div>
-                </div>
 
                 <div class="commit-item">
                     <div class="commit-content">
                         <h4>8-Year-Old Daylight Savings Bug</h4>
-                        <p>Fixed a critical daylight savings/timezone bug in Godot's Windows implementation that had existed since the project became public, causing errors with resolving time in every Windows release of Godot between 2014 and 2022.</p>
+                        <p>Fixed <code>OS.​get_time_zone_info()</code> returning incorrect UTC offset on Windows during DST. The implementation didn't account for DaylightBias—e.g., Mountain Daylight Time returned -420 minutes (UTC-7) instead of -360 (UTC-6). Bug existed since the initial Win32 implementation in 2014. Required understanding the Windows timezone API's distinction between standard and daylight bias values, fixed by applying the correct values.</p><br><p>Before my change, "Is it currently daylight savings?" was hard coded to "No" on Windows.</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223 ⧉</a>
@@ -143,8 +134,18 @@
 
                 <div class="commit-item">
                     <div class="commit-content">
-                        <h4>iOS Game Interface Controls</h4>
-                        <p>Added settings to control status bar visibility and enable the professional "double-swipe" gesture protection that commercial games use. This was previously unavailable in Godot, preventing developers from implementing standard game interface conventions.</p>
+                        <h4>iOS/Android App Lifecycle Notifications</h4>
+                        <p>Implemented <code>NOTIFICATION_​APPLICATION_​PAUSED</code> and <code>NOTIFICATION_​APPLICATION_​RESUMED</code> on iOS by wiring Godot's MainLoop to <code>application​Did​Enter​Background</code> / <code>application​Will​Enter​Foreground</code> UIKit delegates. Also exposed <code>NOTIFICATION_​APPLICATION_​FOCUS_​IN/OUT</code> on both platforms for consistency. Enables reliable autosave within iOS's 5-second background execution window.</p>
+                    </div>
+                    <div class="commit-meta">
+                        <a href="https://github.com/godotengine/godot/pull/85100" class="repo-link">#85100 ⧉</a>
+                    </div>
+                </div>
+
+                <div class="commit-item">
+                    <div class="commit-content">
+                        <h4>iOS Gesture Bar Settings</h4>
+                        <p>Added project settings for iOS status bar visibility (<code>prefers​StatusBar​Hidden</code>), home indicator hiding, and edge gesture deferral (<code>preferred​Screen​Edges​Deferring​System​Gestures</code>). The "double-swipe" protection used by commercial games. Previously required engine recompilation to change. Implemented by exposing <code>UI​View​Controller</code> preference overrides through Godot's iOS display layer.</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/67322" class="repo-link">#67322 ⧉</a>
@@ -153,8 +154,8 @@
 
                 <div class="commit-item">
                     <div class="commit-content">
-                        <h4>ProMotion 120Hz Display Support</h4>
-                        <p>Enabled 120Hz ProMotion high refresh rate support for iOS games on compatible devices (iPad Pro 2018+, iPhone 13 Pro+, iPhone 17+), allowing for smoother gameplay.</p>
+                        <h4>iOS "ProMotion" (120Hz) Display Support</h4>
+                        <p>Enabled ProMotion refresh rates above 60Hz on iOS by removing the hardcoded 60fps <code>CADisplayLink</code> cap in <code>godot_view.mm</code>, and setting <code>CA​Disable​Minimum​Frame​Duration​On​Phone</code> in the export plist. Apple requires both the plist key and explicit frame duration configuration. Affects iPad Pro (2018+), iPhone 13 Pro (and newer), iPhone 17 (and newer).</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/68044" class="repo-link">#68044 ⧉</a>
@@ -163,8 +164,11 @@
 
                 <div class="commit-item">
                     <div class="commit-content">
-                        <h4>iOS & MovieWriter Bug Fixes</h4>
-                        <p>Corrected iOS refresh rate reporting during Low Power Mode and fixed an issue with the MovieWriter, a tool for creating video clips for social media/trailers.</p>
+                        <h4>Bug Fixes</h4>
+                        <ul>
+                            <li>Fixed <code>Display​Server.​screen_​get_​refresh_​rate()</code> returning 120Hz on ProMotion devices even when Low Power Mode throttles to 60Hz. (#85026)</li>
+                            <li>Fixed 2-year-old bug where MovieWriter recorded incorrect resolution/aspect ratio when using Window Size Override with Viewport stretch mode. Output was being captured from the wrong render target dimensions. (#104334)</li>
+                        </ul>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/85026" class="repo-link">#85026 ⧉</a>
@@ -175,7 +179,7 @@
                 <div class="commit-item">
                     <div class="commit-content">
                         <h4>Godot 3.x Legacy Support</h4>
-                        <p>Backported iOS interface controls, ProMotion support, and mobile lifecycle notifications from 4.x to 3.x, enabling legacy projects to use modern features without migrating.</p>
+                        <p>Backported iOS interface controls, ProMotion support, and mobile lifecycle notifications from 4.x to 3.x, enabling legacy projects to use modern features without migrating. Required adapting implementations to 3.x's different display server architecture.</p>
                     </div>
                     <div class="commit-meta">
                         <a href="https://github.com/godotengine/godot/pull/68189" class="repo-link">#68189 ⧉</a>
