@@ -578,6 +578,10 @@ code {
     .commit-content p {
         font-size: 0.95rem;
     }
+
+    .commit-content ul {
+        font-size: 0.95rem;
+    }
 }
 
 /* Small mobile */
@@ -668,6 +672,10 @@ code {
     }
 
     .commit-content p {
+        font-size: 0.9rem;
+    }
+
+    .commit-content ul {
         font-size: 0.9rem;
     }
 
