@@ -58,12 +58,16 @@
     width: 100%;
 }
 
-/* Back navigation links */
+/* Back navigation links - wrapper stays still, inner moves */
+.back-nav {
+    display: inline-block;
+    margin-bottom: 24px;
+}
+
 .back-home,
 .back-link {
     display: inline-flex;
     align-items: center;
-    margin-bottom: 24px;
     color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.95rem;
@@ -72,8 +76,14 @@
     gap: 6px;
 }
 
+.back-nav:hover .back-home,
+.back-nav:hover .back-link {
+    color: var(--accent);
+    transform: translateX(-4px);
+}
+
+/* Fallback for unwrapped back links (color only, no transform) */
 .back-home:hover,
 .back-link:hover {
     color: var(--accent);
-    transform: translateX(-4px);
 }

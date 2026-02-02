@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#faf8f3">
+    <title>iMessage: Forever is a Long Time</title>
+
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <meta name="description" content="Brief thoughts on the iMessage "Keep Messages" setting.">
+    <link rel="canonical" href="https://ztc0611.github.io/blog/2026-imessage-forever.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="iMessage: Forever is a Long Time">
+    <meta property="og:description" content="Brief thoughts on the iMessage "Keep Messages" setting.">
+    <meta property="og:url" content="https://ztc0611.github.io/blog/2026-imessage-forever.html">
+
+    <meta name="twitter:title" content="iMessage: Forever is a Long Time">
+    <meta name="twitter:description" content="Brief thoughts on the iMessage "Keep Messages" setting.">
+
+    <link rel="stylesheet" href="/blog.css">
+</head>
+<body>
+    <main class="content">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <span class="back-nav"><a href="index.html" class="back-link">← Back to weblog</a></span>
+            <h1 class="post-title">iMessage: Forever is a Long Time</h1>
+            <p class="post-date" style="text-align: center;">February 2nd, 2026 at 5:00 PM PST · 1 min read</p>
+            <article>
+
+<picture>
+  <source srcset="/blog_assets/imessage-keep-messages.webp" type="image/webp">
+  <img src="/blog_assets/jpg/imessage-keep-messages.jpg" alt="An image of the selector in settings to determine how long to keep messages on the phone. The options are 30 days, 1 year, and Forever.">
+</picture>
+
+<p>From 2007-2014, the default and only retention option for iPhone texts was "Forever." This changed with iOS 8, released September 2014.<sup><a href="#fn1" id="fnref1">1</a></sup> At that point the automatic cleanup options were functionally 30 days, 1 year, or 7 years.</p>
+
+<p>Today, this option is 30 days, 1 year, or 18.5 years. Since 2014, photos have gotten a lot larger, as have videos. iMessage will perform <em>some</em> size mitigation depending on context<sup><a href="#fn2" id="fnref2">2</a></sup>, however it doesn't touch standard HEIC/JPEG images.</p>
+
+<p>The iPhone (2007, "2G") took photos between 400 and 800KB, and at launch didn't even support MMS.<sup><a href="#fn3" id="fnref3">3</a></sup> A modern standard iPhone photo is frequently in the 3-6MB range. Across that time, directly sharing pictures also moved from being the realm of email/flash drives/DVDs to the realm of texting.</p>
+
+<p>iMessage itself had only existed for 3 years in 2014, any messages before that were only "green bubble" SMS/MMS. This further reduced the capacity to send images and their maximum sizes upon delivery across the initial 7 years.</p>
+
+<p>Messages in iCloud fixes this problem locally for iOS devices. However, any Mac with iCloud sync enabled will try to fill the drive with sometimes hundreds of gigabytes of messages + attachments. It will even regenerate the attachments folder entirely if you delete it. The messages are also unsearchable if they aren't locally present, regardless of platform.</p>
+
+<p>I think it might be time to at least consider 2, 3, and 5 year options. It might also be time to consider detaching "keep text only" from "keep attachments" in this selection, as well.</p>
+
+<br>
+
+<h2>Footnotes</h2>
+
+<ol>
+<li id="fn1"><a href="https://ios.gadgethacks.com/how-to/delete-your-message-history-automatically-0157422/">How to Delete Your Message History Automatically (2014)</a> <a href="#fnref1">↩</a></li>
+<li id="fn2">Videos will be compressed to a lower resolution depending on length/size. Sometimes videos get embarrassingly blurry as they approach 1 minute. ProRAW will send as a much smaller JPEG. <a href="#fnref2">↩</a></li>
+<li id="fn3">This came in 2009, and photos were also heavily compressed in comparison to what came later with iMessage. (Capped at 500KB or less typically.) <a href="#fnref3">↩</a></li>
+</ol>
+</article>
+            <br>
+            <span class="back-nav"><a href="index.html" class="back-link">← Back to weblog</a></span>
+        </div>
+    </main>
+    <script>
+        // Add spatial photo fullscreen support for Vision Pro
+        // Supports both img.spatial and picture.spatial > img
+        document.addEventListener('DOMContentLoaded', function() {
+            const spatialPhotos = document.querySelectorAll('img.spatial, picture.spatial img');
+            spatialPhotos.forEach(function(img) {
+                img.addEventListener('click', async function() {
+                    try {
+                        await img.requestFullscreen();
+                    } catch (error) {
+                        console.log('Fullscreen not supported or denied');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

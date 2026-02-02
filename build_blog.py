@@ -246,21 +246,7 @@ def parse_markdown_to_html(content):
 
 def process_inline_footnotes(text, start_counter, footnote_texts):
     """Process inline footnotes [^text] and replace with superscript links."""
-    counter = start_counter
 
-    def replace_footnote(match):
-        nonlocal counter
-        footnote_text = match.group(1)
-        # Process inline styles and markdown links within footnotes
-        footnote_text = process_inline_styles(footnote_text)
-        footnote_text = process_markdown_links(footnote_text)
-        footnote_texts.append(footnote_text)
-        result = f'<sup><a href="#fn{counter}" id="fnref{counter}">{counter}</a></sup>'
-        counter += 1
-        return result
-
-    # Match [^...] patterns with greedy matching to capture everything until the final ]
-    # This regex looks for [^ followed by anything (including nested parens/brackets) until the last ]
     def find_footnotes(text):
         result = []
         i = 0
@@ -295,9 +281,20 @@ def process_inline_footnotes(text, start_counter, footnote_texts):
         return result
 
     footnotes = find_footnotes(text)
-    # Process from end to start to maintain indices
-    for start, end, footnote_content in reversed(footnotes):
-        replacement = replace_footnote(type('Match', (), {'group': lambda self, n: footnote_content})())
+
+    # First pass: assign numbers in forward order and collect footnote texts
+    numbered_footnotes = []
+    counter = start_counter
+    for start, end, footnote_content in footnotes:
+        footnote_text = process_inline_styles(footnote_content)
+        footnote_text = process_markdown_links(footnote_text)
+        footnote_texts.append(footnote_text)
+        numbered_footnotes.append((start, end, counter))
+        counter += 1
+
+    # Second pass: replace from end to start to maintain indices
+    for start, end, num in reversed(numbered_footnotes):
+        replacement = f'<sup><a href="#fn{num}" id="fnref{num}">{num}</a></sup>'
         text = text[:start] + replacement + text[end:]
 
     # Process inline styles and markdown links in the remaining text
@@ -330,6 +327,25 @@ def escape_html(text):
     text = text.replace('<', '&lt;')
     text = text.replace('>', '&gt;')
     return text
+
+
+def calculate_reading_time(text):
+    """Calculate estimated reading time from markdown content."""
+    # Remove image comments
+    text = re.sub(r'<!--img.*?-->', '', text, flags=re.DOTALL)
+    # Remove other HTML comments
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
+    # Remove markdown links but keep text
+    text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
+    # Remove footnote markers
+    text = re.sub(r'\[\^[^\]]+\]', '', text)
+    # Remove markdown formatting
+    text = re.sub(r'[#*_`]', '', text)
+    # Count words
+    words = len(text.split())
+    # Calculate minutes (200 words per minute, minimum 1)
+    minutes = max(1, round(words / 200))
+    return f"{minutes} min read"
 
 
 def convert_to_jpg(image_path):
@@ -367,13 +383,13 @@ def convert_to_jpg(image_path):
         return None
 
 
-def generate_page(content, metadata, slug, date_formatted, updated_formatted=None):
+def generate_page(content, metadata, slug, date_formatted, reading_time, updated_formatted=None):
     """Wrap blog post content in site template."""
     title = metadata.get('title', 'Untitled')
     description = metadata.get('description', '')
 
-    # Build date display with optional update line
-    date_display = f'<p class="post-date" style="text-align: center;">{date_formatted}</p>'
+    # Build date display with reading time and optional update line
+    date_display = f'<p class="post-date" style="text-align: center;">{date_formatted} · {reading_time}</p>'
     if updated_formatted:
         date_display += f'<p class="post-date" style="text-align: center; font-size: 0.9em; margin-top: -15px;">Updated: {updated_formatted}</p>'
 
@@ -400,7 +416,7 @@ def generate_page(content, metadata, slug, date_formatted, updated_formatted=Non
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#faf8f3">
-    <title>{title} - Zach Coleman</title>
+    <title>{title}</title>
 
     <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.png">
@@ -416,18 +432,17 @@ def generate_page(content, metadata, slug, date_formatted, updated_formatted=Non
     <meta name="twitter:title" content="{title}">
     <meta name="twitter:description" content="{description}">{twitter_image_tags}
 
-    <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/blog.css">
 </head>
 <body>
     <main class="content">
         <div style="max-width: 900px; margin: 0 auto;">
-            <a href="index.html" class="back-link">← Back to weblog</a>
+            <span class="back-nav"><a href="index.html" class="back-link">← Back to weblog</a></span>
             <h1 class="post-title">{title}</h1>
             {date_display}
             {content}
             <br>
-            <a href="index.html" class="back-link">← Back to weblog</a>
+            <span class="back-nav"><a href="index.html" class="back-link">← Back to weblog</a></span>
         </div>
     </main>
     <script>
@@ -452,12 +467,17 @@ def generate_page(content, metadata, slug, date_formatted, updated_formatted=Non
 
 def generate_index(posts):
     """Generate blog index page."""
+    # Lucide clock icon (ISC license)
+    clock_icon = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
     posts_html = []
     for post in posts:
         posts_html.append(f"""
-        <a href="{post['slug']}.html" class="blog-post-preview">
-            <div>
-                <h3>{post['title']}</h3>
+        <a href="{post['slug']}.html" class="blog-post-link">
+            <div class="blog-post-preview">
+                <div class="post-header">
+                    <h3>{post['title']}</h3>
+                    <span class="reading-time">{clock_icon} {post['reading_time']}</span>
+                </div>
                 <p class="post-date">{post['date_formatted']}</p>
                 <p>{post['description']}</p>
             </div>
@@ -477,14 +497,13 @@ def generate_index(posts):
     <link rel="icon" type="image/png" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/blog.css">
     <link rel="alternate" type="application/rss+xml" title="Zach Coleman's Weblog" href="feed.xml">
 </head>
 <body>
     <main class="content">
         <div class="blog-container">
-            <a href="/" class="back-home">← Back to home</a>
+            <span class="back-nav"><a href="/" class="back-home">← Back to home</a></span>
             <a href="feed.xml" class="rss-link animated-underline-link">RSS Feed ⧉</a>
             <h1 class="blog-title">Weblog</h1>
             {posts_section}
@@ -516,6 +535,11 @@ def generate_sitemap(posts):
     <loc>https://ztc0611.github.io/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ztc0611.github.io/portfolio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://ztc0611.github.io/blog/</loc>
@@ -678,8 +702,11 @@ def main():
             except ValueError:
                 updated_formatted = updated_str
 
+        # Calculate reading time from raw markdown content
+        reading_time = calculate_reading_time(content_without_metadata)
+
         # Generate full page
-        full_page = generate_page(html_content, metadata, slug, date_formatted, updated_formatted)
+        full_page = generate_page(html_content, metadata, slug, date_formatted, reading_time, updated_formatted)
         output_path = output_dir / f'{slug}.html'
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(full_page)
@@ -692,6 +719,7 @@ def main():
             'content': html_content,
             'date': date,
             'date_formatted': date_formatted,
+            'reading_time': reading_time,
             'rss_date': rss_date,
             'updated_formatted': updated_formatted
         })
