@@ -398,8 +398,16 @@ def generate_page(content, metadata, slug, date_formatted, reading_time, updated
     og_image_tags = ''
     twitter_image_tags = ''
     if hero_image:
-        # Convert relative to absolute URL if needed
+        # If the file doesn't exist at the given path, check the jpg/ subfolder
         if hero_image.startswith('/'):
+            local_path = Path('.' + hero_image)
+            if not local_path.exists():
+                parent = hero_image.rsplit('/', 1)[0]
+                filename = hero_image.rsplit('/', 1)[1]
+                jpg_subfolder_path = f"{parent}/jpg/{filename}"
+                if Path('.' + jpg_subfolder_path).exists():
+                    hero_image = jpg_subfolder_path
+
             hero_image_url = f"https://ztc0611.github.io{hero_image}"
         else:
             hero_image_url = hero_image
