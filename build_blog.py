@@ -311,6 +311,8 @@ def process_markdown_links(text):
 def process_inline_styles(text):
     """Convert inline markdown styles (bold, italic, code) to HTML."""
     # Code first (so ** and * inside code blocks are preserved)
+    # Handle double backticks first (``code``), then single backticks (`code`)
+    text = re.sub(r'``([^`]+)``', r'<code>\1</code>', text)
     text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
     # Bold (** or __)
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
