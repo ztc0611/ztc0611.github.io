@@ -478,6 +478,16 @@ code {
     .project-card[data-project="photostat"] .project-image img {
         opacity: 0;
     }
+
+    .project-card[data-project="sentry-rewind"] .project-image {
+        background-image: url('portfolio_assets/SentryRewind-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .project-card[data-project="sentry-rewind"] .project-image img {
+        opacity: 0;
+    }
 }
 
 /* Tablet and smaller */

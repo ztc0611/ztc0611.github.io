@@ -28,6 +28,7 @@
     <link rel="preload" as="image" href="portfolio_assets/Dominos-Dark.webp">
     <link rel="preload" as="image" href="portfolio_assets/base4096-Dark.webp">
     <link rel="preload" as="image" href="portfolio_assets/PhotoStat-Dark.webp">
+    <link rel="preload" as="image" href="portfolio_assets/SentryRewind-Dark.webp">
     
     <link rel="stylesheet" href="portfolio.css">
 </head>
@@ -115,6 +116,52 @@
             </div>
         </section>
 
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card-wrapper">
+                    <div class="project-card" data-project="sentry-rewind">
+                        <div class="project-image">
+                            <img src="portfolio_assets/SentryRewind.webp" alt="An image of Sentry Rewind. It is displaying a forward facing view of a car driving on an interstate during the day.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Sentry Rewind</h3>
+                            <p>A desktop app for viewing Tesla dashcam footage, with synchronized 6-camera playback, a calendar view, and a map view. Works with any Tesla-formatted USB drive.</p>
+                            <div class="platform-badges">
+                                <span class="platform-badge">macOS</span>
+                                <span class="platform-badge">Windows</span>
+                            </div>
+                            <div class="project-meta">
+                                <span class="first-worked">Apr. 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/ztc0611/sentry-rewind" class="btn-primary">View on Github ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper">
+                    <div class="project-card" data-project="printing-the-dream">
+                        <div class="project-image">
+                            <img src="portfolio_assets/PrintingTheDream.webp" alt="A picture of a Nintendo Switch 2 showing Tomodachi Life's image editor. A Raspberry Pi Pico is plugged into the bottom USB port. An image of an octopus is being drawn by the Pico.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Printing The Dream</h3>
+                            <p>A tool for importing images into <em>Tomodachi Life: Living the Dream</em> with zero console modification. A Raspberry Pi Pico emulates a wired controller to draw images in the in-game custom item creator. Reverse engineered how to send fastest inputs without game's cursor losing tracking. Works on Switch 1 and Switch 2.</p>
+                            <div class="project-meta">
+                                <span class="first-worked">Apr. 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/ztc0611/printing-the-dream" class="btn-primary">View on Github ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Open Source Contributions Section -->
         <div id="open-source"></div>
         <section class="commits-section">
@@ -126,8 +173,8 @@
                 <div class="commit-item-wrapper">
                     <div class="commit-item">
                         <div class="commit-content">
-                            <h4>8-Year-Old Daylight Savings Bug</h4>
-                            <p>Fixed <code>OS.​get_time_zone_info()</code> returning incorrect UTC offset on Windows during DST. The implementation didn't account for DaylightBias—e.g., Mountain Daylight Time returned -420 minutes (UTC-7) instead of -360 (UTC-6). Bug existed since the initial Win32 implementation in 2014. Required understanding the Windows timezone API's distinction between standard and daylight bias values, fixed by applying the correct values.</p><br><p>Before my change, "Is it currently daylight savings?" was hard coded to "No" on Windows.</p>
+                            <h4>8-Year-Old Daylight Saving Bug</h4>
+                            <p>Fixed <code>OS.​get_time_zone_info()</code> returning incorrect UTC offset on Windows during DST. The implementation didn't account for DaylightBias—e.g., Mountain Daylight Time returned -420 minutes (UTC-7) instead of -360 (UTC-6). Bug existed since the initial Win32 implementation in 2014. Required understanding the Windows timezone API's distinction between standard and daylight bias values, fixed by applying the correct values.</p><br><p>Before my change, "Is it currently daylight saving time?" was hard coded to "No" on Windows.</p>
                         </div>
                         <div class="commit-meta">
                             <a href="https://github.com/godotengine/godot/pull/59223" class="repo-link">#59223 ⧉</a>
@@ -204,30 +251,6 @@
             </div>
         </section>
 
-        <!-- Games Section -->
-        <section class="projects-section">
-            <h2>Games</h2>
-            <div class="projects-grid">
-                <div class="project-card-wrapper">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="portfolio_assets/Northward.webp" alt="Northward Game Demo Screenshot">
-                        </div>
-                        <div class="project-info">
-                            <h3>Northward Demo</h3>
-                            <p>A demo made as an independent study in game design. Playable in web browser, see details on the itch.io page.</p>
-                            <div class="project-meta">
-                                <span class="first-worked">Oct. 2021 - May 2022</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">View on Itch.io ⧉</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Experiments Section -->
         <section class="projects-section">
             <h2>Experiments</h2>
@@ -235,11 +258,12 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="dominos">
                         <div class="project-image">
-                            <img src="portfolio_assets/Dominos.webp" alt="Live Activity for Dominos Screenshot">
+                            <img src="portfolio_assets/Dominos.webp" alt="A picture showing an Live Activity counting down time to a pizza order pickup time.">
                         </div>
                         <div class="project-info">
                             <h3>Live Activity for Dominos Pizza</h3>
                             <p>An experiment in generating an iOS live activity for Dominos Pizza, which works on actual orders when a phone number is entered.</p>
+                            <p>Note: In early 2026, Dominos finally implemented this function into their official app!</p>
                             <div class="project-meta">
                                 <span class="first-worked">Feb. 2024</span>
                             </div>
@@ -296,6 +320,30 @@
                             </div>
                             <div class="project-actions">
                                 <a href="https://github.com/ztc0611/Discord-Apple-Stock-Checker" class="btn-primary">View on Github ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section class="projects-section">
+            <h2>Games</h2>
+            <div class="projects-grid">
+                <div class="project-card-wrapper">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="portfolio_assets/Northward.webp" alt="Northward Game Demo Screenshots. Three are shown. Left: An overworld map of a house interior. Middle: A battle screen. Right: The title screen.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Northward Demo</h3>
+                            <p>A demo made as an independent study in game design. Playable in web browser, see details on the itch.io page.</p>
+                            <div class="project-meta">
+                                <span class="first-worked">Oct. 2021 - May 2022</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">View on Itch.io ⧉</a>
                             </div>
                         </div>
                     </div>
