@@ -311,12 +311,12 @@ body {
     max-width: 800px;
 }
 
-.commits-section .inline-link {
+.inline-link {
     color: var(--accent);
     font-weight: 500;
 }
 
-.commits-section .inline-link.animated-underline-link:hover {
+.inline-link.animated-underline-link:hover {
     color: var(--accent-hover);
 }
 
@@ -420,7 +420,7 @@ code {
 /* Dark mode project images */
 @media (prefers-color-scheme: dark) {
     .project-card[data-project="booklet"] .project-image {
-        background-image: url('portfolio_assets/Booklet-Dark.webp');
+        background-image: url('assets/portfolio/Booklet-Dark.webp');
         background-size: cover;
         background-position: center;
     }
@@ -430,7 +430,7 @@ code {
     }
 
     .project-card[data-project="pixellate"] .project-image {
-        background-image: url('portfolio_assets/Pixellate-Dark.webp');
+        background-image: url('assets/portfolio/Pixellate-Dark.webp');
         background-size: cover;
         background-position: center;
     }
@@ -440,7 +440,7 @@ code {
     }
 
     .project-card[data-project="pointto"] .project-image {
-        background-image: url('portfolio_assets/PointTo-Dark.webp');
+        background-image: url('assets/portfolio/PointTo-Dark.webp');
         background-size: cover;
         background-position: center;
     }
@@ -450,7 +450,7 @@ code {
     }
 
     .project-card[data-project="dominos"] .project-image {
-        background-image: url('portfolio_assets/Dominos-Dark.webp');
+        background-image: url('assets/portfolio/Dominos-Dark.webp');
         background-size: cover;
         background-position: center;
     }
@@ -460,7 +460,7 @@ code {
     }
 
     .project-card[data-project="base4096"] .project-image {
-        background-image: url('portfolio_assets/base4096-Dark.webp');
+        background-image: url('assets/portfolio/base4096-Dark.webp');
         background-size: cover;
         background-position: center;
     }
@@ -470,7 +470,7 @@ code {
     }
 
     .project-card[data-project="photostat"] .project-image {
-        background-image: url('portfolio_assets/PhotoStat-Dark.webp');
+        background-image: url('assets/portfolio/PhotoStat-Dark.webp');
         background-size: cover;
         background-position: center;
     }
@@ -480,12 +480,22 @@ code {
     }
 
     .project-card[data-project="sentry-rewind"] .project-image {
-        background-image: url('portfolio_assets/SentryRewind-Dark.webp');
+        background-image: url('assets/portfolio/SentryRewind-Dark.webp');
         background-size: cover;
         background-position: center;
     }
 
     .project-card[data-project="sentry-rewind"] .project-image img {
+        opacity: 0;
+    }
+
+    .project-card[data-project="trmnl-ferries"] .project-image {
+        background-image: url('assets/portfolio/TRMNL-Washington-Ferries-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .project-card[data-project="trmnl-ferries"] .project-image img {
         opacity: 0;
     }
 }
@@ -705,5 +715,82 @@ code {
     .repo-link {
         font-size: 0.85rem;
         padding: 6px 12px;
+    }
+}
+
+/* Phone landscape (short-and-wide): restore side-by-side, compact everything */
+@media (orientation: landscape) and (max-height: 500px) {
+    .content {
+        padding: 16px 20px;
+    }
+
+    .page-header {
+        margin-bottom: 24px;
+    }
+
+    .page-title {
+        font-size: 2.25rem;
+    }
+
+    .projects-section {
+        margin-bottom: 56px;
+    }
+
+    .projects-section h2,
+    .commits-section h2 {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .projects-grid {
+        gap: 28px;
+    }
+
+    .project-card {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 24px;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .project-image {
+        aspect-ratio: 4/3;
+        border-radius: 8px;
+    }
+
+    .project-info {
+        gap: 12px;
+    }
+
+    .project-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .project-info p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .platform-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+
+    .project-meta .first-worked {
+        font-size: 0.8rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .project-actions {
+        flex-direction: row;
+    }
+
+    .project-actions .btn-primary,
+    .project-actions .btn-secondary {
+        width: auto;
     }
 }

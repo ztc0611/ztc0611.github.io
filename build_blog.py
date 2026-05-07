@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Simple static blog generator for GitHub Pages.
-Reads markdown files from blog_posts/ and generates full pages + RSS feed.
+Reads markdown files from blog-posts/ and generates full pages + RSS feed.
 """
 
 import os
@@ -89,9 +89,9 @@ def parse_markdown_to_html(content):
 
             if src_match:
                 src = src_match.group(1).strip()
-                # Replace ~ with /blog_assets/
+                # Replace ~ with /assets/blog/
                 if src.startswith('~'):
-                    src = '/blog_assets' + src[1:]
+                    src = '/assets/blog' + src[1:]
                 alt = alt_match.group(1).strip() if alt_match else ''
                 caption_text = caption_match.group(1).strip() if caption_match else ''
                 source_text = source_match.group(1).strip() if source_match else ''
@@ -567,10 +567,10 @@ def generate_rss(posts):
     for post in posts:
         # Convert relative image URLs to absolute URLs for RSS readers
         content_for_rss = post['content']
-        # Replace src="/blog_assets/ with full URL
-        content_for_rss = content_for_rss.replace('src="/blog_assets/', 'src="https://ztc0611.github.io/blog_assets/')
-        # Replace src="../portfolio_assets/ with full URL
-        content_for_rss = content_for_rss.replace('src="../portfolio_assets/', 'src="https://ztc0611.github.io/portfolio_assets/')
+        # Replace src="/assets/blog/ with full URL
+        content_for_rss = content_for_rss.replace('src="/assets/blog/', 'src="https://ztc0611.github.io/assets/blog/')
+        # Replace src="../assets/portfolio/ with full URL
+        content_for_rss = content_for_rss.replace('src="../assets/portfolio/', 'src="https://ztc0611.github.io/assets/portfolio/')
 
         # Replace WebP and HEIC extensions with JPG for RSS compatibility
         content_for_rss = re.sub(r'\.webp"', '.jpg"', content_for_rss, flags=re.IGNORECASE)
@@ -618,13 +618,13 @@ def generate_rss(posts):
 
 
 def main():
-    blog_dir = Path('blog_posts')
+    blog_dir = Path('blog-posts')
     output_dir = Path('blog')
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Convert all WebP and HEIC images to JPG for compatibility
     print("Converting WebP and HEIC images to JPG...")
-    asset_path = Path('blog_assets')
+    asset_path = Path('assets/blog')
     if asset_path.exists():
         for ext in ['webp', 'heic', 'HEIC']:
             for img_file in asset_path.glob(f'*.{ext}'):
@@ -633,7 +633,7 @@ def main():
 
     posts = []
 
-    # Process each markdown file in blog_posts/
+    # Process each markdown file in blog-posts/
     for file_path in sorted(blog_dir.glob('*.md')):
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()

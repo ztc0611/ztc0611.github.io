@@ -13,22 +13,23 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Zachary Coleman — Portfolio">
-    <meta property="og:image" content="https://ztc0611.github.io/portfolio_assets/Embed.jpg">
+    <meta property="og:image" content="https://ztc0611.github.io/assets/portfolio/Embed.jpg">
     <meta property="og:url" content="https://ztc0611.github.io">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Zachary Coleman — Portfolio">
-    <meta name="twitter:image" content="https://ztc0611.github.io/portfolio_assets/Embed.jpg">
+    <meta name="twitter:image" content="https://ztc0611.github.io/assets/portfolio/Embed.jpg">
     
     <!-- Preload dark mode images -->
-    <link rel="preload" as="image" href="portfolio_assets/Pixellate-Dark.webp">
-    <link rel="preload" as="image" href="portfolio_assets/PointTo-Dark.webp">
-    <link rel="preload" as="image" href="portfolio_assets/Booklet-Dark.webp">
-    <link rel="preload" as="image" href="portfolio_assets/Dominos-Dark.webp">
-    <link rel="preload" as="image" href="portfolio_assets/base4096-Dark.webp">
-    <link rel="preload" as="image" href="portfolio_assets/PhotoStat-Dark.webp">
-    <link rel="preload" as="image" href="portfolio_assets/SentryRewind-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/Pixellate-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/PointTo-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/Booklet-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/Dominos-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/base4096-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/PhotoStat-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/SentryRewind-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/TRMNL-Washington-Ferries-Dark.webp">
     
     <link rel="stylesheet" href="portfolio.css">
 </head>
@@ -36,7 +37,7 @@
     <main class="content">
         <div class="nav-bar">
             <span class="back-nav"><a href="/" class="back-home">← Back to home</a></span>
-            <a href="mailto:za.colem@gmail.com" class="contact-link animated-underline-link">Contact ⧉</a>
+            <a href="mailto:za.colem@gmail.com" class="contact-link animated-underline-link">Contact Me ⧉</a>
         </div>
         <div class="page-header">
             <h1 class="page-title">Portfolio</h1>
@@ -48,7 +49,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="pixellate">
                         <div class="project-image">
-                            <img src="portfolio_assets/Pixellate.webp" alt="Pixellate Camera Screenshot">
+                            <img src="assets/portfolio/Pixellate.webp" alt="An image of multiple iPhone renders displaying several different configurations of Pixellate Camera. They are all rendered in only 4 colors, with dithering to display additional color depth. Some of the viewfinder images include: An interstate with cars driving towards the camera, a cat looking curious, an arid tree on a rocky landscape, and a campfire.">
                         </div>
                         <div class="project-info">
                             <h3>Pixellate Camera</h3>
@@ -69,7 +70,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="pointto">
                         <div class="project-image">
-                            <img src="portfolio_assets/PointTo.webp" alt="Point To: Custom Compass Screenshot">
+                            <img src="assets/portfolio/PointTo.webp" alt="An image of Point To: Custom Compass running on an iPhone and Apple Watch. One is pointing towards Los Angeles, and the other pointing towards Big Sur. They are rendered floating on top of a background depicting a coastline.">
                         </div>
                         <div class="project-info">
                             <h3>Point To: Custom Compass</h3>
@@ -92,11 +93,11 @@
                 <div class="project-card-wrapper">
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="portfolio_assets/Recall.webp" alt="Recall: Moving Gallery Screenshot">
+                            <img src="assets/portfolio/Recall.webp" alt="Recall: Moving Gallery Screenshot. It shows a picture of a valley within a VisionOS app window, superimposed over a living room.">
                         </div>
                         <div class="project-info">
                             <h3>Recall: Moving Gallery</h3>
-                            <p>Shows random Live Photos and videos from your library. Built to surface unexpected memories you forgot you had.</p>
+                            <p>An app that shows random Live Photos and videos from your library. Built to surface unexpected memories you forgot you had.</p>
                             <div class="platform-badges">
                                 <span class="platform-badge">iOS</span>
                                 <span class="platform-badge">iPadOS</span>
@@ -123,7 +124,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="sentry-rewind">
                         <div class="project-image">
-                            <img src="portfolio_assets/SentryRewind.webp" alt="An image of Sentry Rewind. It is displaying a forward facing view of a car driving on an interstate during the day.">
+                            <img src="assets/portfolio/SentryRewind.webp" alt="An image of Sentry Rewind. It is displaying a forward facing view of a car driving on an interstate during the day.">
                         </div>
                         <div class="project-info">
                             <h3>Sentry Rewind</h3>
@@ -143,9 +144,30 @@
                 </div>
 
                 <div class="project-card-wrapper">
+                    <div class="project-card" data-project="trmnl-ferries">
+                        <div class="project-image">
+                            <img src="assets/portfolio/TRMNL-Washington-Ferries.webp" alt="An image depicting the project, a TRMNL display widget. It is a monochrome interface depicting a map and schedules of departing times for both directions between Seattle, WA and Bainbridge Island, WA.">
+                        </div>
+                        <div class="project-info">
+                            <h3>TRMNL Washington State Ferries Widget</h3>
+                            <p>A widget/"recipe" for the <a href="https://trmnl.com" class="inline-link animated-underline-link">TRMNL ⧉</a> ambient e-ink displays. Pulls real time data from the WSDOT Rest API including ship locations, schedule delays, cancellations, and service alerts.</p>
+                            <div class="platform-badges">
+                                <span class="platform-badge">TRMNL</span>
+                            </div>
+                            <div class="project-meta">
+                                <span class="first-worked">May 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://trmnl.com/recipes/299929" class="btn-primary">View on TRMNL.com ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper">
                     <div class="project-card" data-project="printing-the-dream">
                         <div class="project-image">
-                            <img src="portfolio_assets/PrintingTheDream.webp" alt="A picture of a Nintendo Switch 2 showing Tomodachi Life's image editor. A Raspberry Pi Pico is plugged into the bottom USB port. An image of an octopus is being drawn by the Pico.">
+                            <img src="assets/portfolio/PrintingTheDream.webp" alt="A picture of a Nintendo Switch 2 on a desk showing Tomodachi Life: Living the Dream's image editor. A Raspberry Pi Pico with a small screen and buttons attached is plugged into the bottom USB port. An image of an octopus is being drawn on the Switch 2 by the Pico, which is displaying a thumbnail and progress bar.">
                         </div>
                         <div class="project-info">
                             <h3>Printing The Dream</h3>
@@ -258,7 +280,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="dominos">
                         <div class="project-image">
-                            <img src="portfolio_assets/Dominos.webp" alt="A picture showing an Live Activity counting down time to a pizza order pickup time.">
+                            <img src="assets/portfolio/Dominos.webp" alt="A picture showing a Live Activity counting down the minimum and maximum delivery time for a Dominos pizza order, displayed both on the iPhone lock screen and in the Dynamic Island.">
                         </div>
                         <div class="project-info">
                             <h3>Live Activity for Dominos Pizza</h3>
@@ -277,7 +299,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="base4096">
                         <div class="project-image">
-                            <img src="portfolio_assets/base4096.webp" alt="Base4096 Image">
+                            <img src="assets/portfolio/base4096.webp" alt="A macOS window displaying inputs and outputs of the Base4096 algorithm across three columns: two columns of encoded Unicode characters and a generated noise image, with buttons to generate a random image, gradient image, or decode an image.">
                         </div>
                         <div class="project-info">
                             <h3>Base4096</h3>
@@ -295,7 +317,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="photostat">
                         <div class="project-image">
-                            <img src="portfolio_assets/PhotoStat.webp" alt="PhotoStat Image">
+                            <img src="assets/portfolio/PhotoStat.webp" alt="An image depicting PhotoStat showing the statistics of the user's library. It is set to a mode showing total images taken per year. There is a breakdown on each bar between Live Photos, static photos, and videos.">
                         </div>
                         <div class="project-info">
                             <h3>PhotoStat</h3>
@@ -334,7 +356,7 @@
                 <div class="project-card-wrapper">
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="portfolio_assets/Northward.webp" alt="Northward Game Demo Screenshots. Three are shown. Left: An overworld map of a house interior. Middle: A battle screen. Right: The title screen.">
+                            <img src="assets/portfolio/Northward.webp" alt="Northward Game Demo Screenshots. Three are shown. Left: An overworld map of a house interior. Middle: A battle screen. Right: The title screen.">
                         </div>
                         <div class="project-info">
                             <h3>Northward Demo</h3>
