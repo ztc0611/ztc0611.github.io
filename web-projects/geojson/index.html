@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!-- GEO JSON polygon drawer -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OSM Polygon Drawer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<style>
+  html, body { margin: 0; height: 100%; font-family: -apple-system, system-ui, sans-serif; }
+  #app { display: grid; grid-template-columns: 1fr 380px; height: 100%; }
+  #map { height: 100%; }
+  #toolbar button.active { background: #ffeb3b; border-color: #d33; }
+  #sidebar { display: flex; flex-direction: column; border-left: 1px solid #ddd; min-height: 0; }
+  #toolbar { padding: 10px; border-bottom: 1px solid #eee; display: flex; gap: 6px; flex-wrap: wrap; }
+  #toolbar button { padding: 6px 10px; font-size: 13px; cursor: pointer; }
+  #help { padding: 10px; font-size: 12px; color: #555; border-bottom: 1px solid #eee; line-height: 1.5; }
+  #help kbd { background: #f3f3f3; border: 1px solid #ccc; border-radius: 3px; padding: 1px 5px; font-size: 11px; }
+  #status { padding: 6px 10px; font-size: 12px; color: #333; background: #fafafa; border-bottom: 1px solid #eee; }
+  #out { flex: 1; margin: 0; padding: 10px; font-family: ui-monospace, Menlo, monospace; font-size: 11px;
+         white-space: pre; overflow: auto; background: #fff; border: none; resize: none; }
+  /* Vertex markers: outer 20x20 transparent container = click hitbox.
+     Inner .vertex-dot = visible 10px circle, flex-centered so the dot
+     sits exactly at the marker's lngLat. */
+  .vertex, .saved-vertex {
+    width: 20px; height: 20px; box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vertex-dot {
+    width: 10px; height: 10px;
+    background: #fff; border-radius: 50%; box-sizing: border-box;
+  }
+  .vertex { pointer-events: none; }
+  .vertex .vertex-dot { border: 2px solid #d33; }
+  .saved-vertex { cursor: pointer; }
+  .saved-vertex .vertex-dot { border: 2px solid #06c; }
+  .saved-vertex:hover .vertex-dot { background: #ffeb3b; }
+  .saved-vertex.active .vertex-dot {
+    background: #ffeb3b; border-color: #d33; transform: scale(1.4);
+  }
+  /* Floating drawing-tools palette over the map */
+  #map { position: relative; }
+  .map-tools {
+    position: absolute; top: 12px; left: 12px; z-index: 5;
+    display: flex; flex-direction: column; gap: 4px;
+    background: #fff; border: 1px solid #ccc; border-radius: 6px;
+    padding: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .map-tools button {
+    padding: 6px 10px; font-size: 13px; cursor: pointer;
+    background: #fff; border: 1px solid #ccc; border-radius: 4px;
+    text-align: left; min-width: 160px;
+  }
+  .map-tools button:hover { background: #f3f3f3; }
+  .map-tools button.active { background: #ffeb3b; border-color: #d33; }
+  .map-tools button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .map-tools button:disabled:hover { background: #fff; }
+  .map-tools-divider { height: 1px; background: #ddd; margin: 2px 4px; }
+  .map-tools kbd {
+    float: right; background: #f3f3f3; border: 1px solid #ccc;
+    border-radius: 3px; padding: 0 5px; font-size: 11px; color: #666;
+  }
+
+  /* Theme toggle: floating segmented control top-right of the map. */
+  .theme-toggle {
+    position: absolute; top: 12px; right: 12px; z-index: 5;
+    display: flex; background: #fff; border: 1px solid #ccc;
+    border-radius: 6px; overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .theme-toggle button {
+    padding: 6px 10px; font-size: 12px; cursor: pointer;
+    background: #fff; color: #333; border: none;
+  }
+  .theme-toggle button + button { border-left: 1px solid #ddd; }
+  .theme-toggle button:hover { background: #f3f3f3; }
+  .theme-toggle button.active { background: #ffeb3b; }
+
+  /* Dark mode is driven by an html.dark class set in JS (early inline
+     script in <head> applies it pre-render so there's no light flash).
+     The class is the source of truth so the manual toggle can override
+     the system preference. */
+  html.dark, html.dark body { background: #1c1c1c; color: #e8e8e8; }
+  html.dark #sidebar { border-left-color: #3a3a3a; }
+  html.dark #toolbar { border-bottom-color: #2c2c2c; }
+  html.dark #toolbar button { background: #2a2a2a; color: #e8e8e8; border: 1px solid #444; border-radius: 4px; }
+  html.dark #toolbar button:hover { background: #353535; }
+  html.dark #help { color: #a8a8a8; border-bottom-color: #2c2c2c; }
+  html.dark #help kbd { background: #2a2a2a; border-color: #444; color: #e8e8e8; }
+  html.dark #status { color: #e0e0e0; background: #181818; border-bottom-color: #2c2c2c; }
+  html.dark #out { background: #1c1c1c; color: #e8e8e8; }
+  html.dark #out::selection { background: #3a5b8a; }
+  html.dark .map-tools { background: #242424; border-color: #444; box-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+  html.dark .map-tools button { background: #2a2a2a; color: #e8e8e8; border-color: #444; }
+  html.dark .map-tools button:hover { background: #353535; }
+  html.dark .map-tools button:disabled:hover { background: #2a2a2a; }
+  html.dark .map-tools-divider { background: #444; }
+  html.dark .map-tools kbd { background: #2a2a2a; border-color: #444; color: #aaa; }
+  html.dark .theme-toggle { background: #242424; border-color: #444; box-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+  html.dark .theme-toggle button { background: #2a2a2a; color: #e8e8e8; }
+  html.dark .theme-toggle button + button { border-left-color: #444; }
+  html.dark .theme-toggle button:hover { background: #353535; }
+  html.dark .theme-toggle button.active { background: #d4b500; color: #111; }
+  html.dark .maplibregl-popup-content { background: #242424; color: #e8e8e8; }
+  html.dark .maplibregl-popup-anchor-top .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-top-right .maplibregl-popup-tip { border-bottom-color: #242424; }
+  html.dark .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+  html.dark .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip { border-top-color: #242424; }
+  html.dark .maplibregl-popup-anchor-left .maplibregl-popup-tip { border-right-color: #242424; }
+  html.dark .maplibregl-popup-anchor-right .maplibregl-popup-tip { border-left-color: #242424; }
+  html.dark .maplibregl-popup-close-button { color: #aaa; }
+  html.dark .maplibregl-popup-close-button:hover { background: #353535; }
+</style>
+<script>
+  // Apply dark class before render to avoid a light-mode flash.
+  (() => {
+    const pref = localStorage.getItem('theme') || 'system';
+    const dark = pref === 'dark' ||
+      (pref === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (dark) document.documentElement.classList.add('dark');
+  })();
+</script>
+</head>
+<body>
+<div id="app">
+  <div id="map">
+    <div class="map-tools">
+      <button id="tool-rect">Rectangle <kbd>R</kbd></button>
+      <div class="map-tools-divider"></div>
+      <button id="tool-polygon">New polygon <kbd>N</kbd></button>
+      <button id="tool-complete" disabled>Complete polygon <kbd>↵</kbd></button>
+      <div class="map-tools-divider"></div>
+      <button id="tool-scissor">Scissor <kbd>S</kbd></button>
+    </div>
+    <div class="theme-toggle">
+      <button data-theme="light">Light</button>
+      <button data-theme="system">Auto</button>
+      <button data-theme="dark">Dark</button>
+    </div>
+  </div>
+  <div id="sidebar">
+    <div id="toolbar">
+      <button id="copy">Copy GeoJSON</button>
+      <button id="load">Load from text</button>
+      <button id="download">Download .geojson</button>
+      <button id="clear">Clear all</button>
+    </div>
+    <div id="help">
+      <b>Polygon</b>: click to add vertex, <kbd>Enter</kbd> to confirm, <kbd>⌘Z</kbd>/right-click to undo &nbsp;
+      <b>Rectangle</b>: drag to draw &nbsp;
+      <b>Scissor</b>: click an edge to insert a vertex &nbsp;
+      <b>⌘+drag</b> a node to move it &nbsp;
+      <b>Esc</b>: cancel
+    </div>
+    <div id="status">No polygon in progress.</div>
+    <textarea id="out" spellcheck="false" placeholder='Paste a FeatureCollection, Feature, Polygon, or MultiPolygon here, then click "Load from text".'></textarea>
+  </div>
+</div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+// Mismatched providers (OpenFreeMap liberty + Carto dark-matter) — accepted
+// because each is the best-looking option in its mode and the user can
+// override via the toggle when the auto pick is wrong.
+const styleUrl = (dark) => dark
+  ? 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
+  : 'https://tiles.openfreemap.org/styles/liberty';
+
+const THEME_KEY = 'theme';
+const getThemePref = () => localStorage.getItem(THEME_KEY) || 'system';
+const setThemePref = (pref) => {
+  if (pref === 'system') localStorage.removeItem(THEME_KEY);
+  else localStorage.setItem(THEME_KEY, pref);
+};
+const resolveDark = () => {
+  const pref = getThemePref();
+  if (pref === 'dark') return true;
+  if (pref === 'light') return false;
+  return themeQuery.matches;
+};
+function paintForTheme(dark) {
+  return {
+    savedFill: { 'fill-color': dark ? '#4ea3ff' : '#06c', 'fill-opacity': dark ? 0.3 : 0.2 },
+    savedLine: { 'line-color': dark ? '#4ea3ff' : '#06c', 'line-width': 2 },
+    draftFill: { 'fill-color': dark ? '#ff7a7a' : '#d33', 'fill-opacity': dark ? 0.25 : 0.15 },
+    draftLine: { 'line-color': dark ? '#ff7a7a' : '#d33', 'line-width': 2, 'line-dasharray': [2, 2] }
+  };
+}
+
+const map = new maplibregl.Map({
+  container: 'map',
+  style: styleUrl(resolveDark()),
+  center: [-122.3321, 47.6062],
+  zoom: 11,
+  attributionControl: { compact: true },
+  scrollZoom: false,
+  doubleClickZoom: false,
+  dragRotate: false,
+  pitchWithRotate: false,
+  touchZoomRotate: true
+});
+
+// Apple Maps style: plain two-finger scroll pans, pinch zooms.
+// On macOS, pinch arrives as a wheel event with ctrlKey=true.
+const canvas = map.getCanvas();
+canvas.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  if (e.ctrlKey || e.metaKey) {
+    const factor = -e.deltaY * 0.02;
+    const rect = canvas.getBoundingClientRect();
+    const lngLat = map.unproject([e.clientX - rect.left, e.clientY - rect.top]);
+    map.easeTo({ zoom: map.getZoom() + factor, around: lngLat, duration: 0 });
+  } else {
+    map.panBy([e.deltaX, e.deltaY], { duration: 0 });
+  }
+}, { passive: false });
+
+canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+// Rectangle tool: drag on the canvas to draw a rect (only active when mode='rectangle').
+canvas.addEventListener('mousedown', (e) => {
+  if (mode !== 'rectangle' || e.button !== 0) return;
+  e.preventDefault();
+  const r0 = canvas.getBoundingClientRect();
+  rectStart = map.unproject([e.clientX - r0.left, e.clientY - r0.top]);
+
+  const onMove = (ev) => {
+    const r = canvas.getBoundingClientRect();
+    const ll = map.unproject([ev.clientX - r.left, ev.clientY - r.top]);
+    const ring = rectRing(rectStart, ll);
+    map.getSource('draft').setData({ type: 'FeatureCollection', features: [
+      { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [ring] } }
+    ]});
+  };
+  const onUp = (ev) => {
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+    if (!rectStart) return;
+    const r = canvas.getBoundingClientRect();
+    const ll = map.unproject([ev.clientX - r.left, ev.clientY - r.top]);
+    confirmRectangle(rectStart, ll);
+    rectStart = null;
+    suppressNextMapClick = true;
+    setTimeout(() => { suppressNextMapClick = false; }, 50);
+  };
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup', onUp);
+});
+
+function rectRing(a, b) {
+  return [
+    [a.lng, a.lat], [b.lng, a.lat], [b.lng, b.lat], [a.lng, b.lat], [a.lng, a.lat]
+  ];
+}
+
+function confirmRectangle(a, b) {
+  // Tiny / accidental drag → discard.
+  if (Math.abs(a.lng - b.lng) < 1e-7 || Math.abs(a.lat - b.lat) < 1e-7) {
+    if (map.getSource('draft')) map.getSource('draft').setData(EMPTY_FC);
+    setMode(null);
+    return;
+  }
+  features.push({
+    type: 'Feature',
+    properties: { id: nextId++ },
+    geometry: { type: 'Polygon', coordinates: [rectRing(a, b)] }
+  });
+  if (map.getSource('draft')) map.getSource('draft').setData(EMPTY_FC);
+  updateSavedSource();
+  setMode(null);
+  renderOutput();
+  refreshSavedVertices();
+}
+
+// Scissor tool: insert a vertex on the closest edge near the click point (canvas pixels).
+function scissorAt(point) {
+  let best = { distSq: Infinity };
+  features.forEach((f, fi) => {
+    if (f.geometry.type !== 'Polygon') return;
+    f.geometry.coordinates.forEach((ring, ri) => {
+      for (let i = 0; i < ring.length - 1; i++) {
+        const a = map.project(ring[i]);
+        const b = map.project(ring[i + 1]);
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const lenSq = dx * dx + dy * dy;
+        let t = lenSq === 0 ? 0 : ((point.x - a.x) * dx + (point.y - a.y) * dy) / lenSq;
+        t = Math.max(0, Math.min(1, t));
+        const px = a.x + t * dx, py = a.y + t * dy;
+        const d = (point.x - px) ** 2 + (point.y - py) ** 2;
+        if (d < best.distSq) best = { distSq: d, fi, ri, i, t };
+      }
+    });
+  });
+  if (best.distSq === Infinity || best.distSq > 25 * 25) return; // 25px snap radius
+  const ring = features[best.fi].geometry.coordinates[best.ri];
+  const a = ring[best.i], b = ring[best.i + 1];
+  const newCoord = [
+    a[0] + best.t * (b[0] - a[0]),
+    a[1] + best.t * (b[1] - a[1])
+  ];
+  ring.splice(best.i + 1, 0, newCoord);
+  updateSavedSource();
+  renderOutput();
+  refreshSavedVertices();
+  highlightVertex(best.fi, best.ri, best.i + 1);
+}
+
+// ---- State ----
+let draft = []; // [{lng, lat}]
+const features = []; // GeoJSON Feature[]
+let vertexOffsets = []; // [fi][ri][vi] -> {start, end} into the textarea
+let vertexMarkers = []; // [fi][ri][vi] -> maplibregl.Marker
+let draftMarkers = [];
+let activeMarker = null;
+let mode = null; // null | 'polygon' | 'rectangle' | 'scissor'
+let nextId = 1;
+let openPopup = null;
+let rectStart = null;
+let suppressNextMapClick = false; // swallow the click that follows a rect drag
+
+const EMPTY_FC = { type: 'FeatureCollection', features: [] };
+
+// ---- Map setup ----
+// Re-installed on every style.load so sources/layers survive a setStyle()
+// call when the OS theme flips light↔dark.
+function installAppLayers() {
+  const p = paintForTheme(resolveDark());
+  // setStyle's style-diff can leave our custom sources/layers half-installed
+  // across a theme swap (sources kept, layers gone). Strip leftovers first
+  // so the re-add below doesn't throw "already exists".
+  ['saved-fill', 'saved-line', 'draft-fill', 'draft-line'].forEach(id => {
+    if (map.getLayer(id)) map.removeLayer(id);
+  });
+  ['saved', 'draft'].forEach(id => {
+    if (map.getSource(id)) map.removeSource(id);
+  });
+  map.addSource('saved', { type: 'geojson', data: { type: 'FeatureCollection', features } });
+  map.addLayer({ id: 'saved-fill', type: 'fill', source: 'saved', paint: p.savedFill });
+  map.addLayer({ id: 'saved-line', type: 'line', source: 'saved', paint: p.savedLine });
+
+  map.addSource('draft', { type: 'geojson', data: EMPTY_FC });
+  map.addLayer({ id: 'draft-fill', type: 'fill', source: 'draft',
+                 filter: ['==', ['geometry-type'], 'Polygon'], paint: p.draftFill });
+  map.addLayer({ id: 'draft-line', type: 'line', source: 'draft',
+                 filter: ['==', ['geometry-type'], 'LineString'], paint: p.draftLine });
+
+  refreshDraft();
+}
+
+map.on('style.load', installAppLayers);
+
+function applyTheme() {
+  const dark = resolveDark();
+  const wasDark = document.documentElement.classList.contains('dark');
+  document.documentElement.classList.toggle('dark', dark);
+  if (dark !== wasDark) {
+    // diff:false forces a clean style replacement instead of MapLibre's
+    // partial-diff path, which can strand custom layers between providers.
+    map.setStyle(styleUrl(dark), { diff: false });
+  }
+  syncToggleUI();
+}
+
+function syncToggleUI() {
+  const pref = getThemePref();
+  document.querySelectorAll('.theme-toggle button').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === pref);
+  });
+}
+
+themeQuery.addEventListener('change', () => {
+  if (getThemePref() === 'system') applyTheme();
+});
+
+document.querySelectorAll('.theme-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    setThemePref(btn.dataset.theme);
+    applyTheme();
+  });
+});
+syncToggleUI();
+
+map.on('load', () => {
+  map.on('click', 'saved-fill', (e) => {
+    if (suppressNextMapClick) return;
+    if (mode === 'polygon' || mode === 'rectangle') return; // let main handler add vertex
+    if (mode === 'scissor') return; // scissor handled by main click handler
+    e.preventDefault?.();
+    clearActiveVertex();
+    const id = e.features[0].properties.id;
+    const fi = features.findIndex(f => f.properties.id === id);
+    if (fi < 0) return;
+    showDeletePopup(fi, e.lngLat);
+  });
+
+  map.on('mouseenter', 'saved-fill', () => {
+    if (!mode) map.getCanvas().style.cursor = 'pointer';
+  });
+  map.on('mouseleave', 'saved-fill', () => {
+    if (!mode) map.getCanvas().style.cursor = '';
+  });
+});
+
+map.on('click', e => {
+  if (e.defaultPrevented || suppressNextMapClick) return;
+  if (mode === 'polygon') addVertex(e.lngLat);
+  else if (mode === 'scissor') scissorAt(e.point);
+  else clearActiveVertex();
+});
+map.on('contextmenu', () => undoVertex());
+
+// ---- Drawing state ----
+function setMode(m) {
+  // Switching tools cancels any in-progress polygon draft.
+  if (mode === 'polygon' && m !== 'polygon') draft = [];
+  // Clear any preview-rect from the draft source if leaving rectangle mode.
+  if (mode === 'rectangle' && m !== 'rectangle' && map.getSource('draft')) {
+    map.getSource('draft').setData(EMPTY_FC);
+    rectStart = null;
+  }
+  mode = m;
+  // Rectangle mode needs dragPan disabled so the drag draws a rect, not a pan.
+  if (m === 'rectangle') map.dragPan.disable(); else map.dragPan.enable();
+  map.getCanvas().style.cursor = m ? 'crosshair' : '';
+  document.getElementById('tool-polygon').classList.toggle('active', m === 'polygon');
+  document.getElementById('tool-rect').classList.toggle('active', m === 'rectangle');
+  document.getElementById('tool-scissor').classList.toggle('active', m === 'scissor');
+  refreshDraft();
+}
+
+function refreshDraft() {
+  draftMarkers.forEach(m => m.remove());
+  draftMarkers = [];
+
+  const fc = { type: 'FeatureCollection', features: [] };
+  if (draft.length >= 2) {
+    fc.features.push({
+      type: 'Feature', properties: {},
+      geometry: { type: 'LineString', coordinates: draft.map(p => [p.lng, p.lat]) }
+    });
+  }
+  if (draft.length >= 3) {
+    const ring = draft.map(p => [p.lng, p.lat]);
+    ring.push([ring[0][0], ring[0][1]]);
+    fc.features.push({
+      type: 'Feature', properties: {},
+      geometry: { type: 'Polygon', coordinates: [ring] }
+    });
+  }
+  const src = map.getSource('draft');
+  if (src) src.setData(fc);
+
+  for (const p of draft) {
+    const el = document.createElement('div');
+    el.className = 'vertex';
+    el.appendChild(Object.assign(document.createElement('span'), { className: 'vertex-dot' }));
+    const m = new maplibregl.Marker({ element: el }).setLngLat([p.lng, p.lat]).addTo(map);
+    draftMarkers.push(m);
+  }
+
+  document.getElementById('status').textContent = draft.length
+    ? `Drawing: ${draft.length} vertex${draft.length === 1 ? '' : 'es'}. Press Enter to confirm.`
+    : mode === 'polygon'
+      ? `Polygon mode: click to add vertices. (${features.length} saved)`
+      : mode === 'rectangle'
+        ? `Rectangle mode: drag on the map. (${features.length} saved)`
+        : mode === 'scissor'
+          ? `Scissor mode: click an edge to insert a vertex. (${features.length} saved)`
+          : `${features.length} polygon${features.length === 1 ? '' : 's'} saved.`;
+
+  document.getElementById('tool-complete').disabled =
+    !(mode === 'polygon' && draft.length >= 3);
+}
+
+function addVertex(lngLat) {
+  if (mode !== 'polygon') return;
+  draft.push({ lng: lngLat.lng, lat: lngLat.lat });
+  refreshDraft();
+}
+function undoVertex() {
+  if (draft.length) { draft.pop(); refreshDraft(); }
+}
+function cancelDraft() {
+  draft = [];
+  setMode(null);
+}
+function confirmPolygon() {
+  if (draft.length < 3) {
+    document.getElementById('status').textContent = `Need at least 3 vertices (have ${draft.length}).`;
+    return;
+  }
+  const ring = draft.map(p => [p.lng, p.lat]);
+  ring.push([ring[0][0], ring[0][1]]);
+  const feature = {
+    type: 'Feature',
+    properties: { id: nextId++ },
+    geometry: { type: 'Polygon', coordinates: [ring] }
+  };
+  features.push(feature);
+  updateSavedSource();
+  draft = [];
+  setMode(null);
+  renderOutput();
+  refreshSavedVertices();
+}
+
+function updateSavedSource() {
+  const src = map.getSource('saved');
+  if (src) src.setData({ type: 'FeatureCollection', features });
+}
+
+function showDeletePopup(fi, lngLat) {
+  if (openPopup) openPopup.remove();
+  const f = features[fi];
+  const id = f.properties.id;
+  const vertCount = f.geometry.coordinates[0].length - 1;
+
+  const div = document.createElement('div');
+  div.style.cssText = 'font-family:-apple-system,system-ui,sans-serif;font-size:13px;min-width:140px';
+  div.innerHTML = `
+    <div style="margin-bottom:8px"><b>Polygon #${id}</b><br>
+      <span style="color:#666;font-size:11px">${vertCount} vertices</span></div>
+    <button style="padding:5px 10px;font-size:12px;cursor:pointer;background:#d33;color:#fff;border:none;border-radius:3px">Delete</button>
+  `;
+  div.querySelector('button').addEventListener('click', () => {
+    deletePolygon(id);
+    if (openPopup) { openPopup.remove(); openPopup = null; }
+  });
+
+  openPopup = new maplibregl.Popup({ closeButton: true, closeOnClick: true, maxWidth: 'none' })
+    .setLngLat(lngLat)
+    .setDOMContent(div)
+    .addTo(map);
+  openPopup.on('close', () => { openPopup = null; });
+}
+
+function deletePolygon(id) {
+  const fi = features.findIndex(f => f.properties.id === id);
+  if (fi < 0) return;
+  features.splice(fi, 1);
+  updateSavedSource();
+  renderOutput();
+  refreshSavedVertices();
+  refreshDraft();
+}
+
+function renderOutput() {
+  vertexOffsets = [];
+  let s = '{\n  "type": "FeatureCollection",\n  "features": [';
+  features.forEach((f, fi) => {
+    s += (fi === 0 ? '\n' : ',\n') + '    {\n';
+    s += '      "type": "Feature",\n';
+    s += '      "properties": ' + JSON.stringify(f.properties || {}) + ',\n';
+    s += '      "geometry": {\n';
+    s += '        "type": "' + f.geometry.type + '",\n';
+    s += '        "coordinates": [';
+    vertexOffsets[fi] = [];
+    f.geometry.coordinates.forEach((ring, ri) => {
+      s += (ri === 0 ? '\n' : ',\n') + '          [';
+      vertexOffsets[fi][ri] = [];
+      ring.forEach((coord, ci) => {
+        s += (ci === 0 ? '\n' : ',\n') + '            ';
+        const start = s.length;
+        s += '[' + coord[0] + ', ' + coord[1] + ']';
+        vertexOffsets[fi][ri][ci] = { start, end: s.length };
+      });
+      s += '\n          ]';
+    });
+    s += '\n        ]\n      }\n    }';
+  });
+  s += (features.length ? '\n  ' : '') + ']\n}';
+  document.getElementById('out').value = s;
+}
+
+function refreshSavedVertices() {
+  vertexMarkers.flat(2).forEach(m => m && m.remove());
+  vertexMarkers = [];
+  activeMarker = null;
+  features.forEach((f, fi) => {
+    if (f.geometry.type !== 'Polygon') return;
+    vertexMarkers[fi] = [];
+    f.geometry.coordinates.forEach((ring, ri) => {
+      vertexMarkers[fi][ri] = [];
+      ring.forEach((coord, ci) => {
+        if (ci === ring.length - 1) { vertexMarkers[fi][ri][ci] = null; return; }
+        const el = document.createElement('div');
+        el.className = 'saved-vertex';
+        el.appendChild(Object.assign(document.createElement('span'), { className: 'vertex-dot' }));
+        const m = new maplibregl.Marker({ element: el }).setLngLat([coord[0], coord[1]]).addTo(map);
+        vertexMarkers[fi][ri][ci] = m;
+
+        el.addEventListener('mousedown', (e) => {
+          if (!(e.metaKey || e.ctrlKey)) return; // plain click handled below
+          e.preventDefault();
+          e.stopPropagation();
+          el.classList.add('active');
+          const onMove = (ev) => {
+            const rect = canvas.getBoundingClientRect();
+            const ll = map.unproject([ev.clientX - rect.left, ev.clientY - rect.top]);
+            m.setLngLat([ll.lng, ll.lat]);
+            const r = features[fi].geometry.coordinates[ri];
+            r[ci] = [ll.lng, ll.lat];
+            if (ci === 0) r[r.length - 1] = [ll.lng, ll.lat]; // keep ring closed
+            updateSavedSource();
+          };
+          const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            renderOutput();
+            highlightVertex(fi, ri, ci);
+          };
+          document.addEventListener('mousemove', onMove);
+          document.addEventListener('mouseup', onUp);
+        });
+
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (e.metaKey || e.ctrlKey) return; // cmd-drag path
+          highlightVertex(fi, ri, ci);
+        });
+      });
+    });
+  });
+}
+
+function clearActiveVertex() {
+  if (activeMarker) activeMarker.getElement().classList.remove('active');
+  activeMarker = null;
+  const ta = document.getElementById('out');
+  if (document.activeElement !== ta) ta.setSelectionRange(0, 0);
+}
+
+function highlightVertex(fi, ri, ci) {
+  const off = vertexOffsets[fi]?.[ri]?.[ci];
+  if (!off) return;
+  const ta = document.getElementById('out');
+  ta.focus();
+  ta.setSelectionRange(off.start, off.end);
+  const before = ta.value.substring(0, off.start);
+  const lineNum = (before.match(/\n/g) || []).length;
+  const lineHeight = parseFloat(getComputedStyle(ta).lineHeight) || 14;
+  ta.scrollTop = Math.max(0, lineNum * lineHeight - ta.clientHeight / 2);
+
+  if (activeMarker) activeMarker.getElement().classList.remove('active');
+  const m = vertexMarkers[fi]?.[ri]?.[ci];
+  if (m) m.getElement().classList.add('active');
+  activeMarker = m || null;
+}
+
+// ---- Keyboard ----
+document.addEventListener('keydown', e => {
+  if (e.target && e.target.tagName === 'TEXTAREA') return;
+  if (e.metaKey || e.ctrlKey) {
+    if (e.key.toLowerCase() === 'z') { e.preventDefault(); undoVertex(); }
+    return;
+  }
+  if (e.key === 'Enter') confirmPolygon();
+  else if (e.key === 'Escape') cancelDraft();
+  else if (e.key === 'n' || e.key === 'N') { e.preventDefault(); setMode('polygon'); }
+  else if (e.key === 'r' || e.key === 'R') { e.preventDefault(); setMode('rectangle'); }
+  else if (e.key === 's' || e.key === 'S') { e.preventDefault(); setMode('scissor'); }
+});
+
+// ---- Drawing-tool buttons ----
+document.getElementById('tool-polygon').onclick  = () => setMode(mode === 'polygon' ? null : 'polygon');
+document.getElementById('tool-complete').onclick = () => confirmPolygon();
+document.getElementById('tool-rect').onclick     = () => setMode(mode === 'rectangle' ? null : 'rectangle');
+document.getElementById('tool-scissor').onclick  = () => setMode(mode === 'scissor' ? null : 'scissor');
+
+document.getElementById('load').onclick = loadFromText;
+
+function loadFromText() {
+  const text = document.getElementById('out').value.trim();
+  if (!text) { setStatus('Textarea is empty.'); return; }
+  let data;
+  try { data = JSON.parse(text); }
+  catch (err) { setStatus('Invalid JSON: ' + err.message); return; }
+
+  const incoming = [];
+  const pushPolygon = (coords, props) => incoming.push({
+    type: 'Feature',
+    properties: props || {},
+    geometry: { type: 'Polygon', coordinates: coords }
+  });
+  const ingest = (node) => {
+    if (!node || typeof node !== 'object') return;
+    if (node.type === 'FeatureCollection') node.features.forEach(ingest);
+    else if (node.type === 'Feature') ingestGeom(node.geometry, node.properties);
+    else if (node.type) ingestGeom(node, {});
+  };
+  const ingestGeom = (g, props) => {
+    if (!g) return;
+    if (g.type === 'Polygon') pushPolygon(g.coordinates, props);
+    else if (g.type === 'MultiPolygon') g.coordinates.forEach(c => pushPolygon(c, props));
+    else if (g.type === 'GeometryCollection') g.geometries.forEach(x => ingestGeom(x, props));
+  };
+  ingest(data);
+
+  if (!incoming.length) { setStatus('No polygons found in input.'); return; }
+
+  features.length = 0;
+  let maxId = 0;
+  for (const f of incoming) {
+    f.properties = f.properties || {};
+    if (f.properties.id == null || typeof f.properties.id !== 'number') {
+      f.properties.id = features.length + 1;
+    }
+    if (f.properties.id > maxId) maxId = f.properties.id;
+    features.push(f);
+  }
+  nextId = maxId + 1;
+  updateSavedSource();
+  draft = [];
+  refreshDraft();
+  renderOutput();
+  refreshSavedVertices();
+
+  let minLng = Infinity, minLat = Infinity, maxLng = -Infinity, maxLat = -Infinity;
+  for (const f of features) {
+    for (const ring of f.geometry.coordinates) {
+      for (const [lng, lat] of ring) {
+        if (lng < minLng) minLng = lng; if (lng > maxLng) maxLng = lng;
+        if (lat < minLat) minLat = lat; if (lat > maxLat) maxLat = lat;
+      }
+    }
+  }
+  if (isFinite(minLng)) {
+    map.fitBounds([[minLng, minLat], [maxLng, maxLat]], { padding: 30, duration: 0 });
+  }
+  setStatus(`Loaded ${incoming.length} polygon${incoming.length === 1 ? '' : 's'}.`);
+}
+
+function setStatus(msg) {
+  document.getElementById('status').textContent = msg;
+  clearTimeout(setStatus._t);
+  setStatus._t = setTimeout(() => refreshDraft(), 2000);
+}
+
+document.getElementById('copy').onclick = async () => {
+  await navigator.clipboard.writeText(document.getElementById('out').value || '{}');
+  const s = document.getElementById('status');
+  const prev = s.textContent;
+  s.textContent = 'Copied to clipboard.';
+  setTimeout(() => { s.textContent = prev; }, 1200);
+};
+document.getElementById('download').onclick = () => {
+  const blob = new Blob([document.getElementById('out').value || '{}'], { type: 'application/geo+json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'polygons.geojson';
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+document.getElementById('clear').onclick = () => {
+  if (!features.length && !draft.length) return;
+  if (!confirm('Clear all polygons?')) return;
+  features.length = 0;
+  updateSavedSource();
+  draft = [];
+  refreshDraft();
+  renderOutput();
+  refreshSavedVertices();
+};
+
+renderOutput();
+</script>
+</body>
+</html>

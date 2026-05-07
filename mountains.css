@@ -10,7 +10,7 @@ html, body {
     position: relative;
     overflow: hidden;
     background-color: #00002e;
-    background-image: url('banner/sky.png');
+    background-image: url('assets/home/mountian-parralax/sky.png');
     background-size: auto 100%;
     background-position: center;
     background-repeat: repeat-x;
@@ -67,7 +67,7 @@ html, body {
 
 .sky-top {
     z-index: 1;
-    background-image: url('banner/sky_top.png');
+    background-image: url('assets/home/mountian-parralax/sky_top.png');
     background-repeat: repeat-x;
     background-position: top;
     background-size: auto 100%;
@@ -75,7 +75,7 @@ html, body {
 
 .stars {
     z-index: 2;
-    background-image: url('banner/stars.png');
+    background-image: url('assets/home/mountian-parralax/stars.png');
     background-repeat: repeat-x;
     background-position: top;
     background-size: auto 50%;
@@ -89,11 +89,11 @@ html, body {
 }
 
 #clouds1 {
-    background-image: url('banner/clouds.png');
+    background-image: url('assets/home/mountian-parralax/clouds.png');
 }
 
 #clouds2 {
-    background-image: url('banner/clouds2.png');
+    background-image: url('assets/home/mountian-parralax/clouds2.png');
     opacity: 0.7;
     top: 20px;
 }
@@ -102,7 +102,7 @@ html, body {
     z-index: 3;
     bottom: 0;
     top: auto;
-    background-image: url('banner/mountians.png');
+    background-image: url('assets/home/mountian-parralax/mountians.png');
     background-repeat: repeat-x;
     background-position: bottom;
     background-size: auto 100%;
@@ -112,7 +112,7 @@ html, body {
     z-index: 2;
     bottom: -30px;
     top: auto;
-    background-image: url('banner/mountians2.png');
+    background-image: url('assets/home/mountian-parralax/mountians2.png');
     background-repeat: repeat-x;
     background-position: 0px bottom;
     background-size: auto 100%;
@@ -123,7 +123,7 @@ html, body {
     z-index: 4;
     bottom: 0;
     top: auto;
-    background-image: url('banner/bg_houses.png');
+    background-image: url('assets/home/mountian-parralax/bg_houses.png');
     background-repeat: repeat-x;
     background-position: bottom;
     background-size: auto 100%;
@@ -133,7 +133,7 @@ html, body {
     z-index: 6;
     bottom: 0;
     top: auto;
-    background-image: url('banner/front_houses.png');
+    background-image: url('assets/home/mountian-parralax/front_houses.png');
     background-repeat: repeat-x;
     background-position: bottom;
     background-size: auto 100%;
@@ -143,7 +143,7 @@ html, body {
     z-index: 7;
     bottom: 0;
     top: auto;
-    background-image: url('banner/ground.png');
+    background-image: url('assets/home/mountian-parralax/ground.png');
     background-repeat: repeat-x;
     background-position: bottom;
     background-size: auto 100%;
