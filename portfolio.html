@@ -30,6 +30,7 @@
     <link rel="preload" as="image" href="assets/portfolio/PhotoStat-Dark.webp">
     <link rel="preload" as="image" href="assets/portfolio/SentryRewind-Dark.webp">
     <link rel="preload" as="image" href="assets/portfolio/TRMNL-Washington-Ferries-Dark.webp">
+    <link rel="preload" as="image" href="assets/portfolio/TRMNL-Window-Season-Dark.webp">
     <link rel="preload" as="image" href="assets/portfolio/GeoJSON-Dark.webp">
     
     <link rel="stylesheet" href="portfolio.css">
@@ -38,14 +39,24 @@
     <main class="content">
         <div class="nav-bar">
             <span class="back-nav"><a href="/" class="back-home">← Back to home</a></span>
-            <a href="mailto:za.colem@gmail.com" class="contact-link animated-underline-link">Contact Me ⧉</a>
+            <div class="nav-links">
+                <a href="mailto:za.colem@gmail.com" class="contact-link animated-underline-link">Contact Me ⧉</a>
+                <a href="https://www.linkedin.com/in/zacharytcoleman/" class="contact-link animated-underline-link">LinkedIn ⧉</a>
+            </div>
         </div>
         <div class="page-header">
             <h1 class="page-title">Portfolio</h1>
+            <p class="page-intro">I'm a software developer in the Seattle area. I build apps, fix platform bugs in open-source engines, and make tools I want to use. Currently looking for work in San Francisco or Seattle.</p>
+            <nav class="section-chips" aria-label="Jump to section">
+                <span class="section-chip-wrapper"><a href="#apps" class="section-chip">iOS Apps ↓</a></span>
+                <span class="section-chip-wrapper"><a href="#open-source" class="section-chip">Open Source ↓</a></span>
+                <span class="section-chip-wrapper"><a href="#projects" class="section-chip">Projects ↓</a></span>
+                <span class="section-chip-wrapper"><a href="#experiments" class="section-chip">Experiments ↓</a></span>
+            </nav>
         </div>
         <!-- Apps Section -->
-        <section class="projects-section">
-            <h2>Independent iOS Apps</h2>
+        <section id="apps" class="projects-section">
+            <h2>Independent iOS Apps<a href="#top" class="section-return" aria-label="Return to top of portfolio">↑</a></h2>
             <div class="projects-grid">
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="pixellate">
@@ -118,77 +129,9 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section class="projects-section">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card-wrapper">
-                    <div class="project-card" data-project="sentry-rewind">
-                        <div class="project-image">
-                            <img src="assets/portfolio/SentryRewind.webp" alt="An image of Sentry Rewind. It is displaying a forward facing view of a car driving on an interstate during the day.">
-                        </div>
-                        <div class="project-info">
-                            <h3>Sentry Rewind</h3>
-                            <p>A desktop app for viewing Tesla dashcam footage, with synchronized 6-camera playback, a calendar view, and a map view. Works with any Tesla-formatted USB drive.</p>
-                            <div class="platform-badges">
-                                <span class="platform-badge">macOS</span>
-                                <span class="platform-badge">Windows</span>
-                            </div>
-                            <div class="project-meta">
-                                <span class="first-worked">Apr. 2026</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/ztc0611/sentry-rewind" class="btn-primary">View on Github ⧉</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-wrapper">
-                    <div class="project-card" data-project="trmnl-ferries">
-                        <div class="project-image">
-                            <img src="assets/portfolio/TRMNL-Washington-Ferries.webp" alt="An image depicting the project, a TRMNL display widget. It is a monochrome interface depicting a map and schedules of departing times for both directions between Seattle, WA and Bainbridge Island, WA.">
-                        </div>
-                        <div class="project-info">
-                            <h3>TRMNL Washington State Ferries Widget</h3>
-                            <p>A widget/"recipe" for the <a href="https://trmnl.com" class="inline-link animated-underline-link">TRMNL ⧉</a> ambient e-ink displays. Pulls real time data from the WSDOT Rest API including daily schedule, ship locations, cancellations, and service alerts.</p>
-                            <div class="platform-badges">
-                                <span class="platform-badge">TRMNL</span>
-                            </div>
-                            <div class="project-meta">
-                                <span class="first-worked">May 2026</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://trmnl.com/recipes/299929" class="btn-primary">View on TRMNL.com ⧉</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-wrapper">
-                    <div class="project-card" data-project="printing-the-dream">
-                        <div class="project-image">
-                            <img src="assets/portfolio/PrintingTheDream.webp" alt="A picture of a Nintendo Switch 2 on a desk showing Tomodachi Life: Living the Dream's image editor. A Raspberry Pi Pico with a small screen and buttons attached is plugged into the bottom USB port. An image of an octopus is being drawn on the Switch 2 by the Pico, which is displaying a thumbnail and progress bar.">
-                        </div>
-                        <div class="project-info">
-                            <h3>Printing The Dream</h3>
-                            <p>A tool for importing images into <em>Tomodachi Life: Living the Dream</em> with zero console modification. A Raspberry Pi Pico emulates a wired controller to draw images in the in-game custom item creator. Reverse engineered how to send fastest inputs without game's cursor losing tracking. Works on Switch 1 and Switch 2.</p>
-                            <div class="project-meta">
-                                <span class="first-worked">Apr. 2026</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://github.com/ztc0611/printing-the-dream" class="btn-primary">View on Github ⧉</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Open Source Contributions Section -->
-        <div id="open-source"></div>
-        <section class="commits-section">
-            <h2>Open Source</h2>
+        <section id="open-source" class="commits-section">
+            <h2>Open Source<a href="#top" class="section-return" aria-label="Return to top of portfolio">↑</a></h2>
             <h3>Godot Engine</h3>
             <p class="project-description"><a href="https://godotengine.org" class="inline-link animated-underline-link">Godot Engine ⧉</a> is a free and open-source game engine used to create 2D and 3D games across all major platforms. It has received donations from Microsoft, Meta Reality Labs, Epic Games, Mozilla, and JetBrains. Parts of its code have been used by Tesla, Sega, and Electronic Arts.</p>
             <div class="commits-list">
@@ -274,9 +217,97 @@
             </div>
         </section>
 
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <h2>Projects<a href="#top" class="section-return" aria-label="Return to top of portfolio">↑</a></h2>
+            <div class="projects-grid">
+                <div class="project-card-wrapper">
+                    <div class="project-card" data-project="sentry-rewind">
+                        <div class="project-image">
+                            <img src="assets/portfolio/SentryRewind.webp" alt="An image of Sentry Rewind. It is displaying a forward facing view of a car driving on an interstate during the day.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Sentry Rewind</h3>
+                            <p>A desktop app for viewing Tesla dashcam footage, with synchronized 6-camera playback, a calendar view, and a map view. Works with any Tesla-formatted USB drive.</p>
+                            <div class="platform-badges">
+                                <span class="platform-badge">macOS</span>
+                                <span class="platform-badge">Windows</span>
+                            </div>
+                            <div class="project-meta">
+                                <span class="first-worked">Apr. 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/ztc0611/sentry-rewind" class="btn-primary">View on Github ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper">
+                    <div class="project-card" data-project="printing-the-dream">
+                        <div class="project-image">
+                            <img src="assets/portfolio/PrintingTheDream.webp" alt="A picture of a Nintendo Switch 2 on a desk showing Tomodachi Life: Living the Dream's image editor. A Raspberry Pi Pico with a small screen and buttons attached is plugged into the bottom USB port. An image of an octopus is being drawn on the Switch 2 by the Pico, which is displaying a thumbnail and progress bar.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Printing The Dream</h3>
+                            <p>A tool for importing images into <em>Tomodachi Life: Living the Dream</em>. A Raspberry Pi Pico emulates a wired controller to draw images in the in-game custom item creator.</p>
+                            <p>Reverse engineered how to send fastest inputs without game's cursor losing tracking. Works on Switch 1 and Switch 2. Zero console modification required.</p>
+                            <div class="project-meta">
+                                <span class="first-worked">Apr. 2026 - May 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/ztc0611/printing-the-dream" class="btn-primary">View on Github ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>TRMNL Plugins</h3>
+            <p class="project-description">Widgets/"recipes" I've built for the <a href="https://trmnl.com" class="inline-link animated-underline-link">TRMNL ⧉</a> ambient e-ink displays.</p>
+            <div class="projects-grid">
+                <div class="project-card-wrapper">
+                    <div class="project-card" data-project="trmnl-ferries">
+                        <div class="project-image">
+                            <img src="assets/portfolio/TRMNL-Washington-Ferries.webp" alt="An image depicting the project, a TRMNL display widget. It is a monochrome interface depicting a map and schedules of departing times for both directions between Seattle, WA and Bainbridge Island, WA.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Washington State Ferries</h3>
+                            <p>Pulls real time data from the WSDOT Rest API including daily schedule, ship locations, cancellations, and service alerts. Supports every active ferry route, customizable on install.</p>
+                            <p>I designed custom tooling for creating map images, validation of UX for various API states, and fitting into TRMNL's file size and bandwidth limitations.</p>
+                            <div class="project-meta">
+                                <span class="first-worked">Apr. 2026 - May 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://trmnl.com/recipes/299929" class="btn-primary">View on TRMNL.com ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper">
+                    <div class="project-card" data-project="trmnl-window-season">
+                        <div class="project-image">
+                            <img src="assets/portfolio/TRMNL-Window-Season.webp" alt="An image depicting the project, a TRMNL display widget. It is a monochrome interface advising whether to open or close windows for overnight cooling, with simplified temperature and humidity readings.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Window Season</h3>
+                            <p>For climates that usually lack air conditioning, a schedule of when to open your windows for cooling. Uses Open-Meteo's feels-like (apparent) temperature so humidity and wind are factored in. Also handles rain and AQI.</p>
+                            <div class="project-meta">
+                                <span class="first-worked">May 2026</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://trmnl.com/recipes/304759" class="btn-primary">View on TRMNL.com ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Experiments Section -->
-        <section class="projects-section">
-            <h2>Experiments</h2>
+        <section id="experiments" class="projects-section">
+            <h2>Experiments<a href="#top" class="section-return" aria-label="Return to top of portfolio">↑</a></h2>
             <div class="projects-grid">
                 <div class="project-card-wrapper">
                     <div class="project-card" data-project="geojson-drawer">
@@ -305,7 +336,7 @@
                             <h3>PhotoStat</h3>
                             <p>A small project that can show stats of how many photos the user has taken by months or years, accessing iCloud Photos on macOS.</p>
                             <div class="project-meta">
-                                <span class="first-worked">Aug. 2025</span>
+                                <span class="first-worked">Aug. 2025 - present</span>
                             </div>
                         </div>
                     </div>
@@ -337,7 +368,7 @@
                         </div>
                         <div class="project-info">
                             <h3>Base4096</h3>
-                            <p>An experiment in data compression for when character count matters more than total bytes. Useful for sending small pieces of data on character-capped platforms such as X and Discord.</p>
+                            <p>An experiment in data compression for when character count matters more than total bytes. Useful for sending small pieces of data on character-capped platforms such as Twitter/X and Discord.</p>
                             <div class="project-meta">
                                 <span class="first-worked">Feb. 2025</span>
                             </div>
@@ -351,29 +382,6 @@
             </div>
         </section>
 
-        <!-- Games Section -->
-        <section class="projects-section">
-            <h2>Games</h2>
-            <div class="projects-grid">
-                <div class="project-card-wrapper">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/portfolio/Northward.webp" alt="Northward Game Demo Screenshots. Three are shown. Left: An overworld map of a house interior. Middle: A battle screen. Right: The title screen.">
-                        </div>
-                        <div class="project-info">
-                            <h3>Northward Demo</h3>
-                            <p>A demo made as an independent study in game design. Playable in web browser, see details on the itch.io page.</p>
-                            <div class="project-meta">
-                                <span class="first-worked">Oct. 2021 - May 2022</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://zachcoleman.itch.io/northward-demo" class="btn-primary">View on Itch.io ⧉</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <span class="back-nav" style="margin-top: 60px;"><a href="/" class="back-home">← Back to home</a></span>
     </main>
 </body>

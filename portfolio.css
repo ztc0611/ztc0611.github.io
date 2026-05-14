@@ -8,6 +8,11 @@ html, body {
     background-color: var(--bg-primary);
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 32px;
+}
+
 body {
     background: var(--bg-primary);
     padding-top: 60px;
@@ -28,6 +33,16 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
+}
+
+.nav-bar .back-nav {
+    margin-bottom: 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .contact-link {
@@ -54,13 +69,73 @@ body {
     line-height: 1.1;
 }
 
+.page-intro {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 20px 0 0 0;
+    font-family: Georgia, serif;
+}
+
+.section-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.section-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Merriweather', serif;
+}
+
+.section-chip-wrapper {
+    display: inline-flex;
+}
+
+.section-chip-wrapper:hover .section-chip {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.section-return {
+    visibility: hidden;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s ease;
+}
+
+section:target .section-return {
+    visibility: visible;
+}
+
+.section-return:hover {
+    color: var(--accent);
+}
+
+.page-intro .availability {
+    font-style: italic;
+}
+
 /* Projects Section */
 .projects-section {
     margin-bottom: 120px;
 }
 
 .projects-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--text-tertiary);
     margin-bottom: 48px;
     font-weight: 500;
@@ -68,6 +143,10 @@ body {
     text-transform: uppercase;
     font-family: 'Merriweather', serif;
     text-align: left;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .projects-grid {
@@ -275,7 +354,7 @@ body {
 }
 
 .commits-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: var(--text-tertiary);
     margin-bottom: 16px;
     font-weight: 500;
@@ -283,32 +362,38 @@ body {
     text-transform: uppercase;
     font-family: 'Merriweather', serif;
     text-align: left;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
 }
 
-.commits-section h3 {
-    font-size: 2rem;
+.commits-section > h3,
+.projects-section > h3 {
+    font-size: 1.5rem;
     color: var(--accent);
-    margin-bottom: 48px;
-    margin-top: 80px;
+    margin-bottom: 32px;
+    margin-top: 72px;
     font-family: Georgia, serif;
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-weight: 500;
+    letter-spacing: 0;
 }
 
-.commits-section h3:first-of-type {
+.commits-section > h3:first-of-type {
     margin-top: 0;
 }
 
-.commits-section h3:has(+ .project-description) {
-    margin-bottom: 20px;
+.commits-section > h3:has(+ .project-description),
+.projects-section > h3:has(+ .project-description) {
+    margin-bottom: 14px;
 }
 
-.commits-section .project-description {
+.commits-section .project-description,
+.projects-section .project-description {
     color: var(--text-tertiary);
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 32px;
-    max-width: 800px;
 }
 
 .inline-link {
@@ -508,6 +593,16 @@ code {
     .project-card[data-project="trmnl-ferries"] .project-image img {
         opacity: 0;
     }
+
+    .project-card[data-project="trmnl-window-season"] .project-image {
+        background-image: url('assets/portfolio/TRMNL-Window-Season-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .project-card[data-project="trmnl-window-season"] .project-image img {
+        opacity: 0;
+    }
 }
 
 /* Larger screens — let project cards breathe a bit */
@@ -603,13 +698,14 @@ code {
 
     .projects-section h2,
     .commits-section h2 {
-        font-size: 1.2rem;
+        font-size: 1.45rem;
         margin-bottom: 32px;
     }
 
-    .commits-section h3 {
-        font-size: 1.6rem;
-        margin-bottom: 32px;
+    .commits-section > h3,
+    .projects-section > h3 {
+        font-size: 1.2rem;
+        margin-bottom: 28px;
     }
 
     .projects-grid {
@@ -672,6 +768,10 @@ code {
         margin-bottom: 24px;
     }
 
+    .nav-links {
+        gap: 14px;
+    }
+
     .back-home,
     .contact-link {
         font-size: 0.85rem;
@@ -683,7 +783,7 @@ code {
 
     .projects-section h2,
     .commits-section h2 {
-        font-size: 1rem;
+        font-size: 1.2rem;
         margin-bottom: 24px;
     }
 
@@ -691,9 +791,10 @@ code {
         margin-bottom: 60px;
     }
 
-    .commits-section h3 {
-        font-size: 1.4rem;
-        margin-bottom: 24px;
+    .commits-section > h3,
+    .projects-section > h3 {
+        font-size: 1rem;
+        margin-bottom: 20px;
     }
 
     .projects-grid {
