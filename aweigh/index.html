@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="darkreader-lock">
+    <title>Aweigh — Prototype</title>
+
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ztc0611.github.io/aweigh/">
+    <meta property="og:title" content="Aweigh — Prototype">
+    <meta property="og:description" content="Aweigh — Washington State Ferries, made with SwiftUI. An iOS/watchOS prototype.">
+    <meta property="og:image" content="https://ztc0611.github.io/assets/aweigh/og-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Aweigh — Washington State Ferries, made with SwiftUI. iPhone schedule view alongside an Apple Watch showing the next ferry.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ztc0611.github.io/assets/aweigh/og-card.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Bezel first so the watch frame paints while the video is still streaming -->
+    <link rel="preload" as="image" href="../assets/aweigh/watchos-frame.webp" fetchpriority="high">
+
+    <link rel="stylesheet" href="style.css?v=20260530a">
+</head>
+<body>
+    <div class="page-bg" aria-hidden="true"></div>
+
+    <header class="page-nav">
+        <a href="/portfolio.html" class="back-link" aria-label="Return to portfolio">
+            <span class="back-arrow">←</span>
+            <span>Portfolio</span>
+        </a>
+        <a href="mailto:za.colem@gmail.com" class="contact-link">Contact ⧉</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-backdrop" id="hero-backdrop" aria-hidden="true"></div>
+            <div class="hero-text">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>Prototype · TestFlight ~Jun 2026</span>
+                </div>
+                <h1 class="title">
+                    <span class="title-line">Aweigh.</span>
+                </h1>
+                <p class="tagline">Washington State Ferries<img class="title-flag" src="../assets/aweigh/wa-flag.webp" alt="Washington State flag" title="Washington State">, made with SwiftUI.</p>
+                <p class="meta">An iOS/watchOS prototype by <a href="/portfolio.html">Zachary Coleman</a>.</p>
+            </div>
+
+            <div class="watch-stage">
+                <div class="watch-device">
+                    <div class="watch-screen">
+                        <video muted loop playsinline preload="auto" poster="../assets/aweigh/watchos-poster.webp">
+                            <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
+                            <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
+                        </video>
+                        <video muted playsinline preload="auto" aria-hidden="true" poster="../assets/aweigh/watchos-poster.webp">
+                            <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
+                            <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
+                        </video>
+                        <div class="watch-loader" aria-hidden="true">
+                            <div class="watch-loader-spinner">
+                                <div></div><div></div><div></div>
+                                <div></div><div></div><div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="Video of an Apple Watch displaying the Aweigh app interface being navigated, on the Anacortes to Friday Harbor route. It shows the next sailing, then full day schedule. The user then switches route to Orcas Island to Anacortes and presses confirm, the app displays the updated schedule." fetchpriority="high" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <section class="prose">
+            <h2>The Idea</h2>
+            <p>
+                Aweigh is an app for the largest ferry system in the United States, built with native frameworks. Every screen is designed for the device it's on, and for the way you actually use a ferry: a glance from the wrist when you're rolling up to the terminal, detail on the phone when you're planning a day around it.
+            </p>
+            <p>
+
+            </p>
+        </section>
+
+        <section class="ios-section">
+            <h2>Watch and iPhone.</h2>
+            <p class="ios-section-caption">The full schedule on the wrist, with live capacity, vessel tracking, and terminal cameras a tap away on the phone.</p>
+
+            <div class="ios-hero-stage">
+                <div class="device-pair">
+                    <div class="ios-device ios-device-hero">
+                        <div class="ios-screen">
+                            <video autoplay muted loop playsinline preload="auto" poster="../assets/aweigh/ios-schedule-poster.webp">
+                                <source src="../assets/aweigh/ios-schedule.hevc.mp4" type="video/mp4; codecs=hvc1">
+                                <source src="../assets/aweigh/ios-schedule.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="Video of an iPhone displaying the schedule of Seattle to Bainbridge island, then switching to be Bainbridge Island to Seattle, before returning." decoding="async">
+                    </div>
+                    <div class="watch-device watch-device-secondary">
+                        <div class="watch-screen">
+                            <img src="../assets/aweigh/watchos-schedule.webp" alt="Apple Watch showing schedule from Clinton to Mukilteo: 12:00 PM Tokitae with 66/141 spots, 12:30 PM Kitsap with 120/120 spots, 1:00 PM departure." loading="lazy">
+                        </div>
+                        <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ios-section-divider">
+                <h3 class="ios-section-subhead">Go further on iPhone.</h3>
+                <p class="ios-section-subhead-caption">Live vessel positions and terminal cameras for when the wrist isn't enough.</p>
+            </div>
+
+            <div class="ios-feature-grid">
+                <div class="ios-feature">
+                    <div class="ios-device">
+                        <div class="ios-screen">
+                            <img src="../assets/aweigh/ios-ferry-map.webp" alt="iPhone showing Ferry Map: live map of the Puget Sound with the M/V Puyallup en route, vessel details card with speed, heading, and ETA." loading="lazy">
+                        </div>
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
+                    </div>
+                    <h3>Ferry Map</h3>
+                    <p>Live ferry positions across the Sound. Speed, heading, ETA, and which terminals they're tied to.</p>
+                </div>
+
+                <div class="ios-feature">
+                    <div class="ios-device">
+                        <div class="ios-screen">
+                            <img src="../assets/aweigh/ios-camera-anacortes.webp" alt="iPhone showing Cameras: WSDOT terminal camera feeds for Anacortes, with filter chips per island." loading="lazy">
+                        </div>
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
+                    </div>
+                    <h3>Cameras</h3>
+                    <p>WSDOT camera feeds can also be viewed, allowing you to see wait times before you arrive.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="one-more-thing">
+            <div class="omt-content">
+                <span class="omt-eyebrow">One more thing.</span>
+                <h2>Delay cascades.</h2>
+                <p>The official WSDOT app shows a basic ETA for an underway sailing, and leaves you to correlate vessel positions, alerts, and schedule pressure in your head. Aweigh does that math automatically.</p>
+                <p>When a vessel runs late enough on one sailing, that lateness propagates forward through its rotation, partially absorbed by scheduling slack. A custom server monitors vessel locations in an attempt to predict how the delays will cascade through the day.<p>
+                <p>Each sailing surfaces a tiered punctuality classification with banners like <em class="omt-late">EXPECT 12m late</em> or <em>DEPARTED · ON TIME</em>.</p>
+                <p class="omt-footnote">Experimental. Toggleable against raw WSF schedule.</p>
+            </div>
+            <div class="omt-device-stage">
+                <div class="ios-device">
+                    <div class="ios-screen">
+                        <img src="../assets/aweigh/ios-delay-tracking.webp" alt="iPhone showing predicted delay: an 11-minute late prediction for the Cathlamet sailing from Vashon Island to Southworth, with a 'Why?' explainer noting the vessel is running behind on an earlier sailing today." loading="lazy">
+                    </div>
+                    <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <section class="status-card">
+            <h2>Status</h2>
+            <ol class="timeline">
+                <li class="timeline-done">
+                    <span class="timeline-marker"></span>
+                    <div>
+                        <h3>Working prototype</h3>
+                        <p>Functional on Apple Watch. Real WSDOT data, real schedule pulls.</p>
+                    </div>
+                </li>
+                <li class="timeline-next">
+                    <span class="timeline-marker"></span>
+                    <div>
+                        <h3>Public TestFlight</h3>
+                        <p>Planned for around June 2026. Want in? <a href="mailto:za.colem@gmail.com?subject=Aweigh%20TestFlight">Let me know.</a></p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <aside class="disclaimer">
+            <p>
+                Schedules, vessel positions, and camera feeds are sourced from <a href="https://wsdot.wa.gov/" class="disclaimer-link">WSDOT</a>'s public APIs. Aweigh is an independent prototype. Not affiliated with, endorsed by, or associated with the Washington State Department of Transportation or Washington State Ferries. <em>Washington State Ferries</em>, <em>WSF</em>, vessel names, and related marks belong to their respective owners.
+            </p>
+        </aside>
+    </main>
+
+    <script>
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const fadeWindow = 0.5;
+            const holdMs = 3000;  // freeze on the last frame this long before re-looping
+
+            // ---------------------------------------------------------
+            // San Juans map backdrop — keyed off the video's currentTime
+            // ---------------------------------------------------------
+            // Cues in seconds, derived from the ACTUAL per-frame PTS of the
+            // encoded watchos.mp4 (extracted via `ffprobe -show_entries frame=pts_time`).
+            // The source is variable-framerate so frame N is NOT at N/avg_fps;
+            // these are the real playback timestamps as the browser sees them.
+            //   Frame 252 = 5.981s   button reacts (fade-in begins)
+            //   Frame 325 = 6.658s   picker finishes opening (fade-in complete)
+            //   Frame 376 = 7.902s   FH → FH (no route)
+            //   Frame 387 = 8.077s   Lopez → FH
+            //   Frame 402 = 8.361s   Orcas → FH
+            //   Frame 526 = 11.242s  Orcas → Anacortes
+            //   Frame 630 = 13.076s  route picker closes (fade-out complete)
+            const FADE_IN_START = 5.981;
+            const FADE_IN_END = 6.658;
+            const FADE_OUT_START = 12.5;
+            const FADE_OUT_END = 13.076;
+
+            function backdropOpacityForTime(t) {
+                // Always-on for now. Restore the time-gated fade by uncommenting:
+                // if (t < FADE_IN_START) return 0;
+                // if (t < FADE_IN_END) return (t - FADE_IN_START) / (FADE_IN_END - FADE_IN_START);
+                // if (t < FADE_OUT_START) return 1;
+                // if (t < FADE_OUT_END) return 1 - (t - FADE_OUT_START) / (FADE_OUT_END - FADE_OUT_START);
+                // return 0;
+                return 1;
+            }
+
+            function activeRouteForTime(t) {
+                // Thresholds shifted -0.2s relative to the on-screen cue PTS so
+                // the route changes feel timed to the watch animation despite
+                // the 0.3s CSS opacity transition.
+                if (t < 7.702) return 'anacortes-friday-harbor';
+                if (t < 7.877) return null; // FH → FH transition; no route highlighted
+                if (t < 8.161) return 'lopez-friday-harbor';
+                if (t < 11.042) return 'orcas-friday-harbor';
+                return 'orcas-anacortes';
+            }
+
+            const ROUTES = {
+                'anacortes-friday-harbor': [
+                    [-122.67797316062789, 48.506542362941644], [-122.67250845412997, 48.516023886296495],
+                    [-122.75750088274263, 48.52947269282009], [-122.8256796019071, 48.52930036308521],
+                    [-122.86133030620307, 48.580800828380745], [-122.88327624152518, 48.570833606869485],
+                    [-122.87812999477507, 48.580247213807866], [-122.88902792906903, 48.58184935531747],
+                    [-122.90870475487733, 48.561017554593036], [-122.93716047219995, 48.544987252110246],
+                    [-122.97560596262525, 48.54178058214663], [-122.99770455160983, 48.54518766223745],
+                    [-123.01041880828592, 48.54298310719054], [-123.01495961424139, 48.5363688658947],
+                ],
+                'lopez-friday-harbor': [
+                    [-122.88327624152518, 48.570833606869485], [-122.87812999477507, 48.580247213807866],
+                    [-122.88902792906903, 48.58184935531747], [-122.90870475487733, 48.561017554593036],
+                    [-122.93716047219995, 48.544987252110246], [-122.97560596262525, 48.54178058214663],
+                    [-122.99770455160983, 48.54518766223745], [-123.01041880828592, 48.54298310719054],
+                    [-123.01495961424139, 48.5363688658947],
+                ],
+                'orcas-friday-harbor': [
+                    [-122.94388274910989, 48.597657805623896], [-122.9459796981055, 48.592739200111595],
+                    [-122.9631622482573, 48.5971511686283], [-122.97953620781362, 48.5944772943092],
+                    [-122.99692090561433, 48.5903325094352], [-123.01976358993366, 48.586989693324654],
+                    [-123.02744520058997, 48.58164072759203], [-123.02299795231534, 48.573482464904515],
+                    [-123.01248627457545, 48.56946972158866], [-123.00278318743072, 48.5646540092487],
+                    [-122.99651661031656, 48.5566268029354], [-122.99368654323295, 48.54806304542424],
+                    [-123.00258103978186, 48.54418211561], [-123.01086909338446, 48.54177311293154],
+                    [-123.01511419401018, 48.53548239871614],
+                ],
+                'orcas-anacortes': [
+                    [-122.94362658378358, 48.5973454923882], [-122.94099182185982, 48.59072359306842],
+                    [-122.93045277415575, 48.58845800721318], [-122.91530289308182, 48.58863228665459],
+                    [-122.90089343618536, 48.586352902305265], [-122.87612667408156, 48.581821237098325],
+                    [-122.858473769178, 48.57580743866197], [-122.84622212622223, 48.56587003027113],
+                    [-122.83726393567395, 48.553314722823245], [-122.83372647599519, 48.54239587618093],
+                    [-122.8271395711802, 48.530794383687095], [-122.80777407102454, 48.5274791832224],
+                    [-122.78050428509113, 48.52686846472713], [-122.7590636985904, 48.52557867282155],
+                    [-122.72470818497843, 48.525300682841674], [-122.70692354197817, 48.526173162589146],
+                    [-122.68927063707463, 48.52643490358244], [-122.67543813696346, 48.525475179993606],
+                    [-122.67122251788176, 48.51989097292548], [-122.6782046369857, 48.50662601364522],
+                ],
+            };
+
+            const TERMINALS = {
+                anacortes: { lon: -122.6798, lat: 48.5065 },
+                'friday-harbor': { lon: -123.0150, lat: 48.5365 },
+                orcas: { lon: -122.9439, lat: 48.5975 },
+                lopez: { lon: -122.8833, lat: 48.5708 },
+            };
+
+            const ROUTE_ENDPOINTS = {
+                'anacortes-friday-harbor': ['anacortes', 'friday-harbor'],
+                'lopez-friday-harbor': ['lopez', 'friday-harbor'],
+                'orcas-friday-harbor': ['orcas', 'friday-harbor'],
+                'orcas-anacortes': ['orcas', 'anacortes'],
+            };
+
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+
+            async function setupBackdrop() {
+                const mount = document.getElementById('hero-backdrop');
+                if (!mount) return null;
+
+                const [svgText, projResp] = await Promise.all([
+                    fetch('../assets/aweigh/sanjuans.svg').then(r => r.text()),
+                    fetch('../assets/aweigh/sanjuans-projection.json').then(r => r.json()),
+                ]);
+
+                mount.innerHTML = svgText;
+                const svg = mount.querySelector('svg');
+                if (!svg) return null;
+
+                svg.classList.add('sanjuans-map');
+                // Override the SVG's baked-in "meet" so it FILLS the backdrop
+                // (cropping the wider axis) instead of letterboxing. Zooms the
+                // islands so they're readable at small container heights.
+                svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+
+                // Projection: same math as build-sanjuans-svg.js
+                const proj = projResp;
+                const project = (lon, lat) => [
+                    (lon - proj.view.west) * proj.lonScale * proj.scale,
+                    (proj.view.north - lat) * proj.scale,
+                ];
+
+                // Draw routes as <path> inside .map-routes
+                const routesGroup = svg.querySelector('.map-routes');
+                const routePaths = {};
+                if (routesGroup) {
+                    for (const [key, coords] of Object.entries(ROUTES)) {
+                        const path = document.createElementNS(SVG_NS, 'path');
+                        const d = coords.map(([lon, lat], i) => {
+                            const [x, y] = project(lon, lat);
+                            return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
+                        }).join('');
+                        path.setAttribute('d', d);
+                        path.setAttribute('data-route', key);
+                        routesGroup.appendChild(path);
+                        routePaths[key] = path;
+                    }
+                }
+
+                // Draw terminals as small green circles inside .map-terminals
+                const terminalsGroup = svg.querySelector('.map-terminals');
+                const terminalCircles = {};
+                if (terminalsGroup) {
+                    for (const [name, { lon, lat }] of Object.entries(TERMINALS)) {
+                        const [x, y] = project(lon, lat);
+                        const c = document.createElementNS(SVG_NS, 'circle');
+                        c.setAttribute('cx', x.toFixed(2));
+                        c.setAttribute('cy', y.toFixed(2));
+                        c.setAttribute('r', '6');
+                        c.setAttribute('data-terminal', name);
+                        terminalsGroup.appendChild(c);
+                        terminalCircles[name] = c;
+                    }
+                }
+
+                let lastRoute = '__none__';
+                let lastOpacity = -1;
+
+                function update(currentTime) {
+                    const opacity = backdropOpacityForTime(currentTime);
+                    if (Math.abs(opacity - lastOpacity) > 0.01) {
+                        mount.style.opacity = opacity.toFixed(3);
+                        lastOpacity = opacity;
+                    }
+
+                    if (opacity <= 0.001) return; // nothing to update if invisible
+
+                    const route = activeRouteForTime(currentTime);
+                    if (route === lastRoute) return;
+                    lastRoute = route;
+
+                    for (const [key, path] of Object.entries(routePaths)) {
+                        path.classList.toggle('is-active', key === route);
+                    }
+                    const endpoints = route ? new Set(ROUTE_ENDPOINTS[route] || []) : new Set();
+                    for (const [name, circle] of Object.entries(terminalCircles)) {
+                        circle.classList.toggle('is-endpoint', endpoints.has(name));
+                    }
+                }
+
+                return { update };
+            }
+
+            // ---------------------------------------------------------
+            // Video crossfade + map sync
+            // ---------------------------------------------------------
+            function waitForFullBuffer(video) {
+                return new Promise((resolve) => {
+                    const tid = setTimeout(resolve, 30000);
+                    const check = () => {
+                        const d = video.duration;
+                        if (!d || isNaN(d)) return;
+                        const b = video.buffered;
+                        if (b.length > 0 && b.end(b.length - 1) >= d - 0.05) {
+                            clearTimeout(tid);
+                            video.removeEventListener('progress', check);
+                            video.removeEventListener('loadeddata', check);
+                            video.removeEventListener('canplaythrough', check);
+                            resolve();
+                        }
+                    };
+                    video.addEventListener('progress', check);
+                    video.addEventListener('loadeddata', check);
+                    video.addEventListener('canplaythrough', check);
+                    check();
+                });
+            }
+
+            const backdropReady = setupBackdrop().catch(err => {
+                console.warn('San Juans backdrop init failed:', err);
+                return null;
+            });
+
+            document.querySelectorAll('.watch-screen').forEach(screen => {
+                const videos = Array.from(screen.querySelectorAll('video'));
+                const loader = screen.querySelector('.watch-loader');
+                if (videos.length === 0) return;
+
+                videos.forEach(v => { v.pause(); v.load(); });
+
+                if (loader) {
+                    const hideLoader = () => loader.classList.add('hidden');
+                    const showLoader = () => loader.classList.remove('hidden');
+
+                    // Hide the spinner as soon as the poster image is loaded —
+                    // by that point the user sees the watch's first frame and
+                    // the spinner is just noise on top of meaningful content.
+                    const posterUrl = videos[0] && videos[0].getAttribute('poster');
+                    if (posterUrl) {
+                        const posterImg = new Image();
+                        posterImg.onload = hideLoader;
+                        posterImg.onerror = hideLoader;
+                        posterImg.src = posterUrl;
+                    }
+
+                    videos.forEach(v => {
+                        v.addEventListener('playing', hideLoader);
+                        v.addEventListener('waiting', showLoader);
+                    });
+                }
+
+                let activeIdx = 0;
+                let swapping = false;
+                let backdrop = null;
+                backdropReady.then(b => { backdrop = b; });
+
+                const tick = () => {
+                    const v = videos[activeIdx];
+                    if (backdrop && v) backdrop.update(v.currentTime);
+                };
+                videos.forEach(v => v.addEventListener('timeupdate', tick));
+
+                // When the active video plays out, freeze on its last frame
+                // (loop=false already does that) for holdMs, then crossfade
+                // to the other video starting from frame 0.
+                const triggerSwap = () => {
+                    if (swapping) return;
+                    if (videos.length < 2 || reduceMotion) return;
+                    swapping = true;
+                    setTimeout(() => {
+                        const nextIdx = 1 - activeIdx;
+                        const next = videos[nextIdx];
+                        next.currentTime = 0;
+                        const p = next.play();
+                        if (p && p.catch) p.catch(() => {});
+                        next.style.opacity = '1';
+                        videos[activeIdx].style.opacity = '0';
+                        activeIdx = nextIdx;
+                        setTimeout(() => { swapping = false; }, fadeWindow * 1000);
+                    }, holdMs);
+                };
+                videos.forEach((v, idx) => {
+                    v.addEventListener('ended', () => {
+                        if (idx !== activeIdx) return;
+                        triggerSwap();
+                    });
+                });
+
+                if (videos.length >= 2 && !reduceMotion) {
+                    videos.forEach(v => { v.loop = false; });
+                    videos[0].style.opacity = '1';
+                    videos[1].style.opacity = '0';
+                    Promise.all(videos.map(waitForFullBuffer)).then(() => {
+                        const p = videos[0].play();
+                        if (p && p.catch) p.catch(() => {});
+                    });
+                } else {
+                    waitForFullBuffer(videos[0]).then(() => {
+                        videos[0].loop = true;
+                        const p = videos[0].play();
+                        if (p && p.catch) p.catch(() => {});
+                    });
+                }
+            });
+        })();
+    </script>
+
+    <footer class="page-footer">
+        <a href="/portfolio.html" class="back-link">
+            <span class="back-arrow">←</span>
+            <span>Back to portfolio</span>
+        </a>
+        <a href="mailto:za.colem@gmail.com" class="contact-link">za.colem@gmail.com ⧉</a>
+    </footer>
+</body>
+</html>

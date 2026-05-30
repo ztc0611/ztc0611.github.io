@@ -77,6 +77,305 @@ body {
     font-family: Georgia, serif;
 }
 
+/* Featured project card — dark hero strip above the rest of the portfolio */
+.featured-section {
+    margin: 40px 0 80px;
+}
+
+/* Wrapper catches hover so the inner card can transform without escaping the cursor */
+.featured-card-wrapper {
+    display: block;
+}
+
+.featured-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 48px;
+    background:
+        radial-gradient(900px 500px at 90% 10%, rgba(52, 211, 153, 0.18), transparent 60%),
+        radial-gradient(600px 400px at 0% 100%, rgba(56, 189, 248, 0.10), transparent 70%),
+        #0A1020;
+    color: #F1F5F9;
+    border: 1px solid #1F2937;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.featured-card::before {
+    /* Subtle grid texture in the background */
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 60% 70% at 80% 30%, black 30%, transparent 80%);
+    pointer-events: none;
+}
+
+.featured-card-wrapper:hover .featured-card {
+    transform: translateY(-3px);
+    border-color: rgba(52, 211, 153, 0.4);
+    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.32);
+}
+
+.featured-card-device {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+}
+
+.featured-card-device::before {
+    /* Glow halo behind the watch */
+    content: '';
+    position: absolute;
+    inset: 8% 12%;
+    background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.28), transparent 70%);
+    filter: blur(40px);
+    z-index: 0;
+}
+
+.featured-watch {
+    position: relative;
+    width: 240px;
+    aspect-ratio: 280 / 440;
+    z-index: 1;
+    filter: drop-shadow(0 28px 40px rgba(0, 0, 0, 0.55));
+    transform: perspective(1200px) rotateY(-6deg) rotateX(3deg);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featured-card-wrapper:hover .featured-watch {
+    transform: perspective(1200px) rotateY(-3deg) rotateX(1deg) translateY(-4px);
+}
+
+.featured-watch-screen {
+    /* Measured against the 1120x1760 webp: screen area is 834w x 994h, starts 384px from top */
+    position: absolute;
+    top: 21.818%;     /* 384 / 1760 */
+    left: 12.768%;    /* (1120 - 834) / 2 / 1120 */
+    width: 74.464%;   /* 834 / 1120 */
+    height: 56.477%;  /* 994 / 1760 */
+    border-radius: 28px;
+    overflow: hidden;
+    background: #000;
+}
+
+.featured-watch-screen video {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Width matches the screen container; height stays proportional (no stretching) */
+    width: 100%;
+    height: auto;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.featured-watch-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    z-index: 2;
+}
+
+
+/* watchOS-style "app loading" spinner shown while the video buffers.
+   Transparent background so the video element's <poster> (first frame)
+   shows through — user gets meaningful content immediately instead of
+   black-screen-with-spinner. */
+.watch-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    z-index: 1; /* below the frame (z-index 2) so the bezels clip it */
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.watch-loader.hidden {
+    opacity: 0;
+}
+
+/* watchOS-style 6-dot throbber: brightness rotates around the circle */
+.watch-loader-spinner {
+    position: relative;
+    width: 36px;
+    height: 36px;
+}
+
+.watch-loader-spinner > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    animation: watchSpinnerFade 0.9s linear infinite;
+}
+
+.watch-loader-spinner > div:nth-child(1) { transform: translate(0, -12px);         animation-delay: 0s; }
+.watch-loader-spinner > div:nth-child(2) { transform: translate(10.392px, -6px);   animation-delay: -0.75s; }
+.watch-loader-spinner > div:nth-child(3) { transform: translate(10.392px, 6px);    animation-delay: -0.6s; }
+.watch-loader-spinner > div:nth-child(4) { transform: translate(0, 12px);          animation-delay: -0.45s; }
+.watch-loader-spinner > div:nth-child(5) { transform: translate(-10.392px, 6px);   animation-delay: -0.3s; }
+.watch-loader-spinner > div:nth-child(6) { transform: translate(-10.392px, -6px);  animation-delay: -0.15s; }
+
+@keyframes watchSpinnerFade {
+    0% { opacity: 1; }
+    100% { opacity: 0.22; }
+}
+
+.featured-card-info {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0;
+}
+
+.featured-card-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    background: rgba(52, 211, 153, 0.14);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    border-radius: 999px;
+    color: #6EE7B7;
+    font-family: 'Merriweather', serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    width: fit-content;
+    text-transform: uppercase;
+}
+
+.featured-card-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #34D399;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
+}
+
+.featured-card-title {
+    margin: 0;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-family: Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #F8FAFC;
+}
+
+.featured-card-desc {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #CBD5E1;
+    max-width: 48ch;
+}
+
+.featured-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    padding: 10px 18px;
+    background: #34D399;
+    color: #052E1E;
+    border-radius: 10px;
+    font-family: 'Merriweather', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    width: fit-content;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.featured-card-cta-arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.featured-card-wrapper:hover .featured-card-cta {
+    background: #6EE7B7;
+}
+
+.featured-card-wrapper:hover .featured-card-cta-arrow {
+    transform: translateX(4px);
+}
+
+/* Featured card responsive */
+@media (max-width: 900px) {
+    .featured-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 36px;
+    }
+    .featured-card-device {
+        min-height: 320px;
+    }
+    .featured-watch {
+        width: 220px;
+        transform: none;
+    }
+    .featured-card-wrapper:hover .featured-watch {
+        transform: translateY(-4px);
+    }
+}
+
+@media (max-width: 600px) {
+    .featured-section {
+        margin: 28px 0 56px;
+    }
+    .featured-card {
+        padding: 28px;
+        gap: 24px;
+    }
+    .featured-watch {
+        width: 180px;
+    }
+    .featured-card-device {
+        min-height: 260px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .featured-card,
+    .featured-watch,
+    .featured-card-cta,
+    .featured-card-cta-arrow,
+    .featured-card-wrapper:hover .featured-watch {
+        transform: none !important;
+        transition: none !important;
+    }
+    .watch-loader-spinner > div { animation: none; opacity: 0.45; }
+}
+
 .section-chips {
     display: flex;
     flex-wrap: wrap;

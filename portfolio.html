@@ -32,7 +32,10 @@
     <link rel="preload" as="image" href="assets/portfolio/TRMNL-Washington-Ferries-Dark.webp">
     <link rel="preload" as="image" href="assets/portfolio/TRMNL-Window-Season-Dark.webp">
     <link rel="preload" as="image" href="assets/portfolio/GeoJSON-Dark.webp">
-    
+
+    <!-- Featured project: bezel first so the watch frame paints while the video streams -->
+    <link rel="preload" as="image" href="assets/aweigh/watchos-frame.webp" fetchpriority="high">
+
     <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
@@ -54,6 +57,45 @@
                 <span class="section-chip-wrapper"><a href="#experiments" class="section-chip">Experiments ↓</a></span>
             </nav>
         </div>
+
+        <!-- Featured Project: Aweigh -->
+        <section class="featured-section" aria-label="Featured project">
+          <div class="featured-card-wrapper">
+            <a href="/aweigh/" class="featured-card">
+                <div class="featured-card-device">
+                    <div class="featured-watch">
+                        <div class="featured-watch-screen">
+                            <video muted loop playsinline preload="auto" poster="assets/aweigh/watchos-poster.webp">
+                                <source src="assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
+                                <source src="assets/aweigh/watchos.mp4" type="video/mp4">
+                            </video>
+                            <video muted playsinline preload="auto" aria-hidden="true" poster="assets/aweigh/watchos-poster.webp">
+                                <source src="assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
+                                <source src="assets/aweigh/watchos.mp4" type="video/mp4">
+                            </video>
+                            <div class="watch-loader" aria-hidden="true">
+                                <div class="watch-loader-spinner">
+                                    <div></div><div></div><div></div>
+                                    <div></div><div></div><div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="featured-watch-frame" src="assets/aweigh/watchos-frame.webp" alt="Apple Watch frame with the Aweigh app running." fetchpriority="high" decoding="async">
+                    </div>
+                </div>
+                <div class="featured-card-info">
+                    <div class="featured-card-eyebrow">
+                        <span class="featured-card-status-dot" aria-hidden="true"></span>
+                        <span>Featured · Prototype · TestFlight ~Jun 2026</span>
+                    </div>
+                    <h2 class="featured-card-title">Aweigh</h2>
+                    <p class="featured-card-desc">Washington State Ferries, made with SwiftUI. An iOS/watchOS prototype for the largest ferry system in the United States.</p>
+                    <span class="featured-card-cta">See more <span class="featured-card-cta-arrow">→</span></span>
+                </div>
+            </a>
+          </div>
+        </section>
+
         <!-- Apps Section -->
         <section id="apps" class="projects-section">
             <h2>Independent iOS Apps<a href="#top" class="section-return" aria-label="Return to top of portfolio">↑</a></h2>
@@ -97,30 +139,6 @@
                             </div>
                             <div class="project-actions">
                                 <a href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" class="btn-primary">View in App Store ⧉</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card-wrapper">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="assets/portfolio/Recall.webp" alt="Recall: Moving Gallery Screenshot. It shows a picture of a valley within a VisionOS app window, superimposed over a living room.">
-                        </div>
-                        <div class="project-info">
-                            <h3>Recall: Moving Gallery</h3>
-                            <p>An app that shows random Live Photos and videos from your library. Built to surface unexpected memories you forgot you had.</p>
-                            <div class="platform-badges">
-                                <span class="platform-badge">iOS</span>
-                                <span class="platform-badge">iPadOS</span>
-                                <span class="platform-badge">macOS</span>
-                                <span class="platform-badge">visionOS</span>
-                            </div>
-                            <div class="project-meta">
-                                <span class="first-worked">Jun. 2025 - present</span>
-                            </div>
-                            <div class="project-actions">
-                                <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View in App Store ⧉</a>
                             </div>
                         </div>
                     </div>
@@ -379,10 +397,131 @@
                     </div>
                 </div>
 
+                <div class="project-card-wrapper">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/portfolio/Recall.webp" alt="Recall: Moving Gallery Screenshot. It shows a picture of a valley within a VisionOS app window, superimposed over a living room.">
+                        </div>
+                        <div class="project-info">
+                            <h3>Recall: Moving Gallery</h3>
+                            <p>An app that shows random Live Photos and videos from your library. Built to surface unexpected memories you forgot you had.</p>
+                            <div class="platform-badges">
+                                <span class="platform-badge">iOS</span>
+                                <span class="platform-badge">iPadOS</span>
+                                <span class="platform-badge">macOS</span>
+                                <span class="platform-badge">visionOS</span>
+                            </div>
+                            <div class="project-meta">
+                                <span class="first-worked">Jun. 2025 - present</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" class="btn-primary">View in App Store ⧉</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
         <span class="back-nav" style="margin-top: 60px;"><a href="/" class="back-home">← Back to home</a></span>
     </main>
+
+    <script>
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const fadeWindow = 0.5;
+
+            function waitForFullBuffer(video) {
+                return new Promise((resolve) => {
+                    const tid = setTimeout(resolve, 30000);
+                    const check = () => {
+                        const d = video.duration;
+                        if (!d || isNaN(d)) return;
+                        const b = video.buffered;
+                        if (b.length > 0 && b.end(b.length - 1) >= d - 0.05) {
+                            clearTimeout(tid);
+                            video.removeEventListener('progress', check);
+                            video.removeEventListener('loadeddata', check);
+                            video.removeEventListener('canplaythrough', check);
+                            resolve();
+                        }
+                    };
+                    video.addEventListener('progress', check);
+                    video.addEventListener('loadeddata', check);
+                    video.addEventListener('canplaythrough', check);
+                    check();
+                });
+            }
+
+            document.querySelectorAll('.featured-watch-screen').forEach(screen => {
+                const videos = Array.from(screen.querySelectorAll('video'));
+                const loader = screen.querySelector('.watch-loader');
+                if (videos.length === 0) return;
+
+                videos.forEach(v => { v.pause(); v.load(); });
+
+                if (loader) {
+                    const hideLoader = () => loader.classList.add('hidden');
+                    const showLoader = () => loader.classList.remove('hidden');
+
+                    // Hide the spinner as soon as the poster image is loaded —
+                    // by that point the user sees the watch's first frame and
+                    // the spinner is just noise on top of meaningful content.
+                    const posterUrl = videos[0] && videos[0].getAttribute('poster');
+                    if (posterUrl) {
+                        const posterImg = new Image();
+                        posterImg.onload = hideLoader;
+                        posterImg.onerror = hideLoader;
+                        posterImg.src = posterUrl;
+                    }
+
+                    videos.forEach(v => {
+                        v.addEventListener('playing', hideLoader);
+                        v.addEventListener('waiting', showLoader);
+                    });
+                }
+
+                if (videos.length >= 2 && !reduceMotion) {
+                    videos.forEach(v => { v.loop = false; });
+                    videos[0].style.opacity = '1';
+                    videos[1].style.opacity = '0';
+
+                    Promise.all(videos.map(waitForFullBuffer)).then(() => {
+                        const p = videos[0].play();
+                        if (p && p.catch) p.catch(() => {});
+                    });
+
+                    let activeIdx = 0;
+                    let swapping = false;
+                    const tick = () => {
+                        if (swapping) return;
+                        const v = videos[activeIdx];
+                        const d = v.duration;
+                        if (!d || isNaN(d)) return;
+                        if (d - v.currentTime < fadeWindow) {
+                            swapping = true;
+                            const nextIdx = 1 - activeIdx;
+                            const next = videos[nextIdx];
+                            next.currentTime = 0;
+                            const p = next.play();
+                            if (p && p.catch) p.catch(() => {});
+                            next.style.opacity = '1';
+                            v.style.opacity = '0';
+                            activeIdx = nextIdx;
+                            setTimeout(() => { swapping = false; }, fadeWindow * 1000);
+                        }
+                    };
+                    videos.forEach(v => v.addEventListener('timeupdate', tick));
+                } else {
+                    waitForFullBuffer(videos[0]).then(() => {
+                        videos[0].loop = true;
+                        const p = videos[0].play();
+                        if (p && p.catch) p.catch(() => {});
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
