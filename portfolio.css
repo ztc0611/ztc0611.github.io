@@ -813,6 +813,16 @@ code {
         opacity: 0;
     }
 
+    .project-card[data-project="window-season"] .project-image {
+        background-image: url('assets/portfolio/WindowSeason-Dark.webp');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .project-card[data-project="window-season"] .project-image img {
+        opacity: 0;
+    }
+
     .project-card[data-project="pixellate"] .project-image {
         background-image: url('assets/portfolio/Pixellate-Dark.webp');
         background-size: cover;
@@ -1082,7 +1092,7 @@ code {
 
     .projects-section h2,
     .commits-section h2 {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         margin-bottom: 24px;
     }
 
@@ -1092,7 +1102,7 @@ code {
 
     .commits-section > h3,
     .projects-section > h3 {
-        font-size: 1rem;
+        font-size: 1.3rem;
         margin-bottom: 20px;
     }
 
