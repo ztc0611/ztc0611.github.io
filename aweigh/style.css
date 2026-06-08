@@ -225,12 +225,23 @@ main {
     color: var(--text-muted);
     line-height: 1.5;
     max-width: 28ch;
+    /* Knock the map wireframe/route line out from behind the text: a dense halo
+       in the page bg color so the strokes stop at each glyph's edge. */
+    text-shadow:
+        0 0 6px var(--bg),
+        0 0 6px var(--bg),
+        0 0 12px var(--bg),
+        0 0 12px var(--bg);
 }
 
 .meta {
     margin: 0;
     font-size: 0.9rem;
     color: var(--text-dim);
+    text-shadow:
+        0 0 6px var(--bg),
+        0 0 6px var(--bg),
+        0 0 12px var(--bg);
 }
 
 .meta a {
@@ -242,6 +253,38 @@ main {
 .meta a:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
+}
+
+/* TestFlight CTA — filled accent button. The button box itself does not move
+   on hover (no translate) so the cursor can't fall off it mid-transition;
+   only the inner arrow nudges. */
+.hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    width: fit-content;
+    padding: 12px 22px;
+    background: var(--accent);
+    color: #06231A;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 24px rgba(52, 211, 153, 0.22);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-cta:hover {
+    background: #4ADEAC;
+    box-shadow: 0 10px 30px rgba(52, 211, 153, 0.38);
+}
+
+.hero-cta-arrow {
+    transition: transform 0.2s ease;
+}
+
+.hero-cta:hover .hero-cta-arrow {
+    transform: translateX(3px);
 }
 
 /* Watch device */
