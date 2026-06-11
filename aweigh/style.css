@@ -88,6 +88,12 @@ main,
     margin-top: 80px;
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 .back-link, .contact-link {
     color: var(--text-muted);
     font-size: 0.9rem;
