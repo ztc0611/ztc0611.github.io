@@ -780,6 +780,16 @@ main {
     background: var(--bg);
 }
 
+.timeline-date {
+    display: block;
+    margin: 0 0 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
 .timeline h3 {
     margin: 0 0 4px;
     font-size: 1.05rem;
