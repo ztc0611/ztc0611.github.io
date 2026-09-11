@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Apps, photography tools, and hardware experiments by Zachary Coleman. Pick something up and take a closer look.">
+  <title>Closer look, Zachary Coleman</title>
+  <link rel="stylesheet" href="focus.css">
+</head>
+<body>
+  <a class="skip" href="#work">Skip to selected work</a>
+  <header class="topbar">
+    <a class="identity" href="../../portfolio.html">Zachary Coleman</a>
+    <nav aria-label="Experiments"><a href="../objects/">Original objects</a><a href="../objects-next/">Compare directions</a></nav>
+  </header>
+  <main>
+    <div class="intro">
+      <h1>Take a closer look.</h1>
+      <p>I make apps for Apple platforms,<br class="desktop-break"> photography tools, and hardware experiments.</p>
+    </div>
+
+    <section class="workbench" id="work" aria-label="Selected work">
+      <div class="tool-rests" role="group" aria-label="Pick an object to inspect">
+        <button class="tool-rest" data-select="aweigh" aria-pressed="true" aria-controls="panel-aweigh">
+          <span class="mini mini-watch" aria-hidden="true"><span>9:41</span></span>
+          <span class="rest-copy"><strong>Aweigh</strong><span>Ferries, on your wrist</span></span>
+          <span class="selection-mark" aria-hidden="true"></span>
+        </button>
+        <button class="tool-rest" data-select="pixellate" aria-pressed="false" aria-controls="panel-pixellate">
+          <span class="mini mini-camera" aria-hidden="true"><span></span></span>
+          <span class="rest-copy"><strong>Pixellate Camera</strong><span>A different kind of picture</span></span>
+          <span class="selection-mark" aria-hidden="true"></span>
+        </button>
+        <button class="tool-rest" data-select="printing" aria-pressed="false" aria-controls="panel-printing">
+          <span class="mini mini-board" aria-hidden="true"><span></span></span>
+          <span class="rest-copy"><strong>Printing the Dream</strong><span>A tiny board that draws</span></span>
+          <span class="selection-mark" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <article class="inspection" id="panel-aweigh" data-project="aweigh" aria-labelledby="title-aweigh">
+        <div class="object-zone watch-zone">
+          <div class="watch">
+            <div class="watch-screen">
+              <video id="watch-video" muted playsinline preload="none" poster="../../assets/aweigh/watchos-poster.webp" aria-label="A recording of Aweigh running on watchOS">
+                <source src="../../assets/aweigh/watchos.mp4" type="video/mp4">
+              </video>
+            </div>
+            <img class="watch-frame" src="../../assets/aweigh/watchos-frame.webp" width="1120" height="1760" alt="Apple Watch with Aweigh's live ferry departure board">
+          </div>
+          <div class="action-area">
+            <button class="action" id="watch-play" data-owner="aweigh"><span class="play-glyph" aria-hidden="true">▶</span><span id="watch-play-label">Play the watch demo</span></button>
+            <p class="action-note" id="watch-status" aria-live="polite">Recorded in Aweigh.</p>
+          </div>
+        </div>
+        <div class="story">
+          <p class="project-kind">iOS &amp; watchOS</p>
+          <h2 id="title-aweigh">Aweigh</h2>
+          <p class="project-idea">The next ferry.<br>At a glance.</p>
+          <p>Schedules, vessel locations, capacity, cameras, and alerts for Washington State Ferries, organized around the trip you’re trying to make.</p>
+          <p>The watch brings live departures to a split-flap board, close enough to check without reaching for your phone.</p>
+          <p class="release-status">Awaiting App Review</p>
+
+          <a class="project-link" href="../../aweigh/">Read the Aweigh case study</a>
+        </div>
+      </article>
+
+      <article class="inspection" id="panel-pixellate" data-project="pixellate" aria-labelledby="title-pixellate" hidden>
+        <div class="object-zone camera-zone">
+          <div class="camera">
+            <div class="camera-top"><span>Pixellate</span><span class="camera-dot" aria-hidden="true"></span></div>
+            <div class="viewfinder"><canvas id="photo" width="480" height="360" role="img" aria-label="A photograph of the San Juan Islands, rendered with an adjustable four-color effect"></canvas><span class="viewfinder-corner" aria-hidden="true"></span></div>
+            <div class="camera-controls">
+              <label for="photo-mix">Four-color mix <output for="photo-mix" id="mix-value">70%</output></label>
+              <input id="photo-mix" data-owner="pixellate" type="range" min="0" max="100" value="70" aria-describedby="photo-instruction">
+              <button class="shutter" id="shutter" data-owner="pixellate">Develop photo</button>
+            </div>
+          </div>
+          <figure class="photo-print" id="photo-print" hidden><img id="print-image" alt="Your developed four-color photograph"><figcaption id="print-caption">San Juan Islands</figcaption></figure>
+          <div class="object-caption" id="photo-instruction">Set the mix. Make a little print.</div>
+        </div>
+        <div class="story">
+          <p class="project-kind">iOS camera app</p>
+          <h2 id="title-pixellate">Pixellate Camera</h2>
+          <p class="project-idea">Less color.<br>More character.</p>
+          <p>A live camera that shoots like the 1998 Game Boy Camera: four colors, heavy dither, full metadata, and GPS.</p>
+          <p>The app’s three-pass dithering engine blends error diffusion with a Bayer matrix, keeping faces recognizable while textures go coarse.</p>
+          <div class="action-area"><p class="try-note">Try the camera on the mat. The slider changes the image; the shutter keeps a print of your chosen mix.</p><p class="action-note" id="photo-status" aria-live="polite">Ready to develop.</p></div>
+          <a class="project-link" href="../../portfolio.html#apps">Explore Pixellate and the apps</a>
+        </div>
+      </article>
+
+      <article class="inspection" id="panel-printing" data-project="printing" aria-labelledby="title-printing" hidden>
+        <div class="object-zone drawing-zone">
+          <div class="drawing-machine">
+            <div class="drawing-display"><canvas id="drawing" width="320" height="320" role="img" aria-label="A pixel octopus drawn in four color passes"></canvas></div>
+            <div class="machine-footer"><span class="machine-led" id="machine-led" aria-hidden="true"></span><span id="pass-label" aria-live="polite">Ready for the outline</span></div>
+            <div class="machine-board" aria-hidden="true"><span class="usb"></span><span class="chip"></span><span class="board-label">Pico</span></div>
+            <div class="cable" aria-hidden="true"></div>
+          </div>
+          <div class="action-area"><button class="action" id="draw-pass" data-owner="printing">Draw the outline</button><p class="action-note">Build the picture, one color at a time.</p></div>
+        </div>
+        <div class="story">
+          <p class="project-kind">Hardware &amp; software</p>
+          <h2 id="title-printing">Printing the Dream</h2>
+          <p class="project-idea">A patient little<br>drawing machine.</p>
+          <p>Imports an image into Tomodachi Life on Switch 1 or 2, without modifying the console.</p>
+          <p>A desktop converter finds efficient brush and paint-bucket passes. A Raspberry Pi Pico redraws the image by acting as a wired controller over USB.</p>
+
+          <a class="project-link" href="../../portfolio.html#apps">See the hardware project</a>
+        </div>
+      </article>
+      <div class="mat-foot"><span>Pick up another object whenever you like.</span><span>Photo and drawing tools are illustrative browser sketches.</span></div>
+    </section>
+
+    <footer class="footer"><p>More things, beyond the workbench.</p><nav aria-label="More work"><a href="../../portfolio.html#apps">All apps &amp; projects</a><a href="../../portfolio.html#open-source">Godot contributions</a></nav></footer>
+  </main>
+  <script src="focus.js" defer></script>
+</body>
+</html>

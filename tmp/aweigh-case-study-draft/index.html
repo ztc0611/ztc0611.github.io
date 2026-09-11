@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="darkreader-lock">
+    <title>Aweigh</title>
+
+    <link rel="icon" type="image/png" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ztc0611.github.io/aweigh/">
+    <meta property="og:title" content="Aweigh">
+    <meta property="og:description" content="Live Washington State Ferries departures on iPhone and Apple Watch.">
+    <meta property="og:image" content="https://ztc0611.github.io/assets/aweigh/og-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Aweigh on an iPhone and Apple Watch, showing live Washington State Ferries departures.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ztc0611.github.io/assets/aweigh/og-card.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Bezel first so the watch frame paints while the video is still streaming -->
+    <link rel="preload" as="image" href="../assets/aweigh/watchos-frame.webp" fetchpriority="high">
+
+    <link rel="stylesheet" href="style.css?v=20260909a">
+</head>
+<body>
+    <div class="page-bg" aria-hidden="true"></div>
+
+    <header class="page-nav">
+        <a href="/" class="back-link" aria-label="Return to portfolio">
+            <span class="back-arrow">←</span>
+            <span>Portfolio</span>
+        </a>
+        <div class="nav-right">
+            <a href="https://x.com/zachcolem" class="contact-link">X ⧉</a>
+            <a href="mailto:za.colem@gmail.com" class="contact-link">Contact ⧉</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-backdrop" id="hero-backdrop" aria-hidden="true"></div>
+            <div class="hero-text">
+                <h1 class="title">
+                    <span class="title-line">Aweigh.</span>
+                </h1>
+                <p class="tagline">Live departures for Washington State Ferries, built for iPhone and Apple Watch.</p>
+                <p class="meta">An independent app by <a href="/">Zachary Coleman</a>.</p>
+                <button class="hero-cta" type="button" disabled>Pending App Review</button>
+            </div>
+
+            <div class="watch-stage">
+                <div class="watch-device">
+                    <div class="watch-screen">
+                        <video muted loop playsinline preload="auto" poster="../assets/aweigh/watchos-poster.webp">
+                            <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
+                            <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
+                        </video>
+                        <video muted playsinline preload="auto" aria-hidden="true" poster="../assets/aweigh/watchos-poster.webp">
+                            <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
+                            <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
+                        </video>
+                        <div class="watch-loader" aria-hidden="true">
+                            <div class="watch-loader-spinner">
+                                <div></div><div></div><div></div>
+                                <div></div><div></div><div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="Video of an Apple Watch displaying the Aweigh app interface while routes between Anacortes, Friday Harbor, Lopez, and Orcas are selected." fetchpriority="high" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <section class="ios-section">
+            <h2>Watch and iPhone.</h2>
+            <p class="ios-section-caption">The next departure and vehicle capacity on your wrist. Full schedules, live vessels, cameras, and alerts on your phone.</p>
+
+            <div class="ios-hero-stage">
+                <div class="device-pair">
+                    <div class="ios-device ios-device-hero">
+                        <div class="ios-screen">
+                            <video autoplay muted loop playsinline preload="auto" poster="../assets/aweigh/ios-schedule-poster.webp">
+                                <source src="../assets/aweigh/ios-schedule.hevc.mp4" type="video/mp4; codecs=hvc1">
+                                <source src="../assets/aweigh/ios-schedule.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="Video of an iPhone displaying the schedule of Seattle to Bainbridge island, then switching to be Bainbridge Island to Seattle, before returning." decoding="async">
+                    </div>
+                    <div class="watch-device watch-device-secondary">
+                        <div class="watch-screen">
+                            <img src="../assets/aweigh/watchos-schedule.webp" alt="Apple Watch showing schedule from Clinton to Mukilteo: 12:00 PM Tokitae with 66/141 spots, 12:30 PM Kitsap with 120/120 spots, 1:00 PM departure." loading="lazy">
+                        </div>
+                        <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="" loading="lazy" decoding="async">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ios-section-divider">
+                <h3 class="ios-section-subhead">Go further on iPhone.</h3>
+                <p class="ios-section-subhead-caption">Live vessel positions and terminal cameras for when the wrist isn't enough.</p>
+            </div>
+
+            <div class="ios-feature-grid">
+                <div class="ios-feature">
+                    <div class="ios-device">
+                        <div class="ios-screen">
+                            <img src="../assets/aweigh/ios-ferry-map.webp" alt="iPhone showing Ferry Map: live map of the Puget Sound with the M/V Puyallup en route, vessel details card with speed, heading, and ETA." loading="lazy">
+                        </div>
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
+                    </div>
+                    <h3>Ferry Map</h3>
+                    <p>Follow every vessel live, with its route, speed, heading, and latest position.</p>
+                </div>
+
+                <div class="ios-feature">
+                    <div class="ios-device">
+                        <div class="ios-screen">
+                            <img src="../assets/aweigh/ios-camera-anacortes.webp" alt="iPhone showing Cameras: WSDOT terminal camera feeds for Anacortes, with filter chips per island." loading="lazy">
+                        </div>
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
+                    </div>
+                    <h3>Cameras</h3>
+                    <p>See terminal holding areas before you leave home, grouped by the route and terminal they serve.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="decisions" id="decisions" aria-labelledby="decisions-title">
+            <div class="dc-intro">
+                <h2 id="decisions-title">Two decisions behind the board.</h2>
+                <p>Aweigh turns public ferry feeds into a departure board. These two examples show the decisions behind what stays on screen.</p>
+            </div>
+
+            <!-- ============================================================
+                 STORY 1 — a clock time is not a sailing
+                 ============================================================ -->
+            <article class="dc-story" aria-labelledby="dc-cross-title">
+                <div class="dc-lede">
+                    <h3 id="dc-cross-title">Two sailings at 12:20. One was cancelled.</h3>
+                    <p>On June 1, 2026, the 12:20 PM from Bremerton was cancelled. The 12:20 PM from Seattle was still running. Matching by clock time alone would cross out both.</p>
+                </div>
+
+                <figure class="dc-figure dc-cross">
+                    <fieldset class="dc-match">
+                        <legend>Match a cancellation to a sailing by</legend>
+                        <div class="dc-match-options">
+                            <input type="radio" name="dc-match" id="dc-match-dir" checked>
+                            <label for="dc-match-dir">Time and direction</label>
+                            <input type="radio" name="dc-match" id="dc-match-time">
+                            <label for="dc-match-time">Time only</label>
+                        </div>
+                    </fieldset>
+
+                    <ul class="dc-rows">
+                        <li class="dc-row" id="dc-row-west">
+                            <p class="dc-time"><time datetime="2026-06-01T12:20-07:00">12:20 PM</time></p>
+                            <p class="dc-route">Seattle <span class="dc-to" aria-hidden="true">→</span><span class="dc-sr">to</span> Bremerton</p>
+                            <p class="dc-vessel">Chimacum</p>
+                            <div class="dc-channel">
+                                <span class="dc-water" aria-hidden="true"></span>
+                                <svg class="dc-boat" viewBox="0 0 44 24" aria-hidden="true" focusable="false">
+                                    <path class="dc-hull" d="M2 14h40l-5 7a3 3 0 0 1-2.4 1.2H9.4A3 3 0 0 1 7 21z"/>
+                                    <path class="dc-house" d="M11 5h20a2 2 0 0 1 2 2v7H9V7a2 2 0 0 1 2-2z"/>
+                                    <rect class="dc-mast" x="20" y="1" width="2" height="4" rx="1"/>
+                                </svg>
+                            </div>
+                            <p class="dc-status"><span class="dc-st dc-st-dir">Still running</span><span class="dc-st dc-st-time">Cancelled</span></p>
+                        </li>
+                        <li class="dc-row" id="dc-row-east">
+                            <p class="dc-time"><time datetime="2026-06-01T12:20-07:00">12:20 PM</time></p>
+                            <p class="dc-route">Bremerton <span class="dc-to" aria-hidden="true">→</span><span class="dc-sr">to</span> Seattle</p>
+                            <p class="dc-vessel">Puyallup</p>
+                            <div class="dc-channel">
+                                <span class="dc-water" aria-hidden="true"></span>
+                                <svg class="dc-boat" viewBox="0 0 44 24" aria-hidden="true" focusable="false">
+                                    <path class="dc-hull" d="M2 14h40l-5 7a3 3 0 0 1-2.4 1.2H9.4A3 3 0 0 1 7 21z"/>
+                                    <path class="dc-house" d="M11 5h20a2 2 0 0 1 2 2v7H9V7a2 2 0 0 1 2-2z"/>
+                                    <rect class="dc-mast" x="20" y="1" width="2" height="4" rx="1"/>
+                                </svg>
+                            </div>
+                            <p class="dc-status">Cancelled</p>
+                        </li>
+                    </ul>
+
+                    <div class="dc-readings">
+                        <p class="dc-reading dc-reading-time">
+                            <span class="dc-tag dc-tag-bad">Time only</span>
+                            <span>Both 12:20 sailings are crossed out. The one to Bremerton was still running.</span>
+                        </p>
+                        <p class="dc-reading dc-reading-dir">
+                            <span class="dc-tag dc-tag-good">Time and direction</span>
+                            <span>Only the 12:20 to Seattle is crossed out. The 12:20 to Bremerton keeps its place.</span>
+                        </p>
+                    </div>
+
+                    <figcaption class="dc-figcap">Recorded Washington State Ferries data for June 1, 2026. All times Pacific (PDT). Illustrated from the data.</figcaption>
+                </figure>
+
+                <details class="dc-more">
+                    <summary>Where this comes from</summary>
+                    <div class="dc-more-body">
+                        <p>Two public WSDOT schedule feeds, read on June 1, 2026: the day's running schedule, recorded at 10:30 AM Pacific, and the day's schedule adjustments, recorded at 7:05 AM Pacific. Both were captured by a Raspberry Pi that polls the public API and keeps the responses.</p>
+                        <p>A schedule adjustment stores its time separately from its service date. The terminal and departure-or-arrival indicator establish which direction it applies to. Aweigh combines those fields to match the directed terminal pair and an exact departure instant.</p>
+
+                        <p class="dc-more-h">Clock times that appeared in both directions that day</p>
+                        <table class="dc-table">
+                            <thead>
+                                <tr><th scope="col">Time</th><th scope="col">Seattle to Bremerton</th><th scope="col">Bremerton to Seattle</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><th scope="row">11:10 AM</th><td class="dc-cell-bad">Cancelled</td><td class="dc-cell-good">Running</td></tr>
+                                <tr><th scope="row">12:20 PM</th><td class="dc-cell-good">Running</td><td class="dc-cell-bad">Cancelled</td></tr>
+                                <tr><th scope="row">1:30 PM</th><td class="dc-cell-bad">Cancelled</td><td class="dc-cell-good">Running</td></tr>
+                                <tr><th scope="row">4:15 PM</th><td class="dc-cell-bad">Cancelled</td><td class="dc-cell-good">Running</td></tr>
+                                <tr><th scope="row">5:30 PM</th><td class="dc-cell-good">Running</td><td class="dc-cell-bad">Cancelled</td></tr>
+                            </tbody>
+                        </table>
+
+                        <p class="dc-more-h">The whole day, both directions</p>
+                        <dl class="dc-lists">
+                            <dt>Seattle to Bremerton, cancelled</dt>
+                            <dd>6:05 AM, 7:35 AM, 8:35 AM, 11:10 AM, 1:30 PM, 4:15 PM, 6:45 PM, 9:05 PM</dd>
+                            <dt>Seattle to Bremerton, still running</dt>
+                            <dd>10:00 AM, 12:20 PM, 2:50 PM, 5:30 PM, 7:50 PM, 10:30 PM, 12:50 AM (June 2)</dd>
+                            <dt>Bremerton to Seattle, cancelled</dt>
+                            <dd>4:50 AM, 6:20 AM, 7:20 AM, 9:50 AM, 12:20 PM, 3:00 PM, 5:30 PM, 7:55 PM</dd>
+                            <dt>Bremerton to Seattle, still running</dt>
+                            <dd>8:45 AM, 11:10 AM, 1:30 PM, 4:15 PM, 6:40 PM, 9:00 PM, 11:40 PM</dd>
+                        </dl>
+                        <p class="dc-note">One route on one day. It is enough to show that a departure time on its own does not identify a sailing, which is why Aweigh never treats it as one.</p>
+                    </div>
+                </details>
+            </article>
+
+            <!-- ============================================================
+                 STORY 2 — how long a missing number should stay
+                 ============================================================ -->
+            <article class="dc-story" aria-labelledby="dc-cap-title">
+                <div class="dc-lede">
+                    <h3 id="dc-cap-title">How long should a missing number stay on screen?</h3>
+                    <p>If the capacity feed is completely empty or a request fails, Aweigh temporarily keeps the last good value. Once that value is more than five minutes old, it shows unknown capacity.</p>
+                </div>
+
+                <figure class="dc-figure dc-cap">
+                    <fieldset class="dc-steps">
+                        <legend>Elapsed time in the simulation</legend>
+                        <div class="dc-track">
+                            <input type="radio" name="dc-step" id="dc-step-1" checked>
+                            <label for="dc-step-1"><span class="dc-tick" aria-hidden="true"></span>1:00</label>
+                            <input type="radio" name="dc-step" id="dc-step-2">
+                            <label for="dc-step-2"><span class="dc-tick" aria-hidden="true"></span>3:00</label>
+                            <input type="radio" name="dc-step" id="dc-step-3">
+                            <label for="dc-step-3"><span class="dc-tick" aria-hidden="true"></span>6:00</label>
+                            <input type="radio" name="dc-step" id="dc-step-4">
+                            <label for="dc-step-4"><span class="dc-tick" aria-hidden="true"></span>6:30</label>
+                            <input type="radio" name="dc-step" id="dc-step-5">
+                            <label for="dc-step-5"><span class="dc-tick" aria-hidden="true"></span>9:00</label>
+                        </div>
+                    </fieldset>
+
+                    <ul class="dc-frames">
+                        <li class="dc-frame" data-step="1">
+                            <div class="dc-board">
+                                <p class="dc-board-when">4:30 PM</p>
+                                <p class="dc-board-where">Edmonds to Kingston</p>
+                                <div class="dc-cap-readout">
+                                    <svg class="dc-car" viewBox="0 0 24 14" aria-hidden="true" focusable="false"><path d="M3.2 9.4h17.6M4.6 9.4 6.3 4.9A2 2 0 0 1 8.2 3.6h7.6a2 2 0 0 1 1.9 1.3l1.7 4.5M2 9.4h20v2.2a1 1 0 0 1-1 1h-1.6a1 1 0 0 1-1-1v-.4H5.6v.4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></svg>
+                                    <span class="dc-cap-count">104</span><span class="dc-cap-max">/141</span>
+                                </div>
+                                <div class="dc-bar"><span class="dc-bar-fill dc-tone-ample" style="width:26.2%"></span></div>
+                            </div>
+                            <div class="dc-frame-say">
+                                <p class="dc-feed dc-feed-ok">Capacity response received</p>
+                                <p class="dc-age">Value age 0:00</p>
+                                <p class="dc-say">The latest reported capacity, just received.</p>
+                            </div>
+                        </li>
+
+                        <li class="dc-frame" data-step="2">
+                            <div class="dc-board">
+                                <p class="dc-board-when">4:30 PM</p>
+                                <p class="dc-board-where">Edmonds to Kingston</p>
+                                <div class="dc-cap-readout">
+                                    <svg class="dc-car" viewBox="0 0 24 14" aria-hidden="true" focusable="false"><path d="M3.2 9.4h17.6M4.6 9.4 6.3 4.9A2 2 0 0 1 8.2 3.6h7.6a2 2 0 0 1 1.9 1.3l1.7 4.5M2 9.4h20v2.2a1 1 0 0 1-1 1h-1.6a1 1 0 0 1-1-1v-.4H5.6v.4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></svg>
+                                    <span class="dc-cap-count">104</span><span class="dc-cap-max">/141</span>
+                                </div>
+                                <div class="dc-bar"><span class="dc-bar-fill dc-tone-ample" style="width:26.2%"></span></div>
+                            </div>
+                            <div class="dc-frame-say">
+                                <p class="dc-feed dc-feed-gap">Nothing usable in the response</p>
+                                <p class="dc-age">Value age 2:00</p>
+                                <p class="dc-say">The number is two minutes old. Aweigh keeps it through a short gap in the feed.</p>
+                            </div>
+                        </li>
+
+                        <li class="dc-frame" data-step="3">
+                            <div class="dc-board">
+                                <p class="dc-board-when">4:30 PM</p>
+                                <p class="dc-board-where">Edmonds to Kingston</p>
+                                <div class="dc-cap-readout">
+                                    <svg class="dc-car" viewBox="0 0 24 14" aria-hidden="true" focusable="false"><path d="M3.2 9.4h17.6M4.6 9.4 6.3 4.9A2 2 0 0 1 8.2 3.6h7.6a2 2 0 0 1 1.9 1.3l1.7 4.5M2 9.4h20v2.2a1 1 0 0 1-1 1h-1.6a1 1 0 0 1-1-1v-.4H5.6v.4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></svg>
+                                    <span class="dc-cap-count">104</span><span class="dc-cap-max">/141</span>
+                                </div>
+                                <div class="dc-bar"><span class="dc-bar-fill dc-tone-ample" style="width:26.2%"></span></div>
+                            </div>
+                            <div class="dc-frame-say">
+                                <p class="dc-feed dc-feed-gap">Nothing usable in the response</p>
+                                <p class="dc-age">Value age 5:00</p>
+                                <p class="dc-say">Five minutes old, right at the limit, and still on screen.</p>
+                            </div>
+                        </li>
+
+                        <li class="dc-frame" data-step="4">
+                            <div class="dc-board">
+                                <p class="dc-board-when">4:30 PM</p>
+                                <p class="dc-board-where">Edmonds to Kingston</p>
+                                <div class="dc-cap-readout dc-cap-unknown">
+                                    <span class="dc-cap-count" aria-hidden="true">?</span>
+                                    <span class="dc-sr">Drive-up space unknown</span>
+                                </div>
+                                <div class="dc-bar"><span class="dc-bar-empty"></span></div>
+                            </div>
+                            <div class="dc-frame-say">
+                                <p class="dc-feed dc-feed-gap">Nothing usable in the response</p>
+                                <p class="dc-age">Value age 5:30, past the limit</p>
+                                <p class="dc-say">The value is dropped. The app shows that it does not know, rather than a number it can no longer stand behind.</p>
+                            </div>
+                        </li>
+
+                        <li class="dc-frame" data-step="5">
+                            <div class="dc-board">
+                                <p class="dc-board-when">4:30 PM</p>
+                                <p class="dc-board-where">Edmonds to Kingston</p>
+                                <div class="dc-cap-readout">
+                                    <svg class="dc-car" viewBox="0 0 24 14" aria-hidden="true" focusable="false"><path d="M3.2 9.4h17.6M4.6 9.4 6.3 4.9A2 2 0 0 1 8.2 3.6h7.6a2 2 0 0 1 1.9 1.3l1.7 4.5M2 9.4h20v2.2a1 1 0 0 1-1 1h-1.6a1 1 0 0 1-1-1v-.4H5.6v.4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></svg>
+                                    <span class="dc-cap-count">31</span><span class="dc-cap-max">/141</span>
+                                </div>
+                                <div class="dc-bar"><span class="dc-bar-fill dc-tone-getting" style="width:78.0%"></span></div>
+                            </div>
+                            <div class="dc-frame-say">
+                                <p class="dc-feed dc-feed-ok">Capacity response received</p>
+                                <p class="dc-age">Value age 0:00</p>
+                                <p class="dc-say">The new response reports 31 spaces. The age limit prevents an old count from staying on screen indefinitely.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <figcaption class="dc-figcap">Illustrated simulation with invented times and counts. The five-minute limit and unknown-capacity behavior come from Aweigh's direct WSDOT client.</figcaption>
+                </figure>
+
+                <details class="dc-more">
+                    <summary>The rules underneath</summary>
+                    <div class="dc-more-body">
+                        <p>The limit is inclusive. A value exactly five minutes old is still shown; a value older than that is not.</p>
+                        <p>A nonempty response that leaves one terminal out is a different case. Nothing is held for that terminal, so its sailings show unknown capacity straight away.</p>
+                        <p>Service alerts follow the opposite rule. An alert request that succeeds and returns nothing is taken at face value, because an alert leaving the feed is how it gets cleared. Only a request that fails falls back to the previous list. For capacity, both a completely empty feed and a failed request use the temporary fallback.</p>
+                        <p class="dc-note">This describes Aweigh's direct-to-WSDOT client, the path an Apple Watch uses on its own. The server path applies the same five minute limit before it hands capacity to the app.</p>
+                    </div>
+                </details>
+            </article>
+        </section>
+
+        <section class="test-matrix">
+            <div class="test-matrix-head">
+                <div>
+                    <span class="test-matrix-eyebrow">Test matrix</span>
+                    <h2>The happy path is only one case.</h2>
+                </div>
+                <p>Aweigh's watch interface is tested across screen sizes and the situations ferry riders actually encounter: delays, cancellations, low tides, changing capacity, and the last sailing of the day.</p>
+            </div>
+            <figure class="test-matrix-figure">
+                <img src="../assets/aweigh/watch-test-matrix.png" alt="Contact sheet of fifteen Aweigh Apple Watch screens testing five ferry schedule states across 40 mm, 42 mm, and 49 mm watches." loading="lazy" decoding="async">
+            </figure>
+        </section>
+
+        <section class="geofence">
+            <div class="gf-content">
+                <span class="gf-eyebrow">Location needs context.</span>
+                <h2>The nearest terminal isn't always the right one.</h2>
+                <p>On southeast Orcas Island, Lopez terminal is closer in a straight line than Orcas terminal, even though reaching Lopez requires another ferry. Aweigh uses island boundaries instead of distance alone, so it selects the terminal connected by road.</p>
+            </div>
+
+            <figure class="gf-figure">
+                <div class="gf-map" id="geofence-map" role="img"
+                     aria-label="Map of Orcas and Lopez islands. A 'you are here' pin sits on the southeast corner of Orcas, near Obstruction Pass. A straight line to the Lopez terminal is 3.9 miles; a longer line to the Orcas terminal is 5.6 miles. A geofence drawn around Orcas Island overrides the nearest-dot pick so the correct Orcas terminal is chosen."></div>
+                <div class="gf-callouts">
+                    <p class="gf-callout gf-callout-naive">
+                        <span class="gf-tag gf-tag-bad">Incorrect</span>
+                        <span>Picks nearest, so you get <strong>Lopez</strong>.</span>
+                    </p>
+                    <p class="gf-callout gf-callout-aweigh">
+                        <span class="gf-tag gf-tag-good">Correct</span>
+                        <span>Knows you're on Orcas, so you get <strong>Orcas</strong>.</span>
+                    </p>
+                </div>
+            </figure>
+        </section>
+
+        <aside class="disclaimer">
+            <p>
+                Schedules, vessel positions, and camera feeds are sourced from <a href="https://wsdot.wa.gov/" class="disclaimer-link">WSDOT</a>'s public APIs. Aweigh is an independent app. Not affiliated with, endorsed by, or associated with the Washington State Department of Transportation or Washington State Ferries. <em>Washington State Ferries</em>, <em>WSF</em>, vessel names, and related marks belong to their respective owners.
+            </p>
+        </aside>
+    </main>
+
+    <script>
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const fadeWindow = 0.5;
+            const holdMs = 3000;  // freeze on the last frame this long before re-looping
+
+            // ---------------------------------------------------------
+            // San Juans map backdrop — keyed off the video's currentTime
+            // ---------------------------------------------------------
+            function backdropOpacityForTime(t) {
+                return 1;
+            }
+
+            function activeRouteForTime(t) {
+                // Exact per-frame PTS from watch-newwww.mp4. The source is VFR,
+                // so these cannot be derived reliably from its average frame rate.
+                // Route changes occur at source frames 5, 189, 345, 368, and 397.
+                if (t < 2.393333) return 'anacortes-friday-harbor';
+                if (t < 6.486667) return 'friday-harbor-anacortes';
+                if (t < 9.218333) return 'lopez-anacortes';
+                if (t < 9.603333) return 'lopez-friday-harbor';
+                if (t < 10.085000) return 'lopez-lopez';
+                return 'lopez-orcas';
+            }
+
+            const ROUTES = {
+                'anacortes-friday-harbor': [
+                    [-122.67797316062789, 48.506542362941644], [-122.67250845412997, 48.516023886296495],
+                    [-122.75750088274263, 48.52947269282009], [-122.8256796019071, 48.52930036308521],
+                    [-122.86133030620307, 48.580800828380745], [-122.88327624152518, 48.570833606869485],
+                    [-122.87812999477507, 48.580247213807866], [-122.88902792906903, 48.58184935531747],
+                    [-122.90870475487733, 48.561017554593036], [-122.93716047219995, 48.544987252110246],
+                    [-122.97560596262525, 48.54178058214663], [-122.99770455160983, 48.54518766223745],
+                    [-123.01041880828592, 48.54298310719054], [-123.01495961424139, 48.5363688658947],
+                ],
+                'lopez-friday-harbor': [
+                    [-122.88327624152518, 48.570833606869485], [-122.87812999477507, 48.580247213807866],
+                    [-122.88902792906903, 48.58184935531747], [-122.90870475487733, 48.561017554593036],
+                    [-122.93716047219995, 48.544987252110246], [-122.97560596262525, 48.54178058214663],
+                    [-122.99770455160983, 48.54518766223745], [-123.01041880828592, 48.54298310719054],
+                    [-123.01495961424139, 48.5363688658947],
+                ],
+                'lopez-anacortes': [
+                    [-122.88327624152518, 48.570833606869485], [-122.86133030620307, 48.580800828380745],
+                    [-122.8256796019071, 48.52930036308521], [-122.75750088274263, 48.52947269282009],
+                    [-122.67250845412997, 48.516023886296495], [-122.67797316062789, 48.506542362941644],
+                ],
+                'lopez-orcas': [
+                    [-122.88327624152518, 48.570833606869485], [-122.87612667408156, 48.581821237098325],
+                    [-122.90089343618536, 48.586352902305265], [-122.91530289308182, 48.58863228665459],
+                    [-122.93045277415575, 48.58845800721318], [-122.94099182185982, 48.59072359306842],
+                    [-122.94362658378358, 48.5973454923882],
+                ],
+                'orcas-friday-harbor': [
+                    [-122.94388274910989, 48.597657805623896], [-122.9459796981055, 48.592739200111595],
+                    [-122.9631622482573, 48.5971511686283], [-122.97953620781362, 48.5944772943092],
+                    [-122.99692090561433, 48.5903325094352], [-123.01976358993366, 48.586989693324654],
+                    [-123.02744520058997, 48.58164072759203], [-123.02299795231534, 48.573482464904515],
+                    [-123.01248627457545, 48.56946972158866], [-123.00278318743072, 48.5646540092487],
+                    [-122.99651661031656, 48.5566268029354], [-122.99368654323295, 48.54806304542424],
+                    [-123.00258103978186, 48.54418211561], [-123.01086909338446, 48.54177311293154],
+                    [-123.01511419401018, 48.53548239871614],
+                ],
+                'orcas-anacortes': [
+                    [-122.94362658378358, 48.5973454923882], [-122.94099182185982, 48.59072359306842],
+                    [-122.93045277415575, 48.58845800721318], [-122.91530289308182, 48.58863228665459],
+                    [-122.90089343618536, 48.586352902305265], [-122.87612667408156, 48.581821237098325],
+                    [-122.858473769178, 48.57580743866197], [-122.84622212622223, 48.56587003027113],
+                    [-122.83726393567395, 48.553314722823245], [-122.83372647599519, 48.54239587618093],
+                    [-122.8271395711802, 48.530794383687095], [-122.80777407102454, 48.5274791832224],
+                    [-122.78050428509113, 48.52686846472713], [-122.7590636985904, 48.52557867282155],
+                    [-122.72470818497843, 48.525300682841674], [-122.70692354197817, 48.526173162589146],
+                    [-122.68927063707463, 48.52643490358244], [-122.67543813696346, 48.525475179993606],
+                    [-122.67122251788176, 48.51989097292548], [-122.6782046369857, 48.50662601364522],
+                ],
+            };
+            ROUTES['friday-harbor-anacortes'] = [...ROUTES['anacortes-friday-harbor']].reverse();
+
+            const TERMINALS = {
+                anacortes: { lon: -122.6798, lat: 48.5065 },
+                'friday-harbor': { lon: -123.0150, lat: 48.5365 },
+                orcas: { lon: -122.9439, lat: 48.5975 },
+                lopez: { lon: -122.8833, lat: 48.5708 },
+            };
+
+            const ROUTE_ENDPOINTS = {
+                'anacortes-friday-harbor': ['anacortes', 'friday-harbor'],
+                'friday-harbor-anacortes': ['friday-harbor', 'anacortes'],
+                'lopez-anacortes': ['lopez', 'anacortes'],
+                'lopez-friday-harbor': ['lopez', 'friday-harbor'],
+                'lopez-lopez': ['lopez'],
+                'lopez-orcas': ['lopez', 'orcas'],
+            };
+
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+
+            async function setupBackdrop() {
+                const mount = document.getElementById('hero-backdrop');
+                if (!mount) return null;
+
+                const [svgText, projResp] = await Promise.all([
+                    fetch('../assets/aweigh/sanjuans.svg').then(r => r.text()),
+                    fetch('../assets/aweigh/sanjuans-projection.json').then(r => r.json()),
+                ]);
+
+                mount.innerHTML = svgText;
+                const svg = mount.querySelector('svg');
+                if (!svg) return null;
+
+                svg.classList.add('sanjuans-map');
+                // Override the SVG's baked-in "meet" so it FILLS the backdrop
+                // (cropping the wider axis) instead of letterboxing. Zooms the
+                // islands so they're readable at small container heights.
+                svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+
+                // Projection: same math as build-sanjuans-svg.js
+                const proj = projResp;
+                const project = (lon, lat) => [
+                    (lon - proj.view.west) * proj.lonScale * proj.scale,
+                    (proj.view.north - lat) * proj.scale,
+                ];
+
+                // Draw routes as <path> inside .map-routes
+                const routesGroup = svg.querySelector('.map-routes');
+                const routePaths = {};
+                if (routesGroup) {
+                    for (const [key, coords] of Object.entries(ROUTES)) {
+                        const path = document.createElementNS(SVG_NS, 'path');
+                        const d = coords.map(([lon, lat], i) => {
+                            const [x, y] = project(lon, lat);
+                            return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`;
+                        }).join('');
+                        path.setAttribute('d', d);
+                        path.setAttribute('data-route', key);
+                        routesGroup.appendChild(path);
+                        routePaths[key] = path;
+                    }
+                }
+
+                // Draw terminals as small green circles inside .map-terminals
+                const terminalsGroup = svg.querySelector('.map-terminals');
+                const terminalCircles = {};
+                if (terminalsGroup) {
+                    for (const [name, { lon, lat }] of Object.entries(TERMINALS)) {
+                        const [x, y] = project(lon, lat);
+                        const c = document.createElementNS(SVG_NS, 'circle');
+                        c.setAttribute('cx', x.toFixed(2));
+                        c.setAttribute('cy', y.toFixed(2));
+                        c.setAttribute('r', '6');
+                        c.setAttribute('data-terminal', name);
+                        terminalsGroup.appendChild(c);
+                        terminalCircles[name] = c;
+                    }
+                }
+
+                let lastRoute = '__none__';
+                let lastOpacity = -1;
+
+                function update(currentTime) {
+                    const opacity = backdropOpacityForTime(currentTime);
+                    if (Math.abs(opacity - lastOpacity) > 0.01) {
+                        mount.style.opacity = opacity.toFixed(3);
+                        lastOpacity = opacity;
+                    }
+
+                    if (opacity <= 0.001) return; // nothing to update if invisible
+
+                    const route = activeRouteForTime(currentTime);
+                    if (route === lastRoute) return;
+                    lastRoute = route;
+
+                    for (const [key, path] of Object.entries(routePaths)) {
+                        path.classList.toggle('is-active', key === route);
+                    }
+                    const endpoints = route ? new Set(ROUTE_ENDPOINTS[route] || []) : new Set();
+                    for (const [name, circle] of Object.entries(terminalCircles)) {
+                        circle.classList.toggle('is-endpoint', endpoints.has(name));
+                    }
+                }
+
+                return { update };
+            }
+
+            // ---------------------------------------------------------
+            // Video crossfade + map sync
+            // ---------------------------------------------------------
+            function waitForFullBuffer(video) {
+                return new Promise((resolve) => {
+                    const tid = setTimeout(resolve, 30000);
+                    const check = () => {
+                        const d = video.duration;
+                        if (!d || isNaN(d)) return;
+                        const b = video.buffered;
+                        if (b.length > 0 && b.end(b.length - 1) >= d - 0.05) {
+                            clearTimeout(tid);
+                            video.removeEventListener('progress', check);
+                            video.removeEventListener('loadeddata', check);
+                            video.removeEventListener('canplaythrough', check);
+                            resolve();
+                        }
+                    };
+                    video.addEventListener('progress', check);
+                    video.addEventListener('loadeddata', check);
+                    video.addEventListener('canplaythrough', check);
+                    check();
+                });
+            }
+
+            const backdropReady = setupBackdrop().catch(err => {
+                console.warn('San Juans backdrop init failed:', err);
+                return null;
+            });
+
+            document.querySelectorAll('.watch-screen').forEach(screen => {
+                const videos = Array.from(screen.querySelectorAll('video'));
+                const loader = screen.querySelector('.watch-loader');
+                if (videos.length === 0) return;
+
+                videos.forEach(v => { v.pause(); v.load(); });
+
+                if (loader) {
+                    const hideLoader = () => loader.classList.add('hidden');
+                    const showLoader = () => loader.classList.remove('hidden');
+
+                    // Hide the spinner as soon as the poster image is loaded —
+                    // by that point the user sees the watch's first frame and
+                    // the spinner is just noise on top of meaningful content.
+                    const posterUrl = videos[0] && videos[0].getAttribute('poster');
+                    if (posterUrl) {
+                        const posterImg = new Image();
+                        posterImg.onload = hideLoader;
+                        posterImg.onerror = hideLoader;
+                        posterImg.src = posterUrl;
+                    }
+
+                    videos.forEach(v => {
+                        v.addEventListener('playing', hideLoader);
+                        v.addEventListener('waiting', showLoader);
+                    });
+                }
+
+                let activeIdx = 0;
+                let swapping = false;
+                let backdrop = null;
+                backdropReady.then(b => { backdrop = b; });
+
+                const tick = () => {
+                    const v = videos[activeIdx];
+                    if (backdrop && v) backdrop.update(v.currentTime);
+                };
+                videos.forEach(v => v.addEventListener('timeupdate', tick));
+
+                // When the active video plays out, freeze on its last frame
+                // (loop=false already does that) for holdMs, then crossfade
+                // to the other video starting from frame 0.
+                const triggerSwap = () => {
+                    if (swapping) return;
+                    if (videos.length < 2 || reduceMotion) return;
+                    swapping = true;
+                    setTimeout(() => {
+                        const nextIdx = 1 - activeIdx;
+                        const next = videos[nextIdx];
+                        next.currentTime = 0;
+                        const p = next.play();
+                        if (p && p.catch) p.catch(() => {});
+                        next.style.opacity = '1';
+                        videos[activeIdx].style.opacity = '0';
+                        activeIdx = nextIdx;
+                        setTimeout(() => { swapping = false; }, fadeWindow * 1000);
+                    }, holdMs);
+                };
+                videos.forEach((v, idx) => {
+                    v.addEventListener('ended', () => {
+                        if (idx !== activeIdx) return;
+                        triggerSwap();
+                    });
+                });
+
+                if (videos.length >= 2 && !reduceMotion) {
+                    videos.forEach(v => { v.loop = false; });
+                    videos[0].style.opacity = '1';
+                    videos[1].style.opacity = '0';
+                    Promise.all(videos.map(waitForFullBuffer)).then(() => {
+                        const p = videos[0].play();
+                        if (p && p.catch) p.catch(() => {});
+                    });
+                } else {
+                    waitForFullBuffer(videos[0]).then(() => {
+                        videos[0].loop = true;
+                        const p = videos[0].play();
+                        if (p && p.catch) p.catch(() => {});
+                    });
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        // Smart terminal detection graphic. Reuses the shared San Juans SVG +
+        // projection so the overlay (terminals, pin, geofence) lands on the real
+        // coastline. Two CSS states are cross-faded on an interval while visible.
+        (function () {
+            const mount = document.getElementById('geofence-map');
+            if (!mount) return;
+            const figure = mount.closest('.gf-figure');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const SVG_NS = 'http://www.w3.org/2000/svg';
+
+            // Terminals + "you are here" pin (Obstruction Pass, SE Orcas), lon/lat.
+            // Crow-flies: Lopez 3.5mi, Orcas 5.7mi. The nearer dot is the wrong
+            // island — the reason a per-island geofence is needed at all.
+            const PLACES = {
+                orcas: [-122.9439, 48.5975],
+                lopez: [-122.8833, 48.5708],
+                pin:   [-122.8220, 48.6100],  // SE Orcas (Obstruction Pass area)
+            };
+            // Geofence region around Orcas, in the map's projected px space. Traces the
+            // real coastline (buffered ~3px) but bridges the deep inlets (Deer Harbor,
+            // West Sound, East Sound) and rounds the sharp east tip, so it hugs the
+            // island, contains all of Orcas and the pin, and keeps Shaw and the Lopez
+            // terminal outside.
+            const FENCE_D = "M621.5,229.6C617.4,225.7 601.1,215.3 594.6,211.0C588.1,206.8 585.4,205.9 582.4,204.1C579.4,202.4 578.4,201.7 576.4,200.5C574.4,199.3 572.4,198.1 570.4,196.9C568.4,195.7 567.4,195.1 564.4,193.3C561.4,191.5 555.4,188.0 552.4,186.2C549.4,184.4 548.4,183.8 546.4,182.6C544.4,181.4 542.3,180.2 540.3,179.0C538.3,177.8 536.3,176.6 534.3,175.4C532.3,174.2 530.3,173.0 528.3,171.8C526.3,170.6 524.3,169.4 522.3,168.2C520.3,167.1 518.3,165.9 516.3,164.7C514.3,163.5 512.3,162.3 510.3,161.1C508.3,159.9 506.3,158.7 504.3,157.5C502.3,156.3 501.4,155.3 498.2,153.9C495.1,152.6 488.6,150.3 485.3,149.4C482.0,148.5 480.7,148.8 478.3,148.5C476.0,148.2 473.7,147.9 471.4,147.6C469.1,147.3 466.8,147.0 464.5,146.7C462.2,146.3 459.8,146.0 457.5,145.7C455.2,145.4 454.1,144.9 450.6,144.8C447.1,144.7 440.1,145.0 436.6,145.1C433.1,145.2 433.0,144.8 429.6,145.5C426.2,146.1 420.3,146.9 416.3,148.9C412.2,150.8 408.1,154.9 405.5,157.2C403.0,159.5 402.6,160.8 401.2,162.6C399.7,164.5 398.3,166.3 396.9,168.1C395.4,170.0 394.0,171.8 392.5,173.6C391.1,175.4 389.6,177.3 388.2,179.1C386.7,180.9 385.3,182.8 383.8,184.6C382.4,186.4 380.9,188.3 379.5,190.1C378.0,191.9 376.6,193.7 375.1,195.6C373.7,197.4 372.2,199.2 370.8,201.1C369.3,202.9 367.9,204.7 366.4,206.5C365.0,208.4 363.5,210.2 362.1,212.0C360.6,213.9 360.5,215.5 357.7,217.5C355.0,219.6 350.5,221.0 345.8,224.3C341.1,227.6 333.1,234.4 329.6,237.5C326.2,240.5 326.6,241.0 325.0,242.7C323.5,244.5 322.0,246.2 320.4,248.0C318.9,249.8 317.4,251.5 315.8,253.3C314.3,255.0 313.3,255.8 311.2,258.6C309.1,261.3 305.0,265.9 303.3,270.0C301.6,274.1 301.4,280.0 301.0,283.4C300.6,286.8 300.3,287.0 301.0,290.4C301.6,293.8 303.3,299.5 305.2,303.7C307.0,307.9 310.4,312.7 312.2,315.7C314.0,318.7 314.7,319.7 316.0,321.6C317.2,323.6 317.5,324.9 319.7,327.5C322.0,330.1 327.1,334.9 329.6,337.4C332.1,339.9 331.6,341.6 334.6,342.3C337.7,342.9 344.7,341.7 348.1,341.4C351.5,341.0 352.7,340.7 355.0,340.3C357.3,340.0 359.6,339.6 362.0,339.3C364.3,338.9 366.6,338.6 368.9,338.2C371.2,337.9 373.5,337.5 375.8,337.2C378.1,336.8 380.4,336.5 382.7,336.1C385.0,335.8 387.3,335.5 389.6,335.1C391.9,334.8 394.3,332.3 396.6,334.1C398.8,335.9 400.4,342.7 403.3,346.0C406.2,349.2 411.3,351.8 414.2,353.5C417.1,355.1 417.3,355.4 420.7,356.0C424.0,356.6 430.9,356.9 434.4,357.0C437.8,357.1 439.0,356.7 441.3,356.6C443.7,356.4 446.0,356.3 448.3,356.1C450.6,356.0 451.9,356.5 455.3,355.7C458.7,354.9 464.4,353.4 468.5,351.4C472.6,349.4 477.1,345.8 479.9,343.7C482.6,341.6 482.0,340.6 484.9,338.8C487.8,337.0 494.1,334.3 497.2,333.1C500.4,331.8 501.7,331.8 504.0,331.2C506.2,330.6 508.5,330.0 510.7,329.4C513.0,328.8 515.2,328.1 517.5,327.5C519.7,326.9 522.0,326.3 524.2,325.7C526.5,325.1 527.6,324.8 531.0,323.8C534.4,322.9 540.9,322.3 544.4,319.9C547.9,317.5 549.9,314.4 552.0,309.2C554.0,304.1 554.2,293.9 556.9,289.1C559.5,284.3 565.0,282.6 567.7,280.5C570.5,278.4 571.5,277.8 573.4,276.5C575.3,275.1 577.2,273.8 579.1,272.4C581.0,271.0 582.9,269.7 584.8,268.3C586.7,267.0 588.6,265.6 590.5,264.3C592.4,262.9 594.3,261.5 596.2,260.2C598.1,258.8 599.3,258.4 601.9,256.1C604.5,253.8 609.0,250.0 611.8,246.4C614.7,242.7 617.3,237.1 618.9,234.3C620.5,231.5 625.5,233.4 621.5,229.6Z";
+            const VIEWBOX = "285 120 375 355";
+
+            function svgNodes(markup) {
+                const doc = new DOMParser().parseFromString(
+                    `<svg xmlns="${SVG_NS}">${markup}</svg>`, 'image/svg+xml');
+                return Array.from(doc.documentElement.childNodes);
+            }
+
+            Promise.all([
+                fetch('../assets/aweigh/sanjuans.svg').then(r => r.text()),
+                fetch('../assets/aweigh/sanjuans-projection.json').then(r => r.json()),
+            ]).then(([svgText, proj]) => {
+                mount.innerHTML = svgText;
+                const svg = mount.querySelector('svg');
+                if (!svg) return;
+                svg.setAttribute('viewBox', VIEWBOX);
+                svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+                // Drop the shared asset's empty route/terminal placeholder groups.
+                svg.querySelectorAll('.map-routes, .map-terminals').forEach(el => el.remove());
+
+                const project = (lon, lat) => [
+                    (lon - proj.view.west) * proj.lonScale * proj.scale,
+                    (proj.view.north - lat) * proj.scale,
+                ];
+                const f = n => n.toFixed(1);
+                const [ox, oy] = project(...PLACES.orcas);
+                const [lx, ly] = project(...PLACES.lopez);
+                const [px, py] = project(...PLACES.pin);
+
+                // Push the Lopez distance label off its line (perpendicular offset)
+                // so the dotted line doesn't strike through the text.
+                let uxl = lx - px, uyl = ly - py;
+                const ul = Math.hypot(uxl, uyl) || 1;
+                let perx = uyl / ul, pery = -uxl / ul;
+                if (perx < 0) { perx = -perx; pery = -pery; }
+                const dLx = (px + lx) / 2 + perx * 22, dLy = (py + ly) / 2 + pery * 22;
+
+                const markup = `
+                    <path class="gf-fence" d="${FENCE_D}"/>
+                    <line class="gf-line gf-line-orcas" x1="${f(px)}" y1="${f(py)}" x2="${f(ox)}" y2="${f(oy)}"/>
+                    <line class="gf-line gf-line-lopez" x1="${f(px)}" y1="${f(py)}" x2="${f(lx)}" y2="${f(ly)}"/>
+                    <g class="gf-dist gf-dist-orcas"><text x="${f((px+ox)/2)}" y="${f((py+oy)/2 - 9)}" text-anchor="middle">5.6 mi</text></g>
+                    <g class="gf-dist gf-dist-lopez"><text x="${f(dLx)}" y="${f(dLy)}" text-anchor="middle">3.9 mi</text></g>
+                    <g class="gf-term gf-term-orcas">
+                        <circle class="gf-ring" cx="${f(ox)}" cy="${f(oy)}" r="11"/>
+                        <circle class="gf-dot" cx="${f(ox)}" cy="${f(oy)}" r="5.5"/>
+                        <text class="gf-badge gf-badge-good" x="${f(ox)}" y="${f(oy - 15)}" text-anchor="middle">✓</text>
+                        <text x="${f(ox - 14)}" y="${f(oy + 4)}" text-anchor="end">Orcas terminal</text>
+                    </g>
+                    <g class="gf-term gf-term-lopez">
+                        <circle class="gf-ring" cx="${f(lx)}" cy="${f(ly)}" r="11"/>
+                        <circle class="gf-dot" cx="${f(lx)}" cy="${f(ly)}" r="5.5"/>
+                        <text class="gf-badge gf-badge-bad" x="${f(lx + 13)}" y="${f(ly + 5)}" text-anchor="start">✗</text>
+                        <text x="${f(lx)}" y="${f(ly + 21)}" text-anchor="middle">Lopez terminal</text>
+                    </g>
+                    <g class="gf-pin">
+                        <circle class="gf-pin-halo" cx="${f(px)}" cy="${f(py)}" r="13"/>
+                        <circle class="gf-pin-dot" cx="${f(px)}" cy="${f(py)}" r="6"/>
+                        <text class="gf-pin-label" x="${f(px + 15)}" y="${f(py - 8)}" text-anchor="start">You are here</text>
+                    </g>`;
+
+                const g = document.createElementNS(SVG_NS, 'g');
+                g.setAttribute('class', 'gf-overlay');
+                svgNodes(markup).forEach(n => g.appendChild(document.importNode(n, true)));
+                svg.appendChild(g);
+
+                // ---- state driver ----
+                if (!figure) return;
+                if (reduceMotion) { figure.classList.add('state-aweigh'); return; }
+
+                let idx = 0;
+                const states = ['state-naive', 'state-aweigh'];
+                let timer = null;
+                const apply = () => {
+                    figure.classList.remove('state-naive', 'state-aweigh');
+                    figure.classList.add(states[idx]);
+                    idx = (idx + 1) % states.length;
+                };
+                const start = () => {
+                    if (timer) return;
+                    apply();
+                    timer = setInterval(apply, 2800);
+                };
+                const stop = () => { clearInterval(timer); timer = null; };
+
+                // Only animate while the graphic is on screen.
+                if ('IntersectionObserver' in window) {
+                    new IntersectionObserver((entries) => {
+                        entries.forEach(e => e.isIntersecting ? start() : stop());
+                    }, { threshold: 0.35 }).observe(figure);
+                } else {
+                    start();
+                }
+            }).catch(err => console.warn('Geofence graphic init failed:', err));
+        })();
+    </script>
+
+    <footer class="page-footer">
+        <a href="/" class="back-link">
+            <span class="back-arrow">←</span>
+            <span>Back to portfolio</span>
+        </a>
+        <div class="nav-right">
+            <a href="https://x.com/zachcolem" class="contact-link">X ⧉</a>
+            <a href="mailto:za.colem@gmail.com" class="contact-link">za.colem@gmail.com ⧉</a>
+        </div>
+    </footer>
+
+    <script src="engineering.js" defer></script>
+</body>
+</html>

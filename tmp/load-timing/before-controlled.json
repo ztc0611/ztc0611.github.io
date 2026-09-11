@@ -1,0 +1,378 @@
+[
+  {
+    "run": 0,
+    "url": "http://127.0.0.1:8781/",
+    "throttled": true,
+    "sceneReady": 1018.9000000003725,
+    "fadeStarted": 1033.2000000001863,
+    "fadeDone": 1639.7000000001863,
+    "ttfb": 9.100000000558794,
+    "fcp": 252,
+    "resources": [
+      {
+        "name": "/assets/home/base.css",
+        "start": 91,
+        "end": 189,
+        "transfer": 3128,
+        "decoded": 8994
+      },
+      {
+        "name": "/assets/home/tide.css",
+        "start": 91,
+        "end": 194,
+        "transfer": 4622,
+        "decoded": 14384
+      },
+      {
+        "name": "/assets/home/vendor/three.module.min.js",
+        "start": 91,
+        "end": 362,
+        "transfer": 79628,
+        "decoded": 338908
+      },
+      {
+        "name": "/assets/home/vendor/three.core.min.js",
+        "start": 91,
+        "end": 414,
+        "transfer": 101605,
+        "decoded": 381124
+      },
+      {
+        "name": "/assets/home/appearance.js",
+        "start": 91,
+        "end": 181,
+        "transfer": 671,
+        "decoded": 817
+      },
+      {
+        "name": "/assets/home/arrival.js",
+        "start": 91,
+        "end": 183,
+        "transfer": 964,
+        "decoded": 1298
+      },
+      {
+        "name": "/assets/home/scene.js",
+        "start": 91,
+        "end": 304,
+        "transfer": 10992,
+        "decoded": 30757
+      },
+      {
+        "name": "/assets/home/devices.js",
+        "start": 91,
+        "end": 282,
+        "transfer": 1415,
+        "decoded": 2859
+      },
+      {
+        "name": "/assets/aweigh/watchos-poster.webp",
+        "start": 93,
+        "end": 309,
+        "transfer": 11514,
+        "decoded": 11214
+      },
+      {
+        "name": "/assets/aweigh/watchos-frame.webp",
+        "start": 93,
+        "end": 469,
+        "transfer": 83370,
+        "decoded": 83070
+      },
+      {
+        "name": "/assets/aweigh/sanjuans.svg",
+        "start": 197,
+        "end": 387,
+        "transfer": 10200,
+        "decoded": 22371
+      },
+      {
+        "name": "/assets/aweigh/ios-delay-tracking.webp",
+        "start": 212,
+        "end": 503,
+        "transfer": 75340,
+        "decoded": 75040
+      },
+      {
+        "name": "/assets/aweigh/ios-frame.webp",
+        "start": 212,
+        "end": 673,
+        "transfer": 38508,
+        "decoded": 38208
+      },
+      {
+        "name": "/assets/portfolio/Pixellate.webp",
+        "start": 212,
+        "end": 1028,
+        "transfer": 165298,
+        "decoded": 164998
+      },
+      {
+        "name": "/assets/portfolio/WindowSeason.webp",
+        "start": 212,
+        "end": 827,
+        "transfer": 61278,
+        "decoded": 60978
+      },
+      {
+        "name": "/assets/portfolio/PrintingTheDream.webp",
+        "start": 212,
+        "end": 803,
+        "transfer": 59388,
+        "decoded": 59088
+      },
+      {
+        "name": "/assets/portfolio/TRMNL-Washington-Ferries.webp",
+        "start": 212,
+        "end": 987,
+        "transfer": 115968,
+        "decoded": 115668
+      },
+      {
+        "name": "/assets/portfolio/PointTo.webp",
+        "start": 212,
+        "end": 1117,
+        "transfer": 260092,
+        "decoded": 259792
+      },
+      {
+        "name": "/assets/home/materials.js",
+        "start": 305,
+        "end": 398,
+        "transfer": 2624,
+        "decoded": 7115
+      },
+      {
+        "name": "/assets/home/trees.js",
+        "start": 305,
+        "end": 452,
+        "transfer": 4117,
+        "decoded": 12456
+      },
+      {
+        "name": "/assets/home/ferry.js",
+        "start": 305,
+        "end": 473,
+        "transfer": 2673,
+        "decoded": 6961
+      },
+      {
+        "name": "/assets/home/clouds.js",
+        "start": 305,
+        "end": 482,
+        "transfer": 2138,
+        "decoded": 3946
+      },
+      {
+        "name": "/assets/home/weather.js",
+        "start": 305,
+        "end": 496,
+        "transfer": 1564,
+        "decoded": 2782
+      },
+      {
+        "name": "/assets/home/solar.js",
+        "start": 305,
+        "end": 538,
+        "transfer": 632,
+        "decoded": 508
+      },
+      {
+        "name": "/assets/home/vendor/suncalc.mjs",
+        "start": 538,
+        "end": 775,
+        "transfer": 3552,
+        "decoded": 8946
+      }
+    ],
+    "errors": []
+  },
+  {
+    "run": 1,
+    "url": "http://127.0.0.1:8781/",
+    "throttled": true,
+    "sceneReady": 1006.5999999996275,
+    "fadeStarted": 1015.2999999998137,
+    "fadeDone": 1630.5,
+    "ttfb": 8,
+    "fcp": 260,
+    "resources": [
+      {
+        "name": "/assets/home/base.css",
+        "start": 93,
+        "end": 187,
+        "transfer": 3128,
+        "decoded": 8994
+      },
+      {
+        "name": "/assets/home/tide.css",
+        "start": 93,
+        "end": 192,
+        "transfer": 4622,
+        "decoded": 14384
+      },
+      {
+        "name": "/assets/home/appearance.js",
+        "start": 93,
+        "end": 180,
+        "transfer": 671,
+        "decoded": 817
+      },
+      {
+        "name": "/assets/home/arrival.js",
+        "start": 93,
+        "end": 181,
+        "transfer": 964,
+        "decoded": 1298
+      },
+      {
+        "name": "/assets/home/scene.js",
+        "start": 93,
+        "end": 304,
+        "transfer": 10992,
+        "decoded": 30757
+      },
+      {
+        "name": "/assets/home/vendor/three.module.min.js",
+        "start": 93,
+        "end": 357,
+        "transfer": 79628,
+        "decoded": 338908
+      },
+      {
+        "name": "/assets/home/vendor/three.core.min.js",
+        "start": 93,
+        "end": 410,
+        "transfer": 101605,
+        "decoded": 381124
+      },
+      {
+        "name": "/assets/home/devices.js",
+        "start": 93,
+        "end": 279,
+        "transfer": 1415,
+        "decoded": 2859
+      },
+      {
+        "name": "/assets/aweigh/watchos-poster.webp",
+        "start": 93,
+        "end": 307,
+        "transfer": 11514,
+        "decoded": 11214
+      },
+      {
+        "name": "/assets/aweigh/watchos-frame.webp",
+        "start": 93,
+        "end": 465,
+        "transfer": 83370,
+        "decoded": 83070
+      },
+      {
+        "name": "/assets/aweigh/sanjuans.svg",
+        "start": 198,
+        "end": 385,
+        "transfer": 10200,
+        "decoded": 22371
+      },
+      {
+        "name": "/assets/aweigh/ios-delay-tracking.webp",
+        "start": 219,
+        "end": 500,
+        "transfer": 75340,
+        "decoded": 75040
+      },
+      {
+        "name": "/assets/aweigh/ios-frame.webp",
+        "start": 219,
+        "end": 664,
+        "transfer": 38508,
+        "decoded": 38208
+      },
+      {
+        "name": "/assets/portfolio/Pixellate.webp",
+        "start": 219,
+        "end": 1025,
+        "transfer": 165298,
+        "decoded": 164998
+      },
+      {
+        "name": "/assets/portfolio/PrintingTheDream.webp",
+        "start": 220,
+        "end": 800,
+        "transfer": 59388,
+        "decoded": 59088
+      },
+      {
+        "name": "/assets/portfolio/WindowSeason.webp",
+        "start": 220,
+        "end": 821,
+        "transfer": 61278,
+        "decoded": 60978
+      },
+      {
+        "name": "/assets/portfolio/PointTo.webp",
+        "start": 220,
+        "end": 1113,
+        "transfer": 260092,
+        "decoded": 259792
+      },
+      {
+        "name": "/assets/portfolio/TRMNL-Washington-Ferries.webp",
+        "start": 220,
+        "end": 982,
+        "transfer": 115968,
+        "decoded": 115668
+      },
+      {
+        "name": "/assets/home/materials.js",
+        "start": 305,
+        "end": 396,
+        "transfer": 2624,
+        "decoded": 7115
+      },
+      {
+        "name": "/assets/home/trees.js",
+        "start": 305,
+        "end": 447,
+        "transfer": 4117,
+        "decoded": 12456
+      },
+      {
+        "name": "/assets/home/ferry.js",
+        "start": 305,
+        "end": 470,
+        "transfer": 2673,
+        "decoded": 6961
+      },
+      {
+        "name": "/assets/home/clouds.js",
+        "start": 305,
+        "end": 479,
+        "transfer": 2138,
+        "decoded": 3946
+      },
+      {
+        "name": "/assets/home/weather.js",
+        "start": 305,
+        "end": 492,
+        "transfer": 1564,
+        "decoded": 2782
+      },
+      {
+        "name": "/assets/home/solar.js",
+        "start": 305,
+        "end": 531,
+        "transfer": 632,
+        "decoded": 508
+      },
+      {
+        "name": "/assets/home/vendor/suncalc.mjs",
+        "start": 532,
+        "end": 765,
+        "transfer": 3552,
+        "decoded": 8946
+      }
+    ],
+    "errors": []
+  }
+]

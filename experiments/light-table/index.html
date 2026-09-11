@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Light table, a portfolio experiment</title>
+<meta name="description" content="A design experiment for Zachary Coleman's portfolio: project work mounted as slides on a light table, examined with a movable loupe.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#171320">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
+<link rel="stylesheet" href="light-table.css">
+</head>
+<body>
+
+<a class="skip" href="#reading">Skip to the written work</a>
+
+<header class="topbar">
+  <p class="whoami"><span class="whoami-name">Zachary Coleman</span><span class="whoami-role">Apple platform apps</span></p>
+  <nav class="experiments" aria-label="Design experiments">
+    <a href="../water/">Water</a>
+    <a href="../objects/">Objects</a>
+    <a href="../light-table/" aria-current="page">Light table</a>
+    <a href="../">Compare studies</a>
+  </nav>
+</header>
+
+<main>
+<section class="stage">
+
+  <h1 class="stage-title">Held up<br>to the light</h1>
+
+  <div class="stage-table">
+    <div class="panel">
+      <div class="panel-glow" aria-hidden="true"></div>
+      <div class="panel-surface">
+
+        <div class="mount-wrap">
+          <!-- slides injected here by light-table.js -->
+        </div>
+
+        <div class="controls">
+          <button type="button" class="ctl ctl-inspect" id="inspect-toggle" aria-pressed="false">Inspect</button>
+          <div class="ctl-group" role="group" aria-label="Loupe magnification">
+            <button type="button" class="ctl ctl-mag" data-mag="2.6" aria-pressed="true">2.6&times;</button>
+            <button type="button" class="ctl ctl-mag" data-mag="5.2" aria-pressed="false">5.2&times;</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="strip" role="tablist" aria-label="Slides on the light table">
+      <!-- thumbnails injected here -->
+    </div>
+  </div>
+
+  <div class="stage-text">
+    <p class="lede">Four frames on the table: apps for iPhone and Apple Watch, a detour into Nintendo hardware, and one afternoon in the San Juans.</p>
+    <p class="how" id="loupe-how">The loupe follows your pointer. By keyboard, focus a slide and steer with the arrow keys. On touch, turn on <span class="how-em">Inspect</span> and drag.</p>
+    <p class="scrolldown"><a href="#reading">The same four, written out</a></p>
+  </div>
+
+</section>
+
+<section class="reading" id="reading" tabindex="-1">
+
+  <h2 class="reading-head">What each frame is</h2>
+
+  <article class="entry">
+    <h3 class="entry-name">Pixellate Camera</h3>
+    <p class="entry-medium">iOS, on the App Store since 2025</p>
+    <p class="entry-desc">A live camera that shoots like the 1998 Game Boy Camera: four colors, heavy dither, full metadata, and GPS.</p>
+    <p class="entry-fact">Every viewfinder frame runs through a three pass dithering engine that blends Floyd-Steinberg error diffusion with a Bayer matrix, so faces stay recognizable while textures go fully retro. Palettes are editable down to the hex value.</p>
+    <p class="entry-link"><a href="../../portfolio.html#apps">Read the full entry</a></p>
+  </article>
+
+  <article class="entry">
+    <h3 class="entry-name">Printing the Dream</h3>
+    <p class="entry-medium">Hardware and software, open source, 2026</p>
+    <p class="entry-desc">Imports any image into Tomodachi Life on Switch 1 or 2, without modifying the console.</p>
+    <p class="entry-fact">A desktop converter reduces a PNG to the game's palette, chooses the cheapest brush and paint bucket passes, and minimizes cursor travel. A Raspberry Pi Pico then redraws it by impersonating a wired controller over USB. The slide on the table is a photograph of that rig mid draw.</p>
+    <p class="entry-link"><a href="../../portfolio.html#apps">Read the full entry</a></p>
+  </article>
+
+  <article class="entry">
+    <h3 class="entry-name">Aweigh</h3>
+    <p class="entry-medium">iOS and watchOS, awaiting App Review</p>
+    <p class="entry-desc">A rider first iPhone and Apple Watch app for the largest ferry system in the US, with live departures presented as a split flap board.</p>
+    <p class="entry-fact">WSDOT already publishes much of this data. Aweigh's contribution is the arrangement: schedules, vessel positions, capacity, cameras, and alerts organized around the trip a rider is actually trying to make, rather than around the shape of the source feeds.</p>
+    <p class="entry-link"><a href="../../aweigh/">Read the full entry</a></p>
+  </article>
+
+  <article class="entry entry--quiet">
+    <h3 class="entry-name">May light, San Juan Islands</h3>
+    <p class="entry-medium">Photograph</p>
+    <p class="entry-desc">A photograph from the San Juan Islands, included here as a study of light and texture.</p>
+  </article>
+
+  <aside class="sidenote">
+    <h2 class="sidenote-head">Contributing to Godot</h2>
+    <p>Ten merged pull requests in the core of the Godot engine, mostly repairing Apple platform support across current and legacy releases. One of them had been reporting the wrong Windows daylight saving offset for eight years.</p>
+    <p class="entry-link"><a href="../../portfolio.html#open-source">See the open source work</a></p>
+  </aside>
+
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-note">A design experiment, not the live site. Photographs and screens are real work; the table is a metaphor.</p>
+  <nav class="experiments" aria-label="Design experiments">
+    <a href="../water/">Water</a>
+    <a href="../objects/">Objects</a>
+    <a href="../light-table/" aria-current="page">Light table</a>
+    <a href="../">Compare studies</a>
+  </nav>
+</footer>
+
+<script src="light-table.js"></script>
+</body>
+</html>

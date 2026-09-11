@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Objects on a bench, an experiment by Zachary Coleman</title>
+<meta name="description" content="A portfolio experiment: three of Zachary Coleman's projects as working objects on a workbench.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="objects.css">
+<link rel="preload" as="image" href="../../assets/aweigh/watchos-frame.webp" fetchpriority="high">
+</head>
+<body>
+<a class="skip" href="#bench">Skip to the bench</a>
+
+<header class="topbar">
+  <a class="wordmark" href="../../portfolio.html">Zachary Coleman</a>
+  <nav class="switcher" aria-label="Portfolio experiments">
+    <span class="switcher-name">Experiments</span>
+    <ul>
+      <li><a href="../water/">Water</a></li>
+      <li><a href="./" aria-current="page">Objects</a></li>
+      <li><a href="../light-table/">Light table</a></li>
+      <li><a href="../objects-next/">New variations</a></li><li><a href="../">First studies</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="room">
+
+  <section class="identity">
+    <h1>Zachary Coleman</h1>
+    <p class="role">I make apps for Apple platforms, photography tools, and hardware experiments. I also contribute fixes to the Godot engine.</p>
+    <p class="wayfinding">
+      <a href="../../portfolio.html#apps">Selected work</a>
+      <a href="../../aweigh/">Aweigh case study</a>
+      <a href="../../portfolio.html#open-source">Godot contributions</a>
+    </p>
+
+  </section>
+
+    <article class="card" id="readout" aria-live="polite">
+      <h2 class="card-name" id="card-name">Aweigh</h2>
+      <p class="card-role" id="card-role">iOS and watchOS app, awaiting App Review</p>
+      <div class="card-body" id="card-body">
+        <p>A rider first app for the largest ferry system in the US, with live departures presented as a split flap board. Schedules, vessel locations, capacity, cameras, and alerts are organized around the trip a rider is trying to make.</p>
+      </div>
+      <p class="card-link"><a id="card-link" href="../../aweigh/">Read the Aweigh case study</a></p>
+    </article>
+
+  <section class="stage" id="bench" aria-label="The bench">
+    <div class="wall" aria-hidden="true"></div>
+
+    <figure class="pinned">
+      <img src="../../assets/portfolio/PrintingTheDream.webp" width="1280" height="876" decoding="async"
+           alt="A Nintendo Switch showing octopus artwork in Tomodachi Life, wired to a Raspberry Pi Pico running the drawing macro.">
+      <span class="clip" aria-hidden="true"></span>
+    </figure>
+
+    <div class="shelf">
+      <ul class="objects" id="objects">
+
+        <li class="object object--watch is-selected" data-object="aweigh">
+          <div class="prop">
+            <div class="watch">
+              <div class="watch-screen">
+                <img src="../../assets/aweigh/watchos-poster.webp" width="416" height="496" decoding="async"
+                     alt="The Aweigh watchOS app showing a ferry departure board.">
+              </div>
+              <img class="watch-frame" src="../../assets/aweigh/watchos-frame.webp" width="1120" height="1760" decoding="async" alt="">
+            </div>
+            <div class="cradle" aria-hidden="true"><span></span></div>
+          </div>
+          <button type="button" class="plate" data-select="aweigh" aria-pressed="true" aria-controls="readout">
+            <span class="plate-name">Aweigh</span>
+            <span class="plate-sub">Ferries, on the wrist</span>
+          </button>
+        </li>
+
+        <li class="object object--viewer" data-object="pixellate">
+          <div class="prop">
+            <div class="viewer">
+              <div class="viewer-window">
+                <canvas id="photo" width="480" height="360" role="img"
+                        aria-label="A San Juan Islands photograph, mixed toward a four color pixelated version by the dial below."></canvas>
+              </div>
+              <div class="viewer-controls">
+                <label class="visually-hidden" for="mix">Mix toward the four color version</label>
+                <input type="range" id="mix" min="0" max="100" value="0" step="1" aria-describedby="mix-value">
+                <output class="engraved" id="mix-value" for="mix">0%</output>
+              </div>
+              <span class="screw screw--a" aria-hidden="true"></span>
+              <span class="screw screw--b" aria-hidden="true"></span>
+            </div>
+          </div>
+          <button type="button" class="plate" data-select="pixellate" aria-pressed="false" aria-controls="readout">
+            <span class="plate-name">Pixellate Camera</span>
+            <span class="plate-sub">Four colors, heavy dither</span>
+          </button>
+        </li>
+
+        <li class="object object--press" data-object="printing">
+          <div class="prop">
+            <div class="press">
+              <div class="press-screen">
+                <canvas id="draw" width="240" height="240" role="img"
+                        aria-label="A pixel octopus, drawn one color pass at a time by the print button."></canvas>
+              </div>
+              <div class="press-deck">
+                <button type="button" class="print" id="print">
+                  <span class="print-cap"><span class="print-label">Print</span></span>
+                </button>
+                <p class="press-status"><span class="led" id="led" aria-hidden="true"></span><span class="engraved" id="pass-label" aria-live="polite">Ready, 4 passes</span></p>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="plate" data-select="printing" aria-pressed="false" aria-controls="readout">
+            <span class="plate-name">Printing the Dream</span>
+            <span class="plate-sub">A Pico that draws</span>
+          </button>
+        </li>
+
+      </ul>
+      <div class="slab" aria-hidden="true"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="note">
+  <p>The watch shows Aweigh itself. The photo dial and drawing button are browser sketches inspired by the projects; their original implementations are linked in the descriptions.</p>
+</footer>
+
+<script src="objects.js" defer></script>
+</body>
+</html>

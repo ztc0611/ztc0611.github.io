@@ -1,0 +1,2 @@
+# Embedded GLSL retains upstream whitespace inside JavaScript template strings.
+assets/home/dist/scene.min.js linguist-generated=true -whitespace

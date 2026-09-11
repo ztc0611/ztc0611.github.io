@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex"><title>Zachary Coleman · Water study</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+  <nav class="experiments" aria-label="Design experiments"><a href="../">Design studies</a><div><a href="../water/" aria-current="page">Water</a><a href="../objects/">Objects</a><a href="../light-table/">Light table</a></div></nav>
+  <main>
+    <section class="scene" aria-labelledby="name">
+      <canvas id="water" aria-hidden="true"></canvas>
+      <div class="surface-shade" aria-hidden="true"></div>
+      <header class="site-nav"><span>Apps, photographs &amp; experiments</span><a href="../../portfolio.html#open-source">Open source <span aria-hidden="true">↗</span></a></header>
+      <div class="intro"><h1 id="name">Zachary<br>Coleman<span class="name-dot">.</span></h1><p>I make software for small screens<br>and the world around them.</p><a class="work-link" href="#work">Explore my work <span aria-hidden="true">↓</span></a></div>
+      <div class="artifact-area">
+        <div class="artifact" data-kind="watch">
+          <img id="artifact-image" src="../../assets/aweigh/watchos-poster.webp" alt="Aweigh ferry schedule on an Apple Watch">
+          <span class="artifact-shine" aria-hidden="true"></span>
+        </div>
+        <div class="artifact-caption" aria-live="polite"><strong id="artifact-title">Aweigh</strong><span id="artifact-caption">Your next ferry, at a glance.</span></div>
+      </div>
+      <div class="scene-bottom">
+        <div class="project-picker" role="group" aria-label="Preview a project"><button type="button" data-project="aweigh" aria-pressed="true">Aweigh</button><button type="button" data-project="pixellate" aria-pressed="false">Pixellate</button><button type="button" data-project="dream" aria-pressed="false">Printing the Dream</button></div>
+        <div class="water-controls"><button type="button" id="ripple">Touch the water <span aria-hidden="true">◌</span></button><button type="button" id="light" aria-pressed="false">After hours <span aria-hidden="true">◐</span></button></div>
+      </div>
+      <noscript><p class="no-script">Explore the selected work below. The water and project previews use JavaScript.</p></noscript>
+    </section>
+    <section id="work" class="work" aria-labelledby="work-title">
+      <div class="work-heading"><h2 id="work-title">Made to be used.</h2><p>Native apps, tools for making things,<br>and the occasional hardware detour.</p></div>
+      <a class="work-row" href="../../aweigh/"><span class="project-name">Aweigh</span><p>Ferry schedules, vessel positions, and the next departure on your wrist.</p><span class="project-kind">iPhone &amp; Apple Watch</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+      <a class="work-row" href="../../portfolio.html#apps"><span class="project-name">Pixellate Camera</span><p>A different way to make a photograph.</p><span class="project-kind">iPhone</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+      <a class="work-row" href="../../portfolio.html#apps"><span class="project-name">Printing the Dream</span><p>Turning a picture into controller inputs and a drawing on a console.</p><span class="project-kind">Software meets hardware</span><span class="row-arrow" aria-hidden="true">↗</span></a>
+      <div class="about"><p>I like the point where an interface meets something real: a boat, a photograph, a place you want to get back to.</p><a href="../../portfolio.html">More about me and my work <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+  <footer><span>A portfolio design study.</span><span>Actual project images. A little imaginary water.</span><a href="../">Compare the experiments</a></footer>
+  <script src="water.js"></script><script src="page.js"></script>
+</body>
+</html>

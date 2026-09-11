@@ -1,0 +1,556 @@
+:root {
+  --studio:      #171320;
+  --studio-lift: #1E1929;
+  --graphite:    #241E2E;
+  --mount:       #332B3F;
+  --mount-edge:  #453A52;
+  --mount-deep:  #221C2B;
+  --opal:        #F7F3FB;
+  --opal-warm:   #FFF3DE;
+  --amber:       #E3A34A;
+  --amber-soft:  #F0C88A;
+  --text:        #CFC5DA;
+  --text-dim:    #9C90AB;
+  --on-light:    #2A2333;
+
+  --slide-h: min(40vh, 372px);
+  --ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* the panel spills light past its own box; that must never add page scroll */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--studio);
+  color: var(--text);
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.62;
+  font-variant-numeric: oldstyle-num;
+  /* the room is lit from the table, so the corners fall away */
+  background-image:
+    radial-gradient(120% 90% at 68% 34%, rgba(198, 176, 224, .10), transparent 62%),
+    radial-gradient(80% 60% at 20% 100%, rgba(227, 163, 74, .05), transparent 70%);
+  background-attachment: fixed;
+  /* the panel's light spill is drawn outside the panel box; it must not add scroll */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem; top: -4rem;
+  z-index: 20;
+  background: var(--amber);
+  color: #221A0C;
+  padding: .6rem 1rem;
+  border-radius: 3px;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: .9rem;
+  text-decoration: none;
+  transition: top .18s var(--ease);
+}
+.skip:focus { top: 1rem; }
+
+/* ---------------------------------------------------------------- top bar */
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  flex-wrap: wrap;
+  padding: 1.6rem clamp(1.25rem, 4vw, 3.25rem) 0;
+}
+
+.whoami { margin: 0; display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; }
+.whoami-name { font-size: 1.06rem; letter-spacing: .005em; }
+.whoami-role { color: var(--text-dim); font-size: .95rem; font-style: italic; }
+
+.experiments {
+  display: flex;
+  gap: 1.4rem;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: .8125rem;
+  letter-spacing: .012em;
+}
+.experiments a {
+  color: var(--text-dim);
+  text-decoration: none;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid transparent;
+  transition: color .16s var(--ease), border-color .16s var(--ease);
+}
+.experiments a:hover { color: var(--text); border-bottom-color: rgba(207, 197, 218, .35); }
+.experiments a[aria-current="page"] { color: var(--amber-soft); border-bottom-color: var(--amber); }
+
+/* ------------------------------------------------------------------ stage */
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(300px, 30vw) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: clamp(2rem, 5vw, 5rem);
+  row-gap: 1.15rem;
+  padding: clamp(1rem, 3vh, 2.75rem) clamp(1.25rem, 4vw, 3.25rem) clamp(2rem, 5vh, 3.5rem);
+  min-height: calc(100vh - 5rem);
+  min-height: calc(100svh - 5rem);
+}
+
+.stage-title { grid-column: 1; grid-row: 1; align-self: end; max-width: 12ch; }
+.stage-text  { grid-column: 1; grid-row: 2; align-self: start; max-width: 38ch; }
+.stage-table { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 4.6vw, 3.9rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -.018em;
+  color: #EDE6F3;
+  font-variation-settings: "opsz" 60;
+}
+
+.lede {
+  margin: 0 0 1.15rem;
+  font-size: 1.06rem;
+  color: var(--text);
+}
+
+.how {
+  margin: 0 0 1.6rem;
+  font-size: .94rem;
+  font-style: italic;
+  color: var(--text-dim);
+  padding-left: 1rem;
+  border-left: 1px solid rgba(227, 163, 74, .4);
+}
+.how-em { font-style: normal; color: var(--amber-soft); }
+
+.scrolldown { margin: 0; font-size: .95rem; }
+.scrolldown a {
+  color: var(--text-dim);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(156, 144, 171, .45);
+  padding-bottom: .12em;
+}
+.scrolldown a:hover { color: var(--amber-soft); border-bottom-color: var(--amber); }
+
+/* ------------------------------------------------------------ light panel */
+
+.panel {
+  position: relative;
+  max-width: 62rem;
+}
+
+/* light spilling off the panel onto the studio floor */
+.panel-glow {
+  position: absolute;
+  inset: -22% 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(52% 48% at 50% 46%, rgba(244, 236, 252, .30), rgba(227, 163, 74, .09) 58%, transparent 78%);
+  filter: blur(30px);
+}
+
+.panel-surface {
+  position: relative;
+  border-radius: 4px;
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.25rem) 1.1rem;
+  background:
+    /* the diffuser: a fine ruling, only just visible */
+    repeating-linear-gradient(90deg, rgba(42, 35, 51, .045) 0 1px, transparent 1px 4px),
+    radial-gradient(120% 130% at 50% 8%, #FFFFFF 0%, var(--opal) 42%, var(--opal-warm) 88%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .85),
+    inset 0 0 40px rgba(206, 186, 166, .34),
+    0 0 0 6px rgba(52, 44, 64, .95),
+    0 0 0 7px rgba(96, 82, 114, .7),
+    0 0 90px -6px rgba(246, 238, 252, .34),
+    0 34px 60px -26px rgba(0, 0, 0, .9);
+}
+
+/* the panel warms up while a slide loads */
+.panel-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--mount-deep);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .45s var(--ease);
+}
+.panel-surface.is-warming::after { opacity: .82; }
+
+/* ------------------------------------------------------------- the mounts */
+
+.mount-wrap {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--slide-h) + 5rem);
+}
+
+.mount {
+  --ar: 1.46;
+  --pad: 14px;
+  position: relative;
+  width: min(100%, calc(var(--ar) * var(--slide-h) + 2 * var(--pad)));
+  padding: 14px var(--pad) 0;
+  border-radius: 2px;
+  background: linear-gradient(176deg, var(--mount-edge), var(--mount) 34%, var(--mount-deep));
+  /* light leaking around the edge of an opaque slide on a lit panel */
+  box-shadow:
+    inset 0 1px 0 rgba(230, 216, 244, .28),
+    0 0 26px rgba(255, 244, 224, .6),
+    0 2px 3px rgba(60, 42, 20, .3),
+    0 20px 32px -14px rgba(58, 40, 22, .6);
+}
+.mount[hidden] { display: none; }
+
+/* 35mm strip: rebate and sprockets down both edges */
+.mount--film { --pad: 20px; }
+.mount--film::before,
+.mount--film::after {
+  content: "";
+  position: absolute;
+  top: 16px; bottom: 3.1rem;
+  width: 8px;
+  background:
+    repeating-linear-gradient(180deg,
+      transparent 0 5px,
+      rgba(12, 9, 17, .78) 5px 12px,
+      transparent 12px 17px);
+  border-radius: 1px;
+}
+.mount--film::before { left: 6px; }
+.mount--film::after  { right: 6px; }
+
+.window {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ar);
+  /* not clipped: the loupe is allowed to hang over the edge of the slide */
+  background: var(--mount-deep);
+  cursor: crosshair;
+  /* let the page scroll on touch until Inspect is switched on */
+  touch-action: pan-y;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .6);
+}
+.window.is-inspecting { touch-action: none; }
+
+.window img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.mount-label {
+  margin: 0;
+  padding: .7rem 2px .78rem;
+  font-size: .84rem;
+  line-height: 1.3;
+  color: #D6C9E2;
+}
+.mount-label .lbl-name { display: block; letter-spacing: .005em; }
+.mount-label .lbl-what { display: block; color: #9E90AE; font-style: italic; font-size: .79rem; }
+
+/* ---------------------------------------------------------------- the loupe */
+
+.loupe {
+  position: absolute;
+  top: 0; left: 0;
+  width: var(--loupe-d, 172px);
+  height: var(--loupe-d, 172px);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  background-repeat: no-repeat;
+  background-color: var(--mount-deep);
+  transform: translate3d(-999px, -999px, 0);
+  box-shadow:
+    inset 0 0 22px rgba(30, 20, 45, .3),
+    inset 0 0 0 1px rgba(255, 255, 255, .9),
+    0 0 0 2px rgba(28, 22, 38, .92);
+  transition: opacity .14s var(--ease);
+}
+
+/* the barrel: machined brass, lit from the upper left like everything else */
+.loupe::before {
+  content: "";
+  position: absolute;
+  inset: -11px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding: 11px;
+  /* keep only the 11px ring, so the glass underneath stays visible */
+  -webkit-mask: radial-gradient(#000 0 0) content-box, radial-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: radial-gradient(#000 0 0) content-box, radial-gradient(#000 0 0);
+  mask-composite: exclude;
+  background: conic-gradient(from 202deg,
+    #6E5836, #C9A264, #8A7145, #EBCB93, #6A5533, #B08F58, #7E6740, #DDBB7C, #6E5836);
+  box-shadow:
+    0 0 0 1px rgba(24, 16, 8, .8),
+    0 18px 28px -10px rgba(20, 12, 4, .78);
+}
+.loupe.is-on { opacity: 1; visibility: visible; }
+
+/* glass: a highlight across the top left, a warm bloom at the bottom right */
+.loupe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(58% 48% at 30% 24%, rgba(255, 255, 255, .30), transparent 62%),
+    radial-gradient(70% 70% at 76% 84%, rgba(227, 163, 74, .16), transparent 66%);
+  mix-blend-mode: screen;
+}
+
+/* --------------------------------------------------------------- controls */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding-top: .35rem;
+}
+
+.ctl {
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: #4C4058;
+  background: transparent;
+  border: 1px solid rgba(76, 64, 88, .38);
+  border-radius: 2px;
+  padding: .38rem .7rem;
+  cursor: pointer;
+  transition: background-color .14s var(--ease), color .14s var(--ease), border-color .14s var(--ease);
+}
+.ctl:hover { border-color: rgba(76, 64, 88, .75); color: var(--on-light); }
+.ctl:focus-visible { outline-color: #6B4A12; }
+.ctl[aria-pressed="true"] {
+  background: var(--on-light);
+  border-color: var(--on-light);
+  color: var(--amber-soft);
+}
+
+.ctl-group { display: flex; margin-left: auto; }
+.ctl-group .ctl:first-child { border-radius: 2px 0 0 2px; }
+.ctl-group .ctl:last-child  { border-radius: 0 2px 2px 0; margin-left: -1px; }
+
+/* ---------------------------------------------------------- the film strip */
+
+.strip {
+  display: flex;
+  gap: .9rem;
+  margin-top: 1.5rem;
+  padding-bottom: .5rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mount) transparent;
+}
+
+.chip {
+  flex: 0 0 auto;
+  width: 132px;
+  padding: 7px 7px 0;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(176deg, #3A3146, var(--mount-deep));
+  color: var(--text-dim);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(230, 216, 244, .16), 0 8px 16px -10px rgba(0, 0, 0, .8);
+  transition: color .16s var(--ease), box-shadow .16s var(--ease), transform .16s var(--ease);
+}
+.chip:hover { color: var(--text); transform: translateY(-2px); }
+
+.chip-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #100C18;
+  filter: brightness(.62) saturate(.72);
+  transition: filter .2s var(--ease);
+}
+.chip:hover .chip-img { filter: brightness(.82) saturate(.88); }
+
+.chip-name {
+  display: block;
+  padding: .5rem 2px .55rem;
+  font-size: .8rem;
+  line-height: 1.25;
+}
+
+.chip[aria-selected="true"] {
+  color: #F2E9F8;
+  box-shadow:
+    inset 0 1px 0 rgba(230, 216, 244, .3),
+    0 0 0 1px var(--amber),
+    0 10px 24px -10px rgba(227, 163, 74, .5);
+}
+.chip[aria-selected="true"] .chip-img { filter: none; }
+
+/* ---------------------------------------------------------------- reading */
+
+.reading {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 8vh, 6rem) clamp(1.25rem, 4vw, 3.25rem) 2rem;
+  border-top: 1px solid rgba(207, 197, 218, .12);
+}
+.reading:focus { outline: none; }
+
+.reading-head {
+  margin: 0 0 2.6rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-dim);
+  letter-spacing: .005em;
+}
+
+.entry {
+  max-width: 62ch;
+  margin: 0 0 3.4rem;
+  padding-left: clamp(0px, 3vw, 3.5rem);
+}
+
+.entry-name {
+  margin: 0 0 .15rem;
+  font-size: clamp(1.5rem, 2.4vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.012em;
+  color: #EDE6F3;
+}
+.entry-medium {
+  margin: 0 0 1rem;
+  font-size: .88rem;
+  font-style: italic;
+  color: var(--text-dim);
+}
+.entry-desc { margin: 0 0 .9rem; font-size: 1.12rem; color: #E1D8EB; }
+.entry-fact { margin: 0 0 1.1rem; color: var(--text-dim); }
+
+.entry-link { margin: 0; font-size: .95rem; }
+.entry-link a {
+  color: var(--amber-soft);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(227, 163, 74, .45);
+  padding-bottom: .12em;
+  transition: border-color .16s var(--ease);
+}
+.entry-link a:hover { border-bottom-color: var(--amber); }
+
+.entry--quiet .entry-desc { font-size: 1rem; color: var(--text); }
+
+.sidenote {
+  max-width: 62ch;
+  margin: 0 0 1rem;
+  padding: 1.6rem 0 0 clamp(0px, 3vw, 3.5rem);
+  border-top: 1px solid rgba(207, 197, 218, .12);
+}
+.sidenote-head {
+  margin: 0 0 .7rem;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #E1D8EB;
+}
+.sidenote p { margin: 0 0 .9rem; color: var(--text-dim); }
+
+/* ----------------------------------------------------------------- footer */
+
+.foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  flex-wrap: wrap;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2rem clamp(1.25rem, 4vw, 3.25rem) 3rem;
+}
+.foot-note {
+  margin: 0;
+  max-width: 46ch;
+  font-size: .88rem;
+  font-style: italic;
+  color: #7E7290;
+}
+
+/* ------------------------------------------------------------ narrow view */
+
+@media (max-width: 1080px) {
+  .stage {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    align-items: start;
+    min-height: 0;
+    row-gap: 1.35rem;
+  }
+  /* the slide comes before the reading on a narrow screen, so it lands high */
+  .stage-title { grid-column: 1; grid-row: 1; max-width: none; }
+  .stage-table { grid-column: 1; grid-row: 2; }
+  .stage-text  { grid-column: 1; grid-row: 3; max-width: 46ch; }
+  :root { --slide-h: min(42vh, 330px); }
+}
+
+@media (max-width: 620px) {
+  body { font-size: 16px; }
+  :root { --slide-h: min(40vh, 320px); }
+  .stage { row-gap: 1.1rem; }
+  .stage-title { line-height: 1.0; }
+  .topbar { gap: .7rem; padding-top: 1.15rem; }
+  .experiments { gap: 1.1rem; flex-wrap: wrap; }
+  .whoami { gap: .45rem; }
+  .whoami-role { font-size: .88rem; }
+  h1 { font-size: clamp(2.1rem, 11vw, 2.8rem); }
+  .panel-surface { padding: 1rem .8rem .8rem; }
+  /* on a narrow screen the panel resizes with the slide rather than
+     reserving room for the tallest one; the vertical space matters more */
+  .mount-wrap { min-height: 0; }
+  .mount-label { flex-direction: column; gap: .1rem; }
+  .mount-label .lbl-what { text-align: left; }
+  .loupe::before { inset: -8px; padding: 8px; }
+  .strip { margin-left: -.4rem; padding-left: .4rem; }
+  .chip { width: 112px; }
+  .foot { padding-bottom: 2.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .chip:hover { transform: none; }
+}

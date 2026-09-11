@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Zachary Coleman, iOS Developer</title>
+    <meta name="description" content="iOS developer in Seattle. Native apps for iPhone, Apple Watch, Mac, and Vision Pro, plus 10 merged patches in the Godot game engine.">
+    <link rel="canonical" href="https://ztc0611.github.io/portfolio.html">
+
+    <!-- One value per scheme, so Safari never paints the wrong bar color -->
+    <meta name="theme-color" content="#EBEFEB" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0B0E13" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Zachary Coleman, iOS Developer">
+    <meta property="og:description" content="iOS developer in Seattle. Native apps for iPhone, Apple Watch, Mac, and Vision Pro, plus 10 merged patches in the Godot game engine.">
+    <meta property="og:image" content="https://ztc0611.github.io/assets/portfolio/Embed.jpg">
+    <meta property="og:url" content="https://ztc0611.github.io/portfolio.html">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Zachary Coleman, iOS Developer">
+    <meta name="twitter:description" content="iOS developer in Seattle. Native apps for iPhone, Apple Watch, Mac, and Vision Pro, plus 10 merged patches in the Godot game engine.">
+    <meta name="twitter:image" content="https://ztc0611.github.io/assets/portfolio/Embed.jpg">
+
+    <!-- Five small icons, one per app entry, cheap enough to fetch up front -->
+    <link rel="preload" as="image" href="assets/apps/aweigh.webp">
+    <link rel="preload" as="image" href="assets/apps/window-season.webp">
+    <link rel="preload" as="image" href="assets/apps/pixellate.webp">
+    <link rel="preload" as="image" href="assets/apps/point-to.webp">
+
+    <!-- Bezel and poster first, so the watch paints a real frame while the video streams -->
+    <link rel="preload" as="image" href="assets/aweigh/watchos-frame.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/aweigh/watchos-poster.webp">
+
+    <link rel="stylesheet" href="portfolio.css?v=20260813a">
+    <script src="portfolio.js?v=20260813a" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#apps">Skip to selected work</a>
+
+<div class="page">
+
+    <!-- ==================================================================
+         MASTHEAD
+         ================================================================== -->
+    <header class="masthead">
+
+        <h1 class="name">Zachary Coleman</h1>
+        <p class="role">iOS engineer and open-source engine contributor</p>
+
+        <div class="band--say">
+            <p class="say">
+                <span>Open to iOS roles in San Francisco or Seattle.</span>
+                <span>Available now.</span>
+                <span class="ink" aria-hidden="true">
+                    <svg viewBox="-9 -1 489 115" preserveAspectRatio="none" focusable="false">
+                        <path d="M68.2 24.5L83.9 21.9L97.3 19.8L128.1 15.8L145.6 13.9L158.1 12.7L185.8 10.6L220.3 8.7L282.6 6.3L303.9 5.8L316.9 5.7L335 5.8L346.2 6L356.9 6.5L367 7.1L376.5 7.9L385.6 9L394.2 10.2L402.3 11.5L410 13.1L417.2 14.9L424 16.8L430.5 18.9L436.4 21.2L442 23.6L449.6 27.5L454.1 30.2L458.2 33.1L461.8 36.1L464.9 39.3L467.5 42.7L469.5 46.6L470.3 48.8L471.9 56.7L472 60.2L471.9 61.7L471 64.6L470.4 66L468.7 68.4L466.6 70.5L463 73.1L457.2 76.1L452.1 78.4L442.5 82L435.1 84.4L427 86.7L418.2 89.1L403.9 92.5L393.7 94.6L383 96.7L371.8 98.6L354.1 101.2L341.8 102.7L329 104L315.6 105.2L294.3 106.5L278.7 107.2L234.4 108.3L207 108.4L192.1 108.2L178.3 107.7L165.4 107.1L147 105.9L135.4 105L118.6 103.3L102.6 101.5L87.3 99.5L63.6 95.9L50.7 93.5L42.7 91.9L31.7 89.1L25.2 87.2L19.3 85.1L14.1 82.8L9.7 80.4L6 77.8L3.1 74.9L2 73.4L1 71.9L0.3 70.2L-0.3 68.4L-0.7 66.5L-0.8 64.3L-0.8 61.5L-0.7 58.3L-0.3 56.1L0.3 54.1L1 52.4L2.9 49.2L5.3 46.4L7.9 44.1L10.8 42L14.2 39.9L18.5 37.7L23.6 35.4L29.3 33L35.7 30.7L46.3 27.2L62.1 22.8L66.6 21.8L71.4 20.9L87.3 18.6L104.3 16.8L122.2 15.4L154.5 13.7L155.2 13.5L156.2 12.9L156.8 12L156.7 11.8L156.5 11.6L150.3 11.3L132.2 11.6L114.6 12.5L97.8 14L81.9 15.9L72 17.5L63.2 19.6L55.2 21.8L43.8 25.3L33.2 29.1L26.6 31.7L17.2 36.1L11.2 39.4L5.7 43L0.9 46.7L-2.7 50.4L-5.4 54.1L-6.4 56L-7.1 57.9L-7.7 60L-8.1 62.3L-8.1 68.4L-7.9 70.6L-7.5 72.6L-6.9 74.4L-6 76.1L-5 77.7L-2.4 80.6L1 83.3L5.2 85.8L10.1 88.2L15.6 90.4L21.9 92.4L32.4 95.3L40.2 97.1L52.7 99.7L61.7 101.2L75.8 103.4L90.8 105.5L106.6 107.4L134.6 110.1L152.6 111.4L165.3 112.1L178.6 112.7L193 113.1L208.9 113.3L228.2 113.1L272.6 112.1L288.3 111.5L309.7 110.1L323.1 109L336 107.6L348.4 106L360.4 104.3L371.9 102.3L388.4 99.2L398.7 96.9L413.3 93.4L426.6 89.7L434.7 87.2L445.7 83.3L452.3 80.6L458.5 77.7L461.4 76.1L466.9 72.8L471.6 69.2L475 65.9L477.2 62.7L478.5 59.6L479 56.3L479 54.5L478.4 50.6L477.2 44.8L476.4 42.5L475.4 40.5L473.1 36.9L471.8 35.2L468.7 32L465.1 28.9L461.1 26L454.2 21.8L449.1 19.2L440.7 15.6L434.5 13.3L427.9 11.2L420.9 9.3L413.4 7.5L405.5 6L397.1 4.6L388.3 3.5L378.9 2.5L369 1.7L358.5 1.2L341.8 0.6L329.8 0.5L310.5 0.6L296.5 0.8L273.1 1.5L216.8 3.8L192.1 5.3L170.9 6.9L151.8 8.7L134.2 10.7L117.9 12.8L107.5 14.4L87.8 18.1L73.9 21.3L69.1 22.6L68.2 22.9L67.3 23.9L67.4 24.4L67.7 24.5Z"/>
+                        <path d="M66.5 24.9L69.8 24.5L88.1 21.4L96.9 20.2L108.7 17.9L140.2 13.8L157.7 11.7L160.1 11.2L160.6 10.7L160.7 10.3L160.3 9.9L157.3 9.9L140.8 10.9L129.3 11.9L116.6 13.3L108.4 14.5L101.9 15.9L85.5 18.6L76.7 20.7L67.9 23.1L66.4 23.6L65.8 24.1L65.7 24.7L66.2 25Z"/>
+                    </svg>
+                </span>
+                <!-- MARGIN NOTE COPY: the only hover-revealed string on the page. -->
+                <span class="note" aria-hidden="true">the whole point<br>of this page</span>
+            </p>
+        </div>
+
+        <div class="band--work">
+            <p class="intro">I ship native apps to the App Store, and I fix the platform bugs underneath them in the engines other people ship on.</p>
+
+            <p class="links">
+                <a href="/resume.pdf">Resume (PDF)</a>
+                <a href="mailto:za.colem@gmail.com">Contact</a>
+                <a href="https://www.linkedin.com/in/zacharytcoleman/" target="_blank" rel="noopener">LinkedIn<span class="ext-mark" aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+            </p>
+        </div>
+
+    </header>
+
+    <!-- ==================================================================
+         SELECTED WORK
+         ================================================================== -->
+    <section id="apps" class="section" aria-labelledby="apps-heading">
+        <h2 class="section-title" id="apps-heading">Selected work</h2>
+
+        <div class="entries">
+
+            <!-- ------------------------------------------------- AWEIGH -->
+            <article class="entry entry--aweigh">
+                <div class="entry-image">
+                    <div class="hero-slot hero-slot--dark">
+                        <div class="hero-route-map" aria-hidden="true"></div>
+                        <div class="hero-watch">
+                            <div class="hero-watch-screen">
+                                <!-- The loop crossfade is baked into the file, so one native
+                                     looping video replaces any double-buffer machinery. -->
+                                <video muted loop playsinline preload="auto" poster="assets/aweigh/watchos-poster.webp">
+                                    <source src="assets/aweigh/watchos-loop.hevc.mp4" type="video/mp4; codecs=hvc1">
+                                    <source src="assets/aweigh/watchos-loop.mp4" type="video/mp4">
+                                </video>
+                                <div class="hero-loader" aria-hidden="true">
+                                    <div class="hero-loader-spinner">
+                                        <div></div><div></div><div></div>
+                                        <div></div><div></div><div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img class="hero-watch-frame" src="assets/aweigh/watchos-frame.webp" alt="Apple Watch frame with the Aweigh app running." width="1120" height="1760" fetchpriority="high" decoding="async">
+                        </div>
+                        <button type="button" class="hero-play on-dark" hidden>
+                            <span aria-hidden="true">&#9654;</span>
+                            <span>Play the demo</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="entry-body">
+                    <div class="entry-title-row">
+                        <img class="entry-icon" src="assets/apps/aweigh.webp" width="44" height="44" alt="" decoding="async">
+                        <div>
+                            <h3 class="entry-name">Aweigh</h3>
+                            <p class="entry-sub">iOS and watchOS &middot; on the App Store since 2026</p>
+                        </div>
+                    </div>
+                    <p class="entry-desc">A rider-first iPhone and Apple Watch app for the largest ferry system in the US, with live departures presented as a split-flap board.</p>
+                    <p class="entry-fact">WSDOT already publishes much of this information. Aweigh's contribution is the experience: schedules, vessel locations, capacity, cameras, and alerts are organized around the trip a rider is trying to make.</p>
+                    <p class="entry-fact">A Raspberry Pi has polled the live system every ten minutes for three months. That archive exposed stale and undocumented data, and now validates the schedule, cancellation, and crossing-time logic served by Aweigh's Cloudflare backend.</p>
+                    <p class="entry-fact">Two of those decisions, with the June 2026 records behind them: <a href="/aweigh/#decisions">reading a cancellation, and holding a number that stopped arriving</a>.</p>
+                    <p class="entry-links"><a class="btn btn--primary" href="/aweigh/"><span class="btn-label">Learn more</span><span aria-hidden="true">&rarr;</span></a><a class="btn btn--primary" href="FIXME"><span class="btn-label">View on the App Store</span><span class="ext-mark" aria-hidden="true">&#8599;</span></a></p>
+                </div>
+            </article>
+
+            <!-- ------------------------- WASHINGTON STATE FERRIES, TRMNL -->
+            <article class="entry">
+                <div class="entry-image">
+                    <picture>
+                        <source media="(prefers-color-scheme: dark)" srcset="assets/portfolio/TRMNL-Washington-Ferries-Dark.webp">
+                        <img src="assets/portfolio/TRMNL-Washington-Ferries.webp" width="1125" height="750" loading="lazy" decoding="async" alt="A TRMNL e-ink display on a brick wall running the Washington State Ferries plugin: a 1-bit map of the Seattle area with labeled terminals and live vessel positions, beside two columns of departure times for both directions between Seattle and Bainbridge Island, with a service alert along the bottom.">
+                    </picture>
+                </div>
+                <div class="entry-body">
+                    <div class="entry-title-row">
+                        <div>
+                            <h3 class="entry-name">Washington State Ferries for TRMNL</h3>
+                            <p class="entry-sub">E-ink plugin &middot; released 2026</p>
+                        </div>
+                    </div>
+                    <p class="entry-desc">A live map and complete schedule for every Washington State Ferries route on an e-ink display. The experiment that grew into Aweigh.</p>
+                    <p class="entry-fact">Designed for an e-ink platform that renders remotely with no client runtime, while keeping every generated file below 100 KiB.</p>
+                    <p class="entry-links"><a class="btn btn--primary" href="https://trmnl.com/recipes/299929" target="_blank" rel="noopener"><span class="btn-label">View on TRMNL</span><span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+                </div>
+            </article>
+
+            <!-- ------------------------------------------ WINDOW SEASON -->
+            <article class="entry">
+                <div class="entry-image">
+                    <picture>
+                        <source media="(prefers-color-scheme: dark)" srcset="assets/portfolio/WindowSeason-Dark.webp">
+                        <img src="assets/portfolio/WindowSeason.webp" width="1500" height="1125" loading="lazy" decoding="async" alt="Window Season running on three iPhones and two Apple Watches. One iPhone shows a 'Close Now' screen for Los Angeles with a feels-like temperature graph; another shows a home screen with Window Season widgets for Seattle, Los Angeles, San Diego, and Antarctica; the third shows a 'Skip Tonight' air-quality warning for Portland. The watches show a 'Too warm' status and a watch face complication showing to open now and close when going to sleep.">
+                    </picture>
+                </div>
+                <div class="entry-body">
+                    <div class="entry-title-row">
+                        <img class="entry-icon" src="assets/apps/window-season.webp" width="44" height="44" alt="" decoding="async">
+                        <div>
+                            <h3 class="entry-name">Window Season</h3>
+                            <p class="entry-sub">iOS and watchOS &middot; on the App Store since 2026</p>
+                        </div>
+                    </div>
+                    <p class="entry-desc">Answers one practical question: when should I open my windows for the best passive cooling?</p>
+                    <p class="entry-fact">Feels-like temperature, rain, and air quality feed one decision engine shared by the app and nine widget and complication families. Widgets recompute hourly from a cached forecast without making network requests.</p>
+                    <p class="entry-fact">Localized in English, French, German, Italian, and Spanish.</p>
+                    <p class="entry-links"><a class="btn btn--primary" href="https://apps.apple.com/us/app/window-season/id6773955082" rel="noopener"><span class="btn-label">View in the App Store</span><span class="ext-mark" aria-hidden="true">&#8599;</span></a></p>
+                </div>
+            </article>
+
+            <!-- --------------------------------------- PIXELLATE CAMERA -->
+            <article class="entry">
+                <div class="entry-image">
+                    <picture>
+                        <source media="(prefers-color-scheme: dark)" srcset="assets/portfolio/Pixellate-Dark.webp">
+                        <img src="assets/portfolio/Pixellate.webp" width="2400" height="1800" loading="lazy" decoding="async" alt="Several iPhones running Pixellate Camera, each rendering its viewfinder in only 4 colors with dithering: an interstate, a curious cat, an arid tree, a campfire.">
+                    </picture>
+                </div>
+                <div class="entry-body">
+                    <div class="entry-title-row">
+                        <img class="entry-icon" src="assets/apps/pixellate.webp" width="44" height="44" alt="" decoding="async">
+                        <div>
+                            <h3 class="entry-name">Pixellate Camera</h3>
+                            <p class="entry-sub">iOS &middot; on the App Store since 2025</p>
+                        </div>
+                    </div>
+                    <p class="entry-desc">A live camera that shoots like the 1998 Game Boy Camera: four colors, heavy dither, full metadata, and GPS.</p>
+                    <p class="entry-fact">Each viewfinder frame runs through a custom three-pass dithering engine that blends Floyd-Steinberg error diffusion with a Bayer matrix, keeping faces recognizable while textures go full retro.</p>
+                    <p class="entry-links"><a class="btn btn--primary" href="https://apps.apple.com/us/app/pixellate-camera/id6743917412" rel="noopener"><span class="btn-label">View in the App Store</span><span class="ext-mark" aria-hidden="true">&#8599;</span></a></p>
+                </div>
+            </article>
+
+            <!-- ------------------------------------ PRINTING THE DREAM -->
+            <article class="entry">
+                <div class="entry-image">
+                    <img src="assets/portfolio/PrintingTheDream.webp" width="1280" height="900" loading="lazy" decoding="async" alt="A Nintendo Switch displaying octopus artwork in Tomodachi Life, connected over USB to a Raspberry Pi Pico with a small screen showing the drawing macro.">
+                </div>
+                <div class="entry-body">
+                    <div class="entry-title-row">
+                        <div>
+                            <h3 class="entry-name">Printing the Dream</h3>
+                            <p class="entry-sub">Hardware and software &middot; open source, 2026</p>
+                        </div>
+                    </div>
+                    <p class="entry-desc">Imports any image into Tomodachi Life on Switch 1 or 2, without modifying the console.</p>
+                    <p class="entry-fact">A desktop converter reduces a PNG to the game's palette, chooses the cheapest brushes and paint-bucket passes, and minimizes cursor travel. A $30 Pi Pico then redraws it by impersonating a wired controller over USB.</p>
+                    <p class="entry-links"><a class="btn btn--primary" href="https://github.com/ztc0611/printing-the-dream" target="_blank" rel="noopener"><span class="btn-label">View on GitHub</span><span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+                </div>
+            </article>
+
+            <!-- ----------------------------------------------- POINT TO -->
+            <article class="entry">
+                <div class="entry-image">
+                    <picture>
+                        <source media="(prefers-color-scheme: dark)" srcset="assets/portfolio/PointTo-Dark.webp">
+                        <img src="assets/portfolio/PointTo.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Point To: Custom Compass running on an iPhone and an Apple Watch. One is pointing towards Los Angeles, the other towards Big Sur. They are rendered floating on top of a background depicting a coastline.">
+                    </picture>
+                </div>
+                <div class="entry-body">
+                    <div class="entry-title-row">
+                        <img class="entry-icon" src="assets/apps/point-to.webp" width="44" height="44" alt="" decoding="async">
+                        <div>
+                            <h3 class="entry-name">Point To: Custom Compass</h3>
+                            <p class="entry-sub">iOS, iPadOS, and watchOS &middot; on the App Store since 2024</p>
+                        </div>
+                    </div>
+                    <p class="entry-desc">A compass that points anywhere you choose, with locations synced between iPhone and Apple Watch.</p>
+                    <p class="entry-fact">What began as a personal tool is now used by the Northeast Rail Feed Association to align radio antennas.</p>
+                    <p class="entry-links"><a class="btn btn--primary" href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992" rel="noopener"><span class="btn-label">View in the App Store</span><span class="ext-mark" aria-hidden="true">&#8599;</span></a></p>
+                </div>
+            </article>
+
+        </div>
+
+        <script>
+            /* Runs during parse, ahead of the deferred bundle, so a visitor on
+               Data Saver or reduced motion never starts the download that
+               preload="auto" on the watch clip would otherwise begin. */
+            (function () {
+                var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                var thrifty = window.matchMedia('(prefers-reduced-motion: reduce)').matches || !!(conn && conn.saveData);
+                if (!thrifty) return;
+                var videos = document.querySelectorAll('.hero-watch-screen video');
+                for (var i = 0; i < videos.length; i++) { videos[i].preload = 'none'; }
+            })();
+        </script>
+    </section>
+
+    <!-- ==================================================================
+         OPEN SOURCE
+         ================================================================== -->
+    <section id="open-source" class="section" aria-labelledby="os-heading">
+        <h2 class="section-title" id="os-heading">Open source</h2>
+
+        <p class="os-lead"><a class="os-link" href="https://godotengine.org" target="_blank" rel="noopener">Godot Engine<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a> is a free and open-source engine used to ship 2D and 3D games on every major platform. I have 10 merged pull requests in its core engine, primarily improving Apple platform support across both current and legacy releases.</p>
+
+        <div>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">An eight-year Windows daylight saving bug</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/59223" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#59223<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">For eight years, Godot's Windows port reported that daylight saving time was always off. Its timezone API could also return an offset one hour wrong while daylight saving time was active.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p><code>OS.&#8203;get_date()</code> hard-coded its <code>dst</code> field to false on Windows, while <code>OS.&#8203;get_time_zone_info()</code> ignored the Windows API's separate daylight and standard bias values. Mountain Daylight Time, for example, reported -420 minutes (UTC-7) instead of -360 (UTC-6). The fix selects the active Windows timezone state and applies its corresponding bias.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">Reliable app lifecycle events on mobile</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/85100" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#85100<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">Godot games on iOS did not receive the pause and resume events needed to save state when the app entered the background. Added those signals on iOS and consistent focus events across iOS and Android.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p>Wired Godot's <code>MainLoop</code> to UIKit's <code>application&#8203;Did&#8203;Enter&#8203;Background</code> and <code>application&#8203;Will&#8203;Enter&#8203;Foreground</code> delegates, emitting <code>NOTIFICATION_&#8203;APPLICATION_&#8203;PAUSED</code> and <code>NOTIFICATION_&#8203;APPLICATION_&#8203;RESUMED</code>. Also added matching focus notifications on iOS and Android. The documentation warns developers that iOS allows roughly five seconds to finish work triggered by the pause signal.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">120Hz support for iPhone and iPad</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/68044" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#68044<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">Godot capped iOS exports at 60 frames per second even on ProMotion devices. Added a project setting that lets games use 120Hz without maintaining a custom engine build.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p>Added <code>display/&#8203;window/&#8203;ios/&#8203;allow_&#8203;high_&#8203;refresh_&#8203;rate</code>, used it to configure <code>CADisplayLink</code> for 120fps, and added <code>CA&#8203;Disable&#8203;Minimum&#8203;Frame&#8203;Duration&#8203;On&#8203;Phone</code> to the exported app's property list. Apple requires both the display-link configuration and property-list opt-in.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">Native iOS interface controls as project settings</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/67322" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#67322<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">Full-screen iOS games need control over the status bar and system-edge gestures. Exposed both as Godot project settings, including the two-swipe protection that prevents players from leaving a game accidentally.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p>Added <code>display/&#8203;window/&#8203;ios/&#8203;hide_&#8203;status_&#8203;bar</code> and <code>display/&#8203;window/&#8203;ios/&#8203;suppress_&#8203;ui_&#8203;gesture</code>. The iOS view controller reads them through <code>prefers&#8203;StatusBar&#8203;Hidden</code> and <code>preferred&#8203;Screen&#8203;Edges&#8203;Deferring&#8203;System&#8203;Gestures</code>, replacing behavior that had previously been hard-coded in the engine.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">Accurate refresh-rate reporting in Low Power Mode</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/85026" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#85026<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">iOS can reduce a 120Hz display to 60Hz in Low Power Mode, but Godot kept reporting the hardware maximum. Corrected the value so games could pace rendering against the screen's active limit.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p><code>Display&#8203;Server.&#8203;screen_&#8203;get_&#8203;refresh_&#8203;rate()</code> returned <code>UIScreen.&#8203;maximum&#8203;Frames&#8203;Per&#8203;Second</code> unconditionally. The iOS display server now checks <code>NS&#8203;Process&#8203;Info.&#8203;low&#8203;Power&#8203;Mode&#8203;Enabled</code> and reports 60Hz while the system limit is active.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">The built-in recorder exported the wrong resolution</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/104334" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#104334<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">Combining two ordinary display settings could make Godot's built-in recorder export the wrong resolution and aspect ratio. Fixed it to record the project's viewport instead of the operating-system window.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p><code>MovieWriter::&#8203;begin()</code> initialized its output with the window dimensions even though Viewport stretch mode renders at the configured viewport size. It now selects <code>viewport_&#8203;width</code> and <code>viewport_&#8203;height</code> before calling <code>write_&#8203;begin()</code>, so recorded output matches the game's render target.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+            <article class="os-entry">
+                <div class="os-head">
+                    <h3 class="os-title">Bringing four iOS improvements to Godot 3.x</h3>
+                    <p class="os-prs">
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/68189" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#68189<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/68190" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#68190<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/85229" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#85229<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                        <a class="os-pr" href="https://github.com/godotengine/godot/pull/85230" target="_blank" rel="noopener"><span class="visually-hidden">Pull request </span>#85230<span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                    </p>
+                </div>
+                <p class="os-hook">Many teams still ship on Godot 3.x and cannot adopt a new engine major version just to gain platform support. Backported four iOS improvements so those projects received the same features and correctness fixes without migrating.</p>
+                <details class="os-detail">
+                    <summary>Technical detail</summary>
+                    <div class="os-detail-body">
+                        <div class="os-detail-inner">
+                            <p>Ported the interface controls, ProMotion support, lifecycle notifications, and Low Power Mode refresh-rate fix to the older <code>OSIPhone</code> and display-layer architecture. The four backports were merged into Godot's maintained 3.x branch.</p>
+                        </div>
+                    </div>
+                </details>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ==================================================================
+         MORE WORK
+         ================================================================== -->
+    <section id="more-work" class="section" aria-labelledby="more-work-title">
+        <h2 class="section-title" id="more-work-title">More work</h2>
+
+        <ul class="rows">
+
+            <li class="row">
+                <div class="row-head">
+                    <h3 class="row-title">Sentry Rewind</h3>
+                    <p class="row-sub">macOS and Windows tool</p>
+                </div>
+                <p class="row-desc">Plug in a Tesla USB drive and browse six synchronized camera feeds by date, location, and event.</p>
+                <p class="row-year"><time datetime="2026">2026</time></p>
+                <p class="row-go"><a class="row-link" href="https://github.com/ztc0611/sentry-rewind" target="_blank" rel="noopener">GitHub<span class="visually-hidden">, Sentry Rewind</span> <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            </li>
+
+            <li class="row">
+                <div class="row-head">
+                    <h3 class="row-title">Window Season</h3>
+                    <p class="row-sub">TRMNL plugin</p>
+                </div>
+                <p class="row-desc">When to open your windows, on an e-ink display.</p>
+                <p class="row-year"><time datetime="2026">2026</time></p>
+                <p class="row-go"><a class="row-link" href="https://trmnl.com/recipes/304759" target="_blank" rel="noopener">TRMNL<span class="visually-hidden">, Window Season</span> <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            </li>
+
+            <li class="row">
+                <div class="row-head">
+                    <h3 class="row-title">GeoJSON Polygon Drawer</h3>
+                    <p class="row-sub">Web tool</p>
+                </div>
+                <p class="row-desc">A browser tool built to trace Aweigh's coastline polygons and export them as GeoJSON.</p>
+                <p class="row-year"><time datetime="2026">2026</time></p>
+                <p class="row-go"><a class="row-link row-link--mouse" href="/web-projects/geojson/">Try it<span class="visually-hidden">, GeoJSON Polygon Drawer</span></a><span class="row-touch-note">Desktop only</span></p>
+            </li>
+
+            <li class="row row--static">
+                <div class="row-head">
+                    <h3 class="row-title">PhotoStat</h3>
+                    <p class="row-sub">macOS experiment</p>
+                </div>
+                <p class="row-desc">Analyzes an iCloud Photos library on device and charts it by month or year.</p>
+                <p class="row-year"><time datetime="2025">2025</time></p>
+                <p class="row-status">Unreleased</p>
+            </li>
+
+            <li class="row">
+                <div class="row-head">
+                    <h3 class="row-title">Recall: Moving Gallery</h3>
+                    <p class="row-sub">iOS, iPadOS, macOS, and visionOS app</p>
+                </div>
+                <p class="row-desc">Resurfaces forgotten Live Photos and videos as a continuously moving gallery.</p>
+                <p class="row-year"><time datetime="2025">2025</time></p>
+                <p class="row-go"><a class="row-link" href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430" rel="noopener">App Store<span class="visually-hidden">, Recall: Moving Gallery</span> <span aria-hidden="true">&#8599;</span></a></p>
+            </li>
+
+            <li class="row">
+                <div class="row-head">
+                    <h3 class="row-title">Live Activity for Dominos Pizza</h3>
+                    <p class="row-sub">iOS experiment</p>
+                </div>
+                <p class="row-desc">A real pizza order, tracked in the Dynamic Island.</p>
+                <p class="row-year"><time datetime="2024">2024</time></p>
+                <p class="row-go"><a class="row-link" href="https://github.com/ztc0611/Live-Activity-4-Dominos" target="_blank" rel="noopener">GitHub<span class="visually-hidden">, Live Activity for Dominos Pizza</span> <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            </li>
+
+            <li class="row">
+                <div class="row-head">
+                    <h3 class="row-title">Base4096</h3>
+                    <p class="row-sub">Godot experiment</p>
+                </div>
+                <p class="row-desc">Encodes a 32&times;32, 16-color design in 342 Unicode characters, fitting five designs into one Discord message instead of one.</p>
+                <p class="row-year"><time datetime="2025">2025</time></p>
+                <p class="row-go"><a class="row-link" href="https://github.com/ztc0611/base4096-godot" target="_blank" rel="noopener">GitHub<span class="visually-hidden">, Base4096</span> <span aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            </li>
+
+        </ul>
+    </section>
+
+    <!-- ==================================================================
+         FOOTER
+         ================================================================== -->
+    <footer class="site-footer">
+        <div class="footer-contact">
+            <a class="footer-email" href="mailto:za.colem@gmail.com">za.colem@gmail.com</a>
+            <div class="footer-actions">
+                <a class="btn btn--ghost" href="https://www.linkedin.com/in/zacharytcoleman/" target="_blank" rel="noopener">
+                    <span class="btn-label">LinkedIn</span><span class="ext-mark" aria-hidden="true">&#8599;</span><span class="visually-hidden"> (opens in a new tab)</span>
+                </a>
+                <a class="btn btn--ghost" href="/resume.pdf">
+                    <span class="btn-label">Resume (PDF)</span>
+                </a>
+            </div>
+        </div>
+
+        <p class="footer-easter"><a class="easter" href="/mountains.html" aria-label="A hiking page, unrelated to any of this">&#127956;&#65039;</a></p>
+    </footer>
+
+</div>
+</body>
+</html>

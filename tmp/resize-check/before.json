@@ -1,0 +1,297 @@
+{
+  "version": "before",
+  "errors": [],
+  "clearedFrames": [
+    {
+      "cssWidth": 1200,
+      "width": 1200,
+      "renderedWidth": 1000,
+      "height": 740,
+      "renderedHeight": 740,
+      "lost": false
+    },
+    {
+      "cssWidth": 1500,
+      "width": 1500,
+      "renderedWidth": 1200,
+      "height": 740,
+      "renderedHeight": 740,
+      "lost": false
+    }
+  ],
+  "totalResizeEvents": 3,
+  "cameras": [
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1000,
+      "height": 740,
+      "aspect": 1.3513513513513513,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1000,
+        740
+      ],
+      "lost": false
+    },
+    {
+      "width": 1200,
+      "height": 740,
+      "aspect": 1.6216216216216217,
+      "fov": 46,
+      "position": [
+        0,
+        13,
+        44
+      ],
+      "reflection": [
+        1200,
+        740
+      ],
+      "lost": false
+    }
+  ]
+}

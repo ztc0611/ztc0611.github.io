@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "run": "First visit",
+      "sceneReady": 2149.600000000559,
+      "fadeStarted": 2436.100000000559,
+      "fadeDone": 3037.100000000559,
+      "ttfb": 4.300000000745058,
+      "firstPaint": 484,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+      "scriptTransfer": 802100
+    },
+    {
+      "run": "Reload 1",
+      "sceneReady": 242.40000000037253,
+      "fadeStarted": 255.6000000005588,
+      "fadeDone": 866.7999999998137,
+      "ttfb": 1.900000000372529,
+      "firstPaint": 24,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+      "scriptTransfer": 300
+    },
+    {
+      "run": "Reload 2",
+      "sceneReady": 232.29999999981374,
+      "fadeStarted": 239.20000000018626,
+      "fadeDone": 853.9000000003725,
+      "ttfb": 1.400000000372529,
+      "firstPaint": 20,
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+      "scriptTransfer": 300
+    }
+  ],
+  "errors": []
+}

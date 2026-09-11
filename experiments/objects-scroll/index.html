@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The working collection | Zachary Coleman</title>
+<meta name="description" content="Apps, cameras, and things that draw. Selected projects by Zachary Coleman.">
+<meta name="robots" content="noindex"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#aweigh">Skip to projects</a>
+<header class="masthead"><a href="../../portfolio.html">Zachary Coleman</a><nav aria-label="Experiment navigation"><a href="../objects/">Original shelf</a><a href="../objects-next/">Compare experiments</a></nav></header>
+<main>
+<section class="intro" aria-labelledby="intro-title">
+<div><p class="intro-note">Apps, cameras, and things that draw.</p><h1 id="intro-title">The working<br>collection.</h1></div>
+<div class="intro-copy"><p>I make software you can reach for. A ferry on your wrist. A camera with a different memory. A tiny board that learns to draw.</p><a href="#aweigh" class="scroll-link"><span aria-hidden="true">↓</span> Take a look around</a></div>
+</section>
+<div class="collection" id="collection" data-active="aweigh">
+<aside class="stage" aria-label="Interactive project objects">
+<div class="cabinet">
+<div class="stage-top"><span>Made to be used</span><span id="stage-name">Aweigh</span></div>
+<div class="alcove" aria-hidden="true"></div><div class="plinth" aria-hidden="true"></div>
+<div class="object-panel" id="object-aweigh">
+<div class="watch"><div class="watch-screen"><video id="watch-video" muted loop playsinline preload="none" poster="../../assets/aweigh/watchos-poster.webp" aria-label="Recorded Aweigh watchOS app interface"><source src="../../assets/aweigh/watchos-loop.mp4" type="video/mp4"></video></div><img class="watch-frame" src="../../assets/aweigh/watchos-frame.webp" width="1120" height="1760" alt="Apple Watch with the Aweigh ferry app."></div>
+<div class="object-controls"><button id="watch-play" class="action" type="button" aria-pressed="false"><span class="play-icon" aria-hidden="true">▶</span><span id="watch-label">Play watch demo</span></button><span class="control-note" id="watch-status">Recorded on watchOS</span></div>
+</div>
+<div class="object-panel" id="object-pixellate" hidden>
+<div class="camera"><div class="camera-top"><span>Pixellate</span><button id="shutter" type="button" aria-label="Take a sample photo">●</button></div><div class="camera-window"><canvas id="photo" width="320" height="240" role="img" aria-label="Island photograph rendered with a four-color dithering effect"></canvas><span class="viewfinder-corner" aria-hidden="true"></span></div><div class="camera-bottom"><span class="camera-dot" aria-hidden="true"></span><label for="dither">Dither</label><input id="dither" type="range" min="0" max="100" value="75"><output for="dither" id="dither-value">75%</output></div></div>
+<div class="object-controls"><span class="control-note" id="photo-status" aria-live="polite">Turn the dial. Press the shutter.</span><span class="control-note">Illustrative browser camera</span></div>
+</div>
+<div class="object-panel" id="object-printing" hidden>
+<div class="plotter"><div class="plotter-rail" aria-hidden="true"><span class="print-head"></span></div><div class="paper"><canvas id="drawing" width="240" height="240" role="img" aria-label="Pixel octopus drawing, produced one color at a time"></canvas></div><div class="plotter-front"><span class="hardware-led" aria-hidden="true"></span><span>Printing the Dream</span><button type="button" id="print">Draw</button></div><span class="usb-cable" aria-hidden="true"></span></div>
+<div class="object-controls"><span class="control-note" id="print-status" aria-live="polite">Ready for a color pass</span><span class="control-note">Illustrative browser drawing machine</span></div>
+</div>
+<div class="stage-bottom"><span class="stage-caption">Selected work</span><nav aria-label="Jump to project"><a href="#aweigh" data-project="aweigh" aria-current="true" aria-label="Aweigh">●</a><a href="#pixellate" data-project="pixellate" aria-label="Pixellate Camera">●</a><a href="#printing" data-project="printing" aria-label="Printing the Dream">●</a></nav></div>
+</div>
+</aside>
+<div class="stories">
+<article class="story" id="aweigh" data-story="aweigh">
+<div class="project-meta"><img src="../../assets/apps/aweigh.webp" width="36" height="36" alt=""><span>iOS and watchOS<br><span class="muted">Awaiting App Review</span></span></div>
+<h2>Aweigh</h2><p class="story-lead">The next boat.<br>A glance away.</p><p>Ferry travel comes with questions. Is the boat on time? Is there room? Which terminal camera should I check?</p><p>Aweigh brings schedules, vessel locations, capacity, cameras, and alerts together around the trip a rider is trying to make.</p><a class="project-link" href="../../aweigh/">Explore Aweigh <span aria-hidden="true">↗</span></a>
+<div class="aside-note"><span aria-hidden="true">↖</span><p>A departure board small enough to wear. Play the watch to see the actual interface.</p></div>
+</article>
+<article class="story" id="pixellate" data-story="pixellate">
+<div class="project-meta"><img src="../../assets/apps/pixellate.webp" width="36" height="36" alt=""><span>iOS camera app<br><span class="muted">On the App Store since 2025</span></span></div>
+<h2>Pixellate<br>Camera</h2><p class="story-lead">Less detail.<br>More character.</p><p>A live camera with the spirit of the 1998 Game Boy Camera. Four colors, heavy dither, and all the metadata and GPS you'd expect today.</p><p>A custom three-pass engine blends error diffusion and a Bayer matrix, keeping faces recognizable while textures go wonderfully coarse.</p><a class="project-link" href="../../portfolio.html#apps">See Pixellate Camera <span aria-hidden="true">↗</span></a>
+<figure class="evidence"><img src="../../assets/portfolio/Pixellate.webp" width="2400" height="1800" loading="lazy" alt="Pixellate Camera running on four iPhones with different four-color photographs."><figcaption>The shipping camera, in its many colors.</figcaption></figure>
+</article>
+<article class="story" id="printing" data-story="printing">
+<div class="project-meta"><span class="board-icon" aria-hidden="true">▦</span><span>Hardware and software<br><span class="muted">Open source</span></span></div>
+<h2>Printing<br>the Dream</h2><p class="story-lead">A very patient<br>pair of hands.</p><p>Bring an image into Tomodachi Life on Switch 1 or 2, without modifying the console.</p><p>A desktop converter picks a palette, plans brush and paint-bucket passes, and reduces cursor travel. A Raspberry Pi Pico takes it from there, acting as a wired controller and drawing the picture.</p><a class="project-link" href="../../portfolio.html#apps">Explore the project <span aria-hidden="true">↗</span></a>
+<figure class="evidence hardware-evidence"><img src="../../assets/portfolio/PrintingTheDream.webp" width="1280" height="900" loading="lazy" alt="A Raspberry Pi Pico connected to a Nintendo Switch displaying octopus artwork in Tomodachi Life."><figcaption>The real setup. Small board, large amount of patience.</figcaption></figure>
+</article>
+</div>
+</div>
+<section class="outro"><p>There's more in the workshop.</p><div><a href="../../portfolio.html#apps">All projects</a><a href="../../portfolio.html#open-source">Godot contributions</a></div></section>
+</main>
+<footer><span>A portfolio experiment by Zachary Coleman</span><a href="../objects-next/">Back to the experiments</a></footer>
+<script src="script.js" defer></script>
+</body></html>

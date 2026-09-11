@@ -1,0 +1,122 @@
+{
+  "marks": [
+    {
+      "name": "scene-start",
+      "ms": 46
+    },
+    {
+      "name": "surface-textures",
+      "ms": 52
+    },
+    {
+      "name": "renderer-created",
+      "ms": 80
+    },
+    {
+      "name": "sky-created",
+      "ms": 83
+    },
+    {
+      "name": "islands-created",
+      "ms": 144
+    },
+    {
+      "name": "forest-created",
+      "ms": 154
+    },
+    {
+      "name": "ferry-water-rain-created",
+      "ms": 166
+    },
+    {
+      "name": "low-clouds-created",
+      "ms": 173
+    },
+    {
+      "name": "first-reflection-start",
+      "ms": 182
+    },
+    {
+      "name": "first-reflection-end",
+      "ms": 234
+    },
+    {
+      "name": "first-main-end",
+      "ms": 282
+    }
+  ],
+  "resources": [
+    {
+      "name": "appearance.js",
+      "start": 8,
+      "end": 14,
+      "bytes": 1117
+    },
+    {
+      "name": "scene.js?v=20260909-startup",
+      "start": 8,
+      "end": 13,
+      "bytes": 31593
+    },
+    {
+      "name": "arrival.js?v=20260909-reveal",
+      "start": 8,
+      "end": 13,
+      "bytes": 1598
+    },
+    {
+      "name": "devices.js",
+      "start": 8,
+      "end": 17,
+      "bytes": 3159
+    },
+    {
+      "name": "materials.js",
+      "start": 17,
+      "end": 19,
+      "bytes": 7415
+    },
+    {
+      "name": "trees.js?v=20260909-details",
+      "start": 17,
+      "end": 20,
+      "bytes": 12756
+    },
+    {
+      "name": "clouds.js?v=20260909-details",
+      "start": 17,
+      "end": 20,
+      "bytes": 4246
+    },
+    {
+      "name": "ferry.js",
+      "start": 17,
+      "end": 20,
+      "bytes": 7261
+    },
+    {
+      "name": "weather.js",
+      "start": 17,
+      "end": 20,
+      "bytes": 3082
+    },
+    {
+      "name": "solar.js",
+      "start": 17,
+      "end": 21,
+      "bytes": 808
+    },
+    {
+      "name": "suncalc.mjs",
+      "start": 39,
+      "end": 42,
+      "bytes": 9246
+    }
+  ],
+  "nav": [
+    {
+      "responseEnd": 5.900000000372529,
+      "domContentLoaded": 285.40000000037253
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+:root{--paper:#f4f6f5;--ink:#233c42}.tide-hero{position:relative;isolation:isolate;min-height:720px;height:100svh;max-height:1400px;overflow:hidden;color:#f4f6ec;background:#1d3d4c;user-select:none;-webkit-user-select:none}.tide-hero #scene{position:absolute;inset:0;z-index:-3;background:linear-gradient(#6d939e,#b3bbb0 46%,#365b64 47%,#143e4d)}#scene canvas{display:block;width:100%;height:100%;touch-action:pan-y}.scene-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#061b2b5c,transparent 40%,transparent 60%,#071d2d8c)}.tide-header{position:absolute;top:30px;left:var(--inset);right:var(--inset);display:flex;justify-content:flex-end;align-items:start;font-size:13px;line-height:1.45;text-shadow:0 1px 14px #0d222c4d}.tide-header nav{display:flex;gap:36px}.tide-header a{text-decoration:none;padding:4px 0}.tide-header a:hover{text-decoration:underline}.scene-title{position:absolute;left:var(--inset);right:var(--inset);top:30px;pointer-events:none;text-shadow:0 2px 32px #05182735}.scene-title h1{font-size:clamp(46px,6.5vw,104px);font-weight:400;line-height:1.03;letter-spacing:-.055em}.scene-title p{font-size:clamp(15px,1.5vw,21px);line-height:1.4;margin-top:16px;letter-spacing:-.02em}.scene-footer{position:absolute;left:var(--inset);right:var(--inset);bottom:39px;display:flex;justify-content:space-between;align-items:end;gap:36px}.scene-footer>.work-link{font-size:14px;min-height:44px;text-shadow:0 1px 8px #05182770}.day-controls{width:270px;max-width:100%;flex-shrink:0;font-size:12px}.clock-line{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:11px;min-height:28px}.clock-line output{font-variant-numeric:tabular-nums;font-size:24px;letter-spacing:-.025em;min-width:100px;text-align:right}.clock-line>span{opacity:.85;white-space:nowrap}#time-range{display:block;width:100%;height:24px;margin:0;padding:0;appearance:none;-webkit-appearance:none;cursor:ew-resize;background:transparent;color:inherit;touch-action:pan-y}#time-range::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(90deg,#577485,#99b7bd 20%,#f1d4a1 28%,#f1efda 50%,#edcba3 72%,#718b99 82%,#577485)}#time-range::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:15px;height:15px;background:#f5f5eb;border-radius:50%;margin-top:-6px;box-shadow:0 1px 7px #081d3455}#time-range::-moz-range-track{height:3px;background:linear-gradient(90deg,#577485,#f1d4a1,#f1efda,#edcba3,#577485)}#time-range::-moz-range-thumb{width:15px;height:15px;background:#f5f5eb;border:0;border-radius:50%}#time-range:focus-visible{outline:1px solid #f4f6ec;outline-offset:6px}.time-scale{display:flex;justify-content:space-between;opacity:.64;font-size:10px;margin-top:1px}.scene-actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:20px}.scene-actions button{padding:8px 0;min-height:36px;background:none;border:0;color:inherit;font-size:12px;text-align:left}.scene-actions button:hover{text-decoration:underline;text-underline-offset:4px}#scene-motion{text-align:right;min-width:90px}.scene-hint{position:absolute;left:var(--inset);bottom:104px;font-size:12px;opacity:.72;pointer-events:none}.scene-fallback{position:absolute;bottom:200px;left:var(--inset)}.day-controls:has(button:disabled){opacity:.7}footer{background:#dce6e5}.work-intro{padding-top:5px}.map-art{opacity:.16}
+@media(min-width:1700px){.scene-footer{bottom:50px}.scene-hint{bottom:115px}}
+@media(max-width:700px){.tide-hero{min-height:720px;max-height:1100px}.tide-header{top:24px;font-size:11px}.tide-header nav{gap:24px}.scene-title{top:72px}.scene-title h1{font-size:clamp(46px,10.5vw,70px);line-height:1.01}.scene-title h1 span{display:block}.scene-title p{font-size:15px;margin-top:16px}.scene-footer{bottom:26px;gap:28px;align-items:end;flex-wrap:wrap}.scene-footer>.work-link{order:2;flex:1;font-size:12px}.day-controls{width:230px;margin-left:auto}.scene-hint{bottom:215px;max-width:140px;font-size:11px}.clock-line output{font-size:22px}.time-scale{font-size:9px}.scene-actions{margin-top:7px}.scene-actions button{font-size:11px}.scene-shade{background:linear-gradient(180deg,#061b2b70,transparent 47%,#071d2d15 57%,#071d2db0)}}
+@media(max-width:420px){.scene-footer{display:grid;grid-template-columns:1fr;gap:17px}.day-controls{width:230px;margin:0 0 0 auto}.scene-footer>.work-link{grid-row:2;justify-self:start}.scene-hint{bottom:258px;max-width:none}}
+@media(prefers-reduced-motion:reduce){.scene-actions button{transition:none}}
+.day-controls,.scene-hint{visibility:hidden;opacity:0;transition:opacity .45s ease}.tide-hero:has(#scene[data-ready="true"]) .day-controls{visibility:visible;opacity:1}.tide-hero:has(#scene[data-ready="true"]) .scene-hint{visibility:visible;opacity:.72}@media(prefers-reduced-motion:reduce){.day-controls,.scene-hint{transition:none}}
+
+.arrival-fog{position:absolute;inset:0;z-index:-2;pointer-events:none;background:var(--arrival-fog,#91a6b3);opacity:1;transition:opacity .6s cubic-bezier(.25,.1,.25,1)}
+.arrival-fog::before,.arrival-fog::after,.arrival-fog>span{content:"";position:absolute;inset:-15%;background:radial-gradient(ellipse at 25% 62%,#d5e0e660,transparent 56%),radial-gradient(ellipse at 78% 28%,#d5e0e650,transparent 50%);transform:translate3d(0,0,0);transition:transform .7s cubic-bezier(.25,.1,.25,1)}
+.arrival-fog::after{background:radial-gradient(ellipse at 82% 65%,#c6d6e277,transparent 60%),radial-gradient(ellipse at 12% 30%,#ecf2f522,transparent 50%)}.arrival-fog>span{background:radial-gradient(ellipse at 46% 88%,#132f4522,transparent 58%)}
+.arrival-fog.departing{opacity:0}.arrival-fog.departing::before{transform:translate3d(-1.3%,.4%,0)}.arrival-fog.departing::after{transform:translate3d(1.5%,-.6%,0)}.arrival-fog.departing>span{transform:translate3d(-.4%,1%,0)}.arrival-fog[hidden]{display:none}
+.weather-line{display:flex;justify-content:space-between;align-items:center;margin-top:12px;min-height:30px;gap:20px}.weather-line>span{font-size:11px;opacity:.72}.weather-line button{display:flex;align-items:center;gap:8px;padding:7px 0 7px 14px;background:none;border:0;font-size:12px;min-width:65px;justify-content:end}.rain-indicator{width:6px;height:6px;border:1px solid currentColor;border-radius:50%;opacity:.6;transition:background .3s,opacity .3s}#rain-toggle[aria-pressed="true"] .rain-indicator{background:currentColor;opacity:1}.weather-line button:hover{text-decoration:underline;text-underline-offset:4px}.scene-actions{margin-top:5px}
+@media(max-width:700px){.scene-hint{bottom:252px}.weather-line{margin-top:9px}.weather-line button{font-size:11px}}@media(max-width:420px){.scene-hint{bottom:295px}}
+@media(prefers-reduced-motion:reduce){.arrival-fog,.arrival-fog::before,.arrival-fog::after,.arrival-fog>span,.rain-indicator{transition:none}}
+.scene-footer{pointer-events:none}.scene-footer>.work-link,.scene-footer>.day-controls{pointer-events:auto}
+
+/* Aweigh device pair. aweigh/style.css is the authority for these two frames;
+   the apertures below are its measurements. watchos-frame.webp is 1120x1760
+   with a 834x994 screen starting 384px down; ios-frame.webp is 1380x2880 with
+   a 1260x2736 screen inset 60px from each side and 73px from the top. */
+.ferry-media .device-pair{position:absolute;inset:0 0 40px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(16px,5%,52px);padding:0 5%}
+.ferry-media .watch,.ferry-media .phone{position:relative;left:auto;top:auto;width:auto;flex:0 0 auto}
+.ferry-media .phone{height:92%;aspect-ratio:1380/2880;border:0;border-radius:0;overflow:visible;background:none;box-shadow:none;filter:drop-shadow(6px 20px 22px #18394c33)}
+/* The watch is enlarged relative to the phone so its recording remains legible. */
+.ferry-media .watch{height:41.3%;aspect-ratio:280/440;filter:drop-shadow(4px 14px 16px #18394c33)}
+.ferry-media .watch-screen{position:absolute;top:21.818%;left:12.768%;width:74.464%;height:56.477%;overflow:hidden;background:#000}
+/* A single-axis percentage would give elliptical corners rounder than the
+   frame's cutout, and the map behind would show through at the corners. The
+   split syntax makes both corner radii the same number of pixels: 11.5% of
+   the watch's width, matching the cutout. */
+.ferry-media .watch-screen{border-radius:15.44%/12.96%}
+.ferry-media .watch-screen video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:auto;object-fit:fill;border-radius:0;background:none}
+.ferry-media .phone-screen{position:absolute;top:2.222%;left:3.768%;width:92.464%;height:95.556%;overflow:hidden;background:#000;border-radius:13%/6%}
+.ferry-media .phone-screen img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.ferry-media .watch>.watch-frame,.ferry-media .phone>.phone-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:none;pointer-events:none;user-select:none;-webkit-user-drag:none;z-index:2}
+@media(max-width:600px){.ferry-media .device-pair{inset:0 0 24px;padding:0 4%;gap:clamp(12px,5%,32px)}.ferry-media .phone{height:115%}.ferry-media .watch{height:51.6%}}
+
+:root{color-scheme:light;--muted:#526b73;--rule:#cad6d8;--surface:#e8eef0;--device-well:#c6d8e2;--footer:#dce6e5;--control:#f7fafbef;--control-hover:#fff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#13252b;--ink:#e3ece9;--muted:#a2b7bb;--rule:#385158;--surface:#1a3036;--device-well:#223d46;--footer:#0e1e24;--control:#213a43f2;--control-hover:#2d4953}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#13252b;--ink:#e3ece9;--muted:#a2b7bb;--rule:#385158;--surface:#1a3036;--device-well:#223d46;--footer:#0e1e24;--control:#213a43f2;--control-hover:#2d4953}
+body{background:var(--paper);color:var(--ink)}
+.work :is(.project-caption h3+span,.more-grid p){color:var(--muted)}
+.work .project-link span{color:inherit}
+.project-media,.project-pair .project-media,.more-grid img{background:var(--surface)}
+/* Promo art has a dark twin; the pair swaps on the same conditions as the palette above. */
+/* Cards: the picture and the title are both links; hovering either underlines the title and thickens the CTA line, and only the picture itself zooms. */
+.project:has(a:hover) .project-caption h3 a{text-decoration:underline;text-underline-offset:4px}
+.more-media{display:block;overflow:hidden}
+.more-grid img{transition:transform .6s cubic-bezier(.2,.65,.3,1)}
+.image-link:hover img,.more-media:hover img{transform:scale(1.025)}
+@media(prefers-reduced-motion:reduce){.image-link:hover img,.more-media:hover img{transform:none}}
+/* Captions are plain, selectable text: the picture, the title and the CTA are each their own link, and the CTA shares the title's line. */
+.project-caption h3 a::after{content:none}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.more-grid>article{display:block}
+.more-grid h3{margin:0}
+.more-grid .card-head{margin:20px 0 8px}
+.more-grid h3 a{text-decoration:none}
+.more-grid article:has(a:hover) h3 a{text-decoration:underline;text-underline-offset:4px}
+.more-grid .project-link{margin-top:0}
+.project-pair .project-caption{display:grid;grid-template-columns:1fr auto;grid-template-areas:"head cta" "body body";gap:15px 30px}.project-pair .project-caption>div{grid-area:head}.project-pair .project-caption>p{grid-area:body;margin-top:0}.project-pair .project-caption>.project-link{grid-area:cta;justify-self:end;align-self:start;margin-top:0;padding-top:0}
+@media(max-width:1050px){.project-caption{display:grid;grid-template-columns:1fr auto;grid-template-areas:"head cta" "body body";gap:18px 30px}.project-caption>div{grid-area:head}.project-caption>p{grid-area:body;margin-top:0}.project-caption>.project-link{grid-area:cta;grid-column:auto;justify-self:end;align-self:start;margin-top:0;padding-top:0}}
+@media(max-width:600px){.project-caption{display:grid;padding-top:22px}.project-caption>.project-link{display:inline-flex;margin-top:0}.more-grid .card-head{margin-top:14px}}
+.img-dark{display:none}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .img-dark{display:block}:root:not([data-theme="light"]) .img-light{display:none}}
+:root[data-theme="dark"] .img-dark{display:block}:root[data-theme="dark"] .img-light{display:none}
+
+.ferry-media{background:var(--device-well)}
+.ferry-media::after{background:linear-gradient(110deg,#b7d3df18,transparent 55%)}
+footer{background:var(--footer)}
+.skip:focus{background:var(--paper);color:var(--ink)}
+.project-link{display:inline-flex;align-items:center;gap:14px;justify-self:start;align-self:start;text-decoration:none;border-bottom:1px solid currentColor;padding:0 0 5px;line-height:1.4;margin-top:8px}
+.project-link span{margin:0;font-size:20px;line-height:1}
+.project:has(a:hover) .project-link,.more-grid article:has(a:hover) .project-link{border-bottom-width:2px;padding-bottom:4px}
+.work-navigation{display:flex;flex-wrap:wrap;gap:28px;margin:-20px 0 40px;font-size:14px;color:var(--muted)}
+.work-navigation a{padding:8px 0;text-decoration:none}
+.work-navigation a:hover{text-decoration:underline}
+#apps,#open-source,#more-work{scroll-margin-top:36px}
+.engine-work{margin-top:110px;padding-top:90px;border-top:1px solid var(--rule)}
+.engine-work>h2{font-size:clamp(34px,4vw,60px)}
+.os-lead{max-width:760px;font-size:20px;line-height:1.55;margin:28px 0 60px}
+.os-entry{display:grid;grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr);column-gap:clamp(32px,6vw,100px);padding:34px 0;border-top:1px solid var(--rule)}
+.os-head{grid-column:1;grid-row:1/3}
+.os-title{font-size:23px;line-height:1.25;font-weight:500;letter-spacing:-.025em;max-width:350px;text-wrap:pretty}
+.os-prs{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;font-size:14px;color:var(--muted)}
+.os-pr span[aria-hidden]{display:none}
+.os-hook,.os-detail{grid-column:2;max-width:700px}
+.os-hook{font-size:17px;line-height:1.6}
+.os-detail{margin-top:15px;font-size:15px;line-height:1.6;color:var(--muted)}
+.os-detail summary{cursor:pointer;width:fit-content;padding:8px 0;color:var(--ink)}
+.os-detail summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.os-detail-body{padding-top:9px}
+.os-detail code{font-size:.9em;overflow-wrap:anywhere;color:var(--ink)}
+@supports(interpolate-size:allow-keywords){
+  .os-detail{interpolate-size:allow-keywords}
+  .os-detail::details-content{block-size:0;overflow:clip;transition:block-size .25s ease,content-visibility .25s;transition-behavior:allow-discrete}
+  .os-detail[open]::details-content{block-size:auto}
+}
+.additional-work{padding:80px 0 110px}
+.additional-work>h2{font-size:clamp(30px,3.3vw,48px);margin-bottom:40px}
+.rows{list-style:none;padding:0;margin:0}
+.row{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,1.2fr) 45px 95px;gap:28px;padding:28px 0;border-top:1px solid var(--rule);align-items:baseline}
+.row-title{font-size:20px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
+.row-sub{font-size:13px;line-height:1.5;color:var(--muted);margin-top:8px}
+.row-desc{font-size:16px;line-height:1.55;max-width:650px}
+.row-year,.row-go,.row-status{font-size:13px;line-height:1.5}
+.row-year,.row-status{color:var(--muted)}
+.row-go,.row-status{justify-self:stretch;text-align:left}
+.row-link{white-space:nowrap}
+.row-touch-note{display:block;color:var(--muted);font-size:11px;margin-top:6px}
+.appearance-control{display:flex;align-items:center;gap:16px;font-size:13px;width:fit-content;color:var(--muted)}
+.appearance-control select{font:inherit;background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:5px;padding:8px 30px 8px 12px;min-height:40px}
+.appearance-control select:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+@media(max-width:900px){.row{grid-template-columns:1fr 1.3fr 95px;gap:20px}.row-year{display:none}}
+@media(max-width:600px){
+  .work-navigation{margin:0 0 28px;gap:24px;font-size:13px}
+  .project-link{margin-top:20px}
+  .engine-work{margin-top:70px;padding-top:55px}
+  .os-lead{font-size:18px;margin:24px 0 35px}
+  .os-entry{display:block;padding:28px 0}
+  .os-title{font-size:22px}
+  .os-prs{margin-top:12px}
+  .os-hook{margin-top:20px;font-size:16px}
+  .additional-work{padding:55px 0 65px}
+  .row{grid-template-columns:minmax(0,1fr) 95px;gap:16px 20px;padding:24px 0}
+  .row-head{grid-column:1;grid-row:1}
+  .row-desc{grid-column:1/-1;grid-row:2}
+  .row-go,.row-status{grid-column:2;grid-row:1;align-self:start;padding-top:3px}
+}
+/* watchOS throbber, standing on the screen's own black backing while the poster
+   is still on the wire. Everything is a percentage of the aperture so it tracks
+   the watch across the card's breakpoints instead of swelling on a phone. */
+.ferry-media .watch-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;transition:opacity .35s ease}
+.ferry-media .watch-loader.hidden{opacity:0}
+.ferry-media .watch-loader-spinner{position:relative;width:19%;aspect-ratio:1}
+.ferry-media .watch-loader-spinner>div{position:absolute;top:50%;left:50%;width:22.5%;aspect-ratio:1;margin:-11.25% 0 0 -11.25%;border-radius:50%;background:#fff;animation:watch-spinner .9s linear infinite}
+/* The ring radius is 1.5x a dot, and a percentage translate on the dot resolves
+   against the dot, so 150% is that radius at any size. */
+.ferry-media .watch-loader-spinner>div:nth-child(1){transform:translate(0,-150%);animation-delay:0s}
+.ferry-media .watch-loader-spinner>div:nth-child(2){transform:translate(129.9%,-75%);animation-delay:-.75s}
+.ferry-media .watch-loader-spinner>div:nth-child(3){transform:translate(129.9%,75%);animation-delay:-.6s}
+.ferry-media .watch-loader-spinner>div:nth-child(4){transform:translate(0,150%);animation-delay:-.45s}
+.ferry-media .watch-loader-spinner>div:nth-child(5){transform:translate(-129.9%,75%);animation-delay:-.3s}
+.ferry-media .watch-loader-spinner>div:nth-child(6){transform:translate(-129.9%,-75%);animation-delay:-.15s}
+@keyframes watch-spinner{0%{opacity:1}100%{opacity:.22}}
+/* base.css stops every animation under reduced motion, which would leave six
+   dots at full strength. Parked at rest it should read as a quiet ring. */
+@media(prefers-reduced-motion:reduce){.ferry-media .watch-loader-spinner>div{opacity:.45}}

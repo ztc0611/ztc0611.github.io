@@ -1,0 +1,252 @@
+[
+  {
+    "run": 0,
+    "url": "http://127.0.0.1:8782/",
+    "throttled": true,
+    "sceneReady": 675.5,
+    "fadeStarted": 689,
+    "fadeDone": 1293.7000000001863,
+    "ttfb": 1.800000000745058,
+    "fcp": 256,
+    "resources": [
+      {
+        "name": "/assets/home/base.css",
+        "start": 87,
+        "end": 185,
+        "transfer": 3128,
+        "decoded": 8994
+      },
+      {
+        "name": "/assets/home/tide.css",
+        "start": 87,
+        "end": 190,
+        "transfer": 4622,
+        "decoded": 14384
+      },
+      {
+        "name": "/assets/home/appearance.js",
+        "start": 87,
+        "end": 175,
+        "transfer": 671,
+        "decoded": 817
+      },
+      {
+        "name": "/assets/home/arrival.js",
+        "start": 87,
+        "end": 176,
+        "transfer": 964,
+        "decoded": 1298
+      },
+      {
+        "name": "/assets/home/dist/scene.min.js",
+        "start": 87,
+        "end": 456,
+        "transfer": 156736,
+        "decoded": 584518
+      },
+      {
+        "name": "/assets/home/devices.js",
+        "start": 88,
+        "end": 273,
+        "transfer": 1415,
+        "decoded": 2859
+      },
+      {
+        "name": "/assets/aweigh/watchos-poster.webp",
+        "start": 89,
+        "end": 201,
+        "transfer": 11514,
+        "decoded": 11214
+      },
+      {
+        "name": "/assets/aweigh/sanjuans.svg",
+        "start": 194,
+        "end": 290,
+        "transfer": 10200,
+        "decoded": 22371
+      },
+      {
+        "name": "/assets/aweigh/ios-frame.webp",
+        "start": 215,
+        "end": 446,
+        "transfer": 38508,
+        "decoded": 38208
+      },
+      {
+        "name": "/assets/portfolio/PrintingTheDream.webp",
+        "start": 215,
+        "end": 614,
+        "transfer": 59388,
+        "decoded": 59088
+      },
+      {
+        "name": "/assets/aweigh/watchos-frame.webp",
+        "start": 215,
+        "end": 616,
+        "transfer": 83370,
+        "decoded": 83070
+      },
+      {
+        "name": "/assets/aweigh/ios-delay-tracking.webp",
+        "start": 215,
+        "end": 586,
+        "transfer": 75340,
+        "decoded": 75040
+      },
+      {
+        "name": "/assets/portfolio/WindowSeason.webp",
+        "start": 215,
+        "end": 733,
+        "transfer": 61278,
+        "decoded": 60978
+      },
+      {
+        "name": "/assets/portfolio/Pixellate.webp",
+        "start": 215,
+        "end": 876,
+        "transfer": 165298,
+        "decoded": 164998
+      },
+      {
+        "name": "/assets/portfolio/PointTo.webp",
+        "start": 215,
+        "end": 1020,
+        "transfer": 260092,
+        "decoded": 259792
+      },
+      {
+        "name": "/assets/portfolio/TRMNL-Washington-Ferries.webp",
+        "start": 215,
+        "end": 935,
+        "transfer": 115968,
+        "decoded": 115668
+      }
+    ],
+    "errors": []
+  },
+  {
+    "run": 1,
+    "url": "http://127.0.0.1:8782/",
+    "throttled": true,
+    "sceneReady": 704.4000000003725,
+    "fadeStarted": 717.8000000007451,
+    "fadeDone": 1326.2000000001863,
+    "ttfb": 1.5,
+    "fcp": 248,
+    "resources": [
+      {
+        "name": "/assets/home/base.css",
+        "start": 85,
+        "end": 184,
+        "transfer": 3128,
+        "decoded": 8994
+      },
+      {
+        "name": "/assets/home/tide.css",
+        "start": 85,
+        "end": 189,
+        "transfer": 4622,
+        "decoded": 14384
+      },
+      {
+        "name": "/assets/home/appearance.js",
+        "start": 85,
+        "end": 176,
+        "transfer": 671,
+        "decoded": 817
+      },
+      {
+        "name": "/assets/home/dist/scene.min.js",
+        "start": 85,
+        "end": 471,
+        "transfer": 156736,
+        "decoded": 584518
+      },
+      {
+        "name": "/assets/home/arrival.js",
+        "start": 85,
+        "end": 177,
+        "transfer": 964,
+        "decoded": 1298
+      },
+      {
+        "name": "/assets/home/devices.js",
+        "start": 85,
+        "end": 272,
+        "transfer": 1415,
+        "decoded": 2859
+      },
+      {
+        "name": "/assets/aweigh/watchos-poster.webp",
+        "start": 87,
+        "end": 201,
+        "transfer": 11514,
+        "decoded": 11214
+      },
+      {
+        "name": "/assets/aweigh/sanjuans.svg",
+        "start": 192,
+        "end": 288,
+        "transfer": 10200,
+        "decoded": 22371
+      },
+      {
+        "name": "/assets/aweigh/watchos-frame.webp",
+        "start": 208,
+        "end": 611,
+        "transfer": 83370,
+        "decoded": 83070
+      },
+      {
+        "name": "/assets/aweigh/ios-frame.webp",
+        "start": 208,
+        "end": 438,
+        "transfer": 38508,
+        "decoded": 38208
+      },
+      {
+        "name": "/assets/aweigh/ios-delay-tracking.webp",
+        "start": 208,
+        "end": 581,
+        "transfer": 75340,
+        "decoded": 75040
+      },
+      {
+        "name": "/assets/portfolio/PrintingTheDream.webp",
+        "start": 208,
+        "end": 614,
+        "transfer": 59388,
+        "decoded": 59088
+      },
+      {
+        "name": "/assets/portfolio/WindowSeason.webp",
+        "start": 208,
+        "end": 722,
+        "transfer": 61278,
+        "decoded": 60978
+      },
+      {
+        "name": "/assets/portfolio/Pixellate.webp",
+        "start": 208,
+        "end": 875,
+        "transfer": 165298,
+        "decoded": 164998
+      },
+      {
+        "name": "/assets/portfolio/TRMNL-Washington-Ferries.webp",
+        "start": 208,
+        "end": 930,
+        "transfer": 115968,
+        "decoded": 115668
+      },
+      {
+        "name": "/assets/portfolio/PointTo.webp",
+        "start": 208,
+        "end": 1019,
+        "transfer": 260092,
+        "decoded": 259792
+      }
+    ],
+    "errors": []
+  }
+]

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d9dfdc">
+  <title>Zachary Coleman · Software, thoughtfully made</title>
+  <meta name="description" content="Native apps and open-source tools by Zachary Coleman. Explore working demonstrations and the engineering behind them.">
+  <link rel="stylesheet" href="desk.css">
+  <script src="desk.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+<div class="page">
+  <header class="masthead">
+    <div class="identity"><a href="#" aria-label="Zachary Coleman, home">Zachary Coleman<span class="identity-dot" aria-hidden="true"></span></a><p>iOS engineer &amp; open-source contributor</p></div>
+    <nav aria-label="Main navigation"><a href="#more">All work</a><a href="../fresh/">Compare studies</a><a href="https://www.linkedin.com/in/zacharytcoleman/">LinkedIn</a></nav>
+  </header>
+  <main>
+    <div class="intro"><h1>Made to be used.<br>Built to feel right.</h1><div><p>I make native apps with a little personality<br class="desktop-break"> and a lot of care underneath.</p><p class="invitation">Three projects on the desk. Try them for yourself.</p></div></div>
+    <section class="desk" id="work" aria-label="Three interactive projects">
+      <div class="desk-edge" aria-hidden="true"></div>
+      <article class="station watch-station">
+        <div class="object-space">
+          <div class="watch-recess"><div class="watch">
+            <div class="watch-screen"><video id="watch-video" playsinline muted preload="none" poster="../../assets/aweigh/watchos-poster.webp"><source src="../../assets/aweigh/watchos.mp4" type="video/mp4"></video></div>
+            <img src="../../assets/aweigh/watchos-frame.webp" width="1120" height="1760" alt="Aweigh running on an Apple Watch" class="watch-frame">
+          </div></div>
+          <div class="watch-control"><button id="watch-play" class="metal-button" type="button"><span class="play-icon" aria-hidden="true">▶</span><span id="watch-play-label">Play watch demo</span></button><span class="control-light" id="watch-light" aria-hidden="true"></span></div>
+        </div>
+        <div class="project-note"><div class="note-title"><img src="../../assets/apps/aweigh.webp" width="34" height="34" alt=""><h2>Aweigh</h2></div><p>A ferry app that puts the next departure first. Live schedules, vessel locations, and capacity for iPhone and Apple Watch.</p><p class="status" id="watch-status" role="status">Actual app recording. Awaiting App Review.</p><a href="../../aweigh/">Explore the project <span aria-hidden="true">↗</span></a></div>
+      </article>
+      <article class="station camera-station">
+        <div class="object-space">
+          <div class="camera">
+            <div class="camera-top"><span class="maker">Pixellate</span><span class="viewfinder-dot" aria-hidden="true"></span><span class="screw" aria-hidden="true"></span></div>
+            <div class="camera-screen"><canvas id="photo" width="480" height="360" aria-label="An illustrative sample photo with an adjustable four-color dither effect"></canvas><div class="screen-marker" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
+            <div class="camera-controls"><label for="photo-mix">Dither <output id="mix-value" for="photo-mix">75%</output></label><input id="photo-mix" type="range" min="0" max="100" value="75"><button id="shutter" type="button" aria-label="Develop a photo"><span aria-hidden="true"></span></button></div>
+            <div class="camera-foot"><span>Original</span><span>Four colors</span><span>Develop</span></div>
+            <div class="print-slot" aria-hidden="true"></div>
+          </div>
+          <div class="print-bed"><p class="print-instruction" id="print-instruction">Turn the mix. Press the shutter.<br>A small print, made by you.</p><figure class="photo-print" id="photo-print" hidden><img id="print-image" alt="Your developed sample photograph"><figcaption id="print-caption">75% dither</figcaption></figure></div>
+        </div>
+        <div class="project-note"><div class="note-title"><img src="../../assets/apps/pixellate.webp" width="34" height="34" alt=""><h2>Pixellate Camera</h2></div><p>A four-color camera inspired by the Game Boy. A custom dithering engine makes familiar scenes feel wonderfully different.</p><p class="status" id="photo-status" role="status">Illustrative sample. Adjust the dither and develop a print.</p><a href="https://apps.apple.com/us/app/pixellate-camera/id6743917412">View on the App Store <span aria-hidden="true">↗</span></a></div>
+      </article>
+      <article class="station plotter-station">
+        <div class="object-space">
+          <div class="plotter">
+            <div class="plotter-top"><span class="screw" aria-hidden="true"></span><span>Printing the Dream</span><span class="screw" aria-hidden="true"></span></div>
+            <div class="paper-well"><div class="paper-clamp" aria-hidden="true"></div><canvas id="drawing" width="320" height="320" aria-label="A pixel squid drawn in four passes"></canvas><span class="registration one" aria-hidden="true">+</span><span class="registration two" aria-hidden="true">+</span></div>
+            <div class="pass-indicators" aria-label="Drawing progress"><span data-pass="0"><i></i>Outline</span><span data-pass="1"><i></i>Color</span><span data-pass="2"><i></i>Eyes</span><span data-pass="3"><i></i>Pupils</span></div>
+            <button class="plot-button" id="draw-pass" type="button">Draw the outline <span aria-hidden="true">↵</span></button>
+          </div>
+          <p class="pass-status" id="pass-status" role="status">Ready for pass 1 of 4</p>
+        </div>
+        <div class="project-note"><div class="note-title"><span class="draw-icon" aria-hidden="true">✳</span><h2>Printing the Dream</h2></div><p>From an image to a drawing on your Switch. A desktop converter plans the brushwork; a Pico plays the controller.</p><p class="status">Try a miniature four-pass drawing above.</p><a href="https://github.com/ztc0611/printing-the-dream">See how it works <span aria-hidden="true">↗</span></a></div>
+      </article>
+      <div class="desk-signature" aria-hidden="true"><span>Z. Coleman</span><span>Software &amp; small obsessions</span></div>
+    </section>
+    <section class="more-work" id="more" aria-labelledby="more-heading">
+      <div class="section-heading"><h2 id="more-heading">Beyond the desk</h2><p>More apps, useful tools, and the work underneath.</p></div>
+      <div class="app-list">
+        <a class="app-row" href="https://apps.apple.com/us/app/window-season/id6773955082"><img src="../../assets/apps/window-season.webp" alt="" width="48" height="48"><div><h3>Window Season</h3><p>When to open your windows for better passive cooling.</p></div><span class="platform">iPhone &amp; Apple Watch</span><span aria-hidden="true">↗</span></a>
+        <a class="app-row" href="https://apps.apple.com/us/app/point-to-home-custom-compass/id6478132992"><img src="../../assets/apps/point-to.webp" alt="" width="48" height="48"><div><h3>Point To: Custom Compass</h3><p>A compass that points anywhere you choose.</p></div><span class="platform">iPhone, iPad &amp; Apple Watch</span><span aria-hidden="true">↗</span></a>
+        <a class="app-row" href="https://apps.apple.com/us/app/recall-moving-gallery/id6747688430"><span class="row-symbol" aria-hidden="true">▣</span><div><h3>Recall: Moving Gallery</h3><p>Forgotten Live Photos and videos, in motion again.</p></div><span class="platform">iPhone, iPad, Mac &amp; Vision Pro</span><span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="work-columns"><section class="engine-work"><h3>Care for the foundation.</h3><p>I also contribute to Godot Engine, with 10 merged patches across current and legacy releases, primarily improving Apple platform support.</p><div class="engine-links"><a href="https://github.com/godotengine/godot/pull/68044">120Hz on iPhone and iPad</a><a href="https://github.com/godotengine/godot/pull/85100">Reliable mobile lifecycle events</a><a href="https://github.com/godotengine/godot/pull/85026">Correct refresh rates in Low Power Mode</a><a href="https://github.com/godotengine/godot/pull/59223">An eight-year daylight saving bug</a><a href="../../portfolio.html#open-source">All engine contributions</a></div></section><section class="tool-work"><h3>Tools &amp; experiments</h3><ul><li><a href="https://trmnl.com/recipes/299929">Washington State Ferries for TRMNL</a><span>A live map and departure board on e-ink.</span></li><li><a href="https://trmnl.com/recipes/304759">Window Season for TRMNL</a><span>Passive cooling advice, at a glance.</span></li><li><a href="https://github.com/ztc0611/sentry-rewind">Sentry Rewind</a><span>Browse six synchronized Tesla camera feeds.</span></li><li><a href="../../web-projects/geojson/">GeoJSON Polygon Drawer</a><span>Trace a coastline and export the geometry.</span></li><li><a href="https://github.com/ztc0611/Live-Activity-4-Dominos">Live Activity for Dominos Pizza</a><span>An order tracker in the Dynamic Island.</span></li><li><a href="https://github.com/ztc0611/base4096-godot">Base4096</a><span>Compact image encoding for Godot.</span></li><li><span class="unreleased-title">PhotoStat <small>Unreleased</small></span><span>Explore an iCloud Photos library on device.</span></li></ul></section></div>
+    </section>
+  </main>
+  <footer><span>Zachary Coleman</span><p>Native software. Considered details.</p><a href="../fresh/">Compare studies</a></footer>
+</div>
+</body>
+</html>

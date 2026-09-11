@@ -1,0 +1,67 @@
+<section aria-label="Featured projects" class="featured" data-active="aweigh" id="featured">
+<div aria-label="Choose a project" class="project-selector" role="group">
+<button aria-controls="featured-aweigh" aria-pressed="true" data-select="aweigh" type="button"><span>Aweigh</span><small>Ferry companion</small></button>
+<button aria-controls="featured-pixellate" aria-pressed="false" data-select="pixellate" type="button"><span>Pixellate Camera</span><small>Four-color photography</small></button>
+<button aria-controls="featured-printing" aria-pressed="false" data-select="printing" type="button"><span>Printing the Dream</span><small>Hardware &amp; software</small></button>
+</div>
+<article aria-labelledby="featured-aweigh-title" class="project-inspection" data-project="aweigh" id="featured-aweigh">
+<div class="instrument-stage watch-stage">
+<div aria-hidden="true" class="stage-recess"></div><div aria-hidden="true" class="stage-shelf"></div>
+<div class="watch-instrument">
+<div class="watch-screen"><video aria-label="Aweigh watchOS app recording" id="featured-watch-video" muted="" playsinline="" poster="../../assets/aweigh/watchos-poster.webp" preload="none"><source src="../../assets/aweigh/watchos.mp4" type="video/mp4"/></video></div>
+<img alt="Aweigh's ferry departure board on an Apple Watch" class="watch-frame" height="1760" src="../../assets/aweigh/watchos-frame.webp" width="1120"/>
+</div>
+<div class="instrument-actions"><button class="instrument-button" id="featured-watch-play" type="button"><span aria-hidden="true" class="play-glyph">▶</span><span id="featured-watch-label">Play watch demo</span></button><p aria-live="polite" class="instrument-status" id="featured-watch-status">Recorded in Aweigh.</p></div>
+</div>
+<div class="project-story">
+<p class="project-platform">iOS &amp; watchOS</p><h2 id="featured-aweigh-title">Aweigh</h2>
+<p class="project-lead">The next ferry.<br/>At a glance.</p>
+<p class="project-description">Schedules, vessel locations, capacity, cameras, and alerts for Washington State Ferries, organized around the trip you’re trying to make.</p>
+<p class="project-detail">On your wrist, a split-flap departure board keeps the next sailing close.</p>
+<p class="project-release">Awaiting App Review</p>
+<a class="project-link" href="../../aweigh/">Explore Aweigh <span aria-hidden="true">↗</span></a>
+</div>
+</article>
+<article aria-labelledby="featured-pixellate-title" class="project-inspection" data-project="pixellate" hidden="" id="featured-pixellate">
+<div class="instrument-stage camera-stage">
+<div aria-hidden="true" class="stage-recess"></div><div aria-hidden="true" class="stage-shelf"></div>
+<div class="photo-workspace">
+<div class="camera-instrument">
+<div class="camera-top"><span class="camera-wordmark">Pixellate</span><span aria-hidden="true" class="camera-viewfinder"></span><span aria-hidden="true" class="camera-indicator"></span></div>
+<div class="camera-glass"><canvas aria-label="A San Juan Islands photograph with an adjustable four-color effect" height="360" id="featured-photo" role="img" width="480"></canvas></div>
+<div class="camera-controls"><div class="mix-control"><label for="featured-photo-mix">Four-color mix <output for="featured-photo-mix" id="featured-mix-value">70%</output></label><input id="featured-photo-mix" max="100" min="0" type="range" value="70"/></div><button class="camera-shutter" id="featured-shutter" type="button"><span aria-hidden="true"></span>Develop photo</button></div>
+<div aria-hidden="true" class="camera-seam"></div>
+</div>
+<figure class="photo-print" hidden="" id="featured-photo-print"><img alt="Your developed four-color photograph" id="featured-print-image"/><figcaption id="featured-print-caption">San Juan Islands</figcaption></figure>
+</div>
+<p aria-live="polite" class="instrument-status photo-status" id="featured-photo-status">Adjust the mix, then develop a print.</p>
+</div>
+<div class="project-story">
+<p class="project-platform">iOS camera app</p><h2 id="featured-pixellate-title">Pixellate Camera</h2>
+<p class="project-lead">Less color.<br/>More character.</p>
+<p class="project-description">A live camera that shoots like the 1998 Game Boy Camera: four colors, heavy dither, full metadata, and GPS.</p>
+<p class="project-detail">Its three-pass dithering engine blends error diffusion with a Bayer matrix, keeping faces recognizable while textures go coarse.</p>
+<a class="project-link" href="../../portfolio.html#apps">Explore the camera app <span aria-hidden="true">↗</span></a>
+</div>
+</article>
+<article aria-labelledby="featured-printing-title" class="project-inspection" data-project="printing" hidden="" id="featured-printing">
+<div class="instrument-stage drawing-stage">
+<div aria-hidden="true" class="stage-recess"></div><div aria-hidden="true" class="stage-shelf"></div>
+<div class="drawing-instrument">
+<div class="drawing-top"><span>Printing the Dream</span><span class="drawing-connection"><i aria-hidden="true"></i>USB</span></div>
+<div class="drawing-glass"><canvas aria-label="A pixel octopus drawn in four color passes" height="320" id="featured-drawing" role="img" width="320"></canvas></div>
+<div class="drawing-console"><div aria-label="Drawing progress" class="pass-indicators"><span data-pass="1"></span><span data-pass="2"></span><span data-pass="3"></span><span data-pass="4"></span></div><p aria-live="polite" id="featured-pass-label">Ready for the outline</p></div>
+<span aria-hidden="true" class="console-screw screw-left"></span><span aria-hidden="true" class="console-screw screw-right"></span>
+</div>
+<div class="instrument-actions"><button class="instrument-button" id="featured-draw-pass" type="button">Draw the outline</button><p class="instrument-status">Four colors, one pass at a time.</p></div>
+</div>
+<div class="project-story">
+<p class="project-platform">Hardware &amp; software</p><h2 id="featured-printing-title">Printing the Dream</h2>
+<p class="project-lead">A picture becomes<br/>a sequence.</p>
+<p class="project-description">Imports an image into Tomodachi Life on Switch 1 or 2, without modifying the console.</p>
+<p class="project-detail">A desktop converter plans the brush and paint-bucket passes. A Raspberry Pi Pico redraws the image by acting as a wired controller over USB.</p>
+<a class="project-link" href="../../portfolio.html#apps">Explore the hardware project <span aria-hidden="true">↗</span></a>
+</div>
+</article>
+<p class="featured-footnote">Camera and drawing interactions are illustrative browser sketches.</p>
+</section>
