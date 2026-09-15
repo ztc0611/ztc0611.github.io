@@ -21,6 +21,7 @@
     <meta property="og:image:alt" content="Aweigh on an iPhone and Apple Watch, showing live Washington State Ferries departures.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ztc0611.github.io/assets/aweigh/og-card.jpg">
+    <meta name="twitter:image:alt" content="Aweigh on an iPhone and Apple Watch, showing live Washington State Ferries departures.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,8 +59,8 @@
             </div>
 
             <div class="watch-stage">
-                <div class="watch-device">
-                    <div class="watch-screen">
+                <div class="watch-device" role="img" aria-label="Aweigh on Apple Watch: switching ferry routes updates departure times, countdowns, and vehicle availability.">
+                    <div class="watch-screen" aria-hidden="true">
                         <video muted loop playsinline preload="auto" poster="../assets/aweigh/watchos-poster.webp">
                             <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
                             <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
@@ -75,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="Video of an Apple Watch displaying the Aweigh app interface while routes between Anacortes, Friday Harbor, Lopez, and Orcas are selected." fetchpriority="high" decoding="async">
+                    <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="" fetchpriority="high" decoding="async">
                 </div>
             </div>
         </section>
@@ -86,18 +87,18 @@
 
             <div class="ios-hero-stage">
                 <div class="device-pair">
-                    <div class="ios-device ios-device-hero">
-                        <div class="ios-screen">
+                    <div class="ios-device ios-device-hero" role="img" aria-label="Aweigh on iPhone: switching between Seattle and Bainbridge Island departures updates the route map and sailing schedule.">
+                        <div class="ios-screen" aria-hidden="true">
                             <video autoplay muted loop playsinline preload="auto" poster="../assets/aweigh/ios-schedule-poster.webp">
                                 <source src="../assets/aweigh/ios-schedule.hevc.mp4" type="video/mp4; codecs=hvc1">
                                 <source src="../assets/aweigh/ios-schedule.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="Video of an iPhone displaying the schedule of Seattle to Bainbridge island, then switching to be Bainbridge Island to Seattle, before returning." decoding="async">
+                        <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" decoding="async">
                     </div>
                     <div class="watch-device watch-device-secondary">
                         <div class="watch-screen">
-                            <img src="../assets/aweigh/watchos-schedule.webp" alt="Apple Watch showing schedule from Clinton to Mukilteo: 12:00 PM Tokitae with 66/141 spots, 12:30 PM Kitsap with 120/120 spots, 1:00 PM departure." loading="lazy">
+                            <img src="../assets/aweigh/watchos-schedule.webp" alt="Aweigh on Apple Watch, showing Seattle to Bainbridge Island departures with a countdown and vehicle capacity." loading="lazy">
                         </div>
                         <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="" loading="lazy" decoding="async">
                     </div>
@@ -113,7 +114,7 @@
                 <div class="ios-feature">
                     <div class="ios-device">
                         <div class="ios-screen">
-                            <img src="../assets/aweigh/ios-ferry-map.webp" alt="iPhone showing Ferry Map: live map of the Puget Sound with the M/V Puyallup en route, vessel details card with speed, heading, and ETA." loading="lazy">
+                            <img src="../assets/aweigh/ios-ferry-map.webp" alt="Aweigh’s ferry map, with Kitsap sailing from Southworth to Vashon Island and a card showing its speed, heading, and next departure." loading="lazy">
                         </div>
                         <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
                     </div>
@@ -124,7 +125,7 @@
                 <div class="ios-feature">
                     <div class="ios-device">
                         <div class="ios-screen">
-                            <img src="../assets/aweigh/ios-camera-anacortes.webp" alt="iPhone showing Cameras: WSDOT terminal camera feeds for Anacortes, with filter chips per island." loading="lazy">
+                            <img src="../assets/aweigh/ios-camera-anacortes.webp" alt="Aweigh’s Anacortes camera view, showing the ferry terminal, vehicle holding lanes, and approach road, with tabs for other terminals." loading="lazy">
                         </div>
                         <img class="ios-frame" src="../assets/aweigh/ios-frame.webp" alt="" loading="lazy" decoding="async">
                     </div>
@@ -143,8 +144,8 @@
                 <p>Aweigh's watch interface is tested across screen sizes and the situations ferry riders actually encounter: delays, cancellations, low tides, changing capacity, and the last sailing of the day.</p>
             </div>
             <figure class="test-matrix-figure">
-                <a href="../assets/aweigh/watch-test-matrix.png" aria-label="View Apple Watch states image at full size">
-                    <img width="2270" height="1864" src="../assets/aweigh/watch-test-matrix.png" alt="Contact sheet of fifteen Aweigh Apple Watch screens testing five ferry schedule states across 40 mm, 42 mm, and 49 mm watches." loading="lazy" decoding="async">
+                <a href="../assets/aweigh/watch-test-matrix.png" aria-label="View the Aweigh Apple Watch comparison at full size">
+                    <img width="2270" height="1864" src="../assets/aweigh/watch-test-matrix.png" alt="Five Aweigh schedule scenarios compared across 40, 42, and 49 mm Apple Watches in a three-row grid." loading="lazy" decoding="async">
                 </a>
             </figure>
         </section>
