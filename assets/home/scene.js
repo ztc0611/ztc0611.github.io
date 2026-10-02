@@ -1,11 +1,13 @@
 import * as THREE from './vendor/three.module.min.js';
 import { createSurfaceDetails } from './materials.js';
-import { createForest, createUnderstory, createDriftwood } from './trees.js?v=20260909-details';
-import { terrainSurface, plantUnderstory } from './habitat.js';
+import { createForest, createUnderstory, createBroadleaves, createDriftwood } from './trees.js?v=20260909-details';
+import { createLandscape } from './terrain.js';
+import { createCoastalLandmarks } from './coast.js';
 import { createFerry } from './ferry.js';
-import { createLowClouds } from './clouds.js?v=20260909-details';
+import { createLowClouds, createMist } from './clouds.js?v=20260909-details';
 import { createRain, weatherForDate } from './weather.js';
-import { sunAtLocalHour } from './solar.js';
+import { sunAtLocalHour, moonAtLocalHour } from './solar.js';
+import { seasonForDate } from './season.js';
 
 const mount = document.querySelector('#scene');
 const range = document.querySelector('#time-range');
@@ -39,6 +41,7 @@ function createInlet() {
   const mix = THREE.MathUtils.lerp;
   const color = (hex) => new THREE.Color(hex);
   const surfaceDetails = createSurfaceDetails();
+  const season = seasonForDate();
   let dailyWeather = weatherForDate(), weatherOverride = false;
   let targetRain = dailyWeather.rainy ? 1 : 0, currentRain = targetRain;
   const scene = new THREE.Scene();
@@ -70,12 +73,15 @@ function createInlet() {
   const skyUniforms = {
     uTop: {value:color('#5585a7')}, uHorizon:{value:color('#bdccd0')},
     uSun:{value:new THREE.Vector3(-0.5,0.4,-0.7).normalize()}, uSunColor:{value:color('#fff1d5')},
-    uDay:{value:1}, uDusk:{value:0}, uTime:{value:0}, uRain:{value:currentRain},uFog:{value:scene.fog.color}
+    uDay:{value:1}, uDusk:{value:0}, uTime:{value:0}, uRain:{value:currentRain},uFog:{value:scene.fog.color},
+    uMoon:{value:new THREE.Vector3(0,-1,0)}, uMoonPhase:{value:.5},
+    // Fair summer days carry far fewer clouds than fair autumn ones.
+    uCover:{value:mix(.58,.49,Math.max(season.mist,season.bare))}
   };
   const sky = new THREE.Mesh(new THREE.SphereGeometry(900, 40, 24), new THREE.ShaderMaterial({
     side:THREE.BackSide, depthWrite:false, uniforms:skyUniforms,
     vertexShader:`varying vec3 vWorld; void main(){vWorld=(modelMatrix*vec4(position,1.)).xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
-    fragmentShader:`varying vec3 vWorld; uniform vec3 uTop,uHorizon,uSun,uSunColor,uFog; uniform float uDay,uDusk,uTime,uRain; ${noiseGLSL}
+    fragmentShader:`varying vec3 vWorld; uniform vec3 uTop,uHorizon,uSun,uSunColor,uFog,uMoon; uniform float uDay,uDusk,uTime,uRain,uCover,uMoonPhase; ${noiseGLSL}
       vec2 cloudGradient(vec2 cell){float a=hash(cell)*6.283185;return vec2(cos(a),sin(a));}
       float cloudNoise(vec2 p){
         vec2 cell=floor(p),f=fract(p),u=f*f*f*(f*(f*6.-15.)+10.);
@@ -98,12 +104,24 @@ function createInlet() {
         c+=uSunColor*(pow(sd,16.)*.15+pow(sd,180.)*.4+smoothstep(.99955,.99985,sd)*2.2)*smoothstep(-.09,.025,uSun.y);
         vec2 cp=rd.xz/max(rd.y+mix(.22,.12,uRain),.1)*mix(1.8,2.4,uRain)+vec2(uTime*.0017,0.);
         float cloudMass=cloudField(cp);
-        float clearClouds=smoothstep(.47,.72,cloudMass)*smoothstep(-.03,.13,rd.y)*(1.-smoothstep(.55,.93,rd.y));
+        float clearClouds=smoothstep(uCover,uCover+.25,cloudMass)*smoothstep(-.03,.13,rd.y)*(1.-smoothstep(.55,.93,rd.y));
         float clouds=mix(clearClouds,.94+.06*cloudMass,uRain);
         vec3 cloudColor=mix(vec3(.07,.11,.18),mix(vec3(.77,.83,.85),vec3(.98,.69,.46),uDusk*.65),uDay);
         vec3 overcast=mix(vec3(.032,.040,.049),vec3(.29,.315,.32),uDay);
         overcast*=.68+smoothstep(.23,.75,cloudMass)*.48;
         cloudColor=mix(cloudColor,overcast,uRain);
+        // The disc is drawn about twice its true size so it holds up at this
+        // field of view; the terminator follows the real phase.
+        vec3 moonRight=normalize(cross(uMoon,vec3(0.,1.,0.))),moonUp=cross(moonRight,uMoon);
+        vec2 disc=vec2(dot(rd,moonRight),dot(rd,moonUp))/.0095;
+        float moonMask=(1.-smoothstep(.94,1.,length(disc)))*step(0.,dot(rd,uMoon));
+        float moonPhaseAngle=uMoonPhase*6.283185;
+        vec3 moonLight=vec3(sin(moonPhaseAngle),0.,-cos(moonPhaseAngle));
+        vec3 moonNormal=vec3(disc,sqrt(max(0.,1.-dot(disc,disc))));
+        float moonLit=smoothstep(-.04,.1,dot(moonNormal,moonLight))*(.82+.18*noise(disc*3.+4.));
+        float moonUpness=smoothstep(-.02,.04,uMoon.y);
+        float moonHalo=pow(max(dot(rd,uMoon),0.),900.)*.35*(.5-.5*cos(moonPhaseAngle));
+        c+=vec3(.55,.62,.72)*moonHalo*(1.-uDay)*moonUpness;
         c=mix(c,cloudColor,clouds*mix(.78,1.,uRain));
         vec2 sp=rd.xz/(rd.y+.4)*210.; vec2 cell=floor(sp); vec2 f=fract(sp)-.5;
         float star=pow(max(0.,1.-length(f)*3.1),9.)*step(.985,hash(cell));
@@ -111,8 +129,10 @@ function createInlet() {
         gl_FragColor=vec4(c,1.);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
-        float horizonHaze=(1.-smoothstep(mix(.015,.22,uRain),mix(.24,.62,uRain),h))*mix(.92,1.,uRain);
+        float horizonHaze=(1.-smoothstep(mix(.0,.22,uRain),mix(.17,.62,uRain),h))*mix(.82,1.,uRain);
         gl_FragColor.rgb=mix(gl_FragColor.rgb,linearToOutputTexel(vec4(uFog,1.)).rgb,horizonHaze);
+        // The moon sits above the horizon haze, which would otherwise grey it out.
+        gl_FragColor.rgb=mix(gl_FragColor.rgb,vec3(.97,.96,.9)*mix(.97,.8,uDay),moonMask*moonLit*moonUpness*(1.-clouds*mix(.85,1.,uRain))*mix(1.,.45,uDay));
       }`
   }));
   sky.renderOrder=-10;
@@ -121,83 +141,11 @@ function createInlet() {
   function terrainNoise(x,z) {
     return Math.sin(x*.14+Math.sin(z*.13)*2)*.44+Math.sin(x*.37-z*.29)*.24+Math.sin(x*.79+z*.6)*.13+Math.sin(x*1.67-z*1.27)*.07;
   }
-  function groundNoise(x,z){
-    const hash=(a,b)=>{let n=Math.imul(a,374761393)^Math.imul(b,668265263);n=Math.imul(n^(n>>>13),1274126177);return((n^(n>>>16))>>>0)/4294967295;};
-    const ix=Math.floor(x),iz=Math.floor(z);let u=x-ix,v=z-iz;u=u*u*(3-2*u);v=v*v*(3-2*v);
-    return mix(mix(hash(ix,iz),hash(ix+1,iz),u),mix(hash(ix,iz+1),hash(ix+1,iz+1),u),v);
-  }
-  const treePlacements=[],shrubPlacements=[];
-  function island(cx,cz,rx,rz,height,seed, trees=true, snow=false) {
-    const columns=snow?100:144, rows=snow?76:112;
-    const geometry=new THREE.PlaneGeometry(rx*2,rz*2,columns,rows);
-    geometry.rotateX(-Math.PI/2);
-    const pos=geometry.attributes.position, colors=[];
-    const rock=color(snow?'#697e86':'#536456'), green=color('#253e31'), snowColor=color('#d2dfe0');
-    const dryGrass=color('#aa9055'),stoneColor=color('#707672'),vertexColor=new THREE.Color(),stoneTint=new THREE.Color();
-    function elevation(x,z) {
-      const xx=(x-cx)/rx,zz=(z-cz)/rz;
-      const edge=1-Math.sqrt(xx*xx+zz*zz);
-      const ridge=Math.max(0,edge+.075*terrainNoise(x+seed,z));
-      const peak=(.65+.35*Math.sin(x*.036+z*.015+seed));
-      const base=Math.pow(ridge,1.25)*height*peak + terrainNoise(x+seed,z)*Math.min(4,Math.max(0,edge)*8)-1.8;
-      if(snow)return base;
-      // The coastal rise belongs to the terrain, so exposed ledges join the
-      // headland continuously instead of forming a separate ring of objects.
-      const shelf=smooth(-.85,.75,base)*(1-smooth(3.5,9.,base));
-      const headland=2.5+Math.sin(x*.061+z*.037+seed)*1.05;
-      const folded=.28*Math.sin(x*.33+z*.22)+.14*Math.sin(z*.61-x*.19);
-      return base+shelf*(headland+folded);
-    }
-    function exposure(x,z,y){
-      const shore=1-smooth(2.2,6.4,y+terrainNoise(x*.3,z*.3)*1.4);
-      // The slope contribution is capped at .76, so it cannot change this result.
-      if(shore>=.76)return shore;
-      const slope=Math.hypot(elevation(x+2,z)-elevation(x-2,z),elevation(x,z+2)-elevation(x,z-2))/4;
-      return Math.max(shore,smooth(1.05,2.1,slope)*.76);
-    }
-    for(let i=0;i<pos.count;i++){
-      const x=pos.getX(i)+cx,z=pos.getZ(i)+cz,y=elevation(x,z);
-      pos.setXYZ(i,x,y,z);
-      const n=terrainNoise(x*.8+seed,z*.8);
-      const c=vertexColor.copy(rock).lerp(green,smooth(1,7,y)*.7).multiplyScalar(.88+n*.2);
-      if(!snow){
-        const stone=exposure(x,z,y);
-        const patch=groundNoise(x*.065+seed*9.3,z*.065)*.75+groundNoise(x*.17-seed,z*.17)*.25;
-        const meadow=smooth(.29,.72,patch)*(1-stone);
-        c.lerp(dryGrass,meadow*.67);
-        c.lerp(stoneTint.copy(stoneColor).multiplyScalar(.87+n*.13),stone);
-      }
-      if(snow) c.lerp(snowColor,smooth(height*.38,height*.6,y+n*5));
-      colors.push(c.r,c.g,c.b);
-    }
-    geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3)); geometry.computeVertexNormals();
-    const material=new THREE.MeshStandardMaterial({vertexColors:true,roughness:1,metalness:0});
-    surfaceDetails.terrain(material,snow);
-    scene.add(new THREE.Mesh(geometry,material));
-    if(trees){
-      const firstTree=treePlacements.length;
-      for(let i=0;i<1800;i++){
-        const x=cx+(random()*2-1)*rx*.96,z=cz+(random()*2-1)*rz*.96,y=elevation(x,z);
-        if(y>1.2 && y<height*.8 && exposure(x,z,y)<.72){
-          const h=(1.8+random()*3.4)*(cz < -100 ? 1.5:1);
-          treePlacements.push({x,y,z,h,shade:random()});
-        }
-      }
-      const ground=terrainSurface(geometry,exposure);
-      shrubPlacements.push(...plantUnderstory(ground,treePlacements.slice(firstTree),seed,cz>-80?(rx<30?3:9):5));
+  const landscape = createLandscape(surfaceDetails, random, season);
+  const treePlacements = landscape.trees, shrubPlacements = landscape.shrubs;
+  scene.add(landscape.group);
 
-    }
-  }
-  island(-176,-260,168,60,118,4,false,true);
-  island(38,-290,173,62,135,8,false,true);
-  island(195,-275,151,75,98,2,false,true);
-  island(-105,-123,87,61,56,4);
-  island(114,-131,93,67,58,1);
-  island(61,-49,46,52,32,7);
-  island(-109,-37,70,55,30,12);
-  island(36,27,24,24,10,3);
-
-  scene.add(createForest(treePlacements),createUnderstory(shrubPlacements));
+  scene.add(createForest(treePlacements),createUnderstory(shrubPlacements),createBroadleaves(landscape.broadleaves,season));
   if(debug)mount.dataset.shrubs=String(shrubPlacements.length);
 
   const rockMaterial=new THREE.MeshStandardMaterial({color:'#52646a',roughness:.92,vertexColors:true});
@@ -220,6 +168,8 @@ function createInlet() {
   rock(24,.1,12,3.4,2.0,2.8);
 
   const {ferry, windowMat}=createFerry();
+  const landmarks = createCoastalLandmarks(landscape.shores);
+  scene.add(landmarks.group);
   ferry.position.set(-4,0,-52);ferry.rotation.y=.12+THREE.MathUtils.degToRad(40)+Math.PI;scene.add(ferry);
 
   const reflection=new THREE.WebGLRenderTarget(960,640,{type:THREE.HalfFloatType,depthBuffer:true});
@@ -227,7 +177,8 @@ function createInlet() {
   const textureMatrix=new THREE.Matrix4();
   const biasMatrix=new THREE.Matrix4().set(.5,0,0,.5,0,.5,0,.5,0,0,.5,.5,0,0,0,1);
   const ripples=Array.from({length:6},()=>new THREE.Vector4(0,0,-100,0));
-  const waterUniforms={uReflection:{value:reflection.texture},uMatrix:{value:textureMatrix},uTime:{value:0},uSun:{value:new THREE.Vector3()},uSunColor:{value:color('#fff2cd')},uWater:{value:color('#164c58')},uFog:{value:scene.fog.color},uFogDensity:{value:scene.fog.density},uDay:{value:1},uRain:{value:currentRain},uFerry:{value:new THREE.Vector3()},uFerryHeading:{value:ferry.rotation.y},uRipples:{value:ripples}};
+  const waterUniforms={uReflection:{value:reflection.texture},uMatrix:{value:textureMatrix},uTime:{value:0},uSun:{value:new THREE.Vector3()},uSunColor:{value:color('#fff2cd')},uWater:{value:color('#164c58')},uFog:{value:scene.fog.color},uFogDensity:{value:scene.fog.density},uDay:{value:1},uRain:{value:currentRain},uFerry:{value:new THREE.Vector3()},uFerryHeading:{value:ferry.rotation.y},uRipples:{value:ripples},
+    uMoon:skyUniforms.uMoon,uMoonGlow:{value:0},uGlow:{value:season.glow}};
   const waveGLSL=`
     uniform float uTime; uniform vec4 uRipples[6];
     float wave(vec2 p){
@@ -244,7 +195,7 @@ function createInlet() {
     uniforms:waterUniforms, transparent:false,
     vertexShader:`${noiseGLSL} ${waveGLSL} varying vec3 vWorld; varying vec4 vReflection; uniform mat4 uMatrix;
       void main(){vec3 p=position;p.y+=wave(p.xz);vWorld=(modelMatrix*vec4(p,1.)).xyz;vReflection=uMatrix*vec4(vWorld,1.);gl_Position=projectionMatrix*viewMatrix*vec4(vWorld,1.);}`,
-    fragmentShader:`${noiseGLSL} ${waveGLSL} uniform sampler2D uReflection;uniform vec3 uSun,uSunColor,uWater,uFog,uFerry;uniform float uDay,uRain,uFogDensity,uFerryHeading;varying vec3 vWorld;varying vec4 vReflection;
+    fragmentShader:`${noiseGLSL} ${waveGLSL} uniform sampler2D uReflection;uniform vec3 uSun,uSunColor,uWater,uFog,uFerry,uMoon;uniform float uDay,uRain,uFogDensity,uFerryHeading,uMoonGlow,uGlow;varying vec3 vWorld;varying vec4 vReflection;
       vec3 rainImpact(vec2 p){
         vec2 grid=p*.55, cell=floor(grid), slope=vec2(0.);float crest=0.;
         for(int x=-1;x<=1;x++)for(int y=-1;y<=1;y++){
@@ -279,6 +230,7 @@ function createInlet() {
         c+=vec3(.48,.62,.65)*impact.z*.035*(.25+.75*uDay);
         float spec=pow(max(dot(normal,normalize(uSun+viewDir)),0.),340.);
         c+=uSunColor*spec*(.8+uDay*1.3)*(1.-uRain*.88);
+        c+=vec3(.78,.83,.88)*(pow(max(dot(normal,normalize(uMoon+viewDir)),0.),220.)*1.6+pow(max(dot(normal,normalize(uMoon+viewDir)),0.),30.)*.05)*uMoonGlow;
         float shimmer=pow(max(dot(normal,normalize(uSun+viewDir)),0.),28.)*.035;
         c+=uSunColor*shimmer;
         vec2 rel=p-uFerry.xz;
@@ -290,6 +242,15 @@ function createInlet() {
         c=mix(c,vec3(.62,.77,.75)*(.18+.82*uDay),wake*.24);
         float lamp=exp(-pow(rel.x*.65,2.))*exp(-abs(rel.y)*.17)*(.5+.5*sin(rel.y*8.+uTime*2.));
         c+=vec3(1.,.53,.19)*lamp*(1.-uDay)*.2;
+        if(uGlow*(1.-uDay)>.01){
+          // Late-summer dinoflagellates flash where the water is disturbed:
+          // at the crest of each touch ripple and along the ferry's wake.
+          float sparks=0.;
+          for(int i=0;i<6;i++){float t=uTime-uRipples[i].z;float shell=length(p-uRipples[i].xy)-t*2.4;sparks+=exp(-shell*shell*1.4)*exp(-t*.45)*smoothstep(0.,.2,t)*step(.001,uRipples[i].w);}
+          float grain=smoothstep(.55,.9,noise(p*9.+uTime*.6));
+          sparks+=wake*.55;
+          c+=vec3(.16,.78,.82)*sparks*(.12+grain*1.3)*uGlow*(1.-uDay)*detailFade;
+        }
         float fogDepth=-(viewMatrix*vec4(vWorld,1.)).z;float fog=1.-exp(-uFogDensity*uFogDensity*fogDepth*fogDepth);
         gl_FragColor=vec4(c,1.);
         #include <tonemapping_fragment>
@@ -308,6 +269,8 @@ function createInlet() {
   if(debug)mount.dataset.driftwood=JSON.stringify(driftwoodPlacements.map(({x,z})=>({x,z})));
   const rain = createRain(scene);
   const lowClouds = createLowClouds(scene);
+  const mist = createMist(scene, lowClouds.noiseTexture);
+  const mistColor = new THREE.Color();
   if(debug){
     const gl=renderer.getContext(),timer=gl.getExtension('EXT_disjoint_timer_query_webgl2');
     renderer.domElement.dataset.cloudGpuTimer=timer?'available':'unavailable';
@@ -394,20 +357,34 @@ function createInlet() {
     camera.lookAt(aim.x+pointer.x*.25,aim.y+pointer.y*.1,aim.z);
   }
   resize();updateCamera();
-  const dayTop=color('#4e7fa0'),nightTop=color('#071326'),duskTop=color('#344d75');
-  const dayHorizon=color('#b5c9cc'),nightHorizon=color('#26394f'),duskHorizon=color('#ed9270');
+  const alpenglow=color('#ff6f4f');
+  const dayTop=color('#3f77a6'),nightTop=color('#071326'),duskTop=color('#344d75');
+  const dayHorizon=color('#b7ced6'),nightHorizon=color('#26394f'),duskHorizon=color('#ed9270');
   const dayWater=color('#205160'),nightWater=color('#102936');
   const rainSky=color('#758181'),rainHorizon=color('#929d9b'),rainWater=color('#344b4c');
   const rainLight=color('#bac2be'),rainNight=color('#66717f');
   function lighting(){
-    const solar=sunAtLocalHour(currentHour);
+    const solar=sunAtLocalHour(currentHour,season.override?season.date:undefined);
     const elevation=Math.sin(solar.altitude);
     const day=smooth(Math.sin(-6*Math.PI/180),Math.sin(5*Math.PI/180),elevation);
     const dusk=Math.exp(-Math.pow(elevation/.12,2))*day;
-    // Keep the sun within the composed view; its height and daylight follow
+    // Keep the low sun within the composed view; its height and daylight follow
     // the real sun, while the scene has no fixed geographic camera bearing.
-    const sunDir=new THREE.Vector3(Math.sin(solar.azimuth)*.74,Math.max(elevation,.025),-.7).normalize();
+    // A high sun swings behind the viewer so midday light falls on the faces
+    // of the mountains instead of silhouetting them.
+    const lunar=moonAtLocalHour(currentHour,season.override?season.date:undefined);
+    const moonUp=smooth(-.02,.06,Math.sin(lunar.altitude))*(1-currentRain);
+    // Like the sun, the moon is composed into the frame: it rises and sets on
+    // time and shows its true phase, but its bearing and height are compressed
+    // to keep it in the sky above the inlet.
+    const moonHeight=Math.sin(lunar.altitude);
+    skyUniforms.uMoon.value.set(Math.sin(lunar.azimuth)*.42,moonHeight>0?.05+moonHeight*.3:moonHeight,-.9).normalize();
+    skyUniforms.uMoonPhase.value=lunar.phase;
+    const moonlight=lunar.fraction*moonUp*(1-day);
+    waterUniforms.uMoonGlow.value=moonlight;
+    const sunDir=new THREE.Vector3(Math.sin(solar.azimuth)*.74,Math.max(elevation,.025),mix(-.7,.45,smooth(.25,.75,elevation))).normalize();
     sunDir.lerp(new THREE.Vector3(.38,.46,-.8).normalize(),1-smooth(-.35,-.08,elevation)).normalize();
+    const keyDir=sunDir.clone().lerp(skyUniforms.uMoon.value,moonUp*(1-day)).normalize();
     skyUniforms.uTop.value.copy(nightTop).lerp(dayTop,day).lerp(duskTop,dusk*.5);
     skyUniforms.uHorizon.value.copy(nightHorizon).lerp(dayHorizon,day).lerp(duskHorizon,dusk*.9);
     skyUniforms.uTop.value.lerp(rainSky.clone().multiplyScalar(.16+day*.84),currentRain);
@@ -415,19 +392,25 @@ function createInlet() {
     skyUniforms.uRain.value=currentRain;
     skyUniforms.uSun.value.copy(sunDir);skyUniforms.uDay.value=day;skyUniforms.uDusk.value=dusk;
     skyUniforms.uSunColor.value.set('#aecbfa').lerp(color('#ffdfaf'),day);
-    sun.position.copy(sunDir).multiplyScalar(200);sun.color.copy(skyUniforms.uSunColor.value);sun.intensity=mix(.38,2.6,day)*(1-dusk*.25)*(1-currentRain*.85);
+    sun.position.copy(keyDir).multiplyScalar(200);sun.color.copy(skyUniforms.uSunColor.value);sun.intensity=mix(.22+moonlight*.45,2.6,day)*(1-dusk*.25)*(1-currentRain*.85);
     hemi.intensity=mix(.54,2.25,day)*(1-currentRain*.23);hemi.color.set('#6f94bb').lerp(color('#c4dfed'),day).lerp(rainNight.clone().lerp(rainLight,day),currentRain);fill.intensity=mix(.22,.5,day)*(1-currentRain*.35);fill.color.set('#78b8d6').lerp(rainLight,currentRain);
     scene.fog.color.copy(skyUniforms.uHorizon.value).lerp(skyUniforms.uTop.value,.13);
-    scene.fog.density=mix(.0036,.0065,currentRain);
+    scene.fog.density=mix(.0027,.0065,currentRain);
     waterUniforms.uFogDensity.value=scene.fog.density;
     waterUniforms.uRain.value=currentRain;
+    landscape.alpenglow.copy(alpenglow).multiplyScalar(dusk*.42*(1-currentRain));
     surfaceDetails.setWetness(currentRain);
     rain.update(sceneTime,currentRain,day,!reduced.matches);
     lowClouds.update(sceneTime,currentRain,day);
+    // Mist forms before dawn and burns off by late morning.
+    const morning=smooth(3,6,currentHour)*(1-smooth(9.5,11.5,currentHour));
+    mistColor.copy(skyUniforms.uHorizon.value).lerp(skyUniforms.uSunColor.value,.35*day).multiplyScalar(.55+day*.5);
+    mist.update(sceneTime,season.mist*morning*(1-currentRain*.6),mistColor);
 
     waterUniforms.uSun.value.copy(sunDir);waterUniforms.uSunColor.value.copy(skyUniforms.uSunColor.value);
     waterUniforms.uWater.value.copy(nightWater).lerp(dayWater,day).lerp(rainWater.clone().multiplyScalar(.24+day*.76),currentRain);waterUniforms.uDay.value=day;
     windowMat.emissiveIntensity=mix(2.8,.12,day)+currentRain*day*.78;
+    landmarks.update(sceneTime,day);
     renderer.toneMappingExposure=mix(1.15,1.04,day);
     mount.dataset.daylight=day.toFixed(3);
   }

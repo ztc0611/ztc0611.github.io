@@ -29,6 +29,7 @@ export function createLowClouds(scene) {
   geometry.setAttribute('aCenter',new THREE.InstancedBufferAttribute(new Float32Array(centers),3));
   geometry.setAttribute('aShape',new THREE.InstancedBufferAttribute(new Float32Array(shapes),4));geometry.instanceCount=centers.length/3;
   const uniforms={uTime:{value:0},uRain:{value:0},uColor:{value:new THREE.Color()},uNoise:{value:cloudTexture()}};
+  const noiseTexture=uniforms.uNoise.value;
   const material=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,
     vertexShader:`attribute vec3 aCenter;attribute vec4 aShape;uniform float uTime,uRain;varying vec2 vUv;varying vec2 vSeed;
       void main(){vec3 center=aCenter;center.y+=mix(22.,-7.,uRain);center.x+=sin(uTime*.014+aShape.z*6.283)*9.;
@@ -52,5 +53,45 @@ export function createLowClouds(scene) {
       }`
   });
   const mesh=new THREE.Mesh(geometry,material);mesh.frustumCulled=false;mesh.renderOrder=2;scene.add(mesh);
-  return {mesh,update(time,rain,day){mesh.visible=rain>.002;uniforms.uTime.value=time;uniforms.uRain.value=rain;uniforms.uColor.value.setRGB(.30,.325,.33).multiplyScalar(.13+day*.87);}};
+  return {mesh,noiseTexture,update(time,rain,day){mesh.visible=rain>.002;uniforms.uTime.value=time;uniforms.uRain.value=rain;uniforms.uColor.value.setRGB(.30,.325,.33).multiplyScalar(.13+day*.87);}};
+}
+
+// Radiation fog that pools on the channel on still autumn mornings and burns
+// off as the sun climbs. It shares the cloud noise so it needs no extra texture.
+export function createMist(scene, noiseTexture) {
+  let seed=40211;
+  const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)|0;return(seed>>>0)/4294967296;};
+  const centers=[],shapes=[];
+  const banks=[[-60,2.2,-118,120,7],[70,2.4,-112,120,7],[-20,1.6,-78,90,5],[40,1.8,-62,80,5],[-70,1.4,-40,70,4.5],[20,1.2,-20,60,4]];
+  for(const [x,y,z,width,height] of banks)for(let i=0;i<3;i++){
+    centers.push(x+(random()-.5)*width*.7,y+random()*height*.3,z+(random()-.5)*14);
+    shapes.push(width*(.55+random()*.3),height*(.9+random()*.4),random(),random());
+  }
+  const plane=new THREE.PlaneGeometry(1,1),geometry=new THREE.InstancedBufferGeometry();
+  geometry.index=plane.index;geometry.attributes.position=plane.attributes.position;geometry.attributes.uv=plane.attributes.uv;
+  geometry.setAttribute('aCenter',new THREE.InstancedBufferAttribute(new Float32Array(centers),3));
+  geometry.setAttribute('aShape',new THREE.InstancedBufferAttribute(new Float32Array(shapes),4));geometry.instanceCount=centers.length/3;
+  const uniforms={uTime:{value:0},uStrength:{value:0},uColor:{value:new THREE.Color()},uNoise:{value:noiseTexture}};
+  const material=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,
+    vertexShader:`attribute vec3 aCenter;attribute vec4 aShape;uniform float uTime;varying vec2 vUv;varying vec2 vSeed;
+      void main(){vec3 center=aCenter;center.x+=sin(uTime*.02+aShape.z*6.283)*4.;
+      vec4 view=modelViewMatrix*vec4(center,1.);view.xy+=position.xy*aShape.xy;gl_Position=projectionMatrix*view;
+      vUv=uv;vSeed=aShape.zw;}`,
+    fragmentShader:`uniform sampler2D uNoise;uniform float uTime,uStrength;uniform vec3 uColor;varying vec2 vUv,vSeed;
+      void main(){
+      vec2 drift=vec2(uTime*.0016,0.);
+      float n=texture2D(uNoise,vUv*vec2(1.6,.4)+vSeed+drift).r;
+      float wisps=texture2D(uNoise,vUv*vec2(3.1,.7)+vSeed.yx-drift*1.7).r;
+      // Dense along the water, thinning upward into the trees.
+      float body=smoothstep(0.,.25,vUv.y)*(1.-smoothstep(.25,1.,vUv.y+(wisps-.5)*.35));
+      float sides=smoothstep(0.,.25,vUv.x)*(1.-smoothstep(.75,1.,vUv.x));
+      float alpha=body*sides*smoothstep(.3,.7,n+body*.2)*uStrength*.75;
+      if(alpha<.003)discard;
+      gl_FragColor=vec4(uColor*(.9+n*.15),alpha);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+      }`
+  });
+  const mesh=new THREE.Mesh(geometry,material);mesh.frustumCulled=false;mesh.renderOrder=2;scene.add(mesh);
+  return {mesh,update(time,strength,color){mesh.visible=strength>.004;uniforms.uTime.value=time;uniforms.uStrength.value=strength;uniforms.uColor.value.copy(color);}};
 }

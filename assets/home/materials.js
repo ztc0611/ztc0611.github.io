@@ -80,7 +80,7 @@ export function createSurfaceDetails() {
           surfaceWeights /= max(dot(surfaceWeights, vec3(1.0)), .0001);
           vec3 surfaceCoarse = surfaceSample(vSurfaceWorld * .065, surfaceWeights);
           vec3 surfaceFine = surfaceSample(vSurfaceWorld * .43 + vec3(.19, .37, .11), surfaceWeights);
-          float surfaceSnow = ${snow ? 'smoothstep(.28, .54, dot(diffuseColor.rgb, vec3(.2126, .7152, .0722)))' : '0.0'};
+          float surfaceSnow = ${snow ? 'smoothstep(.28, .5, dot(diffuseColor.rgb, vec3(.2126, .7152, .0722)))' : '0.0'};
           float surfaceDetail = 1.0 - surfaceSnow * .82;
           float surfaceUp = smoothstep(.24, .86, surfaceWorldNormal.y);
           float surfaceLichen = smoothstep(.52, .72, surfaceCoarse.b + (surfaceFine.b - .5) * .22);

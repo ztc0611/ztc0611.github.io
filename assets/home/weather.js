@@ -1,10 +1,11 @@
 import * as THREE from './vendor/three.module.min.js';
+import { seasonForDate } from './season.js';
 
-export function weatherForDate(date = new Date()) {
+export function weatherForDate(date = seasonForDate().date) {
   const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   let hash = 2166136261;
   for (const character of `inlet-weather-v1:${key}`) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619);
-  return {key, rainy: (hash >>> 0) % 100 < 38};
+  return {key, rainy: (hash >>> 0) % 1000 < seasonForDate(date).rainChance * 1000};
 }
 
 export function createRain(scene) {

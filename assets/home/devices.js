@@ -4,30 +4,91 @@
   if (!video) return;
 
   const loader = document.querySelector('#watch-loader');
+  const poster = document.querySelector('#watch-poster');
   const stage = video.closest('.watch') || video;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const h264 = video.querySelector('source:last-child');
 
-  let autoplayBlocked = false;
   let onscreen = false;
+  let prewarmed = false;
+  let playPending = false;
+  let frameShown = false;
+  let autoplayBlocked = false;
+  let fallbackTried = false;
+  let fallbackRetryPending = false;
+  let frameCallbackPending = false;
 
-  video.loop = true;
+  function showLoader(on) {
+    loader?.classList.toggle('hidden', !on);
+  }
+
+  function showFrame() {
+    if (reduced.matches) return;
+    frameShown = true;
+    poster?.classList.add('hidden');
+    showLoader(false);
+  }
+
+  function showPoster() {
+    frameShown = false;
+    poster?.classList.remove('hidden');
+    showLoader(false);
+  }
+
+  function prewarm() {
+    if (prewarmed || reduced.matches) return;
+    prewarmed = true;
+    video.preload = 'auto';
+    video.load();
+  }
+
+  function tryH264() {
+    if (fallbackTried || !h264 || !video.currentSrc.includes('watchos-loop.hevc.mp4')) return false;
+    fallbackTried = true;
+    fallbackRetryPending = playPending;
+    frameCallbackPending = false;
+    showPoster();
+    video.src = h264.src;
+    video.load();
+    if (onscreen && !document.hidden && !reduced.matches) resume();
+    return true;
+  }
 
   function resume() {
     if (!onscreen || reduced.matches || document.hidden || autoplayBlocked) return;
-    // preload="none" keeps the clip off the wire until someone reaches the card;
-    // play() starts that fetch by itself. load() would do it too, but it runs the
-    // full media load algorithm first, emptying the element and blanking the
-    // poster frame to the screen's black backing for a paint or two.
-    if (video.preload !== 'auto') video.preload = 'auto';
+    prewarm();
+    if (playPending || !video.paused) return;
+    if (!frameShown) showLoader(true);
     if (video.ended) video.currentTime = 0;
+    playPending = true;
     const started = video.play();
-    if (!started || !started.catch) return;
-    started.catch((error) => {
-      // Scrolling away can interrupt a pending play. That is not an autoplay
-      // refusal and must not prevent the next visible section from resuming.
+    if (!started || !started.then) {
+      playPending = false;
+      return;
+    }
+    started.then(() => {
+      playPending = false;
+      if (fallbackRetryPending) {
+        fallbackRetryPending = false;
+        resume();
+        return;
+      }
+      if (!onscreen || reduced.matches || document.hidden) suspend();
+    }).catch((error) => {
+      playPending = false;
+      if (error.name === 'NotAllowedError') {
+        autoplayBlocked = true;
+        showPoster();
+        return;
+      }
+      if (fallbackRetryPending) {
+        fallbackRetryPending = false;
+        resume();
+        return;
+      }
       if (error.name === 'AbortError') return;
-      autoplayBlocked = true;
-      showLoader(false);
+      if (tryH264()) return;
+      showPoster();
     });
   }
 
@@ -36,25 +97,32 @@
     showLoader(false);
   }
 
-  function showLoader(on) {
-    if (loader) loader.classList.toggle('hidden', !on);
-  }
+  video.addEventListener('playing', () => {
+    if (reduced.matches) return;
+    if (frameShown) {
+      showLoader(false);
+    } else if ('requestVideoFrameCallback' in video && !frameCallbackPending) {
+      frameCallbackPending = true;
+      video.requestVideoFrameCallback(() => {
+        frameCallbackPending = false;
+        showFrame();
+      });
+    } else if (!('requestVideoFrameCallback' in video) && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      showFrame();
+    }
+  });
+  video.addEventListener('waiting', () => {
+    if (onscreen && !reduced.matches && !document.hidden) showLoader(true);
+  });
+  video.addEventListener('error', () => {
+    if (!tryH264()) showPoster();
+  });
 
-  // The poster is on the wire from first paint even though preload="none" keeps
-  // the clip off it, so the throbber stands only over a screen with genuinely
-  // nothing on it. Once the watch's first frame is up, a spinner on top of it is
-  // noise over meaningful content.
-  const posterUrl = video.getAttribute('poster');
-  if (posterUrl) {
-    const poster = new Image();
-    poster.onload = poster.onerror = () => showLoader(false);
-    poster.src = posterUrl;
-  }
-  video.addEventListener('playing', () => showLoader(false));
-  video.addEventListener('error', () => showLoader(false));
-  // Only a stall that interrupts playback already under way earns the throbber
-  // back. The first fetch happens behind the poster, which is content enough.
-  video.addEventListener('waiting', () => { if (video.currentTime > 0) showLoader(true); });
+  new IntersectionObserver((entries, observer) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    prewarm();
+    observer.disconnect();
+  }, { rootMargin: '600px', threshold: 0 }).observe(stage);
 
   new IntersectionObserver((entries) => {
     const entry = entries[entries.length - 1];
@@ -67,6 +135,10 @@
   });
 
   reduced.addEventListener('change', (event) => {
-    if (event.matches) suspend(); else resume();
+    if (event.matches) {
+      suspend();
+      showPoster();
+    } else resume();
   });
+  if (reduced.matches) showLoader(false);
 })();

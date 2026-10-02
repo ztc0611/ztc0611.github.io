@@ -279,6 +279,51 @@ export function createUnderstory(placements) {
   return shrubs;
 }
 
+// Summer green, then each species' own autumn colour: bigleaf maple goes
+// butter yellow, vine maple scarlet, and alder only dulls before it drops.
+const broadleafSpecies = [
+  { summer: '#4a6536', autumn: '#bf963f' },
+  { summer: '#506a39', autumn: '#a0492f' },
+  { summer: '#435c38', autumn: '#77733f' }
+];
+
+export function createBroadleaves(placements, season) {
+  const group = new THREE.Group();
+  group.name = 'Alder and maple';
+  if (!placements.length) return group;
+  const leaves = surfaceTexture(false), bark = surfaceTexture(true);
+  const crowns = new THREE.InstancedMesh(createShrubGeometry(), new THREE.MeshStandardMaterial({
+    color: '#ffffff', vertexColors: true, map: leaves, bumpMap: leaves, bumpScale: .04, roughness: .92, metalness: 0
+  }), placements.length);
+  const trunks = new THREE.InstancedMesh(new THREE.CylinderGeometry(.05, .09, 1, 5).translate(0, .5, 0),
+    new THREE.MeshStandardMaterial({ color: '#8d8a80', map: bark, roughness: 1, metalness: 0 }), placements.length);
+  const transform = new THREE.Object3D(), tint = new THREE.Color(), turned = new THREE.Color();
+  placements.forEach((tree, index) => {
+    const pick = (tree.shade * 7.31) % 1;
+    const species = broadleafSpecies[pick < .55 ? 0 : pick < .7 ? 1 : 2];
+    // Neighbouring trees turn a week or two apart rather than in lockstep.
+    const timing = THREE.MathUtils.clamp(season.foliage * 1.35 - ((tree.shade * 3.7) % 1) * .35, 0, 1);
+    const leafless = season.bare * (.6 + ((tree.shade * 5.3) % 1) * .4);
+    const crownScale = tree.h * (.44 + tree.shade * .14) * (1 - leafless * .85);
+    transform.position.set(tree.x, tree.y + tree.h * .2, tree.z);
+    transform.rotation.set(0, tree.shade * Math.PI * 2, 0);
+    transform.scale.set(crownScale, crownScale * 1.35, crownScale * .95);
+    transform.updateMatrix();
+    crowns.setMatrixAt(index, transform.matrix);
+    tint.set(species.summer).lerp(turned.set(species.autumn), timing).lerp(turned.set('#6b5a44'), leafless);
+    crowns.setColorAt(index, tint.multiplyScalar(.85 + tree.shade * .3));
+    transform.position.set(tree.x, tree.y, tree.z);
+    transform.scale.set(tree.h * .45, tree.h * .5, tree.h * .45);
+    transform.updateMatrix();
+    trunks.setMatrixAt(index, transform.matrix);
+  });
+  crowns.instanceMatrix.needsUpdate = trunks.instanceMatrix.needsUpdate = crowns.instanceColor.needsUpdate = true;
+  crowns.computeBoundingSphere();
+  trunks.computeBoundingSphere();
+  group.add(trunks, crowns);
+  return group;
+}
+
 export function createDriftwood(placements, waterUniforms, waveCode) {
   const geometry = new THREE.CylinderGeometry(.56, 1, 1, 12, 12);
   const positions = geometry.attributes.position, colors = [];
