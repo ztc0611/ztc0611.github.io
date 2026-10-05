@@ -6,6 +6,7 @@
   --ground:#521a20;
   --ink:#f3e9da;
   --rule:rgb(243 233 218 / .36);
+  --rule-strong:rgb(243 233 218 / .62);
   --shade:rgb(24 3 7 / .5);
   --gap:32px;
   --m:clamp(20px,4.4vw,72px);
@@ -23,7 +24,7 @@
   text-size-adjust:100%;
 }
 @media (prefers-color-scheme:dark){
-  :root{--ground:#0f0b0b;--ink:#e3a69c;--rule:rgb(227 166 156 / .32);--shade:rgb(0 0 0 / .6)}
+  :root{--ground:#0f0b0b;--ink:#e3a69c;--rule:rgb(227 166 156 / .32);--rule-strong:rgb(227 166 156 / .55);--shade:rgb(0 0 0 / .6)}
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -52,7 +53,9 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
 
 /* Shared type: one face at a huge size and at reading sizes. Links and body
    never drop below 16px; only captions are 14px. */
-.title{font-size:clamp(22px,2vw,28px);line-height:1.2;font-weight:600;letter-spacing:-.018em}
+/* Section titles are the middle step between the name and the text: about
+   half the name's size on the cover, so each room announces itself. */
+.room-title{font-size:max(min(13.4vw,60px),min(6.6vw,104px));line-height:.95;font-weight:600;letter-spacing:-.04em;margin-left:-.045em;margin-bottom:clamp(16px,3vw,40px);text-wrap:balance}
 .piece-title{font-size:19px;line-height:1.3;font-weight:600;letter-spacing:-.012em}
 .caption{font-size:14px;line-height:1.45;font-variant-numeric:tabular-nums}
 .text{text-wrap:pretty}
@@ -94,54 +97,47 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
 
 /* Catalogue. Every entry hangs from the same 12-column grid as the opening:
    the label holds the left third, the object the rest. */
-main{padding-bottom:clamp(72px,10vw,160px)}
+main{padding-bottom:clamp(120px,16vw,220px)}
 .foreword{padding-top:clamp(40px,6vw,88px)}
 .foreword p{max-width:30em;font-size:clamp(19px,1.7vw,24px);line-height:1.45;letter-spacing:-.008em;text-wrap:pretty}
 
-.entry,.shelf{position:relative;margin-top:clamp(72px,10vw,150px);padding-top:18px}
-.entry::before,.shelf::before{content:"";position:absolute;top:0;left:var(--pl);right:var(--pr);border-top:1px solid var(--rule)}
+.entry,.shelf{position:relative;margin-top:clamp(120px,16vw,220px);padding-top:clamp(22px,2.6vw,36px)}
+/* Each room opens on a full-bleed threshold, drawn stronger than the hairlines inside rooms. */
+.entry::before,.shelf::before{content:"";position:absolute;top:0;left:calc(50% - 50vw);width:100vw;border-top:1px solid var(--rule-strong)}
 
-.entry{display:grid;grid-template-columns:minmax(0,1fr);row-gap:22px}
+.entry,.feature{display:grid;grid-template-columns:minmax(0,1fr);row-gap:22px}
+.entry>.room-title{order:-2;margin-bottom:0}
 .plate{order:-1}
 .label{display:flex;flex-direction:column;gap:10px}
 .label .caption{margin-top:-4px}
 .label .text{max-width:34em}
 .plate .caption{margin-top:14px}
 
+.plate-print img{width:100%;height:auto;border-radius:4px}
 .plate-duo img{width:100%;height:auto;filter:drop-shadow(-10px 26px 28px var(--shade))}
-.plate-aweigh{display:grid;grid-template-columns:minmax(0,2.857fr) minmax(0,4.792fr) minmax(0,4.792fr);column-gap:clamp(12px,2.4vw,40px);align-items:end}
+.plate-aweigh{display:grid;grid-template-columns:minmax(0,3.513fr) minmax(0,4.792fr) minmax(0,4.792fr);column-gap:clamp(12px,2.4vw,40px);align-items:end}
 
-/* Aweigh's frames: measurements owned by aweigh/style.css. The watch is at
-   true scale to the phone: its frame is 44.9% of the phone frame's height. */
-.phone{position:relative;aspect-ratio:1380/2880;filter:drop-shadow(-6px 16px 20px var(--shade))}
+/* Aweigh's frames: screen insets are measured from the artwork (aweigh/style.css
+   owns them). The watch frame is a 420px copy of watchos-frame.webp because
+   the 1120px original, scaled down to the watch's size on a phone, drew its
+   bezel badly on iPhone. The watch is 55% of the phone's height rather than
+   true scale so its bezel and recording stay legible at phone widths. */
+.phone{position:relative;aspect-ratio:1380/2880;filter:drop-shadow(0 16px 20px var(--shade))}
 .phone-screen{position:absolute;top:2.222%;left:3.768%;width:92.464%;height:95.556%;overflow:hidden;background:#000;border-radius:13%/6%}
 .phone-screen img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .phone-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
-.watch-slot{aspect-ratio:2857/10000;display:flex;align-items:flex-end}
-.watch{position:relative;width:100%;aspect-ratio:1120/1760;filter:drop-shadow(-4px 12px 14px var(--shade))}
-.watch-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.watch-slot{aspect-ratio:3513/10000;display:flex;align-items:flex-end}
+.watch{position:relative;width:100%;aspect-ratio:420/660;filter:drop-shadow(0 14px 18px var(--shade))}
+.watch-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .watch-screen{position:absolute;top:21.818%;left:12.768%;width:74.464%;height:56.477%;overflow:hidden;background:#000;border-radius:15.44%/12.96%}
 .watch-screen video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:auto}
 .watch-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .watch-poster.hidden{display:none}
-/* The opaque loader covers undecoded video until its first frame is painted. */
-.watch-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#000;pointer-events:none;opacity:1;visibility:visible;transition:opacity .35s ease,visibility 0s}
-.watch-loader.hidden{opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
-.watch-loader-spinner{position:relative;width:19%;aspect-ratio:1}
-.watch-loader-spinner>div{position:absolute;top:50%;left:50%;width:22.5%;aspect-ratio:1;margin:-11.25% 0 0 -11.25%;border-radius:50%;background:#fff;animation:watch-spinner .9s linear infinite}
-/* A percentage translate resolves against the dot, so 150% is the ring radius at any size. */
-.watch-loader-spinner>div:nth-child(1){transform:translate(0,-150%);animation-delay:0s}
-.watch-loader-spinner>div:nth-child(2){transform:translate(129.9%,-75%);animation-delay:-.75s}
-.watch-loader-spinner>div:nth-child(3){transform:translate(129.9%,75%);animation-delay:-.6s}
-.watch-loader-spinner>div:nth-child(4){transform:translate(0,150%);animation-delay:-.45s}
-.watch-loader-spinner>div:nth-child(5){transform:translate(-129.9%,75%);animation-delay:-.3s}
-.watch-loader-spinner>div:nth-child(6){transform:translate(-129.9%,-75%);animation-delay:-.15s}
-@keyframes watch-spinner{0%{opacity:1}100%{opacity:.22}}
 
 /* Shelves: smaller work, three to a row. */
-.shelf-head{display:flex;flex-direction:column;gap:12px}
 .shelf-head .text{max-width:40em}
-.shelf-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:44px var(--gap);margin-top:32px}
+.shelf-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:48px var(--gap);margin-top:clamp(28px,3vw,44px)}
+.feature+.shelf-grid{margin-top:clamp(48px,6vw,80px)}
 .piece{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .piece .caption{margin-top:-6px}
 .piece .links{margin-top:auto}
@@ -174,8 +170,8 @@ main{padding-bottom:clamp(72px,10vw,160px)}
 
 /* Close: the one other large line on the page. */
 .colophon{padding-bottom:max(36px,calc(env(safe-area-inset-bottom,0px) + 28px))}
-.colophon-ask{position:relative;padding-top:20px;font-size:clamp(48px,9vw,132px);line-height:1;font-weight:600;letter-spacing:-.045em;margin-left:-.04em}
-.colophon-ask::before{content:"";position:absolute;top:0;left:calc(50% - 50vw);width:100vw;border-top:1px solid var(--rule)}
+.colophon-ask{position:relative;padding-top:clamp(22px,2.6vw,36px);font-size:clamp(48px,9vw,132px);line-height:1;font-weight:600;letter-spacing:-.045em;margin-left:-.04em}
+.colophon-ask::before{content:"";position:absolute;top:0;left:calc(50% - 50vw);width:100vw;border-top:1px solid var(--rule-strong)}
 .colophon-ask a{text-decoration-thickness:.045em;text-underline-offset:.12em}
 .colophon-links{display:flex;gap:0 28px;margin-top:16px;font-weight:500}
 .colophon-links a{display:inline-block;padding:8px 0}
@@ -185,14 +181,13 @@ main{padding-bottom:clamp(72px,10vw,160px)}
   .shelf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (min-width:900px){
-  .entry{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);align-items:end}
-  .plate{order:0;grid-column:5/-1}
-  .label{grid-column:1/span 4;grid-row:1;align-self:start}
+  .entry,.feature{grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);align-items:end}
+  .entry>.room-title{grid-column:1/-1;grid-row:1;margin-bottom:clamp(8px,1.6vw,24px)}
+  .plate{order:0;grid-column:5/-1;grid-row:2}
+  .label{grid-column:1/span 4;grid-row:2;align-self:start}
+  .feature .plate,.feature .label{grid-row:1}
   #aweigh .plate{grid-column:5/span 7}
   .shelf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .shelf-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
-  .shelf-head .title{grid-column:1/span 4}
-  .shelf-head .text{grid-column:5/-1}
   .foreword{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap)}
   .foreword p{grid-column:2}
   .row{grid-template-columns:repeat(12,minmax(0,1fr));grid-template-areas:none;column-gap:var(--gap)}
@@ -207,5 +202,4 @@ main{padding-bottom:clamp(72px,10vw,160px)}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{transition:none!important}
-  .watch-loader-spinner>div{animation:none;opacity:.45}
 }
