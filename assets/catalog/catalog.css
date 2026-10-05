@@ -72,7 +72,7 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
 .cover-inner{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);padding-bottom:clamp(30px,5cqi,56px);--name:27.4cqi}
 .cover-inner::before{content:"";position:absolute;left:50%;top:-100px;bottom:0;border-left:1px solid var(--rule)}
 
-.index{grid-column:1/-1;grid-row:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);font-size:16px;line-height:1.45}
+.index{grid-column:1/-1;grid-row:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap);font-size:16px;line-height:1.45;margin-bottom:clamp(24px,8cqi,40px)}
 .index-head{font-weight:600;padding-bottom:2px}
 .index a{display:inline-block;padding:2px 0;text-decoration-color:transparent}
 .index a:hover{text-decoration-color:currentColor}
@@ -89,7 +89,7 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
 
 @container (min-width:760px){
   .cover-inner{--name:14cqi}
-  .index{grid-column:1;grid-row:1;align-self:start}
+  .index{grid-column:1;grid-row:1;align-self:start;margin-bottom:0}
   .stage-object{grid-row:1/span 2;align-self:end;width:min(31cqi,500px);margin:0 0 calc(var(--name) * -.44) 0}
   .role{padding-bottom:calc(var(--name) * .16);font-size:clamp(18px,1.6cqi,22px)}
   .name span{display:inline}
