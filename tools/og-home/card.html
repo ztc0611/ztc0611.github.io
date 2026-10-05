@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Homepage social card</title>
+<style>
+  :root { --ground: #521a20; --ink: #f3e9da; --rule: rgb(243 233 218 / .36); }
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--ground); color: var(--ink); }
+  body { position: relative; font-family: -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  /* The page's crossing hairlines: a vertical one at the centre line, a horizontal one under the name. */
+  .vertical { position: absolute; left: 600px; top: 0; bottom: 0; border-left: 1px solid var(--rule); }
+  .horizontal { position: absolute; left: 0; right: 0; top: 548px; border-top: 1px solid var(--rule); }
+  .role { position: absolute; left: 64px; top: 64px; font-size: 30px; line-height: 1.32; }
+  .role strong { display: block; font-weight: 600; }
+  .duo { position: absolute; right: 52px; bottom: 120px; width: 470px; height: auto; z-index: 2; }
+  .name { position: absolute; left: 58px; bottom: 96px; font-size: 158px; line-height: .84; font-weight: 600; letter-spacing: -.047em; white-space: nowrap; z-index: 1; }
+</style>
+</head>
+<body>
+  <div class="vertical"></div>
+  <div class="horizontal"></div>
+  <p class="role"><strong>iOS developer.</strong>Apps, tools, and open-source software.</p>
+  <img class="duo" src="../../assets/catalog/duo-standing-1400.webp" alt="">
+  <h1 class="name">Zachary Coleman</h1>
+</body>
+</html>
