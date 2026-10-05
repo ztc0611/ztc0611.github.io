@@ -80,7 +80,7 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
 .stage{display:contents}
 /* The object stands in front of the name and dips into it over lowercase
    letters only, so its shadow falls on the type without hiding any of it. */
-.stage-object{position:relative;z-index:1;grid-column:2;grid-row:2;justify-self:end;width:52cqi;height:auto;margin-top:22px;margin-bottom:calc(var(--name) * -.17);filter:drop-shadow(-8px 20px 22px var(--shade))}
+.stage-object{position:relative;z-index:1;grid-column:2;grid-row:2;justify-self:end;width:74cqi;height:auto;margin-top:8px;margin-bottom:calc(var(--name) * -.36)}
 .role{grid-column:1;grid-row:2;align-self:end;padding-bottom:calc(var(--name) * .1);font-size:17px;line-height:1.4;text-wrap:balance}
 .role strong,.role span{display:block}
 .name{position:relative;grid-column:1/-1;grid-row:3;font-size:var(--name);line-height:.84;font-weight:600;letter-spacing:-.047em;margin-left:-.055em;white-space:nowrap}
@@ -90,7 +90,7 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
 @container (min-width:760px){
   .cover-inner{--name:14cqi}
   .index{grid-column:1;grid-row:1;align-self:start}
-  .stage-object{grid-row:1/span 2;align-self:end;width:min(24cqi,380px);margin:0 1.5cqi calc(var(--name) * -.22) 0;filter:drop-shadow(-14px 28px 30px var(--shade))}
+  .stage-object{grid-row:1/span 2;align-self:end;width:min(31cqi,500px);margin:0 0 calc(var(--name) * -.44) 0}
   .role{padding-bottom:calc(var(--name) * .16);font-size:clamp(18px,1.6cqi,22px)}
   .name span{display:inline}
 }
@@ -114,7 +114,7 @@ main{padding-bottom:clamp(120px,16vw,220px)}
 .plate .caption{margin-top:14px}
 
 .plate-print img{width:100%;height:auto;border-radius:4px}
-.plate-duo img{width:100%;height:auto;filter:drop-shadow(-10px 26px 28px var(--shade))}
+.plate-duo img{width:100%;height:auto}
 .plate-aweigh{display:grid;grid-template-columns:minmax(0,3.513fr) minmax(0,4.792fr) minmax(0,4.792fr);column-gap:clamp(12px,2.4vw,40px);align-items:end}
 
 /* Aweigh's frames: screen insets are measured from the artwork (aweigh/style.css
