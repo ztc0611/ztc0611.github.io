@@ -1,0 +1,135 @@
+/* Prismark's own materials, from the app's Proof.swift and the store slides:
+   proof stock, black ink, one marker color per idea in the app's order.
+   Headlines are SF Pro condensed heavy (the app's proofHeadline), labels SF
+   Mono capitals, reading text the system serif. Off Apple platforms the
+   condensed width and serif fall back to whatever the system has. */
+:root{
+  --stock:#ecebe6;
+  --paper:#f7f7f4;
+  --ink:#111;
+  --ink-2:#5e5e59;
+  --hairline:rgb(17 17 17 / .16);
+  --pink:#ff3fa4;--red:#ff3d2e;--orange:#ff8a1f;--yellow:#ffe03d;
+  --green:#3ee36e;--turquoise:#1fd3d6;--blue:#5580ff;--violet:#b566ff;
+  --s-pink:#ff3fa4;--s-red:#ff3d2e;--s-orange:#ff8a1f;--s-yellow:#ffe03d;
+  --s-green:#3ee36e;--s-turquoise:#1fd3d6;--s-blue:#5580ff;--s-violet:#b566ff;
+  --m:clamp(20px,4.4vw,64px);
+  --pl:max(var(--m),env(safe-area-inset-left,0px));
+  --pr:max(var(--m),env(safe-area-inset-right,0px));
+  --max:1240px;
+  --headline:system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:ui-serif,"New York",Georgia,serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:light dark;
+  background:var(--stock);
+  color:var(--ink);
+  font-family:var(--headline);
+  font-size:17px;
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --stock:#111;--paper:#1c1c1b;--ink:#f1f1ec;--ink-2:#9e9e97;--hairline:rgb(241 241 236 / .16);
+    --pink:#ff4fae;--red:#ff5a4a;--orange:#ff9a3d;--yellow:#ffe03d;
+    --green:#4bea7a;--turquoise:#2edce0;--blue:#6e8dff;--violet:#c47bff;
+    --s-pink:#c8207a;--s-red:#c42418;--s-orange:#b35208;--s-yellow:#8a6a00;
+    --s-green:#13843d;--s-turquoise:#00838a;--s-blue:#2e55e0;--s-violet:#8a2bd6;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--stock);overflow-x:clip}
+h1,h2,h3,p,ul,dl,figure{margin:0}
+ul{padding:0;list-style:none}
+img{display:block;max-width:100%;height:auto}
+picture{display:contents}
+source{display:none}
+
+a{color:inherit;text-decoration-line:underline;text-decoration-thickness:1px;text-underline-offset:.24em;text-decoration-color:var(--hairline);transition:text-decoration-color .2s ease}
+a:hover{text-decoration-color:currentColor}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:2px}
+.skip{position:absolute;left:var(--pl);top:12px;z-index:5;padding:12px 16px;background:var(--ink);color:var(--stock);font-weight:600;text-decoration:none;border-radius:6px;transform:translateY(-200%)}
+.skip:focus{transform:none}
+
+.wrap{max-width:calc(var(--max) + var(--pl) + var(--pr));margin-inline:auto;padding-left:var(--pl);padding-right:var(--pr)}
+
+/* The proofreader's margin notes. Never used on product names: the copy
+   rules forbid Apple product names in capitals. */
+.label{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+
+.headline{font-family:var(--headline);font-stretch:75%;font-weight:800;letter-spacing:-.01em;line-height:1;text-wrap:balance}
+
+/* One pass of a chisel-tip highlighter behind a word: a band through the
+   x-height with its ends cut on the slant (MarkerStroke in Proof.swift).
+   In dark mode the stroke takes the app's deeper stroke shade and the type
+   keeps the page's ink, as the app's own headers do. */
+.mark{position:relative;z-index:0;white-space:nowrap}
+.mark::before{content:"";position:absolute;z-index:-1;left:-.15em;right:-.15em;top:.3em;bottom:.02em;background:var(--c,var(--s-pink));clip-path:polygon(.24em 0,100% 0,calc(100% - .24em) 100%,0 100%)}
+.c-pink{--c:var(--s-pink)}.c-red{--c:var(--s-red)}.c-orange{--c:var(--s-orange)}.c-yellow{--c:var(--s-yellow)}
+.c-green{--c:var(--s-green)}.c-turquoise{--c:var(--s-turquoise)}.c-blue{--c:var(--s-blue)}.c-violet{--c:var(--s-violet)}
+
+.bar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 8px))}
+.bar a:not(.wordmark){display:inline-block;padding:10px 0;text-decoration-color:transparent}
+.bar a:not(.wordmark):hover{text-decoration-color:currentColor}
+.bar nav{display:flex;gap:24px}
+
+/* The wordmark: "Pris" plus "mark", the stroke under "mark". */
+.wordmark{display:inline-flex;align-items:center;gap:.28em;font-family:var(--headline);font-stretch:75%;font-weight:900;letter-spacing:-.015em;line-height:1}
+
+/* App icon. The store's color wheel shows first, once. Pink then fades in
+   and stays underneath for good, and the other seven loop over it in the
+   app's order: each fades in over the one before and holds until the next
+   has covered it, and violet fades out to pink. Steps are 3.2s with 0.6s
+   fades; the loop is 8 steps (25.6s) anchored on red at 6.4s. */
+.icon{display:block;position:relative;flex:none;width:1.2em;height:1.2em;filter:drop-shadow(0 .06em .1em rgb(0 0 0 / .18))}
+.icon img{position:absolute;inset:0;width:100%;height:100%}
+.icon .tint img{opacity:0;animation:tint 25.6s linear infinite}
+.icon .tint:nth-child(2) img{animation:tint-once .6s linear 3.2s forwards}
+.icon .tint:last-child img{animation-name:tint-last}
+@keyframes tint-once{to{opacity:1}}
+@keyframes tint{0%{opacity:0}2.34%{opacity:1}14.84%{opacity:1}14.9%{opacity:0}100%{opacity:0}}
+@keyframes tint-last{0%{opacity:0}2.34%{opacity:1}12.5%{opacity:1}14.84%{opacity:0}100%{opacity:0}}
+.icon .tint:nth-child(3) img{animation-delay:6.4s}.icon .tint:nth-child(4) img{animation-delay:9.6s}
+.icon .tint:nth-child(5) img{animation-delay:12.8s}.icon .tint:nth-child(6) img{animation-delay:16s}
+.icon .tint:nth-child(7) img{animation-delay:19.2s}.icon .tint:nth-child(8) img{animation-delay:22.4s}
+.icon .tint:nth-child(9) img{animation-delay:25.6s}
+/* Strokes marked .live follow the icon on the same clock, pink until red. */
+.live::before{animation:stroke 25.6s linear 6.4s infinite}
+@keyframes stroke{
+  0%{background:var(--s-pink)}2.34%,12.5%{background:var(--s-red)}14.84%,25%{background:var(--s-orange)}
+  27.34%,37.5%{background:var(--s-yellow)}39.84%,50%{background:var(--s-green)}52.34%,62.5%{background:var(--s-turquoise)}
+  64.84%,75%{background:var(--s-blue)}77.34%,87.5%{background:var(--s-violet)}89.84%,100%{background:var(--s-pink)}
+}
+
+/* Registration marks around a device, like the store slides' proof sheet. */
+.proof{position:relative;padding:28px}
+.proof::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(var(--ink-2),var(--ink-2)) left 0 top 0/14px 1px,
+    linear-gradient(var(--ink-2),var(--ink-2)) left 0 top 0/1px 14px,
+    linear-gradient(var(--ink-2),var(--ink-2)) right 0 top 0/14px 1px,
+    linear-gradient(var(--ink-2),var(--ink-2)) right 0 top 0/1px 14px,
+    linear-gradient(var(--ink-2),var(--ink-2)) left 0 bottom 0/14px 1px,
+    linear-gradient(var(--ink-2),var(--ink-2)) left 0 bottom 0/1px 14px,
+    linear-gradient(var(--ink-2),var(--ink-2)) right 0 bottom 0/14px 1px,
+    linear-gradient(var(--ink-2),var(--ink-2)) right 0 bottom 0/1px 14px;
+  background-repeat:no-repeat;opacity:.55}
+
+.text{font-size:clamp(17px,1.35vw,19px);line-height:1.5;max-width:32em;text-wrap:pretty}
+.serif{font-family:var(--serif)}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+.button{display:inline-flex;align-items:center;gap:.5em;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--stock);font-weight:600;text-decoration:none}
+.button:hover{opacity:.88}
+.links a:not(.button){display:inline-block;padding:10px 0;font-weight:500}
+
+.foot{margin-top:clamp(96px,12vw,160px);padding-top:24px;padding-bottom:max(36px,calc(env(safe-area-inset-bottom,0px) + 28px));border-top:1px solid var(--hairline);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 28px;font-size:15px}
+.foot ul{display:flex;gap:24px}
+.foot a{display:inline-block;padding:6px 0}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .icon .tint img{display:none}
+  .live::before{animation:none}
+}

@@ -1,0 +1,38 @@
+Prismark
+Hear text read aloud.
+
+Prismark reads aloud whatever you give it, and marks each sentence as it goes.
+
+ABOUT
+Prismark is a listening app for iPhone, iPad and iPhone Duo. Save an article from the web, open a PDF or a book, and press play. Prismark reads it aloud with natural voices that run on the device, and marks each sentence as it goes, so you never lose your place. Tap any sentence to jump to it, move between chapters in longer books, and keep listening with the screen locked. On iPhone Duo it opens like a book, with the text on one page and the player on the other, and keeps playing on the cover when you close it.
+
+FACTS
+Name: Prismark
+Developer: Zachary Coleman, independent
+Devices: iPhone, iPad and iPhone Duo
+Requires: iOS 26 or later
+Category: Productivity
+Released: October 14, 2026
+Account: None needed. Voices run on the device and work offline.
+Website: https://zach-coleman.com/prismark/
+App Store: https://apps.apple.com/us/app/prismark/id6818318157
+
+IN THIS KIT
+prismark-icon-light.png, prismark-icon-dark.png: app icon, 1024 x 1024, transparent around the rounded shape
+prismark-icon-pink-*.png, prismark-icon-yellow-*.png, prismark-icon-turquoise-*.png: alternate icons people can choose in the app, same format, light and dark
+prismark-icon-*square*.png: the same icons as full squares, the way they're supplied to the App Store
+screens/: screenshots without device frames
+  prismark-duo-open.png, prismark-duo-open-dark.png: iPhone Duo, open, 2853 x 2007
+  prismark-duo-cover.png: iPhone Duo, closed, on the cover display, 1398 x 2034
+  prismark-duo-upright.png: iPhone Duo, held upright, 2007 x 2853
+  prismark-ipad.png: iPad, 2064 x 2752
+  prismark-iphone-01.png to prismark-iphone-06.png: iPhone (player, voices, folder, chapters, speed, library), 1206 x 2622
+framed/: the same screenshots in device frames (iPhone Duo, iPad Pro, iPhone 18 Pro)
+
+USING THESE
+Write the name as Prismark, with one capital.
+Show the icon as it is: no recoloring, cropping or added effects.
+Screenshots may be resized or cropped. Please don't edit what's on the screen.
+
+Press kit: https://zach-coleman.com/prismark/press/
+Contact: https://zach-coleman.com/apps/support
