@@ -132,13 +132,13 @@ main {
 /* Hero */
 .hero {
     display: grid;
-    /* Both columns size to content (auto) and the pair centers in the viewport
-       via justify-content. Keeps the text and watch close together regardless
-       of viewport width, instead of stretching them apart with `fr` columns. */
-    grid-template-columns: auto auto;
+    /* The text keeps the title's full width and the devices take what's
+       left, up to 640px; the pair centers in the viewport via justify-content
+       instead of stretching apart with `fr` columns. */
+    grid-template-columns: max-content minmax(0, 640px);
     justify-content: center;
     align-items: center;
-    gap: 72px;
+    gap: 56px;
     padding: 64px 0 96px;
     position: relative;
 }
@@ -253,6 +253,163 @@ main {
     border-bottom-color: var(--accent);
 }
 
+/* Award credit. The placing is set like a time on the app's departure
+   board: the digit on its own flip tile, split by the hinge line, with the
+   suffix small beside it the way the board sets AM and PM. */
+.award {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    padding: 7px 16px 7px 7px;
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    background: rgba(13, 19, 32, 0.78);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+}
+
+.award:hover {
+    border-color: var(--accent-line);
+}
+
+.award-board {
+    flex: none;
+    display: inline-flex;
+    gap: 3px;
+    padding: 4px;
+    border-radius: 7px;
+    background: #0a0f19;
+    box-shadow: inset 0 0 0 1px var(--border);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* Until the script has set the board's opening value, keep it blank so
+   2ND doesn't flash before the flip back down from 9TH. */
+.js .award-board:not(.is-ready) .flap {
+    color: transparent;
+}
+
+.flap {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 30px;
+    border-radius: 4px;
+    background: linear-gradient(#1c2539 50%, #151d2e 50%);
+    font-size: 19px;
+    line-height: 1;
+    perspective: 140px;
+}
+
+/* The suffix is one flap carrying both letters, as the board's AM/PM is. */
+.flap-suffix {
+    width: 26px;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+}
+
+.flap::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 0.5px);
+    height: 1px;
+    background: #0a0f19;
+    z-index: 3;
+}
+
+.flap .half {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50%;
+    overflow: hidden;
+    backface-visibility: hidden;
+}
+
+.flap .half > span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 200%;
+    display: grid;
+    place-items: center;
+}
+
+.flap .top {
+    top: 0;
+    border-radius: 4px 4px 0 0;
+    background: #1c2539;
+    transform-origin: bottom;
+}
+
+.flap .top > span { top: 0; }
+
+.flap .bottom {
+    bottom: 0;
+    border-radius: 0 0 4px 4px;
+    background: #151d2e;
+    transform-origin: top;
+}
+
+.flap .bottom > span { bottom: 0; }
+
+.flap .top.fold {
+    z-index: 2;
+    animation: flap-top 65ms ease-in forwards;
+}
+
+.flap .bottom.fold {
+    z-index: 2;
+    transform: rotateX(90deg);
+    animation: flap-bottom 65ms ease-out 65ms forwards;
+}
+
+@keyframes flap-top {
+    to { transform: rotateX(-90deg); }
+}
+
+@keyframes flap-bottom {
+    to { transform: rotateX(0deg); }
+}
+
+.award-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.25;
+}
+
+.award-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.award-event {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.award:hover .award-event {
+    color: var(--accent);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 /* App Store CTA — filled accent button. The button box itself does not move
    on hover (no translate) so the cursor can't fall off it mid-transition;
    only the inner arrow nudges. */
@@ -297,24 +454,31 @@ main {
 }
 
 /* Watch device */
-.watch-stage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Header devices: a seamless loop of iPhone Duo and Apple Watch,
+   rendered with a transparent background so the page's grid, glow and map
+   show around them. Sized to sit beside the text on desktop and to span the
+   column when the header stacks. */
+.hero-stage {
     position: relative;
-    padding: 20px;
     z-index: 1;
+    width: 100%;
 }
 
-.watch-stage::before {
-    /* Soft circular spotlight behind the watch */
+.hero-stage::before {
     content: '';
     position: absolute;
-    inset: -5% 0%;
-    background: radial-gradient(circle at center, rgba(52, 211, 153, 0.4) 0%, rgba(52, 211, 153, 0.18) 30%, transparent 65%);
-    filter: blur(30px);
-    z-index: 0;
+    inset: 10% 15%;
+    background: radial-gradient(ellipse at center, rgba(52, 211, 153, 0.22) 0%, rgba(52, 211, 153, 0.08) 40%, transparent 70%);
+    filter: blur(40px);
+    z-index: -1;
     pointer-events: none;
+}
+
+.hero-loop {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1280 / 880;
 }
 
 .watch-device {
@@ -362,59 +526,8 @@ main {
     z-index: 2;
 }
 
-/* watchOS-style "app loading" spinner shown while the video buffers.
-   Transparent background so the video element's <poster> (first frame)
-   shows through — user gets meaningful content immediately instead of
-   black-screen-with-spinner. */
-.watch-loader {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    z-index: 1; /* below the frame (z-index 2) so the bezels clip it */
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-}
-
-.watch-loader.hidden {
-    opacity: 0;
-}
-
-/* watchOS-style 6-dot throbber: brightness rotates around the circle */
-.watch-loader-spinner {
-    position: relative;
-    width: 40px;
-    height: 40px;
-}
-
-.watch-loader-spinner > div {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 9px;
-    height: 9px;
-    margin: -4.5px 0 0 -4.5px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    animation: watchSpinnerFade 0.9s linear infinite;
-}
-
-.watch-loader-spinner > div:nth-child(1) { transform: translate(0, -13.5px);         animation-delay: 0s; }
-.watch-loader-spinner > div:nth-child(2) { transform: translate(11.692px, -6.75px);  animation-delay: -0.75s; }
-.watch-loader-spinner > div:nth-child(3) { transform: translate(11.692px, 6.75px);   animation-delay: -0.6s; }
-.watch-loader-spinner > div:nth-child(4) { transform: translate(0, 13.5px);          animation-delay: -0.45s; }
-.watch-loader-spinner > div:nth-child(5) { transform: translate(-11.692px, 6.75px);  animation-delay: -0.3s; }
-.watch-loader-spinner > div:nth-child(6) { transform: translate(-11.692px, -6.75px); animation-delay: -0.15s; }
-
-@keyframes watchSpinnerFade {
-    0% { opacity: 1; }
-    100% { opacity: 0.22; }
-}
-
-/* Hero backdrop — monochrome wireframe map of the San Juans that appears
-   while the watch's route picker is open. JS controls opacity + active route. */
+/* Hero backdrop: monochrome wireframe map of the San Juans, holding the
+   route the header's iPhone Duo shows. JS fades it in and sets the route. */
 .hero-backdrop {
     position: absolute;
     inset: -10% -5%;  /* slightly oversized so vignette doesn't clip the routes */
@@ -812,21 +925,44 @@ main {
     .status-dot { animation: none; }
     .watch-device { transform: none; }
     .feature-list li:hover { transform: none; }
-    .watch-loader-spinner > div { animation: none; opacity: 0.45; }
 }
 
 /* Responsive */
+/* On wide screens the devices run on into the page's side margin, which
+   the text column never uses, so they can be larger than the grid allows. */
+@media (min-width: 1240px) {
+    .hero-stage {
+        width: calc(100% + 80px);
+        margin-right: -80px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: start;
+        gap: 40px;
+    }
+    .hero-stage {
+        order: -1;
+        max-width: 640px;
+        justify-self: center;
+    }
+}
+
 @media (max-width: 760px) {
     .hero {
         grid-template-columns: 1fr;
-        gap: 48px;
-        /* Extra top padding creates a dedicated zone above the watch for the
-           map backdrop (which lives there on mobile, since the watch obscures
-           it when placed underneath). */
-        padding: 105px 0 64px;
+        gap: 40px;
+        padding: 40px 0 64px;
     }
-    .watch-stage {
-        order: -1;
+
+    /* The loop leaves about 6% of empty frame on each side, so on a phone
+       it runs wider than the column without cropping a device. */
+    .hero-stage {
+        width: 108%;
+        max-width: none;
+        margin-left: -4%;
     }
     .hero-text {
         align-items: flex-start;
@@ -842,8 +978,8 @@ main {
            the viewport edges — the mask handles the dissolve in both axes.
            The SVG inside uses preserveAspectRatio=slice so it fills this
            bigger canvas; the islands re-center via the radial mask. */
-        inset: -40px -25% auto -25%;
-        height: 220px;
+        inset: -20px -25% auto -25%;
+        height: 300px;
         -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 55%, black 15%, transparent 100%);
         mask-image: radial-gradient(ellipse 70% 80% at 50% 55%, black 15%, transparent 100%);
     }

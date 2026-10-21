@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ztc0611.github.io/aweigh/">
     <meta property="og:title" content="Aweigh">
-    <meta property="og:description" content="Live Washington State Ferries departures on iPhone and Apple Watch.">
+    <meta property="og:description" content="Live Washington State Ferries departures on iPhone, iPhone Duo and Apple Watch.">
     <meta property="og:image" content="https://ztc0611.github.io/assets/aweigh/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -27,10 +27,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Bezel first so the watch frame paints while the video is still streaming -->
-    <link rel="preload" as="image" href="../assets/aweigh/watchos-frame.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="../assets/aweigh/hero-devices-poster.webp" fetchpriority="high">
 
-    <link rel="stylesheet" href="style.css?v=20260910-launch">
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="style.css?v=20261021-duowatch">
 </head>
 <body>
     <div class="page-bg" aria-hidden="true"></div>
@@ -53,31 +53,20 @@
                 <h1 class="title">
                     <span class="title-line">Aweigh.</span>
                 </h1>
-                <p class="tagline">Live departures for Washington State Ferries, built for iPhone and Apple Watch.</p>
+                <p class="tagline">Live departures for Washington State Ferries, on iPhone, iPhone Duo and Apple Watch.</p>
                 <p class="meta">An independent app by <a href="/">Zachary Coleman</a>.</p>
+                <a class="award" href="https://apps.shipaton.com/app/aweigh">
+                    <span class="award-board" aria-hidden="true"><span class="flap flap-digit">2</span><span class="flap flap-suffix">ND</span></span><span class="sr-only">2nd place,</span>
+                    <span class="award-text"><span class="award-name">RevenueCat Design Award</span><span class="award-event">Shipaton 2026 <span aria-hidden="true">↗︎</span></span></span>
+                </a>
                 <a class="hero-cta" href="https://apps.apple.com/us/app/aweigh/id6773885528">Download on the App Store <span class="hero-cta-arrow" aria-hidden="true">↗︎</span></a>
             </div>
 
-            <div class="watch-stage">
-                <div class="watch-device" role="img" aria-label="Aweigh on Apple Watch: switching ferry routes updates departure times, countdowns, and vehicle availability.">
-                    <div class="watch-screen" aria-hidden="true">
-                        <video muted loop playsinline preload="auto" poster="../assets/aweigh/watchos-poster.webp">
-                            <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
-                            <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
-                        </video>
-                        <video muted playsinline preload="auto" aria-hidden="true" poster="../assets/aweigh/watchos-poster.webp">
-                            <source src="../assets/aweigh/watchos.hevc.mp4" type="video/mp4; codecs=hvc1">
-                            <source src="../assets/aweigh/watchos.mp4" type="video/mp4">
-                        </video>
-                        <div class="watch-loader" aria-hidden="true">
-                            <div class="watch-loader-spinner">
-                                <div></div><div></div><div></div>
-                                <div></div><div></div><div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <img class="watch-frame" src="../assets/aweigh/watchos-frame.webp" alt="" fetchpriority="high" decoding="async">
-                </div>
+            <div class="hero-stage" role="img" aria-label="Aweigh on iPhone Duo and Apple Watch: the Duo shows the Anacortes to Friday Harbor departure board beside the route list, and its board flips between directions.">
+                <video class="hero-loop" muted loop playsinline preload="auto" width="1280" height="880" poster="../assets/aweigh/hero-devices-poster.webp" aria-hidden="true">
+                    <source src="../assets/aweigh/hero-devices.hevc.mov" type='video/quicktime; codecs="hvc1"'>
+                    <source src="../assets/aweigh/hero-devices.webm" type="video/webm">
+                </video>
             </div>
         </section>
 
@@ -160,28 +149,10 @@
     <script>
         (function() {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const fadeWindow = 0.5;
-            const holdMs = 3000;  // freeze on the last frame this long before re-looping
 
             // ---------------------------------------------------------
-            // San Juans map backdrop — keyed off the video's currentTime
+            // San Juans map backdrop
             // ---------------------------------------------------------
-            function backdropOpacityForTime(t) {
-                return 1;
-            }
-
-            function activeRouteForTime(t) {
-                // Exact per-frame PTS from watch-newwww.mp4. The source is VFR,
-                // so these cannot be derived reliably from its average frame rate.
-                // Route changes occur at source frames 5, 189, 345, 368, and 397.
-                if (t < 2.393333) return 'anacortes-friday-harbor';
-                if (t < 6.486667) return 'friday-harbor-anacortes';
-                if (t < 9.218333) return 'lopez-anacortes';
-                if (t < 9.603333) return 'lopez-friday-harbor';
-                if (t < 10.085000) return 'lopez-lopez';
-                return 'lopez-orcas';
-            }
-
             const ROUTES = {
                 'anacortes-friday-harbor': [
                     [-122.67797316062789, 48.506542362941644], [-122.67250845412997, 48.516023886296495],
@@ -312,152 +283,79 @@
                     }
                 }
 
-                let lastRoute = '__none__';
-                let lastOpacity = -1;
-
-                function update(currentTime) {
-                    const opacity = backdropOpacityForTime(currentTime);
-                    if (Math.abs(opacity - lastOpacity) > 0.01) {
-                        mount.style.opacity = opacity.toFixed(3);
-                        lastOpacity = opacity;
-                    }
-
-                    if (opacity <= 0.001) return; // nothing to update if invisible
-
-                    const route = activeRouteForTime(currentTime);
-                    if (route === lastRoute) return;
-                    lastRoute = route;
-
+                function show(route) {
+                    mount.style.opacity = '1';
                     for (const [key, path] of Object.entries(routePaths)) {
                         path.classList.toggle('is-active', key === route);
                     }
-                    const endpoints = route ? new Set(ROUTE_ENDPOINTS[route] || []) : new Set();
+                    const endpoints = new Set(ROUTE_ENDPOINTS[route] || []);
                     for (const [name, circle] of Object.entries(terminalCircles)) {
                         circle.classList.toggle('is-endpoint', endpoints.has(name));
                     }
                 }
 
-                return { update };
+                return { show };
             }
 
-            // ---------------------------------------------------------
-            // Video crossfade + map sync
-            // ---------------------------------------------------------
-            function waitForFullBuffer(video) {
-                return new Promise((resolve) => {
-                    const tid = setTimeout(resolve, 30000);
-                    const check = () => {
-                        const d = video.duration;
-                        if (!d || isNaN(d)) return;
-                        const b = video.buffered;
-                        if (b.length > 0 && b.end(b.length - 1) >= d - 0.05) {
-                            clearTimeout(tid);
-                            video.removeEventListener('progress', check);
-                            video.removeEventListener('loadeddata', check);
-                            video.removeEventListener('canplaythrough', check);
-                            resolve();
-                        }
-                    };
-                    video.addEventListener('progress', check);
-                    video.addEventListener('loadeddata', check);
-                    video.addEventListener('canplaythrough', check);
-                    check();
-                });
-            }
-
-            const backdropReady = setupBackdrop().catch(err => {
+            // The loop's iPhone Duo shows Anacortes to Friday Harbor throughout,
+            // so the map holds that route rather than following a timeline.
+            setupBackdrop().then(b => { if (b) b.show('anacortes-friday-harbor'); }).catch(err => {
                 console.warn('San Juans backdrop init failed:', err);
-                return null;
             });
 
-            document.querySelectorAll('.watch-screen').forEach(screen => {
-                const videos = Array.from(screen.querySelectorAll('video'));
-                const loader = screen.querySelector('.watch-loader');
-                if (videos.length === 0) return;
-
-                // preload="auto" already has these on the wire by the time this
-                // runs. load() would throw that away: it runs the full media load
-                // algorithm first, emptying the element and blanking whatever is
-                // on screen back to the black backing for a paint or two.
-                videos.forEach(v => v.pause());
-
-                if (loader) {
-                    const hideLoader = () => loader.classList.add('hidden');
-                    const showLoader = () => loader.classList.remove('hidden');
-
-                    // Hide the spinner as soon as the poster image is loaded —
-                    // by that point the user sees the watch's first frame and
-                    // the spinner is just noise on top of meaningful content.
-                    const posterUrl = videos[0] && videos[0].getAttribute('poster');
-                    if (posterUrl) {
-                        const posterImg = new Image();
-                        posterImg.onload = hideLoader;
-                        posterImg.onerror = hideLoader;
-                        posterImg.src = posterUrl;
-                    }
-
-                    videos.forEach(v => {
-                        v.addEventListener('playing', hideLoader);
-                        v.addEventListener('waiting', showLoader);
-                    });
-                }
-
-                let activeIdx = 0;
-                let swapping = false;
-                let backdrop = null;
-                backdropReady.then(b => { backdrop = b; });
-
-                const tick = () => {
-                    const v = videos[activeIdx];
-                    if (backdrop && v) backdrop.update(v.currentTime);
+            // Award board: opens on 9TH and flips down to 2ND, one split-flap
+            // step at a time like the app's departure board, finishing before
+            // the device loop starts. Reduced motion shows 2ND straight away.
+            const board = document.querySelector('.award-board');
+            if (board) {
+                const [digitFlap, suffixFlap] = board.querySelectorAll('.flap');
+                const halves = v => `<span class="half top"><span>${v}</span></span><span class="half bottom"><span>${v}</span></span>`;
+                const settle = (flap, v) => { flap.innerHTML = halves(v); flap.dataset.value = v; };
+                const flip = (flap, to) => {
+                    const from = flap.dataset.value;
+                    if (from === to) return;
+                    flap.innerHTML =
+                        `<span class="half top"><span>${to}</span></span>` +
+                        `<span class="half bottom"><span>${from}</span></span>` +
+                        `<span class="half top fold"><span>${from}</span></span>` +
+                        `<span class="half bottom fold"><span>${to}</span></span>`;
+                    flap.dataset.value = to;
+                    // Drop the fold layers once the fold is over, so the board
+                    // lands on its value even if the animation never ran.
+                    const token = (flap.flipToken || 0) + 1;
+                    flap.flipToken = token;
+                    setTimeout(() => { if (flap.flipToken === token) settle(flap, to); }, 140);
                 };
-                videos.forEach(v => v.addEventListener('timeupdate', tick));
-
-                // When the active video plays out, freeze on its last frame
-                // (loop=false already does that) for holdMs, then crossfade
-                // to the other video starting from frame 0.
-                const triggerSwap = () => {
-                    if (swapping) return;
-                    if (videos.length < 2 || reduceMotion) return;
-                    swapping = true;
-                    setTimeout(() => {
-                        const nextIdx = 1 - activeIdx;
-                        const next = videos[nextIdx];
-                        next.currentTime = 0;
-                        const p = next.play();
-                        if (p && p.catch) p.catch(() => {});
-                        next.style.opacity = '1';
-                        videos[activeIdx].style.opacity = '0';
-                        activeIdx = nextIdx;
-                        setTimeout(() => { swapping = false; }, fadeWindow * 1000);
-                    }, holdMs);
-                };
-                videos.forEach((v, idx) => {
-                    v.addEventListener('ended', () => {
-                        if (idx !== activeIdx) return;
-                        triggerSwap();
-                    });
-                });
-
-                // The second video is a crossfade buffer, not a layer: it has no
-                // z-index, so left at full opacity it simply covers the first.
-                videos[0].style.opacity = '1';
-                if (videos[1]) videos[1].style.opacity = '0';
-
-                if (videos.length >= 2 && !reduceMotion) {
-                    videos.forEach(v => { v.loop = false; });
-                    Promise.all(videos.map(waitForFullBuffer)).then(() => {
-                        const p = videos[0].play();
-                        if (p && p.catch) p.catch(() => {});
-                    });
+                const ordinal = n => n === 3 ? 'RD' : n === 2 ? 'ND' : 'TH';
+                if (reduceMotion) {
+                    settle(digitFlap, '2'); settle(suffixFlap, 'ND');
                 } else {
-                    waitForFullBuffer(videos[0]).then(() => {
-                        videos[0].loop = true;
-                        const p = videos[0].play();
-                        if (p && p.catch) p.catch(() => {});
-                    });
+                    settle(digitFlap, '9'); settle(suffixFlap, 'TH');
+                    let n = 9;
+                    setTimeout(function step() {
+                        n -= 1;
+                        flip(digitFlap, String(n));
+                        flip(suffixFlap, ordinal(n));
+                        if (n > 2) setTimeout(step, 130);
+                    }, 1000);
                 }
-            });
+                board.classList.add('is-ready');
+            }
+
+            // A product page shouldn't move the moment it opens: the loop holds
+            // its settled first frame for a beat, then plays. If the video is
+            // slower to load than that, it starts as soon as it can.
+            const loop = document.querySelector('.hero-loop');
+            const settleMs = 2500;
+            const openedAt = performance.now();
+            if (loop && !reduceMotion) {
+                const start = () => setTimeout(() => {
+                    const p = loop.play();
+                    if (p && p.catch) p.catch(() => {});
+                }, Math.max(0, settleMs - (performance.now() - openedAt)));
+                if (loop.readyState >= 3) start();
+                else loop.addEventListener('canplay', start, { once: true });
+            }
         })();
     </script>
 

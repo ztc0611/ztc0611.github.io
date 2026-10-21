@@ -112,6 +112,14 @@ main{padding-bottom:clamp(120px,16vw,220px)}
 .plate{order:-1}
 .label{display:flex;flex-direction:column;gap:10px}
 .label .caption{margin-top:-4px}
+/* An award reads as a credit between the caption and the description, ruled
+   like the rows further down so it belongs to the page's own vocabulary. */
+.award{margin:2px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.award a{display:flex;flex-direction:column;gap:1px;padding:10px 0 11px;text-decoration:none}
+.award strong{font-weight:600;text-decoration:underline 1px transparent;text-underline-offset:.24em;transition:text-decoration-color .2s ease}
+.award a:hover strong{text-decoration-color:currentColor}
+.award span{font-size:14px}
+.award strong span{font-size:inherit}
 .label .text{max-width:34em}
 .plate .caption{margin-top:14px}
 
