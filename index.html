@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#521a20" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f0b0b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#1f0c10" media="(prefers-color-scheme: dark)">
 <title>Zachary Coleman</title>
 <meta name="description" content="Apps, tools, and contributions to Godot Engine by Zachary Coleman.">
 <link rel="canonical" href="https://zach-coleman.com/">
@@ -27,8 +27,8 @@
 <meta name="twitter:image" content="https://zach-coleman.com/assets/home/og-card.jpg?v=20261005b">
 <meta name="twitter:image:alt" content="Prismark open like a book on an iPhone Duo, standing in front of the name Zachary Coleman on a claret background.">
 <link rel="preload" as="image" imagesrcset="/assets/catalog/duo-standing-900.webp?v=3 900w, /assets/catalog/duo-standing-1400.webp?v=3 1400w" imagesizes="(min-width: 760px) 31vw, 74vw" fetchpriority="high">
-<link rel="stylesheet" href="/assets/catalog/catalog.css?v=20261021-award">
-<script src="/assets/home/devices.js?v=20261001-watch-video" defer></script>
+<link rel="stylesheet" href="/assets/catalog/catalog.css?v=20261021-oxblood">
+<script src="/assets/home/devices.js?v=20261021-aweigh-loop" defer></script>
 </head>
 <body>
 <a class="skip" href="#work">Skip to work</a>
@@ -87,17 +87,7 @@
     <p class="links"><a href="https://apps.apple.com/us/app/aweigh/id6773885528">App Store</a> <a href="/aweigh/">More about Aweigh</a></p>
   </div>
   <figure class="plate plate-aweigh">
-    <div class="watch-slot">
-      <div class="watch" role="img" aria-label="Aweigh on Apple Watch: switching ferry routes updates departure times, countdowns, and vehicle availability."><div class="watch-screen" aria-hidden="true"><video id="watch-video" width="416" height="496" muted loop playsinline preload="none"><source src="/assets/aweigh/watchos-loop.hevc.mp4?v=20261001-420p" type="video/mp4; codecs=hvc1"><source src="/assets/aweigh/watchos-loop.mp4?v=20261001-420p" type="video/mp4"></video><img class="watch-poster" id="watch-poster" src="/assets/aweigh/watchos-poster.webp" width="416" height="496" alt="" loading="lazy" decoding="async"></div><img class="watch-frame" src="/assets/catalog/watch-frame.webp?v=20261005-1" width="420" height="660" alt="" loading="lazy" decoding="async"></div>
-    </div>
-    <div class="phone">
-      <div class="phone-screen"><img src="/assets/aweigh/ios-delay-tracking.webp" width="1260" height="2736" alt="Aweigh’s Coupeville to Port Townsend schedule, showing a delayed ferry, a low-tide cancellation, and remaining vehicle spaces." loading="lazy" decoding="async"></div>
-      <img class="phone-frame" src="/assets/aweigh/ios-frame.webp" width="1380" height="2880" alt="" loading="lazy" decoding="async">
-    </div>
-    <div class="phone">
-      <div class="phone-screen"><img src="/assets/aweigh/ios-ferry-map.webp" width="1260" height="2736" alt="Aweigh’s ferry map following M/V Kitsap from Southworth to Vashon Island, with its speed, heading, and next departure." loading="lazy" decoding="async"></div>
-      <img class="phone-frame" src="/assets/aweigh/ios-frame.webp" width="1380" height="2880" alt="" loading="lazy" decoding="async">
-    </div>
+    <div class="loop" role="img" aria-label="Aweigh on iPhone Duo and Apple Watch: the Duo shows the Anacortes to Friday Harbor departure board beside the route list, and its board flips between directions."><video id="aweigh-video" width="1280" height="880" muted loop playsinline preload="none" aria-hidden="true"><source src="/assets/aweigh/hero-devices.hevc.mov" type='video/quicktime; codecs="hvc1"'><source src="/assets/aweigh/hero-devices.webm" type="video/webm"></video><img class="loop-poster" id="aweigh-poster" src="/assets/aweigh/hero-devices-poster.webp" width="1600" height="1100" alt="" loading="lazy" decoding="async"></div>
   </figure>
 </article>
 
@@ -137,6 +127,13 @@
   <h2 class="room-title" id="hardware-title">Hardware and e-ink</h2>
   <ul class="shelf-grid">
     <li class="piece">
+      <picture><source media="(prefers-color-scheme: dark)" srcset="/assets/portfolio/cards/TRMNL-San-Francisco-Bay-Dark.webp"><img class="print" src="/assets/portfolio/cards/TRMNL-San-Francisco-Bay.webp" width="880" height="587" alt="San Francisco Bay Ambient Map on TRMNL, with fog shading and temperature labels for the Mission, Daly City, and Walnut Creek." loading="lazy" decoding="async"></picture>
+      <h3 class="piece-title">San Francisco Bay Ambient Map</h3>
+      <p class="caption">TRMNL plugin</p>
+      <p class="text">Draws the live marine layer over a full-screen map of San Francisco Bay using the HRRR weather model. Optional terrain, neighborhood conditions, and warmest and coolest spots turn changing weather into e-ink cartography.</p>
+      <p class="links"><a href="https://trmnl.com/recipes/442943">TRMNL<span class="sr-only">, San Francisco Bay Ambient Map</span></a></p>
+    </li>
+    <li class="piece">
       <img class="print" src="/assets/portfolio/cards/PrintingTheDream.webp" width="880" height="602" alt="Printing the Dream setup: a Nintendo Switch 2 displaying a red-and-blue octopus drawing, connected by USB to a small controller board." loading="lazy" decoding="async">
       <h3 class="piece-title">Printing the Dream</h3>
       <p class="caption">Drawing on Nintendo Switch</p>
@@ -149,13 +146,6 @@
       <p class="caption">TRMNL plugin</p>
       <p class="text">Live vessel positions and complete schedules for every Washington State Ferries route, designed for an e-ink display. Each screen is rendered remotely with no client runtime and kept under 100 KiB. The experiment that grew into Aweigh.</p>
       <p class="links"><a href="https://trmnl.com/recipes/299929">TRMNL<span class="sr-only">, Washington State Ferries</span></a></p>
-    </li>
-    <li class="piece">
-      <picture><source media="(prefers-color-scheme: dark)" srcset="/assets/portfolio/cards/TRMNL-San-Francisco-Bay-Dark.webp"><img class="print" src="/assets/portfolio/cards/TRMNL-San-Francisco-Bay.webp" width="880" height="587" alt="San Francisco Bay Ambient Map on TRMNL, with fog shading and temperature labels for the Mission, Daly City, and Walnut Creek." loading="lazy" decoding="async"></picture>
-      <h3 class="piece-title">San Francisco Bay Ambient Map</h3>
-      <p class="caption">TRMNL plugin</p>
-      <p class="text">Draws the live marine layer over a full-screen map of San Francisco Bay using the HRRR weather model. Optional terrain, neighborhood conditions, and warmest and coolest spots turn changing weather into e-ink cartography.</p>
-      <p class="links"><a href="https://trmnl.com/recipes/442943">TRMNL<span class="sr-only">, San Francisco Bay Ambient Map</span></a></p>
     </li>
   </ul>
 </section>

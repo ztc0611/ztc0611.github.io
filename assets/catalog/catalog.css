@@ -1,7 +1,9 @@
 /* Two colours per appearance: a ground and an ink. Product imagery is the only
-   other colour on the page. Light is claret with bone type; dark is not a
-   dimmed claret but a warm black with the claret lifted into the type.
-   Contrast (WCAG): bone on claret 11.4:1, rose on black 9.5:1. */
+   other colour on the page. Light is claret with bone type; dark keeps the
+   bone type on an oxblood ground, the claret taken down nearly to black, so
+   both read as the same page. Rose type on black was tried for dark and
+   rejected: every line of text tinted pink, and the claret was lost.
+   Contrast (WCAG): bone on claret 11.4:1, bone on oxblood 14.9:1. */
 :root{
   --ground:#521a20;
   --ink:#f3e9da;
@@ -24,7 +26,7 @@
   text-size-adjust:100%;
 }
 @media (prefers-color-scheme:dark){
-  :root{--ground:#0f0b0b;--ink:#e3a69c;--rule:rgb(227 166 156 / .32);--rule-strong:rgb(227 166 156 / .55);--shade:rgb(0 0 0 / .6)}
+  :root{--ground:#1f0c10;--ink:#efe4d4;--rule:rgb(239 228 212 / .32);--rule-strong:rgb(239 228 212 / .55);--shade:rgb(0 0 0 / .6)}
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -125,24 +127,13 @@ main{padding-bottom:clamp(120px,16vw,220px)}
 
 .plate-print img{width:100%;height:auto;border-radius:4px}
 .plate-duo img{width:100%;height:auto}
-.plate-aweigh{display:grid;grid-template-columns:minmax(0,3.513fr) minmax(0,4.792fr) minmax(0,4.792fr);column-gap:clamp(12px,2.4vw,40px);align-items:end}
-
-/* Aweigh's frames: screen insets are measured from the artwork (aweigh/style.css
-   owns them). The watch frame is a 420px copy of watchos-frame.webp because
-   the 1120px original, scaled down to the watch's size on a phone, drew its
-   bezel badly on iPhone. The watch is 55% of the phone's height rather than
-   true scale so its bezel and recording stay legible at phone widths. */
-.phone{position:relative;aspect-ratio:1380/2880;filter:drop-shadow(0 16px 20px var(--shade))}
-.phone-screen{position:absolute;top:2.222%;left:3.768%;width:92.464%;height:95.556%;overflow:hidden;background:#000;border-radius:13%/6%}
-.phone-screen img{width:100%;height:100%;object-fit:cover;object-position:center top}
-.phone-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
-.watch-slot{aspect-ratio:3513/10000;display:flex;align-items:flex-end}
-.watch{position:relative;width:100%;aspect-ratio:420/660;filter:drop-shadow(0 14px 18px var(--shade))}
-.watch-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.watch-screen{position:absolute;top:21.818%;left:12.768%;width:74.464%;height:56.477%;overflow:hidden;background:#000;border-radius:15.44%/12.96%}
-.watch-screen video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:auto}
-.watch-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
-.watch-poster.hidden{display:none}
+/* Aweigh's loop has a transparent background, so the ground shows around
+   the devices. It leaves about 6% of empty frame on each side; letting it
+   run that far into the gutters keeps the devices flush with the column. */
+.plate-aweigh .loop{position:relative;aspect-ratio:1280/880;margin-inline:-4%}
+.loop video,.loop-poster{position:absolute;inset:0;width:100%;height:100%}
+.loop-poster{pointer-events:none}
+.loop-poster.hidden{display:none}
 
 /* Shelves: smaller work, three to a row. */
 .shelf-head .text{max-width:40em}
@@ -196,7 +187,6 @@ main{padding-bottom:clamp(120px,16vw,220px)}
   .plate{order:0;grid-column:5/-1;grid-row:2}
   .label{grid-column:1/span 4;grid-row:2;align-self:start}
   .feature .plate,.feature .label{grid-row:1}
-  #aweigh .plate{grid-column:5/span 7}
   .shelf-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
   .foreword{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--gap)}
   .foreword p{grid-column:2}
