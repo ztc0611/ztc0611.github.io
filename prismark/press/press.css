@@ -8,7 +8,7 @@
 .facts{margin-top:14px;border-top:1px solid var(--hairline)}
 .facts div{display:grid;grid-template-columns:7em minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid var(--hairline)}
 .facts dt{font-weight:600}
-.facts dd{margin:0}
+.facts dd{margin:0;overflow-wrap:anywhere}
 .blurb{padding:14px 0 10px;border-top:1px solid var(--hairline)}
 .blurb:first-of-type{margin-top:14px}
 .sub{font-size:15px;font-weight:600}
