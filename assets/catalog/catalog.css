@@ -131,6 +131,28 @@ main{padding-bottom:clamp(120px,16vw,220px)}
 /* Aweigh's loop has a transparent background, so the ground shows around
    the devices. It leaves about 6% of empty frame on each side; letting it
    run that far into the gutters keeps the devices flush with the column. */
+/* Aweigh's award is a rubber stamp, the kind a terminal puts on a ferry
+   ticket. It sits clear of the devices, in the title row's empty right
+   side: brushing the loop's corner read as neither on it nor off it. */
+.plate-aweigh{position:relative}
+.stamp{position:absolute;z-index:2;bottom:100%;right:0;margin-bottom:-8px;width:clamp(96px,11vw,148px);color:var(--ink);transform:rotate(-12deg);text-decoration:none;opacity:.96;transition:opacity .2s ease}
+.stamp:hover{opacity:1}
+.stamp svg{display:block;width:100%;height:auto;overflow:visible}
+.stamp-gold{color:#e2bf63}
+/* In one column the band between the section rule and the image is only
+   about the stamp's height, so it's opened up enough for the stamp to sit
+   well clear of both. */
+@media (max-width:899px){
+  .plate-aweigh{margin-top:30px}
+  .stamp{margin-bottom:20px;width:clamp(76px,21vw,104px)}
+}
+/* Beside the plate, the title row and the empty air above the Duo give
+   the stamp room to grow on wide screens: sized and dropped together so
+   it stays about 13px under the section rule and 15 to 20px off the
+   Duo's corner from 1100 to 1728px wide. */
+@media (min-width:1100px){
+  .stamp{--stamp:clamp(140px,13.9vw,212px);width:var(--stamp);margin-bottom:calc(var(--stamp) * -.22)}
+}
 .plate-aweigh .loop{position:relative;aspect-ratio:1280/880;margin-inline:-4%}
 .loop video,.loop-poster{position:absolute;inset:0;width:100%;height:100%}
 .loop-poster{pointer-events:none}
