@@ -1,15 +1,16 @@
 /* Two colours per appearance: a ground and an ink. Product imagery is the only
-   other colour on the page. Light is claret with bone type; dark keeps the
-   bone type on an oxblood ground, the claret taken down nearly to black, so
-   both read as the same page. Rose type on black was tried for dark and
-   rejected: every line of text tinted pink, and the claret was lost.
-   Contrast (WCAG): bone on claret 11.4:1, bone on oxblood 14.9:1. */
+   other colour on the page. Light is a plum-leaning claret with bone type;
+   dark keeps the bone type on an oxblood ground, the claret taken down
+   nearly to black, so both read as the same page. Rose type on black was
+   tried for dark and rejected: every line of text tinted pink, and the
+   claret was lost. Contrast (WCAG): bone on plum-claret 11.5:1, bone on
+   oxblood 14.9:1. */
 :root{
-  --ground:#521a20;
+  --ground:#4e1a33;
   --ink:#f3e9da;
   --rule:rgb(243 233 218 / .36);
   --rule-strong:rgb(243 233 218 / .62);
-  --shade:rgb(24 3 7 / .5);
+  --shade:rgb(22 3 13 / .5);
   --gap:32px;
   --m:clamp(20px,4.4vw,72px);
   --pl:max(var(--m),env(safe-area-inset-left,0px));
