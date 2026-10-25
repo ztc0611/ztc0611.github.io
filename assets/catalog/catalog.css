@@ -96,7 +96,11 @@ main [id],footer[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 24px)
   .cover-inner{--name:14cqi}
   .index{grid-column:1;grid-row:1;align-self:start;margin-bottom:0}
   .stage-object{grid-row:1/span 2;align-self:end;width:min(31cqi,500px);margin:0 0 calc(var(--name) * -.44) 0}
-  .role{padding-bottom:calc(var(--name) * .16);font-size:clamp(18px,1.6cqi,22px)}
+  /* The role is bottom-aligned in the row the object spans, so on short,
+     wide screens (the Duo's inner display in landscape) that row shrinks to
+     the role itself and it would sit right under the index. The margin keeps
+     it reading as the name's line, not the index's last item. */
+  .role{padding-bottom:calc(var(--name) * .16);font-size:clamp(18px,1.6cqi,22px);margin-top:clamp(32px,4.5cqi,56px)}
   .name span{display:inline}
 }
 
