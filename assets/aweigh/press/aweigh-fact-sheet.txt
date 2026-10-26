@@ -1,0 +1,42 @@
+Aweigh
+Live departures for Washington State Ferries, on iPhone, iPhone Duo and Apple Watch.
+
+ABOUT
+Aweigh is a departure board for Washington State Ferries, on iPhone, iPhone Duo and Apple Watch. Choose a route and a direction to see the next sailings with delay-aware times, cancellations, drive-up space and reservable space. Follow every boat on a live fleet map, check terminal cameras before you leave, and read the alerts for your route. On Apple Watch, favorite routes count down to the next sailing and show the vehicle space left. On iPhone Duo, your routes stay beside a full departure board.
+
+FACTS
+Name: Aweigh
+Developer: Zachary Coleman, independent
+Devices: iPhone, iPhone Duo and Apple Watch
+Requires: iOS 26 or later, watchOS 26 or later
+Category: Navigation
+Released: September 10, 2026
+Price: Free
+Account: None needed. Location is optional.
+Award: 2nd place, RevenueCat Design Award, Shipaton 2026 (https://apps.shipaton.com/app/aweigh)
+Data: Schedules, vessel positions and cameras from WSDOT's public APIs
+Website: https://zach-coleman.com/aweigh/
+App Store: https://apps.apple.com/us/app/aweigh/id6773885528
+
+IN THIS KIT
+aweigh-icon.png, aweigh-icon-dark.png: app icon, 1024 x 1024, transparent around the rounded shape
+aweigh-icon-clear-light.png, aweigh-icon-clear-dark.png: the clear icon styles, same format
+aweigh-icon-square.png: the icon as a full square, the way it's supplied to the App Store
+screens/: screenshots without device frames
+  aweigh-duo-board.png, aweigh-duo-map.png, aweigh-duo-cameras.png: iPhone Duo, open (departure board, ferry map, cameras), 2853 x 2007
+  aweigh-duo-cover.png: iPhone Duo, closed, on the cover display, 1398 x 2034
+  aweigh-iphone-board.png, aweigh-iphone-routes.png, aweigh-iphone-map.png, aweigh-iphone-cameras.png: iPhone (departure board, routes, ferry map, cameras), 1260 x 2736
+  aweigh-watch-countdown.png: Apple Watch, 416 x 496
+  aweigh-watch-board.png, aweigh-watch-cancellation.png, aweigh-watch-routes.png: Apple Watch Ultra, 422 x 514
+framed/: the iPhone Duo, iPhone and 46 mm Apple Watch screenshots in device frames
+
+USING THESE
+Write the name as Aweigh, with one capital.
+Show the icon as it is: no recoloring, cropping or added effects.
+Screenshots may be resized or cropped. Please don't edit what's on the screen.
+Aweigh is independent. Please don't describe it as an official Washington State Ferries or WSDOT app.
+
+Schedules, vessel positions, and camera feeds are sourced from WSDOT's public APIs. Aweigh is an independent app. Not affiliated with, endorsed by, or associated with the Washington State Department of Transportation or Washington State Ferries. Washington State Ferries, WSF, vessel names, and related marks belong to their respective owners.
+
+Press kit: https://zach-coleman.com/aweigh/press/
+Contact: https://zach-coleman.com/apps/support

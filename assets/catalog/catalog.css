@@ -151,11 +151,16 @@ main{padding-bottom:clamp(120px,16vw,220px)}
   .stamp{margin-bottom:20px;width:clamp(76px,21vw,104px)}
 }
 /* Beside the plate, the title row and the empty air above the Duo give
-   the stamp room to grow on wide screens: sized and dropped together so
-   it stays about 13px under the section rule and 15 to 20px off the
-   Duo's corner from 1100 to 1728px wide. */
-@media (min-width:1100px){
+   the stamp room to grow: sized and dropped together so it stays about
+   13px under the section rule and 15 to 20px off the Duo's corner from
+   1100 to 1728px wide, and keeps the same size against the Duo below
+   that. Under 960px the stamp is at its 140px floor while the Duo keeps
+   shrinking, so it drops less there to stay clear of the Duo's corner. */
+@media (min-width:900px){
   .stamp{--stamp:clamp(140px,13.9vw,212px);width:var(--stamp);margin-bottom:calc(var(--stamp) * -.22)}
+}
+@media (min-width:900px) and (max-width:959px){
+  .stamp{margin-bottom:calc(var(--stamp) * -.1)}
 }
 .plate-aweigh .loop{position:relative;aspect-ratio:1280/880;margin-inline:-4%}
 .loop video,.loop-poster{position:absolute;inset:0;width:100%;height:100%}

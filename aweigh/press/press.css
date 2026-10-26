@@ -1,0 +1,311 @@
+/* Aweigh press kit. Builds on ../style.css for the tokens, backdrop,
+   nav, footer, wordmark gradient, award chip and disclaimer. */
+
+.press-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding: clamp(32px, 6vw, 72px) 0 0;
+}
+.press-head .title {
+    font-size: clamp(3rem, 8vw, 6rem);
+}
+.press-eyebrow {
+    margin: 0 0 -14px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+}
+.press-intro {
+    margin: 0;
+    max-width: 36em;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+.press-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 20px;
+}
+.size {
+    font-weight: 500;
+    opacity: 0.72;
+}
+
+.press-section {
+    margin-top: clamp(64px, 8vw, 104px);
+}
+.press-section h2 {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text);
+}
+.press-section h3 {
+    margin: 32px 0 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.section-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+}
+.aside {
+    margin: 14px 0 0;
+    max-width: 40em;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+.aside a,
+.facts a,
+.files a,
+.tiles a,
+.zip {
+    color: var(--text);
+    border-bottom: 1px solid var(--border-strong);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+.aside a:hover,
+.facts a:hover,
+.files a:hover,
+.tiles a:hover,
+.zip:hover {
+    color: var(--accent);
+    border-color: var(--accent-line);
+}
+.dim {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
+
+.split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 64px clamp(32px, 5vw, 80px);
+    margin-top: clamp(64px, 8vw, 104px);
+}
+.split .press-section {
+    margin-top: 0;
+}
+.facts {
+    margin: 18px 0 0;
+    border-top: 1px solid var(--border);
+}
+.facts div {
+    display: grid;
+    grid-template-columns: 7.5em minmax(0, 1fr);
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+}
+.facts dt {
+    padding-top: 0.2em;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+}
+.facts dd {
+    margin: 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+.facts .award-fact a:hover {
+    color: #ffd60a;
+    border-color: rgba(255, 214, 10, 0.5);
+}
+
+.blurb {
+    margin-top: 18px;
+    padding: 18px 0 8px;
+    border-top: 1px solid var(--border);
+}
+.blurb p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text);
+}
+.copy {
+    margin-top: 10px;
+    padding: 8px 0;
+    border: 0;
+    border-bottom: 1px solid var(--border-strong);
+    background: none;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.copy:hover {
+    color: var(--accent);
+    border-color: var(--accent-line);
+}
+
+/* Each file sits on a card, so dark screenshots and the icon's
+   transparent corners still read against the page. */
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px clamp(16px, 3vw, 28px);
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    align-items: end;
+}
+.tiles + .tiles {
+    margin-top: 32px;
+}
+.tiles li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+.tiles .wide {
+    grid-column: 1 / -1;
+}
+.tiles img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.tiles a {
+    font-weight: 600;
+}
+.screen {
+    border-radius: clamp(10px, 3%, 22px);
+    outline: 1px solid var(--border-strong);
+    outline-offset: -1px;
+}
+.tiles-phone .screen {
+    border-radius: 12% / 5.5%;
+}
+.tiles-watch .screen {
+    border-radius: 22% / 18%;
+}
+.tile-icon {
+    display: block;
+    width: 100%;
+    padding: clamp(20px, 4vw, 32px);
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--bg-card);
+}
+.tile-icon img {
+    width: min(100%, 160px);
+    margin: 0 auto;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+}
+
+.zip {
+    font-weight: 600;
+}
+.zip .dim {
+    margin-left: 0.4em;
+}
+.files {
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--border);
+}
+.files li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    break-inside: avoid;
+}
+.files a {
+    font-weight: 500;
+}
+.files .dim {
+    white-space: nowrap;
+}
+
+.rules {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 40em;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+.rules li {
+    position: relative;
+    padding-left: 1.2em;
+}
+.rules li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.5em;
+    border-top: 1.5px solid var(--accent);
+}
+
+@media (min-width: 640px) {
+    .tiles {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .tiles-phone,
+    .tiles-watch {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+@media (min-width: 900px) {
+    .split {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .tiles {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .tiles li {
+        grid-column: span 2;
+    }
+    .tiles .wide {
+        grid-column: span 3;
+    }
+    .tiles-phone li,
+    .tiles-watch li {
+        grid-column: span 1;
+    }
+    /* One row at a shared height: an open Duo is 2.068 times as wide
+       as its cover display at the same height. */
+    .tiles-duo {
+        grid-template-columns: repeat(3, minmax(0, 2.068fr)) minmax(0, 1fr);
+    }
+    .tiles-duo li,
+    .tiles-duo .wide {
+        grid-column: auto;
+    }
+    .files {
+        columns: 2;
+        column-gap: clamp(32px, 5vw, 80px);
+    }
+}
